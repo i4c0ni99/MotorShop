@@ -233,3 +233,4 @@ INSERT INTO `services_has_a_group` (services_id, group_id) VALUES
                                                                (2, 1),
                                                                (3, 1),
                                                                (5, 1);
+CREATE SCHEMA `db_motorshop` DEFAULT CHARACTER SET utf8 ;

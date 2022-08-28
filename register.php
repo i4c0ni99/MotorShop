@@ -1,13 +1,24 @@
 <?php
 
-session_start();
+
+
+
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/auth.inc.php";
 
 
-$main = new Template("index.html");
+$main = new Template("skins/motor-html-package/motor/home.html");
+if($_POST['password']!=$_POST['confirmPassword']){
+        echo'Le password non coincidoni ';
+}else{
+    if (isset($mysqli)) {
+        $oid= $mysqli-> query("INSERT INTO users VALUES('{$_POST['name']}','{$_POST['surname']}',
+                         '{$_POST['email']}','{$_POST['phoneNumber']}','{$_POST['password']}');");
+    }
+}
+
+$main-> close();
 
 
-$oid = $mysqli->query("SELECT * FROM news");
+?>

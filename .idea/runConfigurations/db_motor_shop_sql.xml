@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="db_motor_shop.sql" type="DatabaseScript" editBeforeRun="true" singleton="false">
-    <script-file value="$PROJECT_DIR$/../MotorShop/dump sql/db_motor_shop.sql" />
+    <script-file value="$PROJECT_DIR$/dump sql/db_motor_shop.sql" />
     <script-mode>FILE</script-mode>
-    <data-source id="13f4260b-817f-4e89-88e8-f4bb8fe65b7b" />
+    <data-source id="7561c951-26c4-406e-bdcd-15d949ee0625" />
     <method v="2" />
   </configuration>
 </component>

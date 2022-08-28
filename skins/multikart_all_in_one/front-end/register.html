@@ -718,7 +718,7 @@
                 <div class="col-lg-12">
                     <h3>create account</h3>
                     <div class="theme-card">
-                        <form class="theme-form">
+                        <form class="theme-form" action="../../../register.php" method="POST" >
                             <div class="form-row row">
                                 <div class="col-md-6">
                                     <label for="fname">Nome</label>
@@ -752,7 +752,7 @@
                                 <div class="col-md-6">
                                     <label for="confirmPassword">conferma Password</label>
                                     <input type="password" class="form-control" id="confirmPassword" placeholder="Conferma password"
-                                           required="">
+                                           >
                                 </div>
                             </div>
                             <div class="form-row row">
@@ -764,7 +764,8 @@
                                     <label for="address">Indirizzo</label>
                                     <input type="text" class="form-control" id="address"
                                         placeholder="Indirizzo di fatturazione" required="">
-                                </div><a href="../../multikart_all_in_one/back-end/index.html" class="btn btn-solid w-auto">Iscriviti</a>
+                               <input type="button" id="submit" value="Iscriviti">
+
                             </div>
                         </form>
                     </div>
