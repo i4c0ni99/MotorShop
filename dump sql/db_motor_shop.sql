@@ -1,3 +1,6 @@
+Create Database 'db_motorShop';
+CREATE USER 'i4c0ni99'@'localhost' IDENTIFIED BY 'motorShop99!';
+
 CREATE TABLE IF NOT EXISTS users
 (
     email VARCHAR(100) NOT NULL,

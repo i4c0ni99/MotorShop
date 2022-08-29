@@ -1,14 +1,10 @@
 <?php
-    $host = "127.0.0.1";
-    $user = "i4c0ni99";
-    $pass = "motorShop99!";
-    $name = "db_motorShop";
+    $host = "localhost";
+    $user = "root";
+    $passw="";
+   $name = "db_motorShop";
 
-     $mysqli = new mysqli($host, $user, $pass, $name);
+     $mysqli = mysqli_connect($host, $user,$passw,$name);
 
-    if($mysqli->connect_error){
-        die('Error'.('$mysqli->connect_errorno.'));
-    }else{
 
-    }
 ?>
