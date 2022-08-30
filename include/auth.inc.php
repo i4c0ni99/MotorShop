@@ -1,8 +1,8 @@
 <?php
-
 DEFINE('ERROR_SCRIPT_PERMISSION', 100);
 DEFINE('ERROR_USER_NOT_LOGGED', 200);
 DEFINE('ERROR_OWNERSHIP', 200);
+
 
 function crypto($pass) {
 
@@ -34,7 +34,7 @@ function isOwner($resource, $key = "id") {
 
 }
 
-if (isset($_POST['email']) and isset($_POST['password'])) {
+/*if (isset($_POST['email']) and isset($_POST['password'])) {
 
     $oid = $mysqli->query("
             SELECT name, surname, email 
@@ -104,6 +104,15 @@ if (isset($_POST['email']) and isset($_POST['password'])) {
 if (!isset($_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])])) {
     Header("Location: error.php?code=".ERROR_SCRIPT_PERMISSION);
     exit;
+}*/
+function signUp():void {
+    global $mysqli;
+     $criptoPass=crypto($_POST['password']);
+    //Inserisce l'utente nel database
+     $mysqli->query ("INSERT INTO users (name,surname,email,phone,password) VALUES('{$_POST['name']}','{$_POST['surname']}',
+                         '{$_POST['email']}','{$_POST['phoneNumber']}','$criptoPass');");
+                header("location:skins/motor-html-package/motor/home.html");       
 }
+
 
 ?>
