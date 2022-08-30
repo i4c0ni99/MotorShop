@@ -3,14 +3,14 @@ DEFINE('ERROR_SCRIPT_PERMISSION', 100);
 DEFINE('ERROR_USER_NOT_LOGGED', 200);
 DEFINE('ERROR_OWNERSHIP', 200);
 
-
+// Funzione hashing MD5 password
 function crypto($pass) {
 
     return md5(md5($pass));
 
 }
 
-// Verifica se l`email e` presente nel DB
+// Controllo email già utilizzata
 function isOwner($resource, $key = "id") {
 
     global $mysqli;
@@ -20,7 +20,6 @@ function isOwner($resource, $key = "id") {
             FROM {$resource} 
             WHERE {$key} = '{$_REQUEST[$key]}'");
     if (!$oid) {
-        // Email non trovata
     }
 
     $data = $oid->fetch_assoc();
@@ -34,32 +33,43 @@ function isOwner($resource, $key = "id") {
 
 }
 
-/*if (isset($_POST['email']) and isset($_POST['password'])) {
+// Funzione LogIn
+function doLogin(): void
+{
 
-    $oid = $mysqli->query("
-            SELECT name, surname, email 
+    global $mysqli;
+
+        // Query email e password utente
+        $oid = $mysqli->query("
+            SELECT email, password,name, surname, phone
             FROM users 
-            WHERE email = '".$_POST['email']."'
-            AND password = '".crypto($_POST['password'])."'");
+            WHERE email = '" . $_POST['email'] . "'
+            AND password = '" . crypto($_POST['password']) . "'");
+        
+        if ($oid->num_rows > 0) {
+            // Ottiene dati utente
+            $user = $oid->fetch_assoc();
+            createSession($user, $mysqli);
+        }
 
-
-    if (!$oid) {
-        trigger_error("Generic error, level 21", E_USER_ERROR);
     }
 
-    if ($oid->num_rows > 0) {
-        $user = $oid->fetch_assoc();
+// Funzione crea sessione
+function createSession($user, mysqli $mysqli): void
+{
+         
+        // Crea una sessione per l'utente
         $_SESSION['auth'] = true;
         $_SESSION['user'] = $user;
 
         $oid = $mysqli->query("
-                SELECT DISTINCT script FROM user 
-                LEFT JOIN users_has_groups
-                ON users_has_groups.user_email = users.email
-                LEFT JOIN groups_has_services
-                ON groups_has_services.groups_id = users_has_groups.groups_id 
+                SELECT DISTINCT script FROM users 
+                LEFT JOIN users_has_group
+                ON users_has_group.users_email = users.email
+                LEFT JOIN services_has_group
+                ON services_has_group.group_id = users_has_group.group_id 
                 LEFT JOIN services
-                ON services.id = groups_has_services.services_id
+                ON services.id = services_has_group.services_id
                 WHERE email = '".$_POST['email']."'");
 
         if (!$oid) {
@@ -69,50 +79,34 @@ function isOwner($resource, $key = "id") {
         do {
             $data = $oid->fetch_assoc();
             if ($data) {
-                $scripts[$data['script']] = true;
+                $scripts[$data['link']] = true;
             }
         } while ($data);
 
         $_SESSION['user']['script'] = $scripts;
 
-        if (isset($_SESSION['referrer'])) {
-            $referrer = $_SESSION['referrer'];
-            unset($_SESSION['referrer']);
-            Header("Location: {$referrer}");
-            exit;
+        if (!isset($_SESSION['user']['script'])) {
+            unset($_SESSION['auth']);
+            unset($_SESSION['user']);
         }
-
-    } else {
-        Header("Location: login.php");
-        exit;
-    }
-
-} else {
-    if (!isset($_SESSION['auth'])) {
-        $_SESSION['referrer'] = basename($_SERVER['SCRIPT_NAME']);
-        Header("Location: login.php?not_auth");
-        exit;
-    } else {
-
-        // user logged
-
-    }
+        
 }
 
-// user is logged
+// Funzione registrazione utente
+function doSignUp():void {
 
-if (!isset($_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])])) {
-    Header("Location: error.php?code=".ERROR_SCRIPT_PERMISSION);
-    exit;
-}*/
-function signUp():void {
     global $mysqli;
      $criptoPass=crypto($_POST['password']);
-    //Inserisce l'utente nel database
+
+    //Inserisce l'utente nella tabella users
      $mysqli->query ("INSERT INTO users (name,surname,email,phone,password) VALUES('{$_POST['name']}','{$_POST['surname']}',
                          '{$_POST['email']}','{$_POST['phoneNumber']}','$criptoPass');");
-                header("location:skins/motor-html-package/motor/home.html");       
-}
 
+     //Inserisce l'utente nella tabella
+     $mysqli->query ("INSERT INTO users_has_group (users_email,group_id) VALUES(
+        '{$_POST['email']}',2);");
+
+                header("location:/MotorShop/login.php");               
+}
 
 ?>
