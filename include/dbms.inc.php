@@ -2,9 +2,9 @@
     $host = "localhost";
     $user = "root";
     $passw="";
-   $name = "db_motorShop";
+    $name = "db_motorShop";
 
-     $mysqli = mysqli_connect($host, $user,$passw,$name);
+     $mysqli = new mysqli($host, $user,$passw,$name);
 
 
 ?>
