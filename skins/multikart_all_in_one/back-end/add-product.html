@@ -59,14 +59,6 @@
                 </div>
                 <div class="nav-right col">
                     <ul class="nav-menus">
-                        <li>
-                            <form class="form-inline search-form">
-                                <div class="form-group">
-                                    <input class="form-control-plaintext" type="search" placeholder="Search.."><span
-                                        class="d-sm-none mobile-search"><i data-feather="search"></i></span>
-                                </div>
-                            </form>
-                        </li>
                         <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i
                                     data-feather="maximize-2"></i></a></li>
                         <li class="onhover-dropdown">
@@ -77,11 +69,9 @@
                                         class="main-circle"></span></div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div p-20">
-                                <li><a href="javascript:void(0)"><i data-feather="user"></i>Edit Profile</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="mail"></i>Inbox</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="lock"></i>Lock Screen</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="settings"></i>Settings</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="log-out"></i>Logout</a></li>
+                                <li><a href="javascript:void(0)"><i data-feather="user"></i>Profilo</a></li>
+                                <li><a href="javascript:void(0)"><i data-feather="settings"></i>Impostazioni</a></li>
+                                <li><a href="javascript:void(0)"><i data-feather="log-out"></i>Esci</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -135,6 +125,17 @@
 
                                     <ul class="sidebar-submenu">
                                         <li>
+                                            <a href="add-product.html">
+                                                <i class="fa fa-circle"></i>Aggiungi prodotto
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="product-list.html">
+                                                <i class="fa fa-circle"></i>Lista prodotti</a>
+                                        </li>
+										
+										<li>
                                             <a href="category.html">
                                                 <i class="fa fa-circle"></i>Categorie
                                             </a>
@@ -144,22 +145,7 @@
                                             <a href="category-sub.html">
                                                 <i class="fa fa-circle"></i>Sottocategorie</a>
                                         </li>
-
-                                        <li>
-                                            <a href="product-list.html">
-                                                <i class="fa fa-circle"></i>Lista prodotti</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="product-detail.html">
-                                                <i class="fa fa-circle"></i>Dettagli prodotto</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="add-product.html">
-                                                <i class="fa fa-circle"></i>Aggiungi prodotto
-                                            </a>
-                                        </li>
+										
                                     </ul>
                                 </li>
                                 
@@ -391,21 +377,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Add Products
-                                        <small>Multikart Admin panel</small>
-                                    </h3>
+                                    <h3>Aggiungi prodotto</h3>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item">
-                                        <a href="index.html">
-                                            <i data-feather="home"></i>
-                                        </a>
-                                    </li>
-                                    <li class="breadcrumb-item">Physical</li>
-                                    <li class="breadcrumb-item active">Add Product</li>
-                                </ol>
                             </div>
                         </div>
                     </div>
@@ -418,6 +391,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
+                                    <h3>Aggiungi foto :</h3>
                                     <div class="row product-adding">
                                         <div class="col-xl-5">
                                             <div class="add-product">
@@ -462,49 +436,50 @@
                                                 <div class="form">
                                                     <div class="form-group mb-3 row">
                                                         <label for="validationCustom01"
-                                                            class="col-xl-3 col-sm-4 mb-0">Title :</label>
+                                                            class="col-xl-3 col-sm-4 mb-0">Titolo :</label>
                                                         <div class="col-xl-8 col-sm-7">
                                                             <input class="form-control" id="validationCustom01"
-                                                                type="text" required="">
+                                                                type="text" required="true">
                                                         </div>
-                                                        <div class="valid-feedback">Looks good!</div>
+                                                        <div class="valid-feedback">Sembra ok!</div>
                                                     </div>
                                                     <div class="form-group mb-3 row">
                                                         <label for="validationCustom02"
-                                                            class="col-xl-3 col-sm-4 mb-0">Price :</label>
+                                                            class="col-xl-3 col-sm-4 mb-0">Prezzo :</label>
                                                         <div class="col-xl-8 col-sm-7">
                                                             <input class="form-control" id="validationCustom02"
-                                                                type="text" required="">
+                                                                type="text" required="true">
                                                         </div>
-                                                        <div class="valid-feedback">Looks good!</div>
+                                                        <div class="valid-feedback">Sembra ok!</div>
                                                     </div>
                                                     <div class="form-group mb-3 row">
                                                         <label for="validationCustomUsername"
-                                                            class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
+                                                            class="col-xl-3 col-sm-4 mb-0">Codice prodotto :</label>
                                                         <div class="col-xl-8 col-sm-7">
                                                             <input class="form-control" id="validationCustomUsername"
-                                                                type="text" required="">
+                                                                type="text" required="true">
                                                         </div>
-                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Please
-                                                            choose Valid Code.</div>
+                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Inserisci un codice valido</div>
                                                     </div>
                                                 </div>
                                                 <div class="form">
                                                     <div class="form-group row">
                                                         <label for="exampleFormControlSelect1"
-                                                            class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                                            class="col-xl-3 col-sm-4 mb-0">Taglia :</label>
                                                         <div class="col-xl-8 col-sm-7">
                                                             <select class="form-control digits"
                                                                 id="exampleFormControlSelect1">
-                                                                <option>Small</option>
-                                                                <option>Medium</option>
-                                                                <option>Large</option>
-                                                                <option>Extra Large</option>
+                                                                <option>XS</option>
+                                                                <option>S</option>
+                                                                <option>M</option>
+                                                                <option>L</option>
+                                                                <option>XL</option>
+                                                                <option>XXL</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
+                                                        <label class="col-xl-3 col-sm-4 mb-0">Totale prodotti :</label>
                                                         <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7">
                                                             <div class="input-group">
                                                                 <input class="touchspin" type="text" value="1">
@@ -512,15 +487,38 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4">Add Description :</label>
+                                                        <label class="col-xl-3 col-sm-4">Descrizione :</label>
                                                         <div class="col-xl-8 col-sm-7 description-sm">
-                                                            <textarea id="editor1" name="editor1" cols="10"
+                                                            <textarea id="editor1" name="editor1" cols="10" required="true"
                                                                 rows="4"></textarea>
                                                         </div>
-                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                            <button type="submit" class="btn btn-primary">Add</button>
-                                                            <button type="button" class="btn btn-light">Discard</button>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-3 col-sm-4">Specifiche :</label>
+                                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                                <textarea id="editor1" name="editor1" cols="10" required="true"
+                                                                    rows="4"></textarea>
+                                                            </div>
+                                                            </div>
+                                                                <div class="form-group row">
+                                                                    <label for="exampleFormControlSelect1"
+                                                                        class="col-xl-3 col-sm-4 mb-0">Categoria :</label>
+                                                                    <div class="col-xl-8 col-sm-7">
+                                                                        <select class="form-control digits"
+                                                                            id="exampleFormControlSelect1">
+                                                                            <option>Scegli categoria</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group mb-3 row">
+                                                                    <label for="validationCustom01"
+                                                                        class="col-xl-3 col-sm-4 mb-0">Tags :</label>
+                                                                    <div class="col-xl-8 col-sm-7">
+                                                                        <input class="form-control" id="validationCustom01"
+                                                                            type="text" required="true">
+                                                                    </div>
+                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                            <button type="submit" class="btn btn-primary">Aggiungi</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -539,10 +537,10 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 footer-copyright text-start">
-                            <p class="mb-0">Copyright 2019 © Multikart All rights reserved.</p>
+                            <p class="mb-0">Copyright 2022 © MotorShop</p>
                         </div>
                         <div class="col-md-6 pull-right text-end">
-                            <p class=" mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p>
+                            <p class=" mb-0">Realizzato in Abruzzo con <i class="fa fa-heart"></i></p>
                         </div>
                     </div>
                 </div>
