@@ -9,7 +9,7 @@ $main = new Template("skins/motor-html-package/motor/login.html");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_POST['password']!=$_POST['confirmPassword']) {
-    echo "<script type='text/javascript'>alert('Le password non coincidono');</script>";
+  echo "<script type='text/javascript'>alert('Le password non coincidono');</script>";  
 } else {
     doSignUp();
 }

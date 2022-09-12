@@ -46,8 +46,7 @@ CREATE TABLE IF NOT EXISTS services
 CREATE TABLE IF NOT EXISTS services_has_group
 (
     services_id INT NOT NULL,
-    group_id INT,
-    PRIMARY KEY(services_id)
+    group_id INT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS products
@@ -241,7 +240,4 @@ INSERT INTO `services` (`id`, `script`) VALUES (1, 'dashboard.php'),(2,'login.ph
 INSERT INTO `users_has_group` (`users_email`, `group_id`) VALUE ('admin@gmail.com', 1);
 
 INSERT INTO `services_has_group` (services_id, group_id) VALUES
-                                                               (1, 1),
-                                                               (2, 1),
-                                                               (3, 1),
-                                                               (5, 1);
+                                                               (6, 2);

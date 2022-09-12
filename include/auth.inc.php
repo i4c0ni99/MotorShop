@@ -7,11 +7,11 @@ DEFINE('ERROR_OWNERSHIP', 200);
 function crypto($pass) {
 
     return md5(md5($pass));
-
+    
 }
 
 // Controllo email già utilizzata
-function isOwner($resource, $key = "id") {
+/*function isOwner($resource, $key = "id") {
 
     global $mysqli;
 
@@ -31,7 +31,7 @@ function isOwner($resource, $key = "id") {
 
     }
 
-}
+}*/
 
 // Funzione LogIn
 function doLogin(): void
@@ -44,7 +44,7 @@ function doLogin(): void
             SELECT email, password,name, surname, phone
             FROM users 
             WHERE email = '" . $_POST['email'] . "'
-            AND password = '" . crypto($_POST['password']) . "'");
+            AND password = '" . $_POST['password']. "'");
         
         if ($oid->num_rows > 0) {
             // Ottiene dati utente
@@ -61,34 +61,57 @@ function createSession($user, mysqli $mysqli): void
         // Crea una sessione per l'utente
         $_SESSION['auth'] = true;
         $_SESSION['user'] = $user;
+    
+     $oid = $mysqli->query("
 
-        $oid = $mysqli->query("
-                SELECT DISTINCT script FROM users 
+                SELECT DISTINCT services_has_group.group_id FROM users 
                 LEFT JOIN users_has_group
                 ON users_has_group.users_email = users.email
                 LEFT JOIN services_has_group
                 ON services_has_group.group_id = users_has_group.group_id 
                 LEFT JOIN services
                 ON services.id = services_has_group.services_id
-                WHERE email = '".$_POST['email']."'");
+                WHERE email = '".$_POST['email']."'"
+            );
 
         if (!$oid) {
             trigger_error("Generic error, level 40", E_USER_ERROR);
         }
+        
+        foreach($oid as $item){
+            foreach($item as $item2)
+                echo $item2;
+        }
+        
+         
+            
+
+         
 
         do {
             $data = $oid->fetch_assoc();
-            if ($data) {
-                $scripts[$data['link']] = true;
+            if ($data) { 
+            echo $data['link'];
+
+                 $scripts[$data['link']] = true;
+            
             }
         } while ($data);
+        $_SESSION['auth'] = $scripts;
+ 
+        foreach($oid as $item){
+            foreach($item as $item2){
+                echo $item2;
+         if($item2==2)
+            header("location:/MotorShop/index.php");
+         if($item2==1){
+         
+             header("location:/MotorShop/dashBoard.php");
+         }
+            }
 
-        $_SESSION['user']['script'] = $scripts;
-
-        if (!isset($_SESSION['user']['script'])) {
-            unset($_SESSION['auth']);
-            unset($_SESSION['user']);
-        }
+         }
+        
         
 }
 
