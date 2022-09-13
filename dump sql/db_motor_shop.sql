@@ -140,12 +140,7 @@ CREATE TABLE IF NOT EXISTS offers
 
 ALTER TABLE users_has_group
     ADD    FOREIGN KEY (users_email)
-    REFERENCES users(email)
-;
-    
-ALTER TABLE users_has_group
-    ADD    FOREIGN KEY (group_id)
-    REFERENCES groups(id)
+    REFERENCES users(email)change md5 in php storm
 ;
     
 ALTER TABLE services_has_group
@@ -227,7 +222,7 @@ ALTER TABLE orders_has_products
 
 
 INSERT INTO users (email, shipping_address_id, name,surname, password, streetAddress, phone, cap, city) VALUE
-    ('admin@gmail.com',NULL,'luigi','visconti','admin','via genova 48','3921346140',67100,'L`aquila');
+    ('admin@gmail.com',NULL,'luigi','visconti',MD5='admin','via genova 48','3921346140',67100,'L`aquila');
 
 
 

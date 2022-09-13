@@ -44,7 +44,7 @@ function doLogin(): void
             SELECT email, password,name, surname, phone
             FROM users 
             WHERE email = '" . $_POST['email'] . "'
-            AND password = '" . $_POST['password']. "'");
+            AND password = '" . $_POST['password'] . "'");
         
         if ($oid->num_rows > 0) {
             // Ottiene dati utente
