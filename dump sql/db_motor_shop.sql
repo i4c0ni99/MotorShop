@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS groups_has_services
 
 CREATE TABLE IF NOT EXISTS products
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(150),
     description VARCHAR(2000),
     quantity INT,
@@ -52,9 +52,6 @@ CREATE TABLE IF NOT EXISTS products
     information VARCHAR(2000),
 	mediumRate INT,
 	categories_id INT,
-    images_id INT,
-    sizes_id INT,
-	colours_id INT,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -68,7 +65,7 @@ CREATE TABLE IF NOT EXISTS orders_has_products
 
 CREATE TABLE IF NOT EXISTS orders
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     users_email VARCHAR(100),
     orders_has_products_id INT,
     shipping_address_id INT,
@@ -82,7 +79,7 @@ CREATE TABLE IF NOT EXISTS orders
 
 CREATE TABLE IF NOT EXISTS shipping_address
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     orders_id INT,
     users_email varchar(50),
     name VARCHAR(150),
@@ -97,7 +94,7 @@ CREATE TABLE IF NOT EXISTS shipping_address
 
 CREATE TABLE IF NOT EXISTS feedbacks
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     users_email VARCHAR(100),
     products_id INT,
     rate INT,
@@ -107,14 +104,14 @@ CREATE TABLE IF NOT EXISTS feedbacks
 
 CREATE TABLE IF NOT EXISTS categories
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(25),
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS subcategories
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(25),
 	categories_id INT,
     PRIMARY KEY(id)
@@ -122,7 +119,7 @@ CREATE TABLE IF NOT EXISTS subcategories
 
 CREATE TABLE IF NOT EXISTS offers
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     categories_id INT,
     products_id INT,
     activation_date DATE,
@@ -133,7 +130,7 @@ CREATE TABLE IF NOT EXISTS offers
 
 CREATE TABLE IF NOT EXISTS sizes
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     quantity INT,
     availability BOOLEAN,
     products_id INTEGER,
@@ -142,7 +139,7 @@ CREATE TABLE IF NOT EXISTS sizes
 
 CREATE TABLE IF NOT EXISTS colors
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     sizes_id INT,
     images_id INT,
     color VARCHAR(50),
@@ -151,7 +148,7 @@ CREATE TABLE IF NOT EXISTS colors
 
 CREATE TABLE IF NOT EXISTS images
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     products_id INT,
     imageSrc LONGBLOB,
     PRIMARY KEY(id)

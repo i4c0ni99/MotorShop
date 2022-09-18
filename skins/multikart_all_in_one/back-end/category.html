@@ -504,19 +504,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation">
+                    <form class="needs-validation" method="post" action="/MotorShop/create-category.php">
                         <div class="form">
                             <div class="form-group">
-                                <label for="validationCustom01" class="mb-1">Categoria :</label>
-                                <input class="form-control" id="validationCustom01" type="text">
+                                <label for="validationCustom01" class="mb-1">category</label>
+                                <input class="form-control" name="category" id="validationCustom01" type="text">
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Salva</button>
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Chiudi</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button">Save</button>
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                </div>
+                
             </div>
         </div>
     </div>
