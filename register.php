@@ -15,5 +15,6 @@ if ($_POST['password']!=$_POST['confirmPassword']) {
 }
 
 }
+$main->close();
 
 ?>

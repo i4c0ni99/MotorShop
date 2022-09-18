@@ -11,8 +11,8 @@
     <meta name="keywords"
         content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
     <title>Multikart - Premium Admin Template</title>
 
     <!-- Google font-->
@@ -24,16 +24,16 @@
 
 
     <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/font-awesome.css">
 
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/flag-icon.css">
 
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/bootstrap.css">
 
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/MotorShop/skins/multikart_all_in_one/back-end/assets/css/style.css">
 </head>
 
 <body>
@@ -48,7 +48,7 @@
                     <div class="logo-wrapper">
                         <a href="index.html">
                             <img class="blur-up lazyloaded d-block d-lg-none"
-                                src="assets/images/dashboard/multikart-logo-black.png" alt="">
+                                src="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo-black.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                         <li class="onhover-dropdown">
                             <div class="media align-items-center"><img
                                     class="align-self-center pull-right img-50 blur-up lazyloaded"
-                                    src="assets/images/dashboard/user3.jpg" alt="header-user">
+                                    src="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="header-user">
                                 <div class="dotted-animation"><span class="animate-circle"></span><span
                                         class="main-circle"></span></div>
                             </div>
@@ -151,13 +151,13 @@
             <div class="page-sidebar">
                 <div class="main-header-left d-none d-lg-block">
                     <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded"
-                                src="assets/images/dashboard/multikart-logo.png" alt=""></a></div>
+                                src="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo.png" alt=""></a></div>
                 </div>
                 <div class="sidebar custom-scrollbar">
                     <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times"
                             aria-hidden="true"></i></a>
                     <div class="sidebar-user">
-                        <img class="img-60" src="assets/images/dashboard/user3.jpg" alt="#">
+                        <img class="img-60" src="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="#">
                         <div>
                             <h6 class="f-14">JOHN</h6>
                             <p>general manager.</p>
@@ -509,7 +509,7 @@
                                 <ul class="list">
                                     <li class="clearfix">
                                         <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user.jpg" alt="">
+                                            src="/MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg" alt="">
                                         <div class="status-circle online"></div>
                                         <div class="about">
                                             <div class="name">Vincent Porter</div>
@@ -617,7 +617,7 @@
                                 </div>
                             </form>
 
-                            <a href="create-user.html" class="btn btn-primary mt-md-0 mt-2">Create User</a>
+                            <a href="../../../create-user-admin.php" class="btn btn-primary mt-md-0 mt-2">Create User</a>
                         </div>
 
                         <div class="card-body">
@@ -629,435 +629,33 @@
                                                 <button type="button"
                                                     class="btn btn-primary add-row delete_all">Delete</button>
                                             </th>
-                                            <th>Avtar</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>Nome</th>
+                                            <th>Cognome</th>
                                             <th>Email</th>
-                                            <th>Last Login</th>
-                                            <th>Role</th>
+                                            <th>Ruolo</th>
                                         </tr>
                                     </thead>
-
+                               
                                     <tbody>
-                                        <tr data-row-id="1">
+                                        <[foreach]>
+                                        <tr data-row-id="<[id]>">
                                             <td>
                                                 <input class="checkbox_animated check-it" type="checkbox" value=""
                                                     id="flexCheckDefault" data-id="1">
                                             </td>
 
-                                            <td>
-                                                <img src="assets/images/dashboard/user.jpg" alt="">
-                                            </td>
+                                            <td><[name]></td>
 
-                                            <td>Rowan</td>
+                                            <td><[surname]></td>
 
-                                            <td>Torres</td>
+                                            <td><[email]></td>
 
-                                            <td>Rowan.torres@gmail.com</td>
-
-                                            <td>6 Days ago</td>
-
-                                            <td>Customer</td>
+                                            <td><[ruolo]></td>
+                                         
                                         </tr>
-
-                                        <tr data-row-id="2">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault1" data-id="2">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user1.jpg" alt="">
-                                            </td>
-
-                                            <td>Alonzo</td>
-
-                                            <td>Perez</td>
-
-                                            <td>Perez.Alonzo@gmail.com</td>
-
-                                            <td>2 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="3">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault2" data-id="3">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user2.jpg" alt="">
-                                            </td>
-
-                                            <td>Skylar</td>
-
-                                            <td>Lane</td>
-
-                                            <td>Lane.Skylar@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="4">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault3" data-id="4">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user3.jpg" alt="">
-                                            </td>
-
-                                            <td>Brody</td>
-
-                                            <td>Gray</td>
-
-                                            <td>Gray.Brody@gmail.com</td>
-
-                                            <td>3 Days ago</td>
-
-                                            <td>Admin</td>
-                                        </tr>
-
-                                        <tr data-row-id="5">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault4" data-id="5">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user4.jpg" alt="">
-                                            </td>
-
-                                            <td>Colton</td>
-
-                                            <td>Clay</td>
-
-                                            <td>Colton.Clay@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="6">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault5" data-id="6">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user5.jpg" alt="">
-                                            </td>
-
-                                            <td>Maxine</td>
-
-                                            <td>Woters</td>
-
-                                            <td>woters.maxine@gmail.com</td>
-
-                                            <td>10 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="7">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault6" data-id="7">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user.jpg" alt="">
-                                            </td>
-
-                                            <td>Alonzo</td>
-
-                                            <td>Perez</td>
-
-                                            <td>Perez.Alonzo@gmail.com</td>
-
-                                            <td>2 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="8">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault7" data-id="8">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user1.jpg" alt="">
-                                            </td>
-
-                                            <td>Skylar</td>
-
-                                            <td>Lane</td>
-
-                                            <td>Lane.Skylar@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="9">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault8" data-id="9">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user2.jpg" alt="">
-                                            </td>
-
-                                            <td>Brody</td>
-
-                                            <td>Gray</td>
-
-                                            <td>Gray.Brody@gmail.com</td>
-
-                                            <td>3 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="10">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault9" data-id="10">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user3.jpg" alt="">
-                                            </td>
-
-                                            <td>Colton</td>
-
-                                            <td>Clay</td>
-
-                                            <td>Colton.Clay@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Admin</td>
-                                        </tr>
-
-                                        <tr data-row-id="11">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault10" data-id="11">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user4.jpg" alt="">
-                                            </td>
-
-                                            <td>Maxine</td>
-
-                                            <td>Woters</td>
-
-                                            <td>woters.maxine@gmail.com</td>
-
-                                            <td>10 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="12">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault11" data-id="12">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user5.jpg" alt="">
-                                            </td>
-
-                                            <td>Alonzo</td>
-
-                                            <td>Perez</td>
-
-                                            <td>Perez.Alonzo@gmail.com</td>
-
-                                            <td>2 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="13">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault12" data-id="13">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user.jpg" alt="">
-                                            </td>
-
-                                            <td>Skylar</td>
-
-                                            <td>Lane</td>
-
-                                            <td>Lane.Skylar@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="14">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault13" data-id="14">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user1.jpg" alt="">
-                                            </td>
-
-                                            <td>Brody</td>
-
-                                            <td>Gray</td>
-
-                                            <td>Gray.Brody@gmail.com</td>
-
-                                            <td>3 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="15">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault14" data-id="15">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user2.jpg" alt="">
-                                            </td>
-
-                                            <td>Colton</td>
-
-                                            <td>Clay</td>
-
-                                            <td>Colton.Clay@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="16">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault15" data-id="16">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user3.jpg" alt="">
-                                            </td>
-
-                                            <td>Rowan</td>
-
-                                            <td>Torres</td>
-
-                                            <td>Rowan.torres@gmail.com</td>
-
-                                            <td>6 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="17">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault16" data-id="17">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user4.jpg" alt="">
-                                            </td>
-
-                                            <td>Alonzo</td>
-
-                                            <td>Perez</td>
-
-                                            <td>Perez.Alonzo@gmail.com</td>
-
-                                            <td>2 Days ago</td>
-
-                                            <td>Admin</td>
-                                        </tr>
-
-                                        <tr data-row-id="18">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault17" data-id="18">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user5.jpg" alt="">
-                                            </td>
-
-                                            <td>Skylar</td>
-
-                                            <td>Lane</td>
-
-                                            <td>Lane.Skylar@gmail.com</td>
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
-
-                                        <tr data-row-id="19">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault18" data-id="19">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user.jpg" alt="">
-                                            </td>
-
-                                            <td>Brody</td>
-
-                                            <td>Gray</td>
-
-                                            <td>Gray.Brody@gmail.com</td>
-
-                                            <td>3 Days ago</td>
-
-                                            <td>Admin</td>
-                                        </tr>
-
-                                        <tr data-row-id="20">
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault19" data-id="20">
-                                            </td>
-
-                                            <td>
-                                                <img src="assets/images/dashboard/user1.jpg" alt="">
-                                            </td>
-
-                                            <td>Colton</td>
-
-                                            <td>Clay</td>
-
-                                            <td>Colton.Clay@gmail.com</td>
-
-                                            <td>1 Days ago</td>
-
-                                            <td>Customer</td>
-                                        </tr>
+                                        <[/foreach]>
                                     </tbody>
+                                    
                                 </table>
                             </div>
                         </div>
@@ -1084,32 +682,32 @@
     </div>
 
     <!-- latest jquery-->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/jquery-3.3.1.min.js"></script>
 
     <!-- Bootstrap js-->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- feather icon js-->
-    <script src="assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather-icon.js"></script>
 
     <!-- Sidebar jquery-->
-    <script src="assets/js/sidebar-menu.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/sidebar-menu.js"></script>
 
     <!-- Table Row Delete js -->
-    <script src="assets/js/table-row-delete.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/table-row-delete.js"></script>
 
     <!--Customizer admin-->
-    <script src="assets/js/admin-customizer.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-customizer.js"></script>
 
     <!-- lazyload js-->
-    <script src="assets/js/lazysizes.min.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/lazysizes.min.js"></script>
 
     <!--right sidebar js-->
-    <script src="assets/js/chat-menu.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/chat-menu.js"></script>
 
     <!--script admin-->
-    <script src="assets/js/admin-script.js"></script>
+    <script src="/MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-script.js"></script>
 
 </body>
 
