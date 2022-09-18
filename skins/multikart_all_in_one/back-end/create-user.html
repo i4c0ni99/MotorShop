@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
+    <title>Aggiungi utente</title>
 
     <!-- Google font-->
     <link rel="stylesheet"
@@ -40,8 +40,9 @@
 
     <!-- page-wrapper Start-->
     <div class="page-wrapper">
-
-       <div class="page-main-header">
+        
+        <!-- Page Header Start-->
+        <div class="page-main-header">
             <div class="main-header-right row">
                 <div class="main-header-left d-lg-none w-auto">
                     <div class="logo-wrapper">
@@ -71,7 +72,7 @@
                             <ul class="profile-dropdown onhover-show-div p-20">
                                 <li><a href="javascript:void(0)"><i data-feather="user"></i>Profilo</a></li>
                                 <li><a href="javascript:void(0)"><i data-feather="settings"></i>Impostazioni</a></li>
-                                <li><a href="/MotorShop/logout.php"><i data-feather="log-out"></i>Esci</a></li>
+                                <li><a href="javascript:void(0)"><i data-feather="log-out"></i>Esci</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -115,14 +116,6 @@
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
 
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Prodotti</span>
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </a>
-
                                     <ul class="sidebar-submenu">
                                         <li>
                                             <a href="add-product.html">
@@ -131,7 +124,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="product-list.html">
+                                            <a href="/../MotorShop/skins/multikart_all_in_one/back-end/product-list.html">
                                                 <i class="fa fa-circle"></i>Lista prodotti</a>
                                         </li>
 										
@@ -145,9 +138,6 @@
                                             <a href="category-sub.html">
                                                 <i class="fa fa-circle"></i>Sottocategorie</a>
                                         </li>
-										
-                                    </ul>
-                                </li>
                                 
                                 <li>
                                     <a href="product-review.html">
@@ -166,17 +156,9 @@
                             </a>
 
                             <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Ordini</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-tracking.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Tracking</span>
+								<li>
+                                    <a href="order.html">
+                                        <i class="fa fa-circle"></i>Lista ordini
                                     </a>
                                 </li>
 
@@ -186,54 +168,15 @@
                                         <span>Dettagli ordini</span>
                                     </a>
                                 </li>
+								
+								<li>
+                                    <a href="order-tracking.html">
+                                        <i class="fa fa-circle"></i>
+                                        <span>Tracking</span>
+                                    </a>
+                                </li>
+								
                             </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="dollar-sign"></i>
-                                <span>Vendite</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order.html">
-                                        <i class="fa fa-circle"></i>Ordini
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="transactions.html">
-                                        <i class="fa fa-circle"></i>Transazioni
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="clipboard"></i>
-                                <span>Pagine</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="pages-list.html">
-                                        <i class="fa fa-circle"></i>Lista pagine
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="page-create.html">
-                                        <i class="fa fa-circle"></i>Crea pagina
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="media.html">
-                                <i data-feather="camera"></i>
-                                <span>Media</span>
-                            </a>
                         </li>
                         
                         <li>
@@ -249,7 +192,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="create-user-admin.php">
+                                    <a href="create-user.html">
                                         <i class="fa fa-circle"></i>Aggiungi utente
                                     </a>
                                 </li>
@@ -257,25 +200,15 @@
                         </li>
 
                         <li>
-                            <a class="sidebar-header" href="support-ticket.html"><i
-                                    data-feather="phone"></i><span>Supporto</span>
-                            </a>
-                        </li>
-
-                        <li>
                             <a class="sidebar-header" href="reports.html"><i
                                     data-feather="bar-chart"></i><span>Report</span>
                             </a>
                         </li> 
-
-                        <li>
-                            <a class="sidebar-header" href="invoice.html"><i
-                                    data-feather="archive"></i><span>Fatture</span></a>
-                        </li>
       
                     </ul>
                 </div>
             </div>
+            <!-- Page Sidebar Ends-->
 
             <!-- Right sidebar Start-->
             <div class="right-sidebar" id="right_side_bar">
@@ -376,21 +309,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Create User
-                                        <small>Multikart Admin panel</small>
-                                    </h3>
+                                    <h3>Aggiungi utente</h3>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item">
-                                        <a href="index.html">
-                                            <i data-feather="home"></i>
-                                        </a>
-                                    </li>
-                                    <li class="breadcrumb-item">Users </li>
-                                    <li class="breadcrumb-item active">Create User </li>
-                                </ol>
                             </div>
                         </div>
                     </div>
@@ -416,7 +336,7 @@
                                         <div class="tab-pane fade active show" id="account" role="tabpanel"
                                             aria-labelledby="account-tab">
                                             <form class="needs-validation user-add" method="post" action="/MotorShop/create-user-admin.php">
-                                                <h4>Account Details</h4>
+                                                <h4>Account</h4>
                                                 <div class="form-group row">
                                                     <label for="validationCustom0"
                                                         class="col-xl-3 col-md-4"><span>*</span> Nome</label>
@@ -459,7 +379,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom4"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Confirm
+                                                        class="col-xl-3 col-md-4"><span>*</span> Conferma
                                                         Password</label>
                                                     <div class="col-xl-8 col-md-7">
                                                         <input class="form-control" id="validationCustom4"
@@ -467,7 +387,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="pull-right">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <button type="submit" class="btn btn-primary">Salva</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -657,19 +577,19 @@
             </div>
 
             <!-- footer start-->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 footer-copyright text-start">
-                            <p class="mb-0">Copyright 2019 © Multikart All rights reserved.</p>
-                        </div>
-                        <div class="col-md-6 pull-right text-end">
-                            <p class=" mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- footer end-->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 footer-copyright text-start">
+                <p class="mb-0">Copyright 2022 © MotorShop</p>
+            </div>
+            <div class="col-md-6 pull-right text-end">
+                <p class=" mb-0">Realizzato in Abruzzo con <i class="fa fa-heart"></i></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end-->
         </div>
     </div>
 
