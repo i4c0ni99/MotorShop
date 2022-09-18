@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
+    <title>Aggiungi prodotto</title>
 
     <!-- Google font-->
     <link rel="stylesheet"
@@ -29,9 +28,6 @@
     <!-- Flag icon-->
     <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/flag-icon.css">
 
-    <!-- Liner icon -->
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/bootstrap.css">
 
@@ -41,10 +37,9 @@
 
 <body>
 
-
     <!-- page-wrapper Start-->
     <div class="page-wrapper">
-        
+
         <!-- Page Header Start-->
         <div class="page-main-header">
             <div class="main-header-right row">
@@ -120,24 +115,15 @@
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
 
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Prodotti</span>
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </a>
-
                                     <ul class="sidebar-submenu">
-										
-										<li>
+                                        <li>
                                             <a href="add-product.html">
                                                 <i class="fa fa-circle"></i>Aggiungi prodotto
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a href="product-list.html">
+                                            <a href="/../MotorShop/skins/multikart_all_in_one/back-end/product-list.html">
                                                 <i class="fa fa-circle"></i>Lista prodotti</a>
                                         </li>
 										
@@ -151,9 +137,6 @@
                                             <a href="category-sub.html">
                                                 <i class="fa fa-circle"></i>Sottocategorie</a>
                                         </li>
-
-                                    </ul>
-                                </li>
                                 
                                 <li>
                                     <a href="product-review.html">
@@ -172,17 +155,9 @@
                             </a>
 
                             <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Ordini</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-tracking.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Tracking</span>
+								<li>
+                                    <a href="order.html">
+                                        <i class="fa fa-circle"></i>Lista ordini
                                     </a>
                                 </li>
 
@@ -192,54 +167,15 @@
                                         <span>Dettagli ordini</span>
                                     </a>
                                 </li>
+								
+								<li>
+                                    <a href="order-tracking.html">
+                                        <i class="fa fa-circle"></i>
+                                        <span>Tracking</span>
+                                    </a>
+                                </li>
+								
                             </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="dollar-sign"></i>
-                                <span>Vendite</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order.html">
-                                        <i class="fa fa-circle"></i>Ordini
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="transactions.html">
-                                        <i class="fa fa-circle"></i>Transazioni
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="clipboard"></i>
-                                <span>Pagine</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="pages-list.html">
-                                        <i class="fa fa-circle"></i>Lista pagine
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="page-create.html">
-                                        <i class="fa fa-circle"></i>Crea pagina
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="media.html">
-                                <i data-feather="camera"></i>
-                                <span>Media</span>
-                            </a>
                         </li>
                         
                         <li>
@@ -262,22 +198,13 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="sidebar-header" href="support-ticket.html"><i
-                                    data-feather="phone"></i><span>Supporto</span>
-                            </a>
-                        </li>
+
 
                         <li>
                             <a class="sidebar-header" href="reports.html"><i
                                     data-feather="bar-chart"></i><span>Report</span>
                             </a>
                         </li> 
-
-                        <li>
-                            <a class="sidebar-header" href="invoice.html"><i
-                                    data-feather="archive"></i><span>Fatture</span></a>
-                        </li>
       
                     </ul>
                 </div>
@@ -383,7 +310,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Categorie</h3>
+                                    <h3>Aggiungi prodotto</h3>
                                 </div>
                             </div>
                         </div>
@@ -396,74 +323,139 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <form class="form-inline search-form search-box">
-                                        <div class="form-group">
-                                            <input class="form-control-plaintext" type="search" placeholder="Cerca..">
-                                        </div>
-                                    </form>
-
-                                    <button type="button" class="btn btn-primary mt-md-0 mt-2" data-bs-toggle="modal"
-                                        data-original-title="test" data-bs-target="#exampleModal">
-                                        Aggiungi categoria</button>
-                                </div>
-
                                 <div class="card-body">
-                                    <div class="table-responsive table-desi">
-                                        <table class="table all-package table-category " id="editableTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Categoria</th>
-                                                    <th>Sottocategorie</th>
-                                                    <th>Prodotti</th>
-                                                    <th>Opzioni</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-											
-                                                <tr>
-
-                                                    <td data-field="categoria">Caschi</td>
-
-                                                    <td data-field="sottocategorie">4</td>
-
-                                                    <td data-field="prodotti">10</td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0)">
-                                                            <i class="fa fa-edit" title="Modifica"></i>
-                                                        </a>
-
-                                                        <a href="javascript:void(0)">
-                                                            <i class="fa fa-trash" title="Elimina"></i>
-                                                        </a>
-                                                    </td>
-                                                    
-                                                </tr>
-												
-												 <tr>
-
-                                                    <td data-field="categoria">Guanti</td>
-
-                                                    <td data-field="sottocategorie">2</td>
-
-                                                    <td data-field="prodotti">7</td>
-
-                                                    <td>
-                                                        <a href="javascript:void(0)">
-                                                            <i class="fa fa-edit" title="Modifica"></i>
-                                                        </a>
-
-                                                        <a href="javascript:void(0)">
-                                                            <i class="fa fa-trash" title="Elimina"></i>
-                                                        </a>
-                                                    </td>
-                                                    
-                                                </tr>
-                                                 
-                                            </tbody>
-                                        </table>
+                                    <h3>Aggiungi foto :</h3>
+                                    <div class="row product-adding">
+                                        <div class="col-xl-5">
+                                            <div class="add-product">
+                                                <div class="row">
+                                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                        <img src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/pro3/1.jpg" alt=""
+                                                            class="img-fluid image_zoom_1 blur-up lazyloaded">
+                                                    </div>
+                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                        <ul class="file-upload-product">
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-7">
+                                            <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/addProduct.php">
+                                                <div class="form">
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom01"
+                                                            class="col-xl-3 col-sm-4 mb-0">Titolo :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input class="form-control" id="validationCustom01"
+                                                                type="text" name="title" required="true">
+                                                        </div>
+                                                        <div class="valid-feedback">Sembra ok!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustom02"
+                                                            class="col-xl-3 col-sm-4 mb-0">Prezzo :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input class="form-control" id="validationCustom02"
+                                                                type="text" name="price" required="true">
+                                                        </div>
+                                                        <div class="valid-feedback">Sembra ok!</div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label for="validationCustomUsername"
+                                                            class="col-xl-3 col-sm-4 mb-0">Codice prodotto :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <input class="form-control" id="validationCustomUsername"
+                                                                type="text" name="code" required="true">
+                                                        </div>
+                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Inserisci un codice valido</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form">
+                                                    <div class="form-group row">
+                                                        <label for="exampleFormControlSelect1"
+                                                            class="col-xl-3 col-sm-4 mb-0">Taglia :</label>
+                                                        <div class="col-xl-8 col-sm-7">
+                                                            <select class="form-control digits"
+                                                                id="exampleFormControlSelect1" name="size">
+                                                                <option>XS</option>
+                                                                <option>S</option>
+                                                                <option>M</option>
+                                                                <option>L</option>
+                                                                <option>XL</option>
+                                                                <option>XXL</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-sm-4 mb-0">Totale prodotti :</label>
+                                                        <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7">
+                                                            <div class="input-group">
+                                                                <input class="touchspin" type="text" value="1">
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-sm-4">Descrizione:</label>
+                                                        <div class="col-xl-8 col-sm-7 description-sm">
+                                                            <textarea id="editor1" name="description" cols="10" required="true"
+                                                                rows="4"></textarea>
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-xl-3 col-sm-4">Specifiche:</label>
+                                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                                <textarea id="editor1" name="details" cols="10" required="true"
+                                                                    rows="4"></textarea>
+                                                            </div>
+                                                            </div>
+                                                                <div class="form-group row">
+                                                                    <label for="exampleFormControlSelect1"
+                                                                        class="col-xl-3 col-sm-4 mb-0">Categoria :</label>
+                                                                    <div class="col-xl-8 col-sm-7">
+                                                                        <select class="form-control digits"
+                                                                            id="exampleFormControlSelect1" name="category">
+                                                                            <option>Scegli categoria</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group mb-3 row">
+                                                                    <label for="validationCustom01"
+                                                                        class="col-xl-3 col-sm-4 mb-0">Tags :</label>
+                                                                    <div class="col-xl-8 col-sm-7">
+                                                                        <input class="form-control" id="validationCustom01"
+                                                                            type="text" required="true" name="tags">
+                                                                    </div>
+                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                            <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -473,54 +465,23 @@
                 <!-- Container-fluid Ends-->
             </div>
 
-<!-- footer start-->
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 footer-copyright text-start">
-                <p class="mb-0">Copyright 2022 © MotorShop</p>
-            </div>
-            <div class="col-md-6 pull-right text-end">
-                <p class=" mb-0">Realizzato in Abruzzo con <i class="fa fa-heart"></i></p>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- footer end-->
-
-        </div>
-    </div>
-
-    <!-- add physical product modal box -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title f-w-600" id="exampleModalLabel">
-                       Aggiungi categoria</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="needs-validation">
-                        <div class="form">
-                            <div class="form-group">
-                                <label for="validationCustom01" class="mb-1">Categoria :</label>
-                                <input class="form-control" id="validationCustom01" type="text">
-                            </div>
+            <!-- footer start-->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 footer-copyright text-start">
+                            <p class="mb-0">Copyright 2022 © MotorShop</p>
                         </div>
-                    </form>
+                        <div class="col-md-6 pull-right text-end">
+                            <p class=" mb-0">Realizzato in Abruzzo con <i class="fa fa-heart"></i></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button">Save</button>
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
+            </footer>
+            <!-- footer end-->
         </div>
     </div>
-</div>
+
     <!-- latest jquery-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/jquery-3.3.1.min.js"></script>
 
@@ -534,18 +495,33 @@
     <!-- Sidebar jquery-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/sidebar-menu.js"></script>
 
+    <!-- touchspin js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/touchspin/vendors.min.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/touchspin/touchspin.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/touchspin/input-groups.min.js"></script>
+
+    <!-- form validation js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/dashboard/form-validation-custom.js"></script>
+
+    <!-- ckeditor js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/editor/ckeditor/ckeditor.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/editor/ckeditor/ckeditor.custom.js"></script>
+
+    <!-- Zoom js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/jquery.elevatezoom.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/zoom-scripts.js"></script>
+
     <!--Customizer admin-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-customizer.js"></script>
 
-    <!-- Edit, delete and add new -->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/edit-delete-new-product.js"></script>
+    <!-- lazyload js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/lazysizes.min.js"></script>
 
     <!--right sidebar js-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/chat-menu.js"></script>
 
     <!--script admin-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-script.js"></script>
-
 </body>
 
 </html>
