@@ -7,7 +7,7 @@ DEFINE('ERROR_OWNERSHIP', 200);
 function crypto($pass) {
 
     return md5(md5($pass));
-    
+
 }
 
 // Controllo email già utilizzata
@@ -44,7 +44,7 @@ function doLogin(): void
             SELECT email, password,name, surname, phone
             FROM users 
             WHERE email = '" . $_POST['email'] . "'
-            AND password = '" . $_POST['password']. "'");
+            AND password = '" .crypto( $_POST['password']) . "'");
         
         if ($oid->num_rows > 0) {
             // Ottiene dati utente
@@ -64,13 +64,13 @@ function createSession($user, mysqli $mysqli): void
     
      $oid = $mysqli->query("
 
-                SELECT DISTINCT services_has_group.group_id FROM users 
-                LEFT JOIN users_has_group
-                ON users_has_group.users_email = users.email
-                LEFT JOIN services_has_group
-                ON services_has_group.group_id = users_has_group.group_id 
+                SELECT DISTINCT groups_has_services.groups_id FROM users 
+                LEFT JOIN users_has_groups
+                ON users_has_groups.users_email = users.email
+                LEFT JOIN groups_has_services
+                ON groups_has_services.groups_id = users_has_groups.groups_id 
                 LEFT JOIN services
-                ON services.id = services_has_group.services_id
+                ON services.id = groups_has_services.services_id
                 WHERE email = '".$_POST['email']."'"
             );
 
@@ -79,29 +79,7 @@ function createSession($user, mysqli $mysqli): void
         }
         
         foreach($oid as $item){
-            foreach($item as $item2)
-                echo $item2;
-        }
-        
-         
-            
-
-         
-
-        do {
-            $data = $oid->fetch_assoc();
-            if ($data) { 
-            echo $data['link'];
-
-                 $scripts[$data['link']] = true;
-            
-            }
-        } while ($data);
-        $_SESSION['auth'] = $scripts;
- 
-        foreach($oid as $item){
             foreach($item as $item2){
-                echo $item2;
          if($item2==2)
             header("location:/MotorShop/index.php");
          if($item2==1){
@@ -122,14 +100,31 @@ function doSignUp():void {
      $criptoPass=crypto($_POST['password']);
 
     //Inserisce l'utente nella tabella users
-     $mysqli->query ("INSERT INTO users (name,surname,email,phone,password) VALUES('{$_POST['name']}','{$_POST['surname']}',
-                         '{$_POST['email']}','{$_POST['phoneNumber']}','$criptoPass');");
+    $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{$_POST['email']}','{$_POST['name']}',
+                         '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}');");
 
      //Inserisce l'utente nella tabella
-     $mysqli->query ("INSERT INTO users_has_group (users_email,group_id) VALUES(
-        '{$_POST['email']}',2);");
+     $mysqli->query ("INSERT INTO users_has_groups (users_email,groups_id) VALUES(
+       '{$_POST['email']}',2);");
 
                 header("location:/MotorShop/login.php");               
+}
+
+function doRegister():void{
+  
+    global $mysqli;
+    $criptoPass=crypto($_POST['password']);
+   //Inserisce l'utente nella tabella users
+
+
+   $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{$_POST['email']}','{$_POST['name']}',
+                   '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}');");
+    //Inserisce l'utente nella tabella
+    $mysqli->query ("INSERT INTO users_has_groups  (users_email,groups_id) VALUES(
+       '{$_POST['email']}',1);");
+     
+
+               header("location:/MotorShop/user-list.php");   
 }
 
 ?>

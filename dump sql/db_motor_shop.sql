@@ -9,28 +9,22 @@ CREATE TABLE IF NOT EXISTS users
     name VARCHAR(100),
     surname varchar(100),
     password VARCHAR(32),
-    streetAddress VARCHAR(200),
     phone  VARCHAR(10),
-    cap INT,
-    city VARCHAR(100),
     PRIMARY KEY(email)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS users_has_group
+CREATE TABLE IF NOT EXISTS users_has_groups
 (
     users_email VARCHAR(100) NOT NULL,
-    group_id INT,
-    PRIMARY KEY(users_email)
+    groups_id INT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS groups
 (
     id INT NOT NULL,
-    name VARCHAR(50),
+    roul VARCHAR(50),
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 CREATE TABLE IF NOT EXISTS services
 (
@@ -38,15 +32,13 @@ CREATE TABLE IF NOT EXISTS services
     category VARCHAR(100),
     description VARCHAR(200),
     script VARCHAR(200),
-    link VARCHAR(200),
-    route VARCHAR(200),
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS services_has_group
+CREATE TABLE IF NOT EXISTS groups_has_services
 (
     services_id INT NOT NULL,
-    group_id INT NOT NULL
+    groups_id INT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS products
@@ -55,15 +47,17 @@ CREATE TABLE IF NOT EXISTS products
     name VARCHAR(150),
     description VARCHAR(2000),
     quantity INT,
-    availability TINYINT(1),
-    imageSrc LONGBLOB,
-    size VARCHAR(5),
-    specification VARCHAR(2000),
+    availability BOOLEAN,
+	specification VARCHAR(2000),
     information VARCHAR(2000),
-    tags_id INT,
-    category_id INT,
+	mediumRate INT,
+	categories_id INT,
+    images_id INT,
+    sizes_id INT,
+	colours_id INT,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS orders_has_products
 (
     id INT NOT NULL,
@@ -72,7 +66,6 @@ CREATE TABLE IF NOT EXISTS orders_has_products
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE IF NOT EXISTS orders
 (
     id INT NOT NULL,
@@ -80,22 +73,22 @@ CREATE TABLE IF NOT EXISTS orders
     orders_has_products_id INT,
     shipping_address_id INT,
     totalPrice DOUBLE,
-    quantityProduct INT,
     state VARCHAR(25),
     paymentMethod VARCHAR(25),
+	details VARCHAR(200),
     date DATE,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
 CREATE TABLE IF NOT EXISTS shipping_address
 (
     id INT NOT NULL,
-    Orders_id INT,
+    orders_id INT,
     users_email varchar(50),
     name VARCHAR(150),
     surname VARCHAR(150),
+	phone VARCHAR(10),
+	province VARCHAR(100),
     city VARCHAR(100),
     streetAddress VARCHAR(200),
     cap INT,
@@ -106,29 +99,31 @@ CREATE TABLE IF NOT EXISTS feedbacks
 (
     id INT NOT NULL,
     users_email VARCHAR(100),
-    Products_id INT,
+    products_id INT,
     rate INT,
     review VARCHAR(1000),
-    mediumRate INT,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS tags
+CREATE TABLE IF NOT EXISTS categories
 (
     id INT NOT NULL,
+	name VARCHAR(25),
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS categorys
+CREATE TABLE IF NOT EXISTS subcategories
 (
     id INT NOT NULL,
+	name VARCHAR(25),
+	categories_id INT,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS offers
 (
     id INT NOT NULL,
-    category_id INT,
+    categories_id INT,
     products_id INT,
     activation_date DATE,
     expiration DATE,
@@ -136,30 +131,51 @@ CREATE TABLE IF NOT EXISTS offers
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS sizes
+(
+    id INT NOT NULL,
+    quantity INT,
+    availability BOOLEAN,
+    products_id INTEGER,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS colors
+(
+    id INT NOT NULL,
+    sizes_id INT,
+    images_id INT,
+    color VARCHAR(50),
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE users_has_group
+CREATE TABLE IF NOT EXISTS images
+(
+    id INT NOT NULL,
+    products_id INT,
+    imageSrc LONGBLOB,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE users_has_groups
     ADD    FOREIGN KEY (users_email)
     REFERENCES users(email)
 ;
-    
-ALTER TABLE users_has_group
-    ADD    FOREIGN KEY (group_id)
+
+ALTER TABLE users_has_groups
+    ADD    FOREIGN KEY (groups_id)
     REFERENCES groups(id)
 ;
     
-ALTER TABLE services_has_group
+ALTER TABLE groups_has_services
     ADD    FOREIGN KEY (services_id)
     REFERENCES services(id)
 ;
     
-ALTER TABLE services_has_group
-    ADD    FOREIGN KEY (group_id)
+ALTER TABLE groups_has_services
+    ADD    FOREIGN KEY (groups_id)
     REFERENCES groups(id)
 ;
-     
-    
-    
     
 ALTER TABLE orders
     ADD    FOREIGN KEY (users_email)
@@ -171,9 +187,8 @@ ALTER TABLE orders
     REFERENCES orders_has_products(id)
 ;
     
-    
 ALTER TABLE shipping_address
-    ADD    FOREIGN KEY (Orders_id)
+    ADD    FOREIGN KEY (orders_id)
     REFERENCES orders(id)
 ;
     
@@ -198,19 +213,23 @@ ALTER TABLE feedbacks
 ;
     
 ALTER TABLE feedbacks
-    ADD    FOREIGN KEY (Products_id)
+    ADD    FOREIGN KEY (products_id)
     REFERENCES products(id)
 ;
     
-    
 ALTER TABLE products
-    ADD    FOREIGN KEY (category_id)
-    REFERENCES categorys(id)
+    ADD    FOREIGN KEY (categories_id)
+    REFERENCES categories(id)
+;
+
+ALTER TABLE subcategories
+    ADD    FOREIGN KEY (categories_id)
+    REFERENCES categories(id)
 ;
     
 ALTER TABLE offers
-    ADD    FOREIGN KEY (category_id)
-    REFERENCES categorys(id)
+    ADD    FOREIGN KEY (categories_id)
+    REFERENCES categories(id)
 ;
     
 ALTER TABLE offers
@@ -222,22 +241,47 @@ ALTER TABLE orders_has_products
     ADD    FOREIGN KEY (products_id)
     REFERENCES products(id)
 ;
-    
-    
 
+ALTER TABLE groups_has_services
+    ADD    FOREIGN KEY (services_id)
+    REFERENCES services(id)
+;
 
-INSERT INTO users (email, shipping_address_id, name,surname, password, streetAddress, phone, cap, city) VALUE
-    ('admin@gmail.com',NULL,'luigi','visconti','admin','via genova 48','3921346140',67100,'L`aquila');
+ALTER TABLE groups_has_services
+    ADD    FOREIGN KEY (groups_id)
+    REFERENCES groups(id)
+;
 
+ALTER TABLE sizes
+    ADD    FOREIGN KEY (products_id)
+    REFERENCES products(id)
+;
 
+ALTER TABLE images
+    ADD    FOREIGN KEY (products_id)
+    REFERENCES products(id)
+;
 
-INSERT INTO `groups` (`id`, name) VALUES(1, 'Admin'),
+ALTER TABLE colors
+    ADD    FOREIGN KEY (images_id)
+    REFERENCES images(id)
+;
+
+INSERT INTO users (`email`, `shipping_address_id`, `name`, `surname`, `password`, `phone`) VALUE
+    ( 'admin@gmail.com', NULL, 'Luigi', 'Visconti','admin', '3921346140');
+
+INSERT INTO `groups` (`id`, `roul`) VALUES(1, 'Admin'),
                                      (2, 'Customer');
 
 
-INSERT INTO `services` (`id`, `script`) VALUES (1, 'dashboard.php'),(2,'login.php'),(3, 'logout.php'),(4,'register.php'),(5,'adminRegister.php');
+INSERT INTO `services` (`id`, `category`, `description`, `script`) VALUES (1, 'home', 'dashboard admin', 'dashboard.php'), 
+(2, 'auth', 'login customer-admin', 'login.php'), 
+(3, 'auth', 'logout customer-admin', 'logout.php'), 
+(4, 'auth', 'register customer', 'register.php'), 
+(5, 'auth', 'register admin', 'create-user-admin.php'),
+(6,'list','user list','user-list.php'),
+(7,'home','customer home','index.php');
 
-INSERT INTO `users_has_group` (`users_email`, `group_id`) VALUE ('admin@gmail.com', 1);
+INSERT INTO `users_has_groups` ( `users_email`, `groups_id`) VALUE ('admin@gmail.com', 1);
 
-INSERT INTO `services_has_group` (services_id, group_id) VALUES
-                                                               (6, 2);
+INSERT INTO `groups_has_services` ( `services_id`, `groups_id`) VALUES (1, 1),(3,1),(5,1),(2,2),(3,2),(4,2),(6,1),(7,2),(2,1);
