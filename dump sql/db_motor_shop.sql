@@ -44,15 +44,16 @@ CREATE TABLE IF NOT EXISTS groups_has_services
 CREATE TABLE IF NOT EXISTS products
 (
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(150),
+    code INT ,
+    title VARCHAR(150),
     description VARCHAR(2000),
-    quantity INT,
     availability BOOLEAN,
 	specification VARCHAR(2000),
     information VARCHAR(2000),
 	mediumRate INT,
 	categories_id INT,
     PRIMARY KEY(id)
+    
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS orders_has_products
@@ -99,6 +100,7 @@ CREATE TABLE IF NOT EXISTS feedbacks
     products_id INT,
     rate INT,
     review VARCHAR(1000),
+    date DATE,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -122,6 +124,7 @@ CREATE TABLE IF NOT EXISTS offers
     id INT NOT NULL AUTO_INCREMENT,
     categories_id INT,
     products_id INT,
+    sub_products_id INT,
     activation_date DATE,
     expiration DATE,
     percentage INTEGER,
@@ -132,27 +135,40 @@ CREATE TABLE IF NOT EXISTS sizes
 (
     id INT NOT NULL AUTO_INCREMENT,
     quantity INT,
+    size VARCHAR(10),
     availability BOOLEAN,
-    products_id INTEGER,
-    PRIMARY KEY(id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS colors
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    sizes_id INT,
-    images_id INT,
-    color VARCHAR(50),
+    sub_products_id INTEGER,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS images
 (
     id INT NOT NULL AUTO_INCREMENT,
-    products_id INT,
-    imageSrc LONGBLOB,
+    sub_products_id INT,
+    imgsrc LONGBLOB,
     PRIMARY KEY(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS wishlist
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    sub_products_id INT,
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS sub_products
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    products_id INT,
+    color VARCHAR(25),
+    price FLOAT(10),
+    PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE wishlist
+    ADD    FOREIGN KEY (sub_products_id)
+    REFERENCES sub_products(id)
+;
 
 ALTER TABLE users_has_groups
     ADD    FOREIGN KEY (users_email)
@@ -208,6 +224,9 @@ ALTER TABLE feedbacks
     ADD    FOREIGN KEY (users_email)
     REFERENCES users(email)
 ;
+ALTER TABLE images 
+     ADD FOREIGN KEY (sub_products_id)
+     REFERENCES sub_products(id);
     
 ALTER TABLE feedbacks
     ADD    FOREIGN KEY (products_id)
@@ -233,6 +252,10 @@ ALTER TABLE offers
     ADD    FOREIGN KEY (products_id)
     REFERENCES products(id)
 ;
+ALTER TABLE offers
+    ADD    FOREIGN KEY (sub_products_id)
+    REFERENCES sub_products(id)
+;
     
 ALTER TABLE orders_has_products
     ADD    FOREIGN KEY (products_id)
@@ -250,19 +273,13 @@ ALTER TABLE groups_has_services
 ;
 
 ALTER TABLE sizes
-    ADD    FOREIGN KEY (products_id)
-    REFERENCES products(id)
+    ADD    FOREIGN KEY (sub_products_id)
+    REFERENCES sub_products(id)
 ;
 
-ALTER TABLE images
-    ADD    FOREIGN KEY (products_id)
-    REFERENCES products(id)
-;
 
-ALTER TABLE colors
-    ADD    FOREIGN KEY (images_id)
-    REFERENCES images(id)
-;
+
+
 
 INSERT INTO users (`email`, `shipping_address_id`, `name`, `surname`, `password`, `phone`) VALUE
     ( 'admin@gmail.com', NULL, 'Luigi', 'Visconti','admin', '3921346140');

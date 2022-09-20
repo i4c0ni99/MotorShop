@@ -340,24 +340,7 @@
                                                                         type="file"><i class="fa fa-plus"></i></div>
                                                             </li>
                                                             <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
+                                                                <input type="color" name="color">
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -439,7 +422,9 @@
                                                                     <div class="col-xl-8 col-sm-7">
                                                                         <select class="form-control digits"
                                                                             id="exampleFormControlSelect1" name="category">
-                                                                            <option>Scegli categoria</option>
+                                                                            <[foreach]>
+                                                                            <option><[categories]></option>
+                                                                            <[/foreach]>
                                                                         </select>
                                                                     </div>
                                                                 </div>

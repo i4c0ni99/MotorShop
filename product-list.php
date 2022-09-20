@@ -2,8 +2,7 @@
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
  
-$main =new Template("skins/multikart_all_in_one/back-end/user-list.html");
-$main->setContent("title","coapppp");
+$main =new Template("skins/multikart_all_in_one/back-end/product-list.html");
  $oid=$mysqli->query("SELECT users.name,users.surname,users.email,groups.roul FROM users 
                       JOIN users_has_groups ON users.email=users_has_groups.users_email 
                       JOIN groups ON groups.id=users_has_groups.groups_id;");
