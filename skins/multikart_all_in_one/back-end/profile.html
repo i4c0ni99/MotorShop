@@ -11,11 +11,11 @@
     <meta name="keywords"
         content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
     <title>Profilo</title>
 
-    <!-- Google font-->
+     <!-- Google font-->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
 
@@ -24,16 +24,71 @@
 
 
     <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/font-awesome.css">
 
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/flag-icon.css">
+
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/icofont.css">
+
+    <!-- Prism css-->
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/prism.css">
+
+    <!-- Chartist css -->
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/chartist.css">
 
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/bootstrap.css">
 
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/style.css">
+
+<style type="text/css">
+.overlay {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 10000;
+}
+.popup {
+  width: 98%;
+  padding: 15px;
+  left: 0;
+  margin-left: 1%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  position: absolute;
+  top: -100%;
+  box-shadow: 5px 5px 5px #000;
+  z-index: 10001;
+}
+@media (min-width: 768px) {
+  .popup {
+    width: 66.66666666%;
+    margin-left: 16.666666%;
+  }
+}
+@media (min-width: 992px) {
+  .popup {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .popup {
+    width: 33.33333%;
+    margin-left: 33.33333%;
+  }
+}
+
+</style>
+
 </head>
 
 <body>
@@ -70,9 +125,8 @@
                                         class="main-circle"></span></div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div p-20">
-                                <li><a href="javascript:void(0)"><i data-feather="user"></i>Profilo</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="settings"></i>Impostazioni</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="log-out"></i>Esci</a></li>
+                                <li><a href="/../MotorShop/skins/multikart_all_in_one/back-end/profile.html"><i data-feather="user"></i>Profilo</a></li>
+                                <li><a href="/../MotorShop/logout.php"><i data-feather="log-out"></i>Esci</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -89,16 +143,16 @@
             <div class="page-sidebar">
                 <div class="main-header-left d-none d-lg-block">
                     <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded"
-                                src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/multikart-logo.png" alt=""></a></div>
+                                src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo.png" alt=""></a></div>
                 </div>
                 <div class="sidebar custom-scrollbar">
                     <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times"
                             aria-hidden="true"></i></a>
                     <div class="sidebar-user">
-                        <img class="img-60" src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/user3.jpg" alt="#">
+                        <img class="img-60" src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="#">
                         <div>
-                            <h6 class="f-14">JOHN</h6>
-                            <p>general manager.</p>
+                            <h6 class="f-14"><[user]></h6>
+                            <p>Bentornato!</p>
                         </div>
                     </div>
                     <ul class="sidebar-menu">
@@ -124,7 +178,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="product-list.html">
+                                            <a href="/../MotorShop/skins/multikart_all_in_one/back-end/product-list.html">
                                                 <i class="fa fa-circle"></i>Lista prodotti</a>
                                         </li>
 										
@@ -309,7 +363,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Profilo</h3>
+                                    <h3>Modifica profilo</h3>
                                 </div>
                             </div>
                         </div>
@@ -328,21 +382,26 @@
                                             class="img-fluid img-90 rounded-circle blur-up lazyloaded">
                                         <h5 class="f-w-600 mb-0">Juan Costantini</h5>
                                         <span>johndeo@gmail.com</span>
-                                        <div class="social">
-                                            <div class="form-group btn-showcase">
-                                                <button class="btn social-btn btn-fb d-inline-block"> <i
-                                                        class="fa fa-facebook"></i></button>
-                                                <button class="btn social-btn btn-twitter d-inline-block"><i
-                                                        class="fa fa-google"></i></button>
-                                                <button class="btn social-btn btn-google d-inline-block me-0"><i
-                                                        class="fa fa-twitter"></i></button>
-                                            </div>
-                                        </div>
                                     </div>
                                     <hr>
-                                </div>
+                                    <form class="needs-validation add-avatar-form" novalidate="" method="post" action="add-subProduct.php" enctype="multipart/form-data">
+                                    <div class="row product-adding">
+                                            <div class="add-product">
+                                                <div class="row">
+                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                        <ul class="file-upload-product">
+                                                            <li>
+															<center><button type="button" class="btn btn-primary" input class="upload" type="file" name="image1">Cambia avatar</button></center>
+                                                            </li>
+															 </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
                             </div>
-                        </div>
+							</div>
+							</div>
                         <div class="col-xl-8">
                             <div class="card tab2-card">
                                 <div class="card-body">
@@ -352,120 +411,149 @@
                                                 aria-controls="top-profile" aria-selected="true"><i data-feather="user"
                                                     class="me-2"></i>Dettagli</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" id="contact-top-tab"
-                                                data-bs-toggle="tab" href="#top-contact" role="tab"
-                                                aria-controls="top-contact" aria-selected="false"><i
-                                                    data-feather="settings" class="me-2"></i>Impostazioni</a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content" id="top-tabContent">
                                         <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
                                             aria-labelledby="top-profile-tab">
-                                            <h5 class="f-w-600">Dettagli</h5>
                                             <div class="table-responsive profile-table">
-                                                <table class="table table-borderless">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Nome:</td>
-                                                            <td>Juan</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cognome:</td>
-                                                            <td>Costantini</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Email:</td>
-                                                            <td>johndeo@gmail.com</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cellulare:</td>
-                                                            <td>2124821463</td>
-                                                        </tr>
-														<tr>
-                                                            <td>Ruolo:</td>
-                                                            <td>Admin</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+                                                    <div class="form">
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="name"
+                                                                    type="text" name="name" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                                <label for="validationCustom01"
+                                                                    class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+                                                                <div class="col-xl-8 col-sm-7">
+                                                                    <input class="form-control" id="surname"
+                                                                        type="text" name="surname" required="true">
+                                                                </div>
+                                                                </div>
+                                                                <div class="form-group mb-3 row">
+                                                                    <label for="validationCustom01"
+                                                                        class="col-xl-3 col-sm-4 mb-0">Email:</label>
+                                                                    <div class="col-xl-8 col-sm-7">
+                                                                        <input class="form-control" id="email"
+                                                                            type="text" name="email" required="true">
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="form-group mb-3 row">
+                                                                        <label for="validationCustom01"
+                                                                            class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+                                                                        <div class="col-xl-8 col-sm-7">
+                                                                            <input class="form-control" id="phone"
+                                                                                type="text" name="phone" required="true">
+                                                                        </div>
+                                                                        </div>
+                                                        </div>
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <button type="submit" class="btn btn-primary">Salva</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                        <br>
+                                        </br>
+                                        <br>
+                                        </br>
+                                        <hr>										
+										<form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/updatePassword.php">
+                                                    <div class="form">
+													<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Password corrente:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="currentpassword"
+                                                                    type="password" name="currentpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                        </div>
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="newpassword"
+                                                                    type="password" name="newpassword" required="true">
+                                                            </div>
+                                                            </div>            
+														<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="confirmpassword"
+                                                                    type="password" name="confirmpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                        </div>
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <button type="submit" class="btn btn-primary">Salva</button>
+                                                        </div>
+                                                </form>
+										<br>
+                                        </br>
+                                        <br>
+                                        </br>
+										<hr>
+                                        <h3>Elimina account:</h3>
+                                        <p>Se lo desideri, puoi eliminare il tuo account dal nostro sito.</p>
+                                        <p>Ricorda che questa azione è irreversibile.</p>									
+                                        <br>
+                                        <form method="post" action="/MotorShop/deleteProfile.php">
+                                        <button type="submit" class="btn btn-primary"><a href="#" class="open-dialog">Elimina</a></button>
+                                        </form>
+										<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+function showPrompt(msg)
+{
+  // CREATE A Promise TO RETURN
+  var p = new Promise(function(resolve, reject) {
+  
+    var dialog = $('<div/>', {class: 'popup'})
+      .append(
+        $('<p/>').html(msg)
+      )
+      .append(
+        $('<div/>', {class: 'text-right'})
+          .append($('<button/>', {class: 'btn btn-cancel'}).html('Annulla').on('click', function() {
+            $('.overlay').remove();
+            // RESOLVE Promise TO false
+            resolve(false);
+          }))
+          .append($('<button/>', {class: 'btn btn-primary'}).html('Conferma').on('click', function() {
+            $('.overlay').remove();
+            // RESOLVE Promise TO true
+            resolve(true);
+          }))
+      );
+      
+    var overlay = $('<div/>', {class: 'overlay'})
+      .append(dialog);
+    
+    $('body').append(overlay);
+    $(dialog).animate({top: '15%'}, 1000);
+  });
+  
+  // RETURN THE Promise
+  return p;
+}
+
+$(function() {
+  // HANDLE open-dialog CLICK
+  $('.open-dialog').on('click',function(e) {
+    // PREVENT DEFAULT BEHAVIOUR FOR <a/>
+    e.preventDefault();
+
+    // SAVE PROMISE RETURN
+    var res = showPrompt('Confermi di voler eliminare definitivamente il tuo account?');
+  });
+});
+</script>
                                         </div>
-                                        <div class="tab-pane fade" id="top-contact" role="tabpanel"
-                                            aria-labelledby="contact-top-tab">
-                                            <div class="account-setting">
-                                                <h5 class="f-w-600">Notifications</h5>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="d-block" for="chk-ani">
-                                                            <input class="checkbox_animated" id="chk-ani"
-                                                                type="checkbox">
-                                                            Allow Desktop Notifications
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani1">
-                                                            <input class="checkbox_animated" id="chk-ani1"
-                                                                type="checkbox">
-                                                            Enable Notifications
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani2">
-                                                            <input class="checkbox_animated" id="chk-ani2"
-                                                                type="checkbox">
-                                                            Get notification for my own activity
-                                                        </label>
-                                                        <label class="d-block mb-0" for="chk-ani3">
-                                                            <input class="checkbox_animated" id="chk-ani3"
-                                                                type="checkbox" checked="">
-                                                            DND
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="account-setting deactivate-account">
-                                                <h5 class="f-w-600">Deactivate Account</h5>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="d-block" for="edo-ani">
-                                                            <input class="radio_animated" id="edo-ani" type="radio"
-                                                                name="rdo-ani" checked="">
-                                                            I have a privacy concern
-                                                        </label>
-                                                        <label class="d-block" for="edo-ani1">
-                                                            <input class="radio_animated" id="edo-ani1" type="radio"
-                                                                name="rdo-ani">
-                                                            This is temporary
-                                                        </label>
-                                                        <label class="d-block mb-0" for="edo-ani2">
-                                                            <input class="radio_animated" id="edo-ani2" type="radio"
-                                                                name="rdo-ani" checked="">
-                                                            Other
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Deactivate
-                                                    Account</button>
-                                            </div>
-                                            <div class="account-setting deactivate-account">
-                                                <h5 class="f-w-600">Delete Account</h5>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label class="d-block" for="edo-ani3">
-                                                            <input class="radio_animated" id="edo-ani3" type="radio"
-                                                                name="rdo-ani1" checked="">
-                                                            No longer usable
-                                                        </label>
-                                                        <label class="d-block" for="edo-ani4">
-                                                            <input class="radio_animated" id="edo-ani4" type="radio"
-                                                                name="rdo-ani1">
-                                                            Want to switch on other account
-                                                        </label>
-                                                        <label class="d-block mb-0" for="edo-ani5">
-                                                            <input class="radio_animated" id="edo-ani5" type="radio"
-                                                                name="rdo-ani1" checked="">
-                                                            Other
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-primary">Delete Account</button>
-                                            </div>
-                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -493,29 +581,32 @@
     </div>
 
     <!-- latest jquery-->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/jquery-3.3.1.min.js"></script>
 
     <!-- Bootstrap js-->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- feather icon js-->
-    <script src="assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather-icon.js"></script>
 
     <!-- Sidebar jquery-->
-    <script src="assets/js/sidebar-menu.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/sidebar-menu.js"></script>
 
     <!--Customizer admin-->
-    <script src="assets/js/admin-customizer.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-customizer.js"></script>
 
     <!-- lazyload js-->
-    <script src="assets/js/lazysizes.min.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/lazysizes.min.js"></script>
 
     <!--right sidebar js-->
-    <script src="assets/js/chat-menu.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/chat-menu.js"></script>
+
+    <!--form validation js-->
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/dashboard/form-validation-custom.js"></script>
 
     <!--script admin-->
-    <script src="assets/js/admin-script.js"></script>
+    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-script.js"></script>
 
 </body>
 
