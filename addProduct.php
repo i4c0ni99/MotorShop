@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                0,'{$_POST['details']}','{$item['id']}')");
  }
     
-          header('location:/MotorShop/edit-product.php');
+          header('location:/MotorShop/list-product.php');
 }
 $main->close();
 

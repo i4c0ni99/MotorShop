@@ -10,7 +10,7 @@ $main =new Template("skins/multikart_all_in_one/back-end/product-list.html");
 if($result->num_rows>0){
 foreach($result as $key){
 
- $main->setContent("code",$key['id']);
+ $main->setContent("id",$key['id']);
  $main->setContent("title",$key['title']);
  $data= $mysqli->query("SELECT images.imgsrc FROM products join sub_products ON sub_products.products_id=products.id 
     join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
@@ -20,7 +20,7 @@ foreach($result as $key){
     foreach($data as $item ){
        
         
-        $main->setContent("img",' <img src="data:image/png;base64,' .  base64_encode($item['imgsrc'])  . '" class="img-fluid blur-up lazyload bg-img"/>');
+        $main->setContent("img",$item['imgsrc']);
        
     }
   }

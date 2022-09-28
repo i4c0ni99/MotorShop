@@ -122,13 +122,13 @@
 
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="add-product.html">
+                                            <a href="/../MotorShop/addProduct.php">
                                                 <i class="fa fa-circle"></i>Aggiungi prodotto
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a href="product-list.html">
+                                            <a href="/../MotorShop/list-product.php">
                                                 <i class="fa fa-circle"></i>Lista prodotti</a>
                                         </li>
 										
@@ -308,9 +308,11 @@
 
             <div class="page-body">
                 <!-- Container-fluid starts-->
+               
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="row">
+                           
                             <div class="col-lg-6">
                                 <div class="page-header-left">
                                     <h3>Lista prodotti</h3>
@@ -325,13 +327,14 @@
                 
                 <div class="container-fluid">
                     <div class="row products-admin ratio_asos">
+                        <[foreach]>
                         <div class="col-xl-3 col-sm-6">
                             <div class="card">
                             <form method="get" action="/MotorShop/add-subProduct.php">
                                 <div class="card-body product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
-                                            <a href="javascript:void(0)"><[img]></a>
+                                            <a href="javascript:void(0)"><img src="data:image;base64,<[img]>" width="250" height="450"></a>
                                             <div class="product-hover">
                                                 <ul>
                                                     <li>
@@ -362,120 +365,10 @@
                             </form>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                            <form method="get" action="/MotorShop/add-subProduct.php">
-                                <div class="card-body product-box">
-                                    <div class="img-wrapper">
-                                        <div class="front">
-                                            <a href="javascript:void(0)"><[img]></a>
-                                            <div class="product-hover">
-                                                <ul>
-                                                    <li>
-                                                        <button class="btn" type="button" data-original-title=""
-                                                            title=""><i class="ti-pencil-alt"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn"><i class="ti-trash"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn" type="submit" style="font-size: 20px;">+</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i></div>
-                                        <a href="javascript:void(0)">
-                                            <h6><[title]></h6>
-                                        </a>
-                                        <input type="hidden" value="<[id]>" name="id" href="javascript:void(0) ">
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                            <form method="get" action="/MotorShop/add-subProduct.php">
-                                <div class="card-body product-box">
-                                    <div class="img-wrapper">
-                                        <div class="front">
-                                            <a href="javascript:void(0)"><[img]></a>
-                                            <div class="product-hover">
-                                                <ul>
-                                                    <li>
-                                                        <button class="btn" type="button" data-original-title=""
-                                                            title=""><i class="ti-pencil-alt"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn"><i class="ti-trash"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn" type="submit" style="font-size: 20px;">+</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i></div>
-                                        <a href="javascript:void(0)">
-                                            <h6><[title]></h6>
-                                        </a>
-                                        <input type="hidden" value="<[id]>" name="id" href="javascript:void(0) ">
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                            <form method="get" action="/MotorShop/add-subProduct.php">
-                                <div class="card-body product-box">
-                                    <div class="img-wrapper">
-                                        <div class="front">
-                                            <a href="javascript:void(0)"><[img]></a>
-                                            <div class="product-hover">
-                                                <ul>
-                                                    <li>
-                                                        <button class="btn" type="button" data-original-title=""
-                                                            title=""><i class="ti-pencil-alt"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn"><i class="ti-trash"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn" type="submit" style="font-size: 20px;">+</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i></div>
-                                        <a href="javascript:void(0)">
-                                            <h6><[title]></h6>
-                                        </a>
-                                        <input type="hidden" value="<[id]>" name="id" href="javascript:void(0) ">
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
+                        <[/foreach]>
                     </div>
                 </div>
-                <[/foreach]>
+           
                 <!-- Container-fluid Ends-->
             </div>
 
