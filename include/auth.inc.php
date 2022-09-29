@@ -1,8 +1,8 @@
-<?php
+<?php session_start();
+
 DEFINE('ERROR_SCRIPT_PERMISSION', 100);
 DEFINE('ERROR_USER_NOT_LOGGED', 200);
 DEFINE('ERROR_OWNERSHIP', 200);
-
 // Funzione hashing MD5 password
 function crypto($pass) {
 
@@ -10,45 +10,21 @@ function crypto($pass) {
 
 }
 
-// Controllo email già utilizzata
-/*function isOwner($resource, $key = "id") {
-
-    global $mysqli;
-
-    $oid = $mysqli->query("
-            SELECT email 
-            FROM {$resource} 
-            WHERE {$key} = '{$_REQUEST[$key]}'");
-    if (!$oid) {
-    }
-
-    $data = $oid->fetch_assoc();
-
-    if ($data['owner_email'] != $_SESSION['user']['email']) {
-
-        Header("Location: error.php?code=".ERROR_OWNERSHIP);
-        exit;
-
-    }
-
-}*/
-
 // Funzione LogIn
 function doLogin(): void
 {
-
+      
     global $mysqli;
-
         // Query email e password utente
         $oid = $mysqli->query("
-            SELECT email, password,name, surname, phone
+            SELECT email,name, surname
             FROM users 
             WHERE email = '" . $_POST['email'] . "'
             AND password = '" .crypto( $_POST['password']) . "'");
         
         if ($oid->num_rows > 0) {
             // Ottiene dati utente
-            $user = $oid->fetch_assoc();
+            $user = $oid;
             createSession($user, $mysqli);
         }
 
@@ -81,10 +57,11 @@ function createSession($user, mysqli $mysqli): void
         foreach($oid as $item){
             foreach($item as $item2){
          if($item2==2)
-            header("location:/MotorShop/index.php");
-         if($item2==1){
-         
-             header("location:/MotorShop/dashBoard.php");
+            $_SESSION['group']= $item2;
+           header("location:/MotorShop/index.php");
+         if($item2==1){ 
+            $_SESSION['group']= $item2;
+           header("location:/MotorShop/dashBoard.php");
          }
             }
 
@@ -92,6 +69,16 @@ function createSession($user, mysqli $mysqli): void
         
         
 }
+function doLoginSession(): void
+{
+      
+   
+        if($_SESSION['group']==1){
+        header("location:/MotorShop/index.php");
+        }elseif($_SESSION['group']==1){
+            header("location:/MotorShop/dashBoard.php");
+        }
+    }
 
 // Funzione registrazione utente
 function doSignUp():void {

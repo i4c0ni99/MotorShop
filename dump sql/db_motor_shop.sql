@@ -282,7 +282,7 @@ ALTER TABLE sizes
 
 
 INSERT INTO users (`email`, `shipping_address_id`, `name`, `surname`, `password`, `phone`) VALUE
-    ( 'admin@gmail.com', NULL, 'Luigi', 'Visconti','admin', '3921346140');
+    ( 'admin@gmail.com', NULL, 'Luigi', 'Visconti',MD5('admin'), '3921346140');
 
 INSERT INTO `groups` (`id`, `roul`) VALUES(1, 'Admin'),
                                      (2, 'Customer');
