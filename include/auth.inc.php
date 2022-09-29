@@ -75,7 +75,7 @@ function doLoginSession(): void
    
         if($_SESSION['group']==1){
         header("location:/MotorShop/index.php");
-        }elseif($_SESSION['group']==1){
+        }elseif($_SESSION['group']==2){
             header("location:/MotorShop/dashBoard.php");
         }
     }
