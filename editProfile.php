@@ -1,36 +1,37 @@
 <?php
 
+session_start();
+
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
-session_start();
-
 $main = new Template("skins/multikart_all_in_one/back-end/profile.html");
+$main->setContent('name',$_SESSION['user']['name']);
+$main->setContent('surname',$_SESSION['user']['surname']);
+$main->setContent('email',$_SESSION['user']['email']);
+$main->setContent('phone',$_SESSION['user']['phone']);
 
-$main->setContent("user", $_GETCOOKIE['user']);
-
-function updateProfile() {
-
-    global $mysqli;
-
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['edit-details-button'])) {
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];
-        $email = $_POST["email"];
         $phone = $_POST["phone"];
 
-        if ($name != "" && $surname != "" && $email != "" && $phone != "" ) {
+        $_SESSION['user']['name'] = $name;
+        $_SESSION['user']['surname'] = $surname;
+        $_SESSION['user']['phone'] = $phone;
 
-        $oid = $mysqli->query("UPDATE db_motorShop.users SET name ='$name', surname = '$surname', email =' $email', phone= '$phone'
+        if ($name != "" && $surname != "" && $phone != "" ) {
+
+        $oid = $mysqli->query("UPDATE users SET name ='$name', surname = '$surname', phone= '$phone'
                              WHERE email  ='".$_SESSION['user']['email']."'");
+
+        header("location:/../MotorShop/editProfile.php");
 
         }
 
-    }   
-
-}
+    }
 
 $main->close();
 

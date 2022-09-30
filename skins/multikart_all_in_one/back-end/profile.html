@@ -125,7 +125,7 @@
                                         class="main-circle"></span></div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div p-20">
-                                <li><a href="/../MotorShop/skins/multikart_all_in_one/back-end/profile.html"><i data-feather="user"></i>Profilo</a></li>
+                                <li><a href="/../MotorShop/editProfile.php"><i data-feather="user"></i>Profilo</a></li>
                                 <li><a href="/../MotorShop/logout.php"><i data-feather="log-out"></i>Esci</a></li>
                             </ul>
                         </li>
@@ -151,7 +151,7 @@
                     <div class="sidebar-user">
                         <img class="img-60" src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="#">
                         <div>
-                            <h6 class="f-14"><[user]></h6>
+                            <h6 class="f-14"><[name]></h6>
                             <p>Bentornato!</p>
                         </div>
                     </div>
@@ -381,7 +381,7 @@
                                         <img src="assets/images/dashboard/designer.jpg" alt=""
                                             class="img-fluid img-90 rounded-circle blur-up lazyloaded">
                                         <h5 class="f-w-600 mb-0">Juan Costantini</h5>
-                                        <span>johndeo@gmail.com</span>
+                                        <span><[user]></span>
                                     </div>
                                     <hr>
                                     <form class="needs-validation add-avatar-form" novalidate="" method="post" action="add-subProduct.php" enctype="multipart/form-data">
@@ -423,7 +423,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="name"
-                                                                    type="text" name="name" required="true">
+                                                                    type="text" name="name" value="<[name]>" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -431,28 +431,20 @@
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
                                                                     <input class="form-control" id="surname"
-                                                                        type="text" name="surname" required="true">
+                                                                        type="text" name="surname" value="<[surname]>" required="true">
                                                                 </div>
                                                                 </div>
-                                                                <div class="form-group mb-3 row">
-                                                                    <label for="validationCustom01"
-                                                                        class="col-xl-3 col-sm-4 mb-0">Email:</label>
-                                                                    <div class="col-xl-8 col-sm-7">
-                                                                        <input class="form-control" id="email"
-                                                                            type="text" name="email" required="true">
-                                                                    </div>
-                                                                    </div>
                                                                     <div class="form-group mb-3 row">
                                                                         <label for="validationCustom01"
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
                                                                             <input class="form-control" id="phone"
-                                                                                type="text" name="phone" required="true">
+                                                                                type="text" name="phone" value="<[phone]>" required="true">
                                                                         </div>
                                                                         </div>
                                                         </div>
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                                <button type="submit" class="btn btn-primary">Salva</button>
+                                                                <input type="submit" value="Salva" name="edit-details-button" class="btn btn-primary"></input>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -490,7 +482,7 @@
                                                             </div>            
                                                         </div>
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                                <button type="submit" class="btn btn-primary">Salva</button>
+                                                                <button type="changepass" class="btn btn-primary">Salva</button>
                                                         </div>
                                                 </form>
 										<br>
@@ -503,7 +495,7 @@
                                         <p>Ricorda che questa azione è irreversibile.</p>									
                                         <br>
                                         <form method="post" action="/MotorShop/deleteProfile.php">
-                                        <button type="submit" class="btn btn-primary"><a href="#" class="open-dialog">Elimina</a></button>
+                                        <button type="delete" class="btn btn-primary"><a href="#" class="open-dialog">Elimina</a></button>
                                         </form>
 										<script src="http://code.jquery.com/jquery.js"></script>
 <script>
