@@ -1,8 +1,10 @@
-<?php
+<?php session_start();
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
+
+
 
 $main = new Template("skins/multikart_all_in_one/back-end/add-product.html");
  $data=$mysqli->query("SELECT name FROM categories");

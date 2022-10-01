@@ -5,11 +5,12 @@ session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 
+
 $main = new Template("skins/motor-html-package/motor/login.html");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-  require "include/auth.inc.php";
+   require "include/auth.inc.php";
+ 
   
   $result = $mysqli -> query ("
 
@@ -34,10 +35,11 @@ if (!$result) {
    $data = $result -> fetch_assoc();
 
    if ($data['groups_id'] == '1'){
-
+    $_SESSION['user']['goups']=$data['groups_id'];
        header('location:/../MotorShop/dashBoard.php');
 
    } else {
+    $_SESSION['user']['goups']=$data['groups_id'];
        header("location:/../MotorShop/index.php");
        
    }

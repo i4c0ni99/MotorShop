@@ -1,28 +1,38 @@
-<?php
+<?php session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
  
+if($_SESSION['user']['goups']==1){
 $main =new Template("skins/multikart_all_in_one/back-end/product-list.html");
- $oid=$mysqli->query("SELECT users.name,users.surname,users.email,groups.roul FROM users 
-                      JOIN users_has_groups ON users.email=users_has_groups.users_email 
-                      JOIN groups ON groups.id=users_has_groups.groups_id;");
+}else{
+   $main =new Template("skins/motor-html-package/motor/product-grid-3.html");
+}
+ $oid=$mysqli->query("SELECT title,id FROM products");
  $result= $oid;
-$id=1;
+
 if($result->num_rows>0){
 foreach($result as $key){
- $id++; 
- $main->setContent("id",$id);
- $main->setContent("name",$key['name']);
- $main->setContent("surname",$key['surname']);
- $main->setContent("email",$key['email']);
- $main->setContent("ruolo",$key['roul']);
+
+ $main->setContent("id",$key['id']);
+ $main->setContent("title",$key['title']);
+
+ $data= $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
+    join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
+ if($data->num_rows>0){
+    
+
+    foreach($data as $item ){
+       
+        
+        $main->setContent("img",$item['imgsrc']);
+        $main->setContent("price",$item['price']);
+    }
+  }
 }
 }else{
     $main->setContent("id",'');
- $main->setContent("name",'');
- $main->setContent("surname",'');
- $main->setContent("email",'');
- $main->setContent("ruolo",'');
+ $main->setContent("title",'');
+
 }
 
 

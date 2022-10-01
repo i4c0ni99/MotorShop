@@ -111,5 +111,38 @@
         }
         
     }
+    // Funzione registrazione utente
+function doSignUp():void {
+
+    global $mysqli;
+     $criptoPass=crypto($_POST['password']);
+
+    //Inserisce l'utente nella tabella users
+    $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{$_POST['email']}','{$_POST['name']}',
+                         '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}');");
+
+     //Inserisce l'utente nella tabella
+     $mysqli->query ("INSERT INTO users_has_groups (users_email,groups_id) VALUES(
+       '{$_POST['email']}',2);");
+
+                header("location:/MotorShop/login.php");               
+}
+
+function doRegister():void{
+  
+    global $mysqli;
+    $criptoPass=crypto($_POST['password']);
+   //Inserisce l'utente nella tabella users
+
+
+   $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{$_POST['email']}','{$_POST['name']}',
+                   '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}');");
+    //Inserisce l'utente nella tabella
+    $mysqli->query ("INSERT INTO users_has_groups  (users_email,groups_id) VALUES(
+       '{$_POST['email']}',1);");
+     
+
+               header("location:/MotorShop/user-list.php");   
+}
 
 ?>
