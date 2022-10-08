@@ -44,51 +44,6 @@
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/style.css">
 
-<style type="text/css">
-.overlay {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,.85);
-  z-index: 10000;
-}
-.popup {
-  width: 98%;
-  padding: 15px;
-  left: 0;
-  margin-left: 1%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: white;
-  position: absolute;
-  top: -100%;
-  box-shadow: 5px 5px 5px #000;
-  z-index: 10001;
-}
-@media (min-width: 768px) {
-  .popup {
-    width: 66.66666666%;
-    margin-left: 16.666666%;
-  }
-}
-@media (min-width: 992px) {
-  .popup {
-    width: 50%;
-    margin-left: 25%;
-  }
-}
-@media (min-width: 1200px) {
-  .popup {
-    width: 33.33333%;
-    margin-left: 33.33333%;
-  }
-}
-
-</style>
-
 </head>
 
 <body>
@@ -138,7 +93,6 @@
 
         <!-- Page Body Start-->
         <div class="page-body-wrapper">
-
             <!-- Page Sidebar Start-->
             <div class="page-sidebar">
                 <div class="main-header-left d-none d-lg-block">
@@ -169,29 +123,26 @@
                                 <span>Prodotti</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
+                            <ul class="sidebar-submenu">
+                                <li>
+                                    <a href="add-product.html">
+                                    <a href="/../MotorShop/addProduct.php">
+                                        <i class="fa fa-circle"></i>Aggiungi prodotto
+                                    </a>
+                                </li>
 
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="add-product.html">
-                                                <i class="fa fa-circle"></i>Aggiungi prodotto
-                                            </a>
-                                        </li>
+                                <li>
+                                    <a href="/../MotorShop/skins/multikart_all_in_one/back-end/product-list.html">
+                                    <a href="/../MotorShop/product-list.php">
+                                        <i class="fa fa-circle"></i>Lista prodotti</a>
+                                </li>
 
-                                        <li>
-                                            <a href="/../MotorShop/skins/multikart_all_in_one/back-end/product-list.html">
-                                                <i class="fa fa-circle"></i>Lista prodotti</a>
-                                        </li>
-										
-										<li>
-                                            <a href="category.html">
-                                                <i class="fa fa-circle"></i>Categorie
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="category-sub.html">
-                                                <i class="fa fa-circle"></i>Sottocategorie</a>
-                                        </li>
+                                  <li>
+                                    <a href="category.html">
+                                    <a href="/../MotorShop/">
+                                        <i class="fa fa-circle"></i>Categorie
+                                    </a>
+                                </li>
                                 
                                 <li>
                                     <a href="product-review.html">
@@ -378,22 +329,29 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="profile-details text-center">
-                                        <img src="assets/images/dashboard/designer.jpg" alt=""
-                                            class="img-fluid img-90 rounded-circle blur-up lazyloaded">
-                                        <h5 class="f-w-600 mb-0">Juan Costantini</h5>
-                                        <span><[user]></span>
+                                        <img class="rounded-circle user-image blur-up lazyloaded"
+                                            src="<[img]>" alt="">
+                                        <h5 class="f-w-600 mb-0"><[name]> <[surname]></h5>
+                                        <span><[email]></span>
                                     </div>
+                                    <br>
                                     <hr>
-                                    <form class="needs-validation add-avatar-form" novalidate="" method="post" action="add-subProduct.php" enctype="multipart/form-data">
+                                    <form class="needs-validation add-avatar-form" novalidate="" method="post" action="editProfile.php" enctype="multipart/form-data">
                                     <div class="row product-adding">
                                             <div class="add-product">
                                                 <div class="row">
                                                     <div class="col-xl-3 xl-50 col-sm-6 col-3">
                                                         <ul class="file-upload-product">
                                                             <li>
-															<center><button type="button" class="btn btn-primary" input class="upload" type="file" name="image1">Cambia avatar</button></center>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file" name="avatar"><i class="fa fa-plus"></i></div>
                                                             </li>
-															 </ul>
+                                                        <ul class="file-upload-product">
+                                                            <br>
+                                                            <li>
+															<input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -402,6 +360,7 @@
                             </div>
 							</div>
 							</div>
+                            
                         <div class="col-xl-8">
                             <div class="card tab2-card">
                                 <div class="card-body">
@@ -411,7 +370,14 @@
                                                 aria-controls="top-profile" aria-selected="true"><i data-feather="user"
                                                     class="me-2"></i>Dettagli</a>
                                         </li>
+										<li class="nav-item"><a class="nav-link" id="manage-address-tab"
+                                                data-bs-toggle="tab" href="#manage-address" role="tab"
+                                                aria-controls="manage-address" aria-selected="false"><i data-feather="user"
+                                                    class="me-2"></i>Aggiungi indirizzo</a>
+                                        </li>
                                     </ul>
+                                    <br>
+
                                     <div class="tab-content" id="top-tabContent">
                                         <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
                                             aria-labelledby="top-profile-tab">
@@ -423,7 +389,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="name"
-                                                                    type="text" name="name" value="<[name]>" required="true">
+                                                                    type="text" name="name" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -431,7 +397,7 @@
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
                                                                     <input class="form-control" id="surname"
-                                                                        type="text" name="surname" value="<[surname]>" required="true">
+                                                                        type="text" name="surname" value="" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
@@ -439,9 +405,17 @@
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
                                                                             <input class="form-control" id="phone"
-                                                                                type="text" name="phone" value="<[phone]>" required="true">
+                                                                                type="text" name="phone" value="" required="true">
                                                                         </div>
                                                                         </div>
+                                                                        <div class="form-group mb-3 row">
+                                                                            <label for="validationCustom01"
+                                                                                class="col-xl-3 col-sm-4 mb-0">Email:</label>
+                                                                            <div class="col-xl-8 col-sm-7">
+                                                                                <input class="form-control" id="email"
+                                                                                    type="text" name="email" value="" required="true" readonly>
+                                                                            </div>
+                                                                            </div>    
                                                         </div>
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
                                                                 <input type="submit" value="Salva" name="edit-details-button" class="btn btn-primary"></input>
@@ -449,11 +423,13 @@
                                                     </div>
                                                 </form>
                                         <br>
-                                        </br>
                                         <br>
-                                        </br>
-                                        <hr>										
-										<form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/updatePassword.php">
+                                        <hr>			
+                                        <br>
+                                        <br>				
+                                        <h3><b>Modifica password:</b></h3>
+                                        <br>										
+										<form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
                                                     <div class="form">
 													<div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
@@ -480,79 +456,152 @@
                                                                     type="password" name="confirmpassword" required="true">
                                                             </div>
                                                             </div>            
-                                                        </div>
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                                <button type="changepass" class="btn btn-primary">Salva</button>
+                                                                <input type="submit" value="Salva" name="change-pass-button" class="btn btn-primary"></input>
                                                         </div>
                                                 </form>
-										<br>
-                                        </br>
+                                                <br>
                                         <br>
-                                        </br>
 										<hr>
-                                        <h3>Elimina account:</h3>
-                                        <p>Se lo desideri, puoi eliminare il tuo account dal nostro sito.</p>
-                                        <p>Ricorda che questa azione è irreversibile.</p>									
                                         <br>
-                                        <form method="post" action="/MotorShop/deleteProfile.php">
-                                        <button type="delete" class="btn btn-primary"><a href="#" class="open-dialog">Elimina</a></button>
+                                        <br>
+                                        <h3><b>Elimina account:</b></h3>
+                                        <h6>Se lo desideri, puoi eliminare il tuo account dal nostro sito.</h6>
+                                        <h6><u><b>Ricorda che questa azione è irreversibile.</b></u></h6>									
+                                        <br>
+                                        <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+                                        <input type="submit" value="Elimina" name="delete-account-button" class="btn btn-primary"></input>
                                         </form>
-										<script src="http://code.jquery.com/jquery.js"></script>
-<script>
-function showPrompt(msg)
-{
-  // CREATE A Promise TO RETURN
-  var p = new Promise(function(resolve, reject) {
-  
-    var dialog = $('<div/>', {class: 'popup'})
-      .append(
-        $('<p/>').html(msg)
-      )
-      .append(
-        $('<div/>', {class: 'text-right'})
-          .append($('<button/>', {class: 'btn btn-cancel'}).html('Annulla').on('click', function() {
-            $('.overlay').remove();
-            // RESOLVE Promise TO false
-            resolve(false);
-          }))
-          .append($('<button/>', {class: 'btn btn-primary'}).html('Conferma').on('click', function() {
-            $('.overlay').remove();
-            // RESOLVE Promise TO true
-            resolve(true);
-          }))
-      );
-      
-    var overlay = $('<div/>', {class: 'overlay'})
-      .append(dialog);
-    
-    $('body').append(overlay);
-    $(dialog).animate({top: '15%'}, 1000);
-  });
-  
-  // RETURN THE Promise
-  return p;
-}
-
-$(function() {
-  // HANDLE open-dialog CLICK
-  $('.open-dialog').on('click',function(e) {
-    // PREVENT DEFAULT BEHAVIOUR FOR <a/>
-    e.preventDefault();
-
-    // SAVE PROMISE RETURN
-    var res = showPrompt('Confermi di voler eliminare definitivamente il tuo account?');
-  });
-});
-</script>
-                                        </div>
-                                    </div>
+                                        </div>                                    
                                     </div>
                                 </div>
+                                        <div class="tab-pane fade" id="manage-address" role="tabpanel"
+                                            aria-labelledby="manage-address-tab">
+											<h3><b>Aggiungi indirizzo:</b></h3>
+											<br>
+                                                <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+                                                    <div class="form">
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="name"
+                                                                    type="text" name="name" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                                <label for="validationCustom01"
+                                                                    class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+                                                                <div class="col-xl-8 col-sm-7">
+                                                                    <input class="form-control" id="surname"
+                                                                        type="text" name="surname" value="" required="true">
+                                                                </div>
+                                                                </div>
+                                                                    <div class="form-group mb-3 row">
+                                                                        <label for="validationCustom01"
+                                                                            class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+                                                                        <div class="col-xl-8 col-sm-7">
+                                                                            <input class="form-control" id="phone"
+                                                                                type="text" name="phone" value="" required="true">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="form-group mb-3 row">
+                                                                            <label for="validationCustom01"
+                                                                                class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
+                                                                            <div class="col-xl-8 col-sm-7">
+                                                                                <input class="form-control" id="province"
+                                                                                    type="text" name="province" value="" required="true" >
+                                                                            </div>
+                                                                            </div>  
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Città:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="city"
+                                                                    type="text" name="city" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Via e numero civico:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="address"
+                                                                    type="text" name="address" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Cap:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="cap"
+                                                                    type="text" name="cap" value="" required="true">
+                                                            </div>
+                                                            </div>															
+                                                        </div>
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <input type="submit" value="Salva" name="add-address-button" class="btn btn-primary"></input>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                        <br>
+                                        <br>
+										</div>
+							</div>
+                        </div>
+                    </div>
+					
+					<div class="card-body">
+                        <h3><b>I tuoi indirizzi di spedizione:</b></h3>
+                            <div class="table-responsive table-desi">
+                                <table class="all-package coupon-table table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <button type="button"
+                                                    class="btn btn-primary add-row delete_all">Elimina</button>
+                                            </th>
+                                            <th>Nome</th>
+                                            <th>Cognome</th>
+                                            <th>Cellulare</th>
+                                            <th>Provincia</th>
+											<th>Città</th>
+											<th>Indirizzo</th>
+											<th>CAP</th>
+                                        </tr>
+                                    </thead>
+                               
+                                    <tbody>
+                                        <tr>
+										
+                                            <td>
+                                                <input class="checkbox_animated check-it" type="checkbox" value=""
+                                                    id="flexCheckDefault" data-id="1">
+                                            </td>
+
+                                            <td>Luigi</td>
+
+                                            <td>Visconti</td>
+
+                                            <td>49 milioni</td>
+
+                                            <td>Napoli</td>
+											
+											<td>Afragola</td>
+											
+											<td>Via Brombeis 49</td>
+											
+											<td>87104</td>
+                                         
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
+					
+                </div>
             </div>
 
             <!-- footer start-->

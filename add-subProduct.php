@@ -9,6 +9,7 @@ $main = new Template("skins/multikart_all_in_one/back-end/add-subProduct.html");
 $main->setContent('id',$_GET['id']) ;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
     $data=file_get_contents($_FILES['image1']['tmp_name']);
     $data64=base64_encode($data);
     $mysqli->query("INSERT INTO sub_products(products_id,color,price) value('{$_POST['id']}','{$_POST['color']}','{$_POST['price']}')");
