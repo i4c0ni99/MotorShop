@@ -504,8 +504,8 @@
                         </div>
 
                         <div class="block-27-price">
-                          <div class="new-price">$115,00</div>
-                          <div class="old-price">$127,99</div>
+                          <div class="new-price">$<[price]></div>
+                          <div class="old-price"><[sale-price]></div>
                         </div>
 
                         <div class="block-27-desc">Breve descrizione prodotto</div>
@@ -532,9 +532,9 @@
                                 <td>
                                   <div class="mv-list-inline-style-1 space-10">
                                     <ul class="list-inline-1">
-                                      <li class="active"><a href="#"><span style="background-color: #ffb535" class="icon-color"></span></a></li>
-                                      <li><a href="#"><span style="background-color: #222222" class="icon-color"></span></a></li>
-                                      <li><a href="#"><span style="background-color: #eeeeee" class="icon-color"></span></a></li>
+                                      <li class="active"><a href="#"><span style="background-color: '<[color]>'" class="icon-color"></span></a></li>
+                                      <li><a href="#"><span style="background-color: '<[color]>'" class="icon-color"></span></a></li>
+                                      <li><a href="#"><span style="background-color: '<[color]>'" class="icon-color"></span></a></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -552,12 +552,13 @@
                                 <td>
                                   <div class="mv-list-inline-style-2">
                                     <ul class="list-inline-2">
-                                      <li class="active"><a href="#" class="mv-btn">Guanti</a></li>
-                                      <li><a href="#" class="mv-btn">Guanti invernali</a></li>
+                                      <li class="active"><a href="#" class="mv-btn"><[Category]></a></li>
+                                      <li><a href="#" class="mv-btn"><[sub-category]></a></li>
                                     </ul>
                                   </div>
                                 </td>
                               </tr>
+                              <input type="hidden" name="id" value="<[id]>"></input>
                             </table>
                           </form>
                         </div>
@@ -600,13 +601,13 @@
 
                   <div class="tab-content">
                     <div id="tab31" role="tabpanel" class="tab-pane active">
-					
+                      <textarea  cols="60" rows="10" readonly style="resize: none;"><[description]></textarea>
                     </div>
                     <div id="tab32" role="tabpanel" class="tab-pane">
-                     
+                      <textarea  cols="60" rows="10" readonly style="resize: none;"><[description]></textarea>                    
                     </div>
                     <div id="tab33" role="tabpanel" class="tab-pane">
-
+                      <textarea  cols="60" rows="10" readonly style="resize: none;"><[description]></textarea>
                     </div>
                   </div>
                 </div>
@@ -1377,30 +1378,32 @@
     <!-- .popup-wrapper-->
 
     <!-- Vendor jQuery-->
-    <script type="text/javascript" src="libs/jquery/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="libs/smoothscroll/SmoothScroll.min.js"></script>
-    <script type="text/javascript" src="libs/superfish-menu/js/superfish.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-ui/external/touch-punch/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-ui/external/jquery.mousewheel.min.js"></script>
-    <script type="text/javascript" src="libs/parallax/parallax.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-countto/jquery.countTo.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-appear/jquery.appear.min.js"></script>
-    <script type="text/javascript" src="libs/as-pie-progress/jquery-asPieProgress.min.js"></script>
-    <script type="text/javascript" src="libs/caroufredsel/helper-plugins/jquery.touchSwipe.min.js"></script>
-    <script type="text/javascript" src="libs/caroufredsel/jquery.carouFredSel-6.2.1-packed.js"></script>
-    <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="libs/isotope/fit-columns.min.js"></script>
-    <script type="text/javascript" src="libs/slick-sider/slick.min.js"></script>
-    <script type="text/javascript" src="libs/lwt-countdown/jquery.lwtCountdown-1.0.min.js"></script>
-    <script type="text/javascript" src="libs/swiper-sider/dist/js/swiper.min.js"></script>
-    <script type="text/javascript" src="libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="libs/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
-    <script type="text/javascript" src="libs/jquery-cookie/jquery.cookie.min.js"></script>
+    
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/smoothscroll/SmoothScroll.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/superfish-menu/js/superfish.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/external/touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/external/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/parallax/parallax.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-countto/jquery.countTo.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-appear/jquery.appear.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/as-pie-progress/jquery-asPieProgress.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/caroufredsel/helper-plugins/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/caroufredsel/jquery.carouFredSel-6.2.1-packed.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/isotope/fit-columns.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/lwt-countdown/jquery.lwtCountdown-1.0.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/swiper-sider/dist/js/swiper.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-cookie/jquery.cookie.min.js"></script>
 
     <!-- Theme Script-->
-    <script type="text/javascript" src="js/style.selector.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/style.selector.js"></script>
+    <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/main.js"></script>
   </body>
 </html>

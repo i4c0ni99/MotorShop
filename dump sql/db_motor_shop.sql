@@ -297,11 +297,13 @@ INSERT INTO `services` (`id`, `category`, `description`, `script`) VALUES (1, 'h
 (7,'home','customer home','index.php'),
 (8,'edit', 'edite prifile','editProfile.php'),
 (9,'add','add products','addProduct.php'),
-(10,'add','add sub product','add-subProduct.php');
+(10,'add','add sub product','add-subProduct.php'),
+(11,'product','product details','product-detail.php');
 
 INSERT INTO `users_has_groups` ( `users_email`, `groups_id`) VALUE ('admin@gmail.com', 1);
 
 
 
 
-INSERT INTO `groups_has_services` ( `services_id`, `groups_id`) VALUES (1, 1),(3,1),(5,1),(2,2),(3,2),(4,2),(6,1),(7,2),(2,1),(8,1),(8,2),(9,1),(10,1);
+INSERT INTO `groups_has_services` ( `services_id`, `groups_id`) VALUES (1,1),(3,1),(5,1),(2,2),(3,2),(4,2),(6,1),(7,2),
+                                                                       (2,1),(8,1),(8,2),(9,1),(10,1),(11, 1),(11,2);

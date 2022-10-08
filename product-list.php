@@ -1,42 +1,59 @@
-<?php session_start();
+<?php 
+session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
- 
-if($_SESSION['user']['goups']==1){
-$main =new Template("skins/multikart_all_in_one/back-end/product-list.html");
-}else{
-   $main =new Template("skins/motor-html-package/motor/product-grid-3.html");
+include "include/utils/priceFormatter.php";
+
+$PAGE = 0;
+$TO   = 9;
+
+
+if (isset($_GET['page']) && isset($_GET['to'])) {
+   if ($_GET['page'] > 1) {
+      $PAGE = ($_GET['page'] - 1) * 9;
+   }
+
+   $to   = $_GET['to'];
+   if ($to > 9 || $to < 1) {
+      $to = 9;
+   }
+
+   $TO   = $to;
 }
- $oid=$mysqli->query("SELECT title,id FROM products");
- $result= $oid;
 
-if($result->num_rows>0){
-foreach($result as $key){
+   $main = new Template("skins/motor-html-package/motor/frame_public.html");
+   $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
+  
 
- $main->setContent("id",$key['id']);
- $main->setContent("title",$key['title']);
+$oid = $mysqli->query("SELECT title,id FROM products LIMIT $PAGE,$TO");
+$result = $oid;
 
- $data= $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
+if ($result->num_rows > 0) {
+   foreach ($result as $key) {
+
+      $body->setContent("id", $key['id']);
+      $body->setContent("title", $key['title']);
+
+
+
+
+      $data = $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
     join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
- if($data->num_rows>0){
-    
+      if ($data->num_rows > 0) {
 
-    foreach($data as $item ){
-       
-        
-        $main->setContent("img",$item['imgsrc']);
-        $main->setContent("price",$item['price']);
-    }
-  }
-}
-}else{
-    $main->setContent("id",'');
- $main->setContent("title",'');
 
+         foreach ($data as $item) {
+
+            $price = strval($item['price']);
+            $body->setContent("img", $item['imgsrc']);
+            $body->setContent("price", formatPrice($price));
+         }
+      }
+   }
 }
 
 
-
+$main->setContent("dynamic", $body->get());
 $main->close();
 
 ?>
