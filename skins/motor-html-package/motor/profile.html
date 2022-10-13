@@ -1,0 +1,287 @@
+<div class="mv-site">
+      
+      <section class="main-banner mv-wrap">
+        <section data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+          <div class="page-name mv-caption-style-6">
+            <div class="container">
+              <div class="mv-title-style-9"><span class="main">Il mio profilo</span><img src="images/icon/icon_line_polygon_line.png" alt="icon" class="line"/></div>
+            </div>
+          </div>
+        </section>
+      
+      <!-- .main-banner-->
+
+      <section class="main-breadcrumb mv-wrap">
+        <div class="mv-breadcrumb-style-1">
+          <div class="container">
+            <ul class="breadcrumb-1-list">
+              <li><a href="/../MotorShop/index.php"><i class="fa fa-home"></i></a></li>
+              <li><a>Il mio profilo</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- .main-breadcrumb-->
+
+      <section class="mv-main-body checkout-main mv-bg-gray mv-wrap">
+        <div class="container">
+          
+      <div class="checkout-block block-billing-address mv-mb-50">
+                <div class="mv-form-style-2 mv-box-shadow-gray-1">
+                  <div class="row">
+                    <section class="col-sm-12 col-billing-address">
+                      <div class="form-billing-address">
+                        <div class="form-header">
+                          <div class="mv-title-style-13">
+                            <div class="text-main">Dati personali</div>
+                          </div>
+                        </div>
+                        <!-- .form-header--> 
+    
+                        <div class="form-body">
+    
+                          <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php"></form>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="mv-label"> <strong class="text-uppercase">Nome <span class="mv-color-primary">*</span></strong></div>
+                                <div class="mv-field">
+                                  <input type="text" name="name" placeholder="<[name]>" class="mv-inputbox mv-inputbox-style-2"/>
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mv-label"> <strong class="text-uppercase">Cognome <span class="mv-color-primary">*</span></strong></div>
+                                <div class="mv-field">
+                                  <input type="text" name="surname" placeholder="<[surname]>" class="mv-inputbox mv-inputbox-style-2"/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mv-form-group">
+                            <div class="mv-label"> <strong class="text-uppercase">Email <span class="mv-color-primary">*</span></strong></div>
+                            <div class="mv-field">
+                              <input type="text" name="email" value="<[email]>" class="mv-inputbox mv-inputbox-style-2"/>
+                            </div>
+                          </div>
+    
+                          <div class="mv-form-group">
+                            <div class="mv-label"> <strong class="text-uppercase">Cellulare <span class="mv-color-primary">*</span></strong></div>
+                            <div class="mv-field">
+                              <input type="text" name="phone" value="<[phone]>" class="mv-inputbox mv-inputbox-style-2"/>
+                            </div>
+                          </div>
+    
+                          <div class="mv-form-group submit-button mv-mt-30">
+                            <input type="submit" value="Salva" name="edit-details-button" class="btn btn-primary"></input>
+                          </div>
+
+                          <br>
+                          <br>
+                          <form class="needs-validation add-avatar-form" novalidate="" method="post" action="editCustomerProfile.php" enctype="multipart/form-data">
+                            <div class="row product-adding">
+                                    <div class="add-product">
+                                        <div class="row">
+                                            <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                <ul class="file-upload-product">
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload"
+                                                                type="file" name="avatar"><i class="fa fa-plus"></i></div>
+                                                    </li>
+                                                <ul class="file-upload-product">
+                                                    <br>
+                                                    <li>
+                                                    <input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                                        <br>
+                                        <hr>			
+                                        <br>
+                                        <br>				
+                                        <h3><b>Modifica password:</b></h3>
+                                        <br>										
+										<form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php">
+                                                    <div class="form">
+													<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Password corrente:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="currentpassword"
+                                                                    type="password" name="currentpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                        </div>
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="newpassword"
+                                                                    type="password" name="newpassword" required="true">
+                                                            </div>
+                                                            </div>            
+														<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="confirmpassword"
+                                                                    type="password" name="confirmpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <input type="submit" value="Salva" name="change-pass-button" class="btn btn-primary"></input>
+                                                        </div>
+                                                </form>
+                                                <br>
+                                        <br>
+										<hr>
+                                        <br>
+                                        <h3><b>Elimina account:</b></h3>
+                                        <h6>Se lo desideri, puoi eliminare il tuo account dal nostro sito.</h6>
+                                        <h6><u><b>Ricorda che questa azione è irreversibile.</b></u></h6>									
+                                        <br>
+                                        <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php">
+                                        <input type="submit" value="Elimina" name="delete-account-button" class="btn btn-primary"></input>
+                                        </form>        
+                                        <br>
+                                        <hr>
+                                        <br>										
+                                        <h3><b>I tuoi indirizzi di spedizione:</b></h3>
+                                        <br>
+                            <div class="table-responsive table-desi">
+                                <table class="all-package coupon-table table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <button type="button"
+                                                    class="btn btn-primary add-row delete_all">Elimina</button>
+                                            </th>
+                                            <th>Nome</th>
+                                            <th>Cognome</th>
+                                            <th>Cellulare</th>
+                                            <th>Provincia</th>
+											<th>Città</th>
+											<th>Indirizzo</th>
+											<th>CAP</th>
+                                        </tr>
+                                    </thead>
+                               
+                                    <tbody>
+                                        <tr>
+										
+                                            <td>
+                                                <input class="checkbox_animated check-it" type="checkbox" value=""
+                                                    id="flexCheckDefault" data-id="1">
+                                            </td>
+
+                                            <td>Luigi</td>
+
+                                            <td>Visconti</td>
+
+                                            <td>49 milioni</td>
+
+                                            <td>Napoli</td>
+											
+											<td>Afragola</td>
+											
+											<td>Via Brombeis 49</td>
+											
+											<td>87104</td>
+                                         
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>          
+                                <br>
+                                <hr>
+                                <br>
+										<h3><b>Aggiungi indirizzo:</b></h3>
+											<br>
+                                                <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php">
+                                                    <div class="form">
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="name"
+                                                                    type="text" name="name" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                                <label for="validationCustom01"
+                                                                    class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+                                                                <div class="col-xl-8 col-sm-7">
+                                                                    <input class="form-control" id="surname"
+                                                                        type="text" name="surname" value="" required="true">
+                                                                </div>
+                                                                </div>
+                                                                    <div class="form-group mb-3 row">
+                                                                        <label for="validationCustom01"
+                                                                            class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+                                                                        <div class="col-xl-8 col-sm-7">
+                                                                            <input class="form-control" id="phone"
+                                                                                type="text" name="phone" value="" required="true">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="form-group mb-3 row">
+                                                                            <label for="validationCustom01"
+                                                                                class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
+                                                                            <div class="col-xl-8 col-sm-7">
+                                                                                <input class="form-control" id="province"
+                                                                                    type="text" name="province" value="" required="true" >
+                                                                            </div>
+                                                                            </div>  
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Città:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="city"
+                                                                    type="text" name="city" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Via e numero civico:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="address"
+                                                                    type="text" name="address" value="" required="true">
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Cap:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="cap"
+                                                                    type="text" name="cap" value="" required="true">
+                                                            </div>
+                                                            </div>															
+                                                        </div>
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <input type="submit" value="Salva" name="add-address-button" class="btn btn-primary"></input>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                        <br>
+                                        <br>
+										</div>
+							</div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+
+                        </div>
+                        <!-- .form-body-->
+                      </div>
+                      <!-- .form-billing-address-->
+                    </div>
+        </div>
+
+      </section>
+      
+    </div>
+</div>

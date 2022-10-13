@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Profilo</title>
+    <title>Il mio profilo</title>
 
      <!-- Google font-->
     <link rel="stylesheet"
@@ -323,6 +323,52 @@
                 <!-- Container-fluid Ends-->
 
                 <!-- Container-fluid starts-->
+                <div class="card-body">
+                    <h4><b>Indirizzi salvati:</b></h4>
+                        <div class="table-responsive table-desi">
+                            <table class="all-package coupon-table table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <button type="button"
+                                                class="btn btn-primary add-row delete_all">Elimina</button>
+                                        </th>
+                                        <th>Nome</th>
+                                        <th>Cognome</th>
+                                        <th>Cellulare</th>
+                                        <th>Provincia</th>
+                                        <th>Città</th>
+                                        <th>Indirizzo</th>
+                                        <th>CAP</th>
+                                    </tr>
+                                </thead>
+                           
+                                <tbody>
+                                    <tr>
+                                    
+                                        <td>
+                                            <input class="checkbox_animated check-it" type="checkbox" value=""
+                                                id="flexCheckDefault" data-id="1">
+                                        </td>
+                                        <td>Luigi</td>
+                                        <td>Visconti</td>
+                                        <td>49 milioni</td>
+                                        <td>Napoli</td>
+                                        
+                                        <td>Afragola</td>
+                                        
+                                        <td>Via Brombeis 49</td>
+                                        
+                                        <td>87104</td>
+                                     
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-4">
@@ -389,7 +435,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="name"
-                                                                    type="text" name="name" value="" required="true">
+                                                                    type="text" name="name" value="<[name]>" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -397,7 +443,7 @@
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
                                                                     <input class="form-control" id="surname"
-                                                                        type="text" name="surname" value="" required="true">
+                                                                        type="text" name="surname" value="<[surname]>" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
@@ -405,7 +451,7 @@
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
                                                                             <input class="form-control" id="phone"
-                                                                                type="text" name="phone" value="" required="true">
+                                                                                type="text" name="phone" value="<[phone]>" required="true">
                                                                         </div>
                                                                         </div>
                                                                         <div class="form-group mb-3 row">
@@ -413,7 +459,7 @@
                                                                                 class="col-xl-3 col-sm-4 mb-0">Email:</label>
                                                                             <div class="col-xl-8 col-sm-7">
                                                                                 <input class="form-control" id="email"
-                                                                                    type="text" name="email" value="" required="true" readonly>
+                                                                                    type="text" name="email" value="<[email]>" required="true">
                                                                             </div>
                                                                             </div>    
                                                         </div>
@@ -473,8 +519,6 @@
                                         <input type="submit" value="Elimina" name="delete-account-button" class="btn btn-primary"></input>
                                         </form>
                                         </div>                                    
-                                    </div>
-                                </div>
                                         <div class="tab-pane fade" id="manage-address" role="tabpanel"
                                             aria-labelledby="manage-address-tab">
 											<h3><b>Aggiungi indirizzo:</b></h3>
@@ -549,60 +593,11 @@
 							</div>
                         </div>
                     </div>
-					
-					<div class="card-body">
-                        <h3><b>I tuoi indirizzi di spedizione:</b></h3>
-                            <div class="table-responsive table-desi">
-                                <table class="all-package coupon-table table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <button type="button"
-                                                    class="btn btn-primary add-row delete_all">Elimina</button>
-                                            </th>
-                                            <th>Nome</th>
-                                            <th>Cognome</th>
-                                            <th>Cellulare</th>
-                                            <th>Provincia</th>
-											<th>Città</th>
-											<th>Indirizzo</th>
-											<th>CAP</th>
-                                        </tr>
-                                    </thead>
-                               
-                                    <tbody>
-                                        <tr>
-										
-                                            <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault" data-id="1">
-                                            </td>
-
-                                            <td>Luigi</td>
-
-                                            <td>Visconti</td>
-
-                                            <td>49 milioni</td>
-
-                                            <td>Napoli</td>
-											
-											<td>Afragola</td>
-											
-											<td>Via Brombeis 49</td>
-											
-											<td>87104</td>
-                                         
-                                        </tr>
-                                    </tbody>
-                                    
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
 					
                 </div>
-            </div>
 
             <!-- footer start-->
             <footer class="footer">

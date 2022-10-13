@@ -6,7 +6,9 @@ require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
-$main = new Template("skins/multikart_all_in_one/back-end/profile.html");
+$main = new Template("skins/motor-html-package/motor/frame_public.html");
+$body = new Template("skins/motor-html-package/motor/profile.html");
+
 $main->setContent('name',$_SESSION['user']['name']);
 $main->setContent('surname',$_SESSION['user']['surname']);
 $main->setContent('email',$_SESSION['user']['email']);
@@ -27,7 +29,7 @@ $img=$data->fetch_assoc();
         echo $data64;
         $mysqli->query("UPDATE users SET avatar = '$data64' WHERE email  ='".$_SESSION['user']['email']."'");
 
-        header("location:/../MotorShop/editProfile.php");
+        header("location:/../MotorShop/editCustomerProfile.php");
 
     }
 
@@ -46,7 +48,7 @@ $img=$data->fetch_assoc();
         $oid = $mysqli->query("UPDATE users SET name ='$name', surname = '$surname', phone= '$phone'
                              WHERE email  ='".$_SESSION['user']['email']."'");
 
-        header("location:/../MotorShop/editProfile.php");
+        header("location:/MotorShop/editCustomerProfile.php");
 
         }
 
@@ -73,7 +75,7 @@ $img=$data->fetch_assoc();
         $oid = $mysqli->query("UPDATE users SET password = '".crypto($newpassword)."'
                              WHERE email  ='".$_SESSION['user']['email']."'");
 
-                             header("location:/../MotorShop/editProfile.php");
+                             header("location:/../MotorShop/editCustomerProfile.php");
 
         } else {
 
@@ -107,12 +109,14 @@ $img=$data->fetch_assoc();
         
         $mysqli->query("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) VALUE ('".$_SESSION['user']['email']."', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");
 
-        header("location:/../MotorShop/editProfile.php");
+        header("location:/../MotorShop/editCustomerProfile.php");
 
         }
 
     }
 
-$main->close();
+    $main->setContent("dynamic", $body->get());
+    
+    $main->close();
 
 ?>
