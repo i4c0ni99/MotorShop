@@ -21,9 +21,13 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
    $TO   = $to;
 }
 
-   $main = new Template("skins/motor-html-package/motor/frame_public.html");
-   $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
-  
+//if($_SESSION['user']['groups']==1){
+   $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
+   $body = new Template("skins/multikart_all_in_one/back-end/product-list.html");
+//}else{
+   //$main = new Template("skins/motor-html-package/motor/frame_public.html");
+  // $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
+//}
 
 $oid = $mysqli->query("SELECT title,id FROM products LIMIT $PAGE,$TO");
 $result = $oid;
@@ -38,7 +42,7 @@ if ($result->num_rows > 0) {
 
 
       $data = $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
-    join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
+      join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
       if ($data->num_rows > 0) {
 
 
@@ -54,6 +58,7 @@ if ($result->num_rows > 0) {
 
 
 $main->setContent("dynamic", $body->get());
+$main->setContent("body", $body->get());
 $main->close();
 
 ?>

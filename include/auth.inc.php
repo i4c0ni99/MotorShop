@@ -102,6 +102,7 @@
         }
     }
 
+
     // user is logged
     if (!isset($_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])] )) {
         if(!$_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])]){

@@ -1789,11 +1789,11 @@ $(document).ready(function() {
     $(document.body).off('dbclick').on('click', '.btn-add-to-cart', function() {
       var post = $(this).closest('.post');
       var messageAction = post.find('.content-message .message-inner');
-      var htmlString =  '<i class="fa fa-check mv-color-primary"></i> 1 item added to cart. <a href="cart.html"><strong>View cart</strong></a>';
+      var htmlString =  '<i class="fa fa-check mv-color-primary"></i> 1 prodotto aggiunto al carrello. <a href="cart.html"><strong>visualizza carrello</strong></a>';
 
       if ( !$(this).hasClass('active') ) {
         $(this).addClass('active');
-        $(this).find('.btn-text').text('added to cart');
+        $(this).find('.btn-text').text('aggiunto');
         messageAction.html(htmlString).hide().fadeIn();
       } else {
         messageAction.html(htmlString).hide().fadeIn();
@@ -1806,15 +1806,20 @@ $(document).ready(function() {
   /* ADD TO WISHLIST BUTTON
   /* --------------------------------------------------------------------- */
   (function($) {
-    if (!$('.btn-add-to-wishlist').length) return;
+    if (!$('.btn-add-to-wishlist').length){
+      console.log("ciao1");
+      return;
+    } 
 
     $(document.body).off('dbclick').on('click', '.btn-add-to-wishlist', function() {
+      console.log("ciao");
       var post = $(this).closest('.post');
       var messageAction = post.find('.content-message .message-inner');
-      var htmlString =  '<i class="fa fa-check mv-color-primary"></i> 1 item added to wishlist. <a href="wishlist.html"><strong>View wishlist</strong></a>';
+      var htmlString =  '<i class="fa fa-check mv-color-primary"></i> prodoto aggiunto in wishlist . <a href="wishlist.html"><strong>View wishlist</strong></a>';
 
       if ( !$(this).hasClass('active') ) {
         $(this).addClass('active');
+        $(this).find('.btn-text').text('aggiunto');
         messageAction.html(htmlString).hide().fadeIn();
       } else {
         messageAction.html(htmlString).hide().fadeIn();

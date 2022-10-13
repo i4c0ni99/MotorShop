@@ -34,12 +34,12 @@ if (!$result) {
 
    $data = $result -> fetch_assoc();
 
-   if ($data['groups_id'] == '1'){
-    $_SESSION['user']['goups']=$data['groups_id'];
+   if ($data['groups_id'] == 1){
+    $_SESSION['user']['groups']=$data['groups_id'];
        header('location:/../MotorShop/dashBoard.php');
 
    } else {
-    $_SESSION['user']['goups']=$data['groups_id'];
+    $_SESSION['user']['groups']=$data['groups_id'];
        header("location:/../MotorShop/index.php");
        
    }

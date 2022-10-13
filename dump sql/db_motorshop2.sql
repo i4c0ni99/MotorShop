@@ -82,7 +82,6 @@ CREATE TABLE `services` (
 
 CREATE TABLE `shipping_address` (
   `id` int(11) NOT NULL,
-  `orders_id` int(11) DEFAULT NULL,
   `users_email` varchar(50) DEFAULT NULL,
   `name` varchar(150) DEFAULT NULL,
   `surname` varchar(150) DEFAULT NULL,
@@ -189,9 +188,7 @@ ADD
 ADD
   KEY `users_email` (`users_email`),
 ADD
-  KEY `orders_has_products_id` (`orders_has_products_id`),
-ADD
-  KEY `shipping_address_id` (`shipping_address_id`);
+  KEY `orders_has_products_id` (`orders_has_products_id`);
 
 ALTER TABLE
   `orders_has_products`

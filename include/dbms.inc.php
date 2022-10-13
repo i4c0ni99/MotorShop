@@ -2,7 +2,7 @@
 
     $host = "localhost";
     $user = "root";
-    $passw= "passw0rd";
+    $passw= "";
     $name = "db_motorShop";
 
      $mysqli = new mysqli($host, $user,$passw,$name);
