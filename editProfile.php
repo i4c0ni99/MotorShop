@@ -24,7 +24,6 @@ $img=$data->fetch_assoc();
 
         $data = file_get_contents($_FILES['avatar']['tmp_name']);
         $data64 = base64_encode($data);
-        echo $data64;
         $mysqli->query("UPDATE users SET avatar = '$data64' WHERE email  ='".$_SESSION['user']['email']."'");
 
         header("location:/../MotorShop/editProfile.php");

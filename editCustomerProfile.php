@@ -22,12 +22,44 @@ $img=$data->fetch_assoc();
     $main->setContent('img',"data:image;base64,"."{$img['avatar']}");
    }
 
+   $oid=$mysqli->query("SELECT * FROM shipping_address WHERE shipping_address.users_email = '".$_SESSION['user']['email']."'");
+   $result= $oid;
+   $id=1;
+
+if ($result->num_rows>0) {
+
+foreach ($result as $key) {
+
+ $id++; 
+ $body->setContent("id",$id);
+ $body->setContent("ADname",$key['name']);
+ $body->setContent("ADsurname",$key['surname']);
+ $body->setContent("ADphone",$key['phone']);
+ $body->setContent("ADprovince",$key['province']);
+ $body->setContent("ADcity",$key['city']);
+ $body->setContent("ADstreetAddress",$key['streetAddress']);
+ $body->setContent("ADcap",$key['cap']);
+
+}
+
+} else {
+    
+    $body->setContent("id",'');
+    $body->setContent("ADname",'');
+    $body->setContent("ADsurname",'');
+    $body->setContent("ADphone",'');
+    $body->setContent("ADprovince",'');
+    $body->setContent("ADcity",'');
+    $body->setContent("ADstreetAddress",'');
+    $body->setContent("ADcap",'');
+
+}
+
     if (isset($_POST['edit-avatar-button'])) {
 
         $data = file_get_contents($_FILES['avatar']['tmp_name']);
         $data64 = base64_encode($data);
-        echo $data64;
-        $mysqli->query("UPDATE users SET avatar = '$data64' WHERE email  ='".$_SESSION['user']['email']."'");
+        $mysqli->query("UPDATE users SET avatar = '$data64' WHERE email  = '".$_SESSION['user']['email']."'");
 
         header("location:/../MotorShop/editCustomerProfile.php");
 
@@ -38,17 +70,17 @@ $img=$data->fetch_assoc();
         $name = $_POST["name"];
         $surname = $_POST["surname"];
         $phone = $_POST["phone"];
-
+        echo $name;
         $_SESSION['user']['name'] = $name;
         $_SESSION['user']['surname'] = $surname;
         $_SESSION['user']['phone'] = $phone;
 
         if ($name != "" && $surname != "" && $phone != "" ) {
-
+            echo $surname;
         $oid = $mysqli->query("UPDATE users SET name ='$name', surname = '$surname', phone= '$phone'
                              WHERE email  ='".$_SESSION['user']['email']."'");
 
-        header("location:/MotorShop/editCustomerProfile.php");
+        header("location:/../MotorShop/editCustomerProfile.php");
 
         }
 

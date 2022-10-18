@@ -29,8 +29,8 @@
       <div class="checkout-block block-billing-address mv-mb-50">
                 <div class="mv-form-style-2 mv-box-shadow-gray-1">
                   <div class="row">
-                    <section class="col-sm-12 col-billing-address">
-                      <div class="form-billing-address">
+                    <div class="col-sm-12 col-billing-address">
+                      <form class="form-billing-address">
                         <div class="form-header">
                           <div class="mv-title-style-13">
                             <div class="text-main">Dati personali</div>
@@ -39,8 +39,8 @@
                         <!-- .form-header--> 
     
                         <div class="form-body">
-    
-                          <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php"></form>
+                          
+                          <form class="needs-validation add-product-form" novalidate="" method="post" action="/../MotorShop/editCustomerProfile.php"></form>
                             <div class="row">
                               <div class="col-sm-6">
                                 <div class="mv-label"> <strong class="text-uppercase">Nome <span class="mv-color-primary">*</span></strong></div>
@@ -74,10 +74,11 @@
                           <div class="mv-form-group submit-button mv-mt-30">
                             <input type="submit" value="Salva" name="edit-details-button" class="btn btn-primary"></input>
                           </div>
-
+                          </form>
+                        </div>
                           <br>
                           <br>
-                          <form class="needs-validation add-avatar-form" novalidate="" method="post" action="editCustomerProfile.php" enctype="multipart/form-data">
+                          <form class="needs-validation add-avatar-form" novalidate="" method="post" action="/MotorShop/editCustomerProfile.php" enctype="multipart/form-data">
                             <div class="row product-adding">
                                     <div class="add-product">
                                         <div class="row">
@@ -163,35 +164,37 @@
                                             <th>Cognome</th>
                                             <th>Cellulare</th>
                                             <th>Provincia</th>
-											<th>Città</th>
-											<th>Indirizzo</th>
-											<th>CAP</th>
+											                      <th>Città</th>
+											                      <th>Indirizzo</th>
+											                      <th>CAP</th>
                                         </tr>
                                     </thead>
                                
                                     <tbody>
-                                        <tr>
+                                      <[foreach]>
+                                        <tr data-row-id="<[id]>">
 										
                                             <td>
                                                 <input class="checkbox_animated check-it" type="checkbox" value=""
                                                     id="flexCheckDefault" data-id="1">
                                             </td>
 
-                                            <td>Luigi</td>
+                                            <td><[ADname]></td>
 
-                                            <td>Visconti</td>
+                                            <td><[ADsurname]></td>
 
-                                            <td>49 milioni</td>
+                                            <td><[ADphone]></td>
 
-                                            <td>Napoli</td>
+                                            <td><[ADprovince]></td>
 											
-											<td>Afragola</td>
+											                      <td><[ADcity]></td>
 											
-											<td>Via Brombeis 49</td>
+											                      <td><[ADstreetAddress]></td>
 											
-											<td>87104</td>
+											                      <td><[ADcap]></td>
                                          
                                         </tr>
+                                      <[/foreach]>
                                     </tbody>
                                     
                                 </table>          
