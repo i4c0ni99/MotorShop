@@ -390,7 +390,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="name"
-                                                                    type="text" name="name" value="<[name]>" required="true">
+                                                                    type="text" name="name" minlength="2" value="<[name]>" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -398,7 +398,7 @@
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
                                                                     <input class="form-control" id="surname"
-                                                                        type="text" name="surname" value="<[surname]>" required="true">
+                                                                        type="text" name="surname" minlength="2" value="<[surname]>" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
@@ -406,7 +406,7 @@
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
                                                                             <input class="form-control" id="phone"
-                                                                                type="text" name="phone" value="<[phone]>" required="true">
+                                                                                type="text" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="<[phone]>" required="true">
                                                                         </div>
                                                                         </div>
                                                                         <div class="form-group mb-3 row">
@@ -414,7 +414,7 @@
                                                                                 class="col-xl-3 col-sm-4 mb-0">Email:</label>
                                                                             <div class="col-xl-8 col-sm-7">
                                                                                 <input class="form-control" id="email"
-                                                                                    type="text" name="email" value="<[email]>" required="true">
+                                                                                    type="text" name="email" minlength="6" value="<[email]>" required="true">
                                                                             </div>
                                                                             </div>    
                                                         </div>
@@ -446,7 +446,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="newpassword"
-                                                                    type="password" name="newpassword" required="true">
+                                                                    type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="newpassword" required="true">
                                                             </div>
                                                             </div>            
 														<div class="form-group mb-3 row">
@@ -454,7 +454,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="confirmpassword"
-                                                                    type="password" name="confirmpassword" required="true">
+                                                                    type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmpassword" required="true">
                                                             </div>
                                                             </div>            
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
@@ -485,7 +485,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="name"
-                                                                    type="text" name="name" value="" required="true">
+                                                                    type="text" name="name" minlength="2" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -493,7 +493,7 @@
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
                                                                     <input class="form-control" id="surname"
-                                                                        type="text" name="surname" value="" required="true">
+                                                                        type="text" name="surname" minlength="2" value="" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
@@ -501,7 +501,7 @@
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
                                                                             <input class="form-control" id="phone"
-                                                                                type="text" name="phone" value="" required="true">
+                                                                                type="text" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="" required="true">
                                                                         </div>
                                                                         </div>
                                                                         <div class="form-group mb-3 row">
@@ -509,7 +509,7 @@
                                                                                 class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
                                                                             <div class="col-xl-8 col-sm-7">
                                                                                 <input class="form-control" id="province"
-                                                                                    type="text" name="province" value="" required="true" >
+                                                                                    type="text" name="province" minlength="3" value="" required="true" >
                                                                             </div>
                                                                             </div>  
                                                             <div class="form-group mb-3 row">
@@ -517,7 +517,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Città:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="city"
-                                                                    type="text" name="city" value="" required="true">
+                                                                    type="text" name="city" minlength="3" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -525,7 +525,7 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Via e numero civico:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="address"
-                                                                    type="text" name="address" value="" required="true">
+                                                                    type="text" name="address" minlength="5" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
@@ -533,12 +533,12 @@
                                                                 class="col-xl-3 col-sm-4 mb-0">Cap:</label>
                                                             <div class="col-xl-8 col-sm-7">
                                                                 <input class="form-control" id="cap"
-                                                                    type="text" name="cap" value="" required="true">
+                                                                    type="text" pattern="[0-9]*" minlength="5" name="cap" value="" required="true">
                                                             </div>
                                                             </div>															
                                                         </div>
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                                <input type="submit" value="Salva" name="edit-details-button" class="btn btn-primary"></input>
+                                                                <input type="submit" value="Aggiungi" name="edit-details-button" class="btn btn-primary"></input>
                                                         </div>
                                                     </div>
                                                 </form>

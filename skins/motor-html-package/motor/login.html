@@ -94,12 +94,9 @@
 
                     <div class="mv-form-group submit-button mv-mt-30">
                       <button type="submit" name="login" class="mv-btn mv-btn-style-5 btn-login">Accedi</button>
-                      <label class="mv-checkbox mv-checkbox-style-1 checkbox-remember">
-                        <input type="checkbox" name="test138" class="hidden"/><span class="checkbox-after-input"><span class="checkbox-visual-box"><span class="icon-checked fa fa-check"></span></span><span class="checkbox-text">Ricordami</span></span>
-                      </label>
                     </div>
 
-                    <div class="mv-form-group"><a href="forgot-password.html" class="btn-forgot-pass">Password dimenticata?</a></div>
+                    <div class="mv-form-group"><a href="/MotorShop/reset-password.php" class="btn-forgot-pass">Password dimenticata?</a></div>
                   </div>
                   <!-- .form-body-->
                 </form>
@@ -121,14 +118,14 @@
                   <div class="mv-form-group">
                     <div class="mv-label"> <strong class="text-uppercase">Nome *</strong></div>
                     <div class="mv-field">
-                      <input type="text" name="name"  class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                      <input type="text" name="name" minlength="2" class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo nome per esteso" required = "true"/>
                     </div>
                   </div>
                   
                   <div class="mv-form-group">
                     <div class="mv-label"> <strong class="text-uppercase">Cognome *</strong></div>
                     <div class="mv-field">
-                      <input type="text" name="surname" class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                      <input type="text" minlength="2" name="surname" class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo cognome" required = "true"/>
                     </div>
                   </div>
 
@@ -136,7 +133,7 @@
                     <div class="mv-form-group">
                       <div class="mv-label"> <strong class="text-uppercase">Email *</strong></div>
                       <div class="mv-field">
-                        <input type="email" name="email"  class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                        <input type="email" minlength="6" name="email" class="mv-inputbox mv-inputbox-style-1" title="Inserisci la tua email primaria'" required = "true"/>
                       </div>
                     </div>
 
@@ -144,21 +141,21 @@
                       <div class="mv-form-group">
                         <div class="mv-label"> <strong class="text-uppercase">Cellulare *</strong></div>
                         <div class="mv-field">
-                          <input type="text" name="phoneNumber"  class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                          <input type="text" pattern="[3]{1}[0-9]{9}" minlength="10" name="phoneNumber"  class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo numero di cellulare" required = "true"/>
                         </div>
                       </div>
   
                     <div class="mv-form-group">
                       <div class="mv-label"> <strong class="text-uppercase">Password *</strong></div>
                       <div class="mv-field">
-                        <input type="password" name="password"  class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                        <input type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="password" title="Inserisci una password robusta: almeno 7 caratteri, un carattere speciale ed un numero" class="mv-inputbox mv-inputbox-style-1" required = "true"/>
                       </div>
                     </div>
 
                     <div class="mv-form-group">
                       <div class="mv-label"> <strong class="text-uppercase">Conferma Password *</strong></div>
                       <div class="mv-field">
-                        <input type="password" name="confirmPassword" class="mv-inputbox mv-inputbox-style-1" required = "true"/>
+                        <input type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmPassword" title="Digita nuovamente la password scelta" class="mv-inputbox mv-inputbox-style-1" required = "true"/>
                       </div>
                     </div>
 

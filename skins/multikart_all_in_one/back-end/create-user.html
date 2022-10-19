@@ -5,7 +5,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Aggiungi utente</h3>
+                                    <h3>Aggiungi amministratore</h3>
                                 </div>
                             </div>
                         </div>
@@ -37,51 +37,51 @@
 												<br>
                                                 <div class="form-group row">
                                                     <label for="validationCustom0"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Nome</label>
+                                                        class="col-xl-3 col-md-4"><span>*</span> Nome </label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom0" type="text"
-                                                            name="name">
+                                                        <input class="form-control" minlength="2" id="validationCustom0" type="text"
+                                                            name="name" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom1"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Cognome</label>
+                                                        class="col-xl-3 col-md-4"><span>*</span> Cognome </label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom1" type="text"
-                                                             name="surname">
+                                                        <input class="form-control" minlength="2" id="validationCustom1" type="text"
+                                                             name="surname" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom2"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Email</label>
+                                                        class="col-xl-3 col-md-4"><span>*</span> Email </label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom2" type="email"
-                                                             name="email">
+                                                        <input class="form-control" minlength="6" id="validationCustom2" type="email"
+                                                             name="email" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom5"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Cellulare</label>
+                                                        class="col-xl-3 col-md-4"><span>*</span> Cellulare </label>
                                                     <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom5" type="text"
-                                                             name="phoneNumber">
+                                                        <input class="form-control" pattern="[3]{1}[0-9]{9}" minlength="10" id="validationCustom5" type="text"
+                                                             name="phoneNumber" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom3"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Password</label>
+                                                        class="col-xl-3 col-md-4"><span>*</span> Password </label>
                                                     <div class="col-xl-8 col-md-7">
                                                         <input class="form-control" id="validationCustom3"
-                                                            type="password"  name="password">
+                                                            type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="password" required="true">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="validationCustom4"
                                                         class="col-xl-3 col-md-4"><span>*</span> Conferma
-                                                        Password</label>
+                                                        Password </label>
                                                     <div class="col-xl-8 col-md-7">
                                                         <input class="form-control" id="validationCustom4"
-                                                            type="password"  name="confirmPassword">
+                                                            type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmPassword" required="true">
                                                     </div>
                                                 </div>
 												<br>

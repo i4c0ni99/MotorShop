@@ -39,7 +39,7 @@
                         <div class="mv-form-group">
                           <div class="col-md-2 mv-label"> <strong class="text-uppercase">Nome: *</strong></div>
                           <div class="col-md-8 mv-field">
-                            <input type="text" name="test127" class="mv-inputbox mv-inputbox-style-1"/>
+                            <input type="text" minlength="2" name="test127" title="Inserisci il tuo cognome" class="mv-inputbox mv-inputbox-style-1" required="true"/>
                           </div>
                         </div>
                       </div>
@@ -48,7 +48,7 @@
                         <div class="mv-form-group">
                           <div class="col-md-2 mv-label"> <strong class="text-uppercase">Cognome: </strong></div>
                           <div class="col-md-8 mv-field">
-                            <input type="text" name="test595" class="mv-inputbox mv-inputbox-style-1"/>
+                            <input type="text" minlength="2" name="test595" title="Inserisci il tuo cognome" class="mv-inputbox mv-inputbox-style-1" required="true"/>
                           </div>
                         </div>
                       </div>
@@ -58,7 +58,7 @@
                         <div class="mv-form-group">
                           <div class="col-md-2 mv-label"> <strong class="text-uppercase">Email: *</strong></div>
                           <div class="col-md-8 mv-field">
-                            <input type="email" name="test595" class="mv-inputbox mv-inputbox-style-1"/>
+                            <input type="email" minlength="5" name="test595" title="Inserisci la tua email" class="mv-inputbox mv-inputbox-style-1" required="true"/>
                           </div>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
                         <div class="mv-form-group">
                           <div class="col-md-2 mv-label"> <strong class="text-uppercase">Cellulare: </strong></div>
                           <div class="col-md-8 mv-field">
-                            <input type="text" name="test327" class="mv-inputbox mv-inputbox-style-1"/>
+                            <input type="text" pattern="[3]{1}[0-9]{9}" minlength="10" name="test327" title="Inserisci il tuo numero di cellulare" class="mv-inputbox mv-inputbox-style-1" required="false"/>
                           </div>
                         </div>
                       </div>
@@ -76,7 +76,7 @@
                     <div class="mv-form-group input-message-wrapper">
                       <div class="col-md-1 mv-label"> <strong class="text-uppercase"> </strong></div>
                       <div class="col-md-11 mv-field">
-                        <textarea name="test178" rows="6" placeholder="Il tuo messaggio.." data-mv-placeholder="Il tuo messaggio.." class="mv-inputbox mv-inputbox-style-1"></textarea>
+                        <textarea name="test178" rows="6" minlength="4" placeholder="Scrivi il tuo messaggio.." data-mv-placeholder="Scrivi il tuo messaggio.." class="mv-inputbox mv-inputbox-style-1" required="true"></textarea>
                       </div>
                     </div>
 
@@ -92,60 +92,7 @@
                 <!-- .block-32-form-main-->
               </div>
               <!-- .block-32-form-->
-
-              <div class="block-32-contact mv-box-shadow-gray-1">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-4">
-                    <div class="contact-box">
-                      <div class="mv-icon-left-style-7">
-                        <div class="i-l-inner">
-                          <div class="i-l-text"><span class="i-l-icon icon-map-marker fa fa-map-marker mv-f-54 mv-color-primary"></span>
-                            <div class="text-main">Indirizzo</div>
-                            <div class="text-sub">Via Francesco Paolo Tosti 115, L'Aquila AQ</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-4">
-                    <div class="contact-box">
-                      <div class="mv-icon-left-style-7">
-                        <div class="i-l-inner">
-                          <div class="i-l-text"><span class="i-l-icon icon-mobile fa fa-mobile mv-f-60 mv-color-primary"></span>
-                            <div class="text-main">Chiamaci</div>
-                            <div class="text-sub">
-                               
-                              Telefono: <a href="tel:1-800-64-38"> 086 2589863 </a><br/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-					</div>
-					</div>
-
-                  <div class="col-xs-12 col-sm-4">
-                    <div class="contact-box">
-                      <div class="mv-icon-left-style-7">
-                        <div class="i-l-inner">
-                          <div class="i-l-text"><span class="i-l-icon icon-envelope fa fa-envelope-o mv-f-48 mv-color-primary"></span>
-                            <div class="text-main">Email</div>
-                            <div class="text-sub"> <a href="mailto:info@motorshop.com">info@motorshop.com</a><br/></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <!-- .block-32-contact-->
-            </div>
-            <!-- .mv-block-style-32-->
-          </div>
-          <!-- .contact-us-form-->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+              </div>
+              </div>
+              </section>
