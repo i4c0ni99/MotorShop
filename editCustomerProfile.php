@@ -31,7 +31,7 @@ if ($result->num_rows>0) {
 foreach ($result as $key) {
 
  $id++; 
- $body->setContent("id",$id);
+ $body->setContent("ADid",$key['id']);
  $body->setContent("ADname",$key['name']);
  $body->setContent("ADsurname",$key['surname']);
  $body->setContent("ADphone",$key['phone']);
@@ -44,7 +44,7 @@ foreach ($result as $key) {
 
 } else {
     
-    $body->setContent("id",'');
+    $body->setContent("ADid",'');
     $body->setContent("ADname",'');
     $body->setContent("ADsurname",'');
     $body->setContent("ADphone",'');
@@ -125,6 +125,13 @@ foreach ($result as $key) {
 
         header("location:/../MotorShop/logout.php");
 
+    }
+
+    if (isset($_POST['delete-address-button'])) {
+        $address_id = $_POST["check"];
+        $oid = $mysqli->query("DELETE FROM shipping_address
+                             WHERE id  = $address_id");
+        header("location:/../MotorShop/editCustomerProfile.php");
     }
 
     if (isset($_POST['add-address-button'])) {

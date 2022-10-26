@@ -157,8 +157,9 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                <button type="button"
-                                                    class="btn btn-primary add-row delete_all">Elimina</button>
+                                              <form class="needs-validation delete-address-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+                                                <input type="submit"
+                                                    class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina"></input>
                                             </th>
                                             <th>Nome</th>
                                             <th>Cognome</th>
@@ -172,10 +173,10 @@
                                
                                     <tbody>
                                       <[foreach]>
-                                        <tr data-row-id="<[id]>">
+                                        <tr data-row-id="<[ADid]>">
 										
                                             <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
+                                                <input class="checkbox_animated check-it" type="checkbox" name="check" value="<[ADid]>"
                                                     id="flexCheckDefault" data-id="1">
                                             </td>
 
@@ -187,17 +188,18 @@
 
                                             <td><[ADprovince]></td>
 											
-											                      <td><[ADcity]></td>
+											<td><[ADcity]></td>
 											
-											                      <td><[ADstreetAddress]></td>
+											<td><[ADstreetAddress]></td>
 											
-											                      <td><[ADcap]></td>
+											<td><[ADcap]></td>
                                          
                                         </tr>
                                       <[/foreach]>
                                     </tbody>
                                     
-                                </table>          
+                                </table> 
+                              </form>         
                                 <br>
                                 <hr>
                                 <br>

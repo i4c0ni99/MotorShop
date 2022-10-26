@@ -6,7 +6,9 @@ require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
-$main = new Template("skins/multikart_all_in_one/back-end/profile.html");
+$main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
+$body = new Template("skins/multikart_all_in_one/back-end/profile.html");
+
 $main->setContent('name',$_SESSION['user']['name']);
 $main->setContent('surname',$_SESSION['user']['surname']);
 $main->setContent('email',$_SESSION['user']['email']);
@@ -19,6 +21,39 @@ $img=$data->fetch_assoc();
    }else{
     $main->setContent('img',"data:image;base64,"."{$img['avatar']}");
    }
+
+   $oid=$mysqli->query("SELECT * FROM shipping_address WHERE shipping_address.users_email = '".$_SESSION['user']['email']."'");
+   $result= $oid;
+   $id=1;
+
+if ($result->num_rows>0) {
+
+foreach ($result as $key) {
+
+ $id++; 
+ $body->setContent("ADid",$key['id']);
+ $body->setContent("ADname",$key['name']);
+ $body->setContent("ADsurname",$key['surname']);
+ $body->setContent("ADphone",$key['phone']);
+ $body->setContent("ADprovince",$key['province']);
+ $body->setContent("ADcity",$key['city']);
+ $body->setContent("ADstreetAddress",$key['streetAddress']);
+ $body->setContent("ADcap",$key['cap']);
+
+}
+
+} else {
+    
+    $body->setContent("ADid",'');
+    $body->setContent("ADname",'');
+    $body->setContent("ADsurname",'');
+    $body->setContent("ADphone",'');
+    $body->setContent("ADprovince",'');
+    $body->setContent("ADcity",'');
+    $body->setContent("ADstreetAddress",'');
+    $body->setContent("ADcap",'');
+
+}
 
     if (isset($_POST['edit-avatar-button'])) {
 
@@ -104,7 +139,7 @@ $img=$data->fetch_assoc();
         
         if ($name != "" && $surname != "" && $phone != "" && $province != "" && $city != "" && $address != "" && $cap != "") {
         
-        $mysqli->query("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) VALUE ('".$_SESSION['user']['email']."', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");
+        $oid = $mysqli->query("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) VALUE ('".$_SESSION['user']['email']."', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");
 
         header("location:/../MotorShop/editProfile.php");
 
@@ -112,6 +147,15 @@ $img=$data->fetch_assoc();
 
     }
 
-$main->close();
+    if (isset($_POST['delete-address-button'])) {
+        $address_id = $_POST["check"];
+        $oid = $mysqli->query("DELETE FROM shipping_address
+                             WHERE id  = $address_id");
+        header("location:/../MotorShop/editCustomerProfile.php");
+    }
+
+    $main->setContent("body", $body->get());
+
+    $main->close();    
 
 ?>

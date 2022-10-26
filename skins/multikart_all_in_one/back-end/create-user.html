@@ -98,8 +98,8 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                <button type="button"
-                                                    class="btn btn-primary add-row delete_all">PROMUOVI</button>
+                                                <form class="needs-validation delete-user-form" novalidate="" method="post" action="/MotorShop/create-user-admin.php">
+                                                <input type="submit" class="btn btn-primary add-row delete_all" name="admin-user-button" value="Promuovi"></input>
                                             </th>
                                             <th>Nome</th>
                                             <th>Cognome</th>
@@ -112,8 +112,8 @@
                                         <[foreach]>
                                         <tr data-row-id="<[id]>">
                                             <td>
-                                                <input class="checkbox_animated check-it" type="checkbox" value=""
-                                                    id="flexCheckDefault" data-id="1">
+                                               <input class="checkbox_animated check-it" type="checkbox" name="check" value="<[email]>"
+                                                   id="flexCheckDefault" data-id="1">
                                             </td>
 
                                             <td><[name]></td>
@@ -129,6 +129,7 @@
                                     </tbody>
                                     
                                 </table>
+                                </form>
                                         </div>
                                     </div>
                                    

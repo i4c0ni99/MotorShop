@@ -70,6 +70,12 @@ $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{
 
     }
 
+    if (isset($_POST['admin-user-button'])) {
+      $oid = $mysqli->query ("UPDATE users_has_groups SET groups_id = 1
+                            WHERE users_email = '{$_POST['check']}'");
+      header("location:/../MotorShop/create-user-admin.php");
+  }
+
     $main->setContent("body",$body->get());
 
     $main->close();

@@ -38,13 +38,11 @@ foreach($result as $key) {
 
 }
 
-if (isset($_POST['delete-user'])) {
-
-    $mysqli->query("DELETE FROM users
-              WHERE email  ='".$_SESSION['user']['email']."'");
-              
-    header("location:/../MotorShop/user-list.php");          
-
+if (isset($_POST['delete-user-button'])) {
+    $delete = $_POST["check"];
+    $oid = $mysqli->query("DELETE FROM users
+                         WHERE email = '$delete'");
+    header("location:/../MotorShop/user-list.php");
 }
 
 $main->setContent("body",$body->get());
