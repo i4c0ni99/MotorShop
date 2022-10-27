@@ -2,7 +2,9 @@
 session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
+require "include/auth.inc.php";
 include "include/utils/priceFormatter.php";
+
 
 $PAGE = 0;
 $TO   = 9;
@@ -42,12 +44,11 @@ if ($result->num_rows > 0) {
 
 
       $data = $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
-      join images ON images.sub_products_id=sub_products.id where products.id={$key['id']}");
+      join images ON images.sub_products_id=sub_products.id where products.id={$key['id']} limit 0,1");
       if ($data->num_rows > 0) {
 
 
          foreach ($data as $item) {
-
             $price = strval($item['price']);
             $body->setContent("img", $item['imgsrc']);
             $body->setContent("price", formatPrice($price));

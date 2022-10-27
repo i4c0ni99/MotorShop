@@ -50,9 +50,11 @@
     } 
     
     if ($oid->num_rows > 0) {
+    
         $user = $oid->fetch_assoc();
         $_SESSION['auth'] = true;
         $_SESSION['user'] = $user;
+        $_SESSION['sizes']=array();
     
         //prende gli script che il gruppo dell'utente può vedere
         $result = $mysqli->query("
@@ -86,7 +88,7 @@
                 Header("Location: {$referrer}");
                 exit;
             }
-        
+            echo $_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])];
         } else {
             Header("Location: login.php");
             echo $mysqli->error;
@@ -102,7 +104,7 @@
         }
     }
 
-
+        
     // user is logged
     if (!isset($_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])] )) {
         if(!$_SESSION['user']['script'][basename($_SERVER['SCRIPT_NAME'])]){

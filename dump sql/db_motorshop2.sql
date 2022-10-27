@@ -70,7 +70,8 @@ CREATE TABLE `products` (
   `specification` varchar(2000) DEFAULT NULL,
   `information` varchar(2000) DEFAULT NULL,
   `mediumRate` int(11) DEFAULT NULL,
-  `categories_id` int(11) DEFAULT NULL
+  `categories_id` int(11) DEFAULT NULL,
+  `date` date
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE `services` (
@@ -461,7 +462,7 @@ VALUES
 INSERT INTO
   `categories` (`id`, `name`)
 VALUES
-  (1, 'CASCHO'),
+  (1, 'CASCO'),
   (2, 'GUANTO');
 
 INSERT INTO
