@@ -30,6 +30,7 @@
                                     <table class="display" id="basic-1">
                                         <thead>
                                             <tr>
+                                                <form class="needs-validation delete-address-form" novalidate="" method="post" action="/MotorShop/orders-list.php">
                                                 <th>Codice</th>
 												<th>Stato</th>
 												<th>Data</th>
@@ -39,27 +40,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>#3</td>
-                                                <td><span class="badge badge-success">Consegnato</span></td>
-                                                <td>15 Settembre 2022</td>
-												<td>Paypal</td>
-                                                <td>€250</td>
-                                            </tr>
-                                            <tr>
-                                                <td>#2</td>
-                                                <td><span class="badge badge-success">Spedito</span></td>
-                                                <td>16 Settembre 2022</td>
-												<td>Carta di credito</td>
-                                                <td>€130</td>
-                                            </tr>
-											<tr>
-                                                <td>#1</td>
-                                                <td><span class="badge badge-success">Consegnato</span></td>
-                                                <td>07 Settembre 2022</td>
-												<td>Bonifico</td>
-                                                <td>€400</td>
-                                            </tr>
+                                            
+                                            <tr data-row-id="<[id]>">
+    
+                                                <td><[codice]></td>
+    
+                                                <td><[stato]></td>
+    
+                                                <td><[data]></td>
+    
+                                                <td><[pagamento]></td>
+                                                
+                                                <td><[importo]></td>
+
+                                                <td>
+                                                    <input class="checkbox_animated check-it" type="checkbox" name="check" value="<[id]>"
+                                                        id="flexCheckDefault" data-id="1">
+                                                </td>
+
+                                                </tr>
+                                           
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>

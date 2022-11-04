@@ -43,6 +43,9 @@
                                                             <li>
 															<input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>
                                                             </li>
+                                                            <li>
+                                                                <input type="submit" value="Elimina avatar" name="delete-avatar-button" class="btn btn-primary"></input>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -74,38 +77,34 @@
                                         <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
                                             aria-labelledby="top-profile-tab">
                                             <div class="table-responsive profile-table">
-                                                <form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+                                                <form class="needs-validation edit-details-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
                                                     <div class="form">
                                                         <div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="name"
-                                                                    type="text" name="name" minlength="2" value="<[name]>" required="true">
+                                                                <input type="text" id="name" name="name" minlength="2" value="<[name]>" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                                 <label for="validationCustom01"
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
-                                                                    <input class="form-control" id="surname"
-                                                                        type="text" name="surname" minlength="2" value="<[surname]>" required="true">
+                                                                    <input type="text" name="surname" minlength="2" value="<[surname]>" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
                                                                         <label for="validationCustom01"
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
-                                                                            <input class="form-control" id="phone"
-                                                                                type="text" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="<[phone]>" required="true">
+                                                                            <input type="text" id="phone" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="<[phone]>" required="true">
                                                                         </div>
                                                                         </div>
                                                                         <div class="form-group mb-3 row">
                                                                             <label for="validationCustom01"
                                                                                 class="col-xl-3 col-sm-4 mb-0">Email:</label>
                                                                             <div class="col-xl-8 col-sm-7">
-                                                                                <input class="form-control" id="email"
-                                                                                    type="text" name="email" minlength="6" value="<[email]>" required="true">
+                                                                                <input type="text" id="email" name="email" minlength="6" value="<[email]>" required="true">
                                                                             </div>
                                                                             </div>    
                                                         </div>
@@ -136,16 +135,14 @@
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="newpassword"
-                                                                    type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="newpassword" required="true">
+                                                                <input type="password" id="newpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="newpassword" required="true">
                                                             </div>
                                                             </div>            
 														<div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="confirmpassword"
-                                                                    type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmpassword" required="true">
+                                                                <input type="password" id="confirmpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmpassword" required="true">
                                                             </div>
                                                             </div>            
                                                             <div class="offset-xl-3 offset-sm-4 mt-4">
@@ -169,62 +166,55 @@
                                             aria-labelledby="manage-address-tab">
 											<h3><b>Aggiungi indirizzo:</b></h3>
 											<br>
-                                                <form class="needs-validation add-product-form" novalidate="false" method="post" action="/MotorShop/editProfile.php">
-                                                    <div class="form">
+                                            <form method="POST" class="form-address" action="/MotorShop/editProfile.php">
+                                                    <div class="form-header">
                                                         <div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Nome:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="name"
-                                                                    type="text" name="name" minlength="2" value="" required="true">
+                                                                <input type="text" id="name" name="name" minlength="2" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                                 <label for="validationCustom01"
                                                                     class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
                                                                 <div class="col-xl-8 col-sm-7">
-                                                                    <input class="form-control" id="surname"
-                                                                        type="text" name="surname" minlength="2" value="" required="true">
+                                                                    <input type="text" id="surname" name="surname" minlength="2" value="" required="true">
                                                                 </div>
                                                                 </div>
                                                                     <div class="form-group mb-3 row">
                                                                         <label for="validationCustom01"
                                                                             class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
                                                                         <div class="col-xl-8 col-sm-7">
-                                                                            <input class="form-control" id="phone"
-                                                                                type="text" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="" required="true">
+                                                                            <input type="text" id="phone" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" value="" required="true">
                                                                         </div>
                                                                         </div>
                                                                         <div class="form-group mb-3 row">
                                                                             <label for="validationCustom01"
                                                                                 class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
                                                                             <div class="col-xl-8 col-sm-7">
-                                                                                <input class="form-control" id="province"
-                                                                                    type="text" name="province" minlength="3" value="" required="true" >
+                                                                                <input type="text" id="province" name="province" minlength="3" value="" required="true" >
                                                                             </div>
                                                                             </div>  
                                                             <div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Città:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="city"
-                                                                    type="text" name="city" minlength="3" value="" required="true">
+                                                                <input type="text" id="city" name="city" minlength="3" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Via e numero civico:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="address"
-                                                                    type="text" name="address" minlength="5" value="" required="true">
+                                                                <input type="text" id="address" name="address" minlength="5" value="" required="true">
                                                             </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                             <label for="validationCustom01"
                                                                 class="col-xl-3 col-sm-4 mb-0">Cap:</label>
                                                             <div class="col-xl-8 col-sm-7">
-                                                                <input class="form-control" id="cap"
-                                                                    type="text" pattern="[0-9]*" minlength="5" name="cap" value="" required="true">
+                                                                <input type="text" id="cap" pattern="[0-9]*" minlength="5" name="cap" value="" required="true">
                                                             </div>
                                                             </div>															
                                                         </div>

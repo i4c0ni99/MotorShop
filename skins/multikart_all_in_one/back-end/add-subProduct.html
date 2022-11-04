@@ -39,6 +39,13 @@
                                 <div class="col-xl-5">
                                     <div class="add-product">
                                         <div class="row">
+                                            <div class="page-header-left">
+
+                                                <small style="color: red;">Prima di inserire le immagini compilare il
+                                                    form a destra</small>
+
+                                            </div>
+
                                             <div class="col-xl-9 xl-50 col-sm-6 col-9">
                                                 <img src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/pro3/1.jpg"
                                                     alt="" class="img-fluid image_zoom_1 blur-up lazyloaded">
@@ -83,11 +90,11 @@
 
                                     <div class="form">
                                         <div class="form-group mb-3 row">
-                                            <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Price
+                                            <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Prezzo
                                                 :</label>
                                             <div class="col-xl-8 col-sm-7">
                                                 <input class="form-control" id="validationCustom02" type="text"
-                                                    required="" name="price">
+                                                    required="" name="price" value="<[price]>">
                                             </div>
                                             <div class="valid-feedback">Looks good!</div>
                                         </div>
@@ -96,45 +103,46 @@
                                         <form method="post" action="/MotorShop/add-subProduct.php">
                                             <div class="form-group row">
                                                 <label for="exampleFormControlSelect1"
-                                                    class="col-xl-3 col-sm-4 mb-0">Select
-                                                    Size :</label>
+                                                    class="col-xl-3 col-sm-4 mb-0">Seleziona
+                                                    taglia:</label>
                                                 <div class="col-xl-8 col-sm-7">
                                                     <[sizes]>
                                                         <div class="my-form"
                                                             style="position: absolute; top: 0px; left: 365px; height:100% ; width:100% ; ">
                                                             <[quantity]>
-                                                            <input type="hidden" name="code" value="<[id]>"></input>
+                                                                <input type="hidden" name="code" value="<[id]>"></input>
                                                         </div>
                                                         <p> </p>
-                                                        <button type="submit" name="addSize" class="btn btn-primary">Aggiungi tagli</button>
+                                                        <button type="submit" name="addSize"
+                                                            class="btn btn-primary">Aggiungi taglia</button>
                                                 </div>
-                                               
+
                                             </div>
-                                            
+
+
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-sm-4">Descrizione :</label>
+                                                <div class="col-xl-8 col-sm-7 description-sm">
+                                                    <textarea id="editor1" name="description" cols="10" rows="4"
+                                                        placeholder=" <[description]>"></textarea>
+                                                </div>
                                         </form>
-                                        <div class="form-group row">
-                                            <label class="col-xl-3 col-sm-4">Add Description :</label>
-                                            <div class="col-xl-8 col-sm-7 description-sm">
-                                                <textarea id="editor1" name="description" cols="10" rows="4"
-                                                    placeholder=" <[ciao]>"></textarea>
-                                            </div>
-                                            
-                                            <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                <button type="submit" name="save" class="btn btn-primary">Salva</button>
-                                                <button type="button" class="btn btn-light">Annulla</button>
-                                            </div>
+                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                            <button type="submit" name="save" class="btn btn-primary">Salva</button>
+                                            <button type="button" class="btn btn-light">Annulla</button>
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Container-fluid Ends-->
+</div>
+<!-- Container-fluid Ends-->
 </div>
 
 

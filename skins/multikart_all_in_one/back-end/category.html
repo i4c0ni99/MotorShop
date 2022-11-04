@@ -24,9 +24,10 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <form class="form-inline search-form search-box">
+                                    
+                                    <form class="form-inline search-form search-box" method="POST" action="create-category.php">
                                         <div class="form-group">
-                                            <input class="form-control-plaintext" type="search" placeholder="Cerca..">
+                                            <input type="search" name="keyword" class="form-control-plaintext" placeholder="Cerca categoria.." required="true" value="<?php echo isset($_POST['keyword']) ? $_POST['keyword'] : '' ?>">
                                         </div>
                                     </form>
 
@@ -96,8 +97,8 @@
                     <form class="needs-validation" method="post" action="/MotorShop/create-category.php">
                         <div class="form">
                             <div class="form-group">
-                                <label for="validationCustom01" class="mb-1">Categoria :</label>
-                                <input class="form-control" id="validationCustom01" name="category" type="text">
+                                <label for="validationCustom01" class="mb-1">Categoria:</label>
+                                <input type="text" minlength="3" class="form-control" id="validationCustom01" name="category">
                             </div>
                         </div>
                         <div class="modal-footer">

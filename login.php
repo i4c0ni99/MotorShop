@@ -36,7 +36,7 @@ if (!$result) {
    if ($data['groups_id'] == '1') {
 
     $_SESSION['user']['groups'] = $data['groups_id'];
-       header('location:/../MotorShop/dashBoard.php');
+       header('location:/../MotorShop/dashboard.php');
 
    } else {
 

@@ -48,7 +48,11 @@
     <div class="header-top">
       <div class="container">
         <div class="header-top-inner">
-          <div class="mv-col-wrapper">    
+          <div class="mv-col-wrapper">
+
+            <!-- .header-contact-->
+
+
             <!-- .header-account-->
           </div>
         </div>
@@ -78,9 +82,9 @@
                 <li class="mega-columns"><a href="/../MotorShop/index.php"><span class="menu-text">Home</i></span></a>
                   <ul class="row"></ul>
                 </li>
-                <li><a href="/../MotorShop/product-list.php"><span class="menu-text">Shop</i></span></a>
+                <li><a href="/../MotorShop/product-list-customer.php"><span class="menu-text">Shop</i></span></a>
                 </li>
-                <li><a href="/../MotorShop/contact.php"><span
+                <li><a href="/../MotorShop/contact.php""><span
                       class="menu-text">Contattaci</span></a></li>
               </ul>
             </nav>
@@ -107,7 +111,7 @@
               <div class="item-button dropdown mv-dropdown-style-1 script-dropdown-1">
                 <button type="button" class="mv-btn mv-btn-style-11 btn-dropdown btn-my-cart"><span
                     class="btn-inner"><span class="icon fa fa-shopping-bag"></span><span
-                      class="number">3</sp></span></button>
+                      class="number">3</span></span></button>
                 <div class="dropdown-menu pull-right">
                   <div class="dropdown-menu-inner">
                     <div class="mv-block-style-39">
@@ -168,7 +172,7 @@
                                     <div class="new-price">$200,00</div>
                                   </div>
                                   <ul class="block-24-meta mv-ul">
-                                    <li class="meta-item mv-icon-left-style-3"><span class="text">Quantity: 2</span>
+                                    <li class="meta-item mv-icon-left-style-3"><span class="text">Quanlity: 2</span>
                                     </li>
                                   </ul>
                                 </div>
@@ -201,7 +205,7 @@
                                     <div class="new-price">$200,00</div>
                                   </div>
                                   <ul class="block-24-meta mv-ul">
-                                    <li class="meta-item mv-icon-left-style-3"><span class="text">Quantity: 2</span>
+                                    <li class="meta-item mv-icon-left-style-3"><span class="text">Quanlity: 2</span>
                                     </li>
                                   </ul>
                                 </div>
@@ -233,10 +237,13 @@
                     <!-- .mv-block-style-39-->
                   </div>
                 </div>
-				<div class="item-button dropdown mv-dropdown-style-1 script-dropdown-1">
-                        <button type="button" class="mv-btn mv-btn-style-11 btn-dropdown btn-my-profile"><a href="/MotorShop/editCustomerProfile.php"</a><span
-                            class="btn-inner"><i class='fas fa-user-alt' style='font-size:30px'></i></span></button>
               </div>
+                <button type="button" class="mv-btn mv-btn-style-11 btn-dropdown btn-my-profile">
+                  <a href="/MotorShop/editCustomerProfile.php"></a>
+                  <span class="btn-inner">
+                    <i class="fa fa-user-alt fa-lg" ></i>
+                  </span>
+                </button>
             </div>
             <!-- .header-shop-->
           </div>
@@ -252,137 +259,112 @@
 
 
 
-
-    <footer class="footer mv-footer-style-2 mv-wrap">
-      <div style="background-image: url(images/background/black-wallpapers-20.png)" class="footer-bg">
-        <div class="container">
-          <div class="footer-inner">
-            <div id="footerNav" role="tablist" aria-multiselectable="true" class="footer-nav panel-group">
-              <div class="row">
-                <div class="col-md-3 footer-nav-col footer-contact"><a data-toggle="collapse" data-parent="#footerNav"
-                    href="#footerContact" aria-expanded="true" aria-controls="footerContact"
-                    class="footer-title collapsed">Contatti</a>
-                  <div id="footerContact" role="tabpanel" class="footer-main collapse">
-                    <ul class="mv-ul footer-main-inner list">
-                      <li class="mv-icon-left-style-1 item">
-                        <div class="mv-dp-table align-middle">
-                          <div class="mv-dp-table-cell icon"><i
-                              class="icon-fa fa fa-map-marker mv-f-22 mv-color-primary"></i>
-                          </div>
-                          <div class="mv-dp-table-cell text">Via Francesco Paolo Tosti 115,
-                            L'Aquila AQ</div>
+  <footer class="footer mv-footer-style-2 mv-wrap">
+    <div style="background-image: url(images/background/black-wallpapers-20.png)" class="footer-bg">
+      <div class="container">
+        <div class="footer-inner">
+          <div id="footerNav" role="tablist" aria-multiselectable="true" class="footer-nav panel-group">
+            <div class="row">
+              <div class="col-md-4 footer-nav-col footer-contact"><a data-toggle="collapse" data-parent="#footerNav"
+                  href="#footerContact" aria-expanded="true" aria-controls="footerContact"
+                  class="footer-title collapsed"></a>
+                <div id="footerContact" role="tabpanel" class="footer-main collapse">
+                  <ul class="mv-ul footer-main-inner list">
+                    <h4><b>Contatti: </b></h4>
+                    <br>
+                    <li class="mv-icon-left-style-1 item">
+                      <div class="mv-dp-table align-middle">
+                        <div class="mv-dp-table-cell icon"><i
+                            class="icon-fa fa fa-map-marker mv-f-22 mv-color-primary"></i>
                         </div>
-                      </li>
-
-                      <li class="mv-icon-left-style-1 item">
-                        <div class="mv-dp-table align-middle">
-                          <div class="mv-dp-table-cell icon"><i
-                              class="icon-fa fa fa-envelope-o mv-f-20 mv-color-primary"></i>
-                          </div>
-                          <div class="mv-dp-table-cell text">EMAIL:<a href="mailto:info@motorshop.com">
-                              info@motorshop.com</a></div>
-                        </div>
-                      </li>
-                    </ul>
-
-                    <div class="mv-col-left header-contact">
-                      <ul class="mv-ul clearfix group-contact hidden-xs">
-                        <li class="item-button mv-icon-left-style-2"><a href="tel:0862589863" class="text"> <span
-                              class="icon"><i class="fa fa-phone"></i></span>
-                            Telefono: 0862589863</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-3 footer-nav-col footer-about-us"><a data-toggle="collapse" data-parent="#footerNav"
-                    href="#footerAboutUs" aria-expanded="false" aria-controls="footerAboutUs"
-                    class="footer-title collapsed">ORARI</a>
-                  <div id="footerAboutUs" role="tabpanel" class="footer-main collapse">
-                    <div class="footer-main-inner">
-                      <div class="about-us-content">
-                        <p>Lunedì - Venerdì (10:00 - 18:00)</p>
-                        <br>
-                        <p>Sabato (09:00 - 13:00)</p>
+                        <div class="mv-dp-table-cell text">Via Francesco Paolo Tosti 115,
+                          L'Aquila AQ</div>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </li>
+                  </ul>
 
-                <div class="col-md-3 footer-nav-col footer-faqs"><a data-toggle="collapse" data-parent="#footerNav"
-                    href="#footerFaqs" aria-expanded="false" aria-controls="footerFaqs"
-                    class="footer-title collapsed">faqs</a>
-                  <div id="footerFaqs" role="tabpanel" class="footer-main collapse">
-                    <ul class="mv-ul footer-main-inner list">
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Contact
-                            us</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Returns</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Site
-                            Map</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Brands</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Gift
-                            Vouchers</span></a></li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="col-md-3 footer-nav-col footer-order-tracking"><a data-toggle="collapse"
-                    data-parent="#footerNav" href="#footerOrderTracking" aria-expanded="false"
-                    aria-controls="footerOrderTracking" class="footer-title collapsed">order
-                    tracking</a>
-                  <div id="footerOrderTracking" role="tabpanel" class="footer-main collapse">
-                    <ul class="mv-ul footer-main-inner list">
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>About
-                            us</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Returns</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Contact
-                            us</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Term &
-                            Conditions</span></a></li>
-                      <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
-                                class="fa fa-angle-right"></i></span>Privacy
-                            Policy</span></a></li>
+                    <li class="mv-icon-left-style-1 item">
+                      <div class="mv-dp-table align-middle">
+                        <div class="mv-dp-table-cell icon"><i
+                            class="icon-fa fa fa-envelope-o mv-f-20 mv-color-primary"></i>
+                        </div>
+                        <div class="mv-dp-table-cell text"><a href="mailto:info@motorshop.com">
+                            info@motorshop.com</a></div>
+                      </div>
+                    </li>
+                  </ul>
+                  <br>
+                  <div class="mv-col-left header-contact">
+                    <ul class="mv-ul clearfix group-contact hidden-xs">
+                      <li class="item-button mv-icon-left-style-2"><a href="tel:0862589863" class="text"> <span
+                            class="icon"><i class="fa fa-phone"></i></span>
+                          Telefono: 0862589863</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- .footer-nav-->
 
-            <div class="footer-payment">
-              <ul class="mv-ul list">
-                <li class="item"><a href="#"><img
-                      src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_paypal.png" alt="icon" /></a></li>
-                <li class="item"><a href="#"><img
-                      src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_master_card.png" alt="icon" /></a>
-                </li>
-                <li class="item"><a href="#"><img
-                      src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_american_express.png"
-                      alt="icon" /></a></li>
-                <li class="item"><a href="#"><img
-                      src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_visa.png" alt="icon" /></a></li>
-              </ul>
-            </div>
-            <!-- .footer-payment-->
+              <div class="col-md-4 footer-nav-col footer-about-us"><a data-toggle="collapse" data-parent="#footerNav"
+                  href="#footerAboutUs" aria-expanded="false" aria-controls="footerAboutUs"
+                  class="footer-title collapsed"></a>
+                <div id="footerAboutUs" role="tabpanel" class="footer-main collapse">
+                  <div class="footer-main-inner">
+                    <h4><b>Orari: </b></h4>
+                    <br>
+                    <div class="about-us-content">
+                      <p>Lunedì - Venerdì (10:00 - 18:00)</p>
+                      <br>
+                      <p>Sabato (09:00 - 13:00)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <div class="footer-copyright text-center">Copyright &copy; 2022 MotorShop</div>
-            <!-- .footer-copyright-->
+              <div class="col-md-4 footer-nav-col footer-order-tracking"><a data-toggle="collapse"
+                  data-parent="#footerNav" href="#footerOrderTracking" aria-expanded="false"
+                  aria-controls="footerOrderTracking" class="footer-title collapsed">order
+                  tracking</a>
+                <div id="footerOrderTracking" role="tabpanel" class="footer-main collapse">
+                  <h4><b>Collegamenti rapidi: </b></h4>
+                  <ul class="mv-ul footer-main-inner list">
+                    <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
+                              class="fa fa-angle-right"></i></span>Traccia ordine</span></a></li>
+                    <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
+                              class="fa fa-angle-right"></i></span>Resi</span></a></li>
+                    <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span class="icon"><i
+                              class="fa fa-angle-right"></i></span>Privacy Policy</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- .footer-nav-->
+
+          <div class="footer-payment">
+            <ul class="mv-ul list">
+              <li class="item"><a href="#"><img
+                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_paypal.png" alt="icon" /></a></li>
+              <li class="item"><a href="#"><img
+                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_master_card.png" alt="icon" /></a>
+              </li>
+              <li class="item"><a href="#"><img
+                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_american_express.png"
+                    alt="icon" /></a></li>
+              <li class="item"><a href="#"><img
+                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_visa.png" alt="icon" /></a></li>
+            </ul>
+          </div>
+          <!-- .footer-payment-->
+          <br>
+          <div class="footer-copyright text-center">Copyright &copy; 2022 MotorShop</div>
+          <!-- .footer-copyright-->
         </div>
       </div>
+    </div>
 
-      <button type="button" class="mv-btn mv-btn-style-17 mv-back-to-top fixed-right-bottom"><i
-          class="btn-icon fa fa-long-arrow-up"></i></button>
-    </footer>
+    <button type="button" class="mv-btn mv-btn-style-17 mv-back-to-top fixed-right-bottom"><i
+        class="btn-icon fa fa-long-arrow-up"></i></button>
+  </footer>
 
     <div class="popup-wrapper">
       <div id="popupSearch" tabindex="-1" role="dialog" aria-hidden="true"
@@ -814,7 +796,5 @@
 <!-- Theme Script-->
 <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/style.selector.js"></script>
 <script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/main.js"></script>
-
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </html>

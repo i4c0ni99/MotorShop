@@ -65,20 +65,29 @@ foreach ($result as $key) {
 
     }
 
+    if (isset($_POST['delete-avatar-button'])) {
+
+        $oid = $mysqli->query("UPDATE users SET avatar = null
+                             WHERE email  = '".$_SESSION['user']['email']."'");
+
+        header("location:/../MotorShop/editCustomerProfile.php");
+    
+    }
+
     if (isset($_POST['edit-details-button'])) {
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];
         $phone = $_POST["phone"];
-        echo $name;
         $_SESSION['user']['name'] = $name;
         $_SESSION['user']['surname'] = $surname;
         $_SESSION['user']['phone'] = $phone;
-
-        if ($name != "" && $surname != "" && $phone != "" ) {
-            echo $surname;
+        $_SESSION['user']['email'] = $email;
+        
+        if ($name != "" && $surname != "" && $phone != "") {
+        
         $oid = $mysqli->query("UPDATE users SET name ='$name', surname = '$surname', phone= '$phone'
-                             WHERE email  ='".$_SESSION['user']['email']."'");
+                     WHERE email = '".$_SESSION['user']['email']."'");
 
         header("location:/../MotorShop/editCustomerProfile.php");
 

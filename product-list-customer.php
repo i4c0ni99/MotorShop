@@ -2,7 +2,7 @@
 session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/auth.inc.php";
+
 include "include/utils/priceFormatter.php";
 
 
@@ -24,8 +24,8 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 }
 
 
-   $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
-   $body = new Template("skins/multikart_all_in_one/back-end/product-list.html");
+   $main = new Template("skins/motor-html-package/motor/frame_public.html");
+   $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
 
 
 $oid = $mysqli->query("SELECT title,id FROM products LIMIT $PAGE,$TO");

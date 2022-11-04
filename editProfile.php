@@ -65,20 +65,31 @@ foreach ($result as $key) {
 
     }
 
+    if (isset($_POST['delete-avatar-button'])) {
+
+            $oid = $mysqli->query("UPDATE users SET avatar = null
+                                 WHERE email  = '".$_SESSION['user']['email']."'");
+
+            header("location:/../MotorShop/editProfile.php");
+            
+    }
+
     if (isset($_POST['edit-details-button'])) {
 
         $name = $_POST["name"];
         $surname = $_POST["surname"];
         $phone = $_POST["phone"];
+        $email = $_POST["email"];
 
         $_SESSION['user']['name'] = $name;
         $_SESSION['user']['surname'] = $surname;
         $_SESSION['user']['phone'] = $phone;
+        $_SESSION['user']['email'] = $email;
 
-        if ($name != "" && $surname != "" && $phone != "" ) {
+        if ($name != "" && $surname != "" && $phone != "") {
 
-        $oid = $mysqli->query("UPDATE users SET name ='$name', surname = '$surname', phone= '$phone'
-                             WHERE email  ='".$_SESSION['user']['email']."'");
+        $oid = $mysqli->query("UPDATE users SET name = '$name', surname = '$surname', phone = '$phone'
+                             WHERE email = '".$_SESSION['user']['email']."'");
 
         header("location:/../MotorShop/editProfile.php");
 
@@ -151,7 +162,7 @@ foreach ($result as $key) {
         $address_id = $_POST["check"];
         $oid = $mysqli->query("DELETE FROM shipping_address
                              WHERE id  = $address_id");
-        header("location:/../MotorShop/editCustomerProfile.php");
+        header("location:/../MotorShop/editProfile.php");
     }
 
     $main->setContent("body", $body->get());

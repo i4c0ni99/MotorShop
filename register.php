@@ -64,8 +64,8 @@ if ($_POST['password']!=$_POST['confirmPassword']) {
    } else {
        
   // Inserisce l'utente nella tabella users
-  $mysqli->query ("INSERT INTO users (email,name,surname,password,phone) VALUES('{$_POST['email']}','{$_POST['name']}',
-                       '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}');");
+  $mysqli->query ("INSERT INTO users (email,name,surname,password,phone,verified) VALUES('{$_POST['email']}','{$_POST['name']}',
+                       '{$_POST['surname']}','$criptoPass','{$_POST['phoneNumber']}',0);");
 
    $mysqli->query ("INSERT INTO users_has_groups (users_email,groups_id) VALUES(
      '{$_POST['email']}',2);");
@@ -84,7 +84,7 @@ if (sendmail($email,$v_cod ) == true) {
       </script>";
 }
 
-echo "oidocrop";
+
 
               // header("location:/MotorShop/login.php"); } 
 
