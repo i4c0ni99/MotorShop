@@ -32,7 +32,7 @@ function sendmail ($email,$v_cod) {
 
       $mail->isHTML(true);
       $mail->Subject = 'Benvenuto su MotorShop';
-      $mail->Body    = "La famiglia di MotorShop ti da il benvenuto.<br>Per verificare la tua email: 
+      $mail->Body    = "Lo Staff di MotorShop ti da il benvenuto!<br>Per verificare il tuo account  
       <a href='http://localhost:8000/post-email/verify.php?email=$email&v_cod=$v_cod'> premi qui.</a>";
 
       $mail->send();
