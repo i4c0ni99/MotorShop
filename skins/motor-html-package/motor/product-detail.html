@@ -376,7 +376,7 @@
                             style="background-image: url(images/avatar/avatar_100x100.png);"
                             class="block-37-thumb-img"></span></a></div>
                       <div class="block-37-main">
-                        <div class="block-37-name"><a href="#">Luigi Maiò</a></div>
+                        <div class="block-37-name"><a href="#"><[name]> <[surname]></a></div>
                       </div>
                     </div>
                     <!-- .mv-block-style-37-->
@@ -384,7 +384,7 @@
                   <!-- .review-profile-->
 
                   <div class="review-rating-field">
-                    <form method="GET" class="form-review">
+                    <form method="POST" class="form-review" action="/MotorShop/product-detail.php?id=<[id]>">
                       <div class="mv-form-group rating-field">
                         <div class="mv-field">
                           <div class="mv-rate enabled-rating"><strong class="label-rating">Valuta questo prodotto:
@@ -392,21 +392,21 @@
                             <div class="rate-inner mv-f-28 text-left">
                               <div class="stars-wrapper"><a class="item-rate"></a><a class="item-rate"></a><a
                                   class="item-rate"></a><a class="item-rate"></a><a class="item-rate"></a></div>
-                              <input type="hidden" name="test139" class="input-score-rate" />
+                              <input type="hidden" name="rate" id="rate" class="input-score-rate" />
                             </div><span class="rate-text"></span>
                           </div>
                         </div>
                       </div>
                       <div class="mv-form-group">
                         <div class="mv-field">
-                          <textarea name="test138" data-mv-placeholder="Inserisci un commento.."
-                            placeholder="Description"
+                          <textarea name="review" id="review" minlength="10" required="true" data-mv-placeholder="Scrivi la tua recensione.."
+                            placeholder="recensione"
                             class="mv-resize-vertical mv-inputbox mv-inputbox-style-1 textarea-desc"></textarea>
                         </div>
                       </div>
                       <div class="mv-form-group text-right">
                         <div class="mv-field">
-                          <button type="submit" class="mv-btn mv-btn-style-5 responsive-btn-5-type-2">Pubblica</button>
+                          <input type="submit" value="Pubblica" name="post-review" class="mv-btn mv-btn-style-5 responsive-btn-5-type-2"></input>
                         </div>
                       </div>
                     </form>
@@ -426,11 +426,12 @@
                                 class="block-28-date">December 21, 2016</span>
                               <div data-rate="true" data-score="4" class="block-28-rate mv-rate">
                                 <div class="rate-inner mv-f-14 text-left">
-                                  <div class="stars-wrapper empty-stars"><span class="item-rate"></span><span
-                                      class="item-rate"></span><span class="item-rate"></span><span
-                                      class="item-rate"></span><span class="item-rate"></span></div>
-                                  <div class="stars-wrapper filled-stars"><span class="item-rate"></span><span
-                                      class="item-rate"></span><span class="item-rate"></span><span
+                                  <div class="stars-wrapper empty-stars"><span class="item-rate"></span>
+                                    <span class="item-rate"></span><span class="item-rate"></span>
+                                    <span class="item-rate"></span><span class="item-rate"></span>
+                                  </div>
+                                  <div class="stars-wrapper filled-stars"><span class="item-rate"></span>
+                                    <span class="item-rate"></span><span class="item-rate"></span><span
                                       class="item-rate"></span><span class="item-rate"></span></div>
                                 </div>
                               </div>

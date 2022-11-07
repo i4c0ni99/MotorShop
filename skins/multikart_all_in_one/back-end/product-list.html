@@ -64,13 +64,13 @@
                 <div class="container-fluid">
                     <div class="row products-admin ratio_asos">
                         <[foreach]>
-                        <div class="col-xl-3 col-sm-6">
+                        <div class="col-xl-4 col-sm-6">
                             <div class="card">
                             <form method="get" action="/MotorShop/add-subProduct.php">
                                 <div class="card-body product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
-                                            <a href="javascript:void(0)"><img src="data:image;base64,<[img]>" width="250" height="450"></a>
+                                            <a href="javascript:void(0)"><img src="data:image;base64,<[img]>" width="300" height="300"></a>
                                             <div class="product-hover">
                                                 <ul>
                                                     <li>
@@ -92,9 +92,10 @@
                                                 class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                 class="fa fa-star"></i></div>
                                         <a href="javascript:void(0)">
-                                            <h6><[title]></h6>
+                                            <br>
+                                            <h5><b><[title]></b></h5>
                                         </a>
-                                       <h6><[price]></h6>
+                                       <h6>€ <[price]></h6>
                                         <input type="hidden" value="<[id]>" name="id" href="javascript:void(0) ">
                                         </a>
                                     </div>
