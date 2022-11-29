@@ -71,6 +71,15 @@ if(isset($_POST['addSize'])){
     header('Location:'.$_SERVER['PHP_SELF'].'?'.'id='.$_POST['code']); die;
 }
 
+if (isset($_GET['delete'])) {
+       
+  $mysqli->query(" DELETE FROM products WHERE id = '".$_GET['id']."' ");
+        
+  header('location:/MotorShop/product-list.php');
+
+
+}
+
 
   if(isset($_POST['save'])) {
 

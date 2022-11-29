@@ -37,9 +37,6 @@ if ($result->num_rows > 0) {
       $body->setContent("id", $key['id']);
       $body->setContent("title", $key['title']);
 
-
-
-
       $data = $mysqli->query("SELECT images.imgsrc,sub_products.price FROM products join sub_products ON sub_products.products_id=products.id 
       join images ON images.sub_products_id=sub_products.id where products.id={$key['id']} limit 0,1");
       if ($data->num_rows > 0) {

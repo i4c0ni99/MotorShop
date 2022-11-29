@@ -33,7 +33,7 @@ function sendmail ($email,$v_cod) {
       $mail->isHTML(true);
       $mail->Subject = 'Benvenuto su MotorShop';
       $mail->Body    = "Lo Staff di MotorShop ti da il benvenuto!<br>Per verificare il tuo account  
-      <a href='http://localhost:8000/post-email/verify.php?email=$email&v_cod=$v_cod'> premi qui.</a>";
+      <a href='http://localhost/MotorShop/verify.php?email=$email&v_cod=$v_cod'> premi qui.</a>";
 
       $mail->send();
           return true;
@@ -73,6 +73,7 @@ if ($_POST['password']!=$_POST['confirmPassword']) {
    }
 
 if (sendmail($email,$v_cod ) == true) {
+  $mysqli->query("UPDATE users SET verified = 1 WHERE email='{$_POST['email']}'");
   echo "
       <script>
           alert('Registrazione completata! Verifica la tua email dal link che hai ricevuto, se non lo trovi controlla su Spam.');

@@ -65,20 +65,21 @@
                     <div class="row products-admin ratio_asos">
                         <[foreach]>
                         <div class="col-xl-4 col-sm-6">
+                            <form method="get" action="/MotorShop/add-subProduct.php?id=<[id]>">
                             <div class="card">
-                            <form method="get" action="/MotorShop/add-subProduct.php">
                                 <div class="card-body product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
-                                            <a href="javascript:void(0)"><img src="data:image;base64,<[img]>" width="300" height="300"></a>
+                                            <a href="http://localhost/MotorShop/product-detail.php?id=<[id]>">
+                                            <img href="http://localhost/MotorShop/product-detail.php?id=<[id]>" src="data:image;base64,<[img]>" width="300" height="300">
                                             <div class="product-hover">
                                                 <ul>
+                                                    <li> 
+                                                        <a class="btn" name="edit" href="http://localhost/MotorShop/editproduct.php?id=<[id]>" data-original-title=""
+                                                            title=""><i class="ti-pencil-alt"></i></a>
+                                                    </li> 
                                                     <li>
-                                                        <button class="btn" type="button" data-original-title=""
-                                                            title=""><i class="ti-pencil-alt"></i></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn"><i class="ti-trash"></i></button>
+                                                        <button class="btn" type="submit" name="delete" type="submit"><i class="ti-trash"></i></button>
                                                     </li>
                                                     <li>
                                                         <button class="btn" type="submit" style="font-size: 20px;">+</button>
@@ -86,6 +87,7 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                    
                                     </div>
                                     <div class="product-detail">
                                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -93,7 +95,7 @@
                                                 class="fa fa-star"></i></div>
                                         <a href="javascript:void(0)">
                                             <br>
-                                            <h5><b><[title]></b></h5>
+                                            <h5><a href="http://localhost/MotorShop/product-detail.php?id=<[id]>"><b><[title]></b></a></h5>
                                         </a>
                                        <h6>€ <[price]></h6>
                                         <input type="hidden" value="<[id]>" name="id" href="javascript:void(0) ">
