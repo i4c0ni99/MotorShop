@@ -156,7 +156,7 @@
                             <div class="aside-title mv-title-style-11">Categoria</div>
                             <div class="aside-body">
                                 <select onchange="window.location.href='product-list-customer.php?cat_id=' + this.value">
-                                    <option value="">Tutte le categorie</option>
+                                    <option value="">Tutte le categorie></option>
                                     <[foreach]>
                                         <option value="<[cat_id]>"><[cat_name]></option>
                                     <[/foreach]>
@@ -166,7 +166,7 @@
                         <div class="mv-aside mv-aside-product-type">
                             <div class="aside-title mv-title-style-11">Sotto categoria</div>
                             <div class="aside-body">
-                                <select onchange="window.location.href='product-list-customer.php?sub_cat_id=' + this.value">
+                                <select onchange="window.location.href='product-list-customer.php?cat_id=<[cat_id_in_sub]>&sub_cat_id=' + this.value">
                                     <option value="">Tutte le sotto categorie</option>
                                     <[foreach]>
                                         <option value="<[sub_cat_id]>"><[sub_cat_name]></option>

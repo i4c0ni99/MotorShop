@@ -88,13 +88,6 @@ while ($row = $categories_result->fetch_assoc()) {
     $categories[] = $row;
 }
 
-$sub_categories_query = "SELECT * FROM subcategories";
-$sub_categories_result = $mysqli->query($categories_query);
-$sub_categories = [];
-
-while ($row = $sub_categories_result->fetch_assoc()) {
-    $sub_categories[] = $row;
-}
 
 $PAGE = 0;
 $TO = 9;
@@ -125,6 +118,13 @@ $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = $mysqli->real_escape_string($_GET['cat_id']);
     $category_condition = " AND products.categories_id = $category_id ";
+    $subCat = $mysqli -> query(" SELECT * FROM subcategories WHERE  categories_id={$category_id}");
+    $body -> setContent("cat_id_in_sub",$category_id);
+    foreach($subCat as  $key){
+        $body->setContent("sub_cat_id", $key['id']);
+        $body->setContent("sub_cat_name",$key['name']);
+    }
+  
 }
 
 // Costruisci la parte iniziale della query SQL per selezionare i prodotti
@@ -132,7 +132,7 @@ $product_query_base = "
     SELECT products.title, products.id 
     FROM products 
     JOIN sub_products ON sub_products.products_id = products.id 
-    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) ";
+    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
 
 // Aggiungi la condizione per il filtro di prezzo
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
@@ -244,10 +244,8 @@ foreach ($categories as $category) {
     $body->setContent("cat_id", $category['id']);
     $body->setContent("cat_name", $category['name']);
 }
-foreach ($sub_categories as $sub_category) {
-    $body->setContent("sub_cat_id", $sub_category['id']);
-    $body->setContent("sub_cat_name",$sub_category['name']);
-}
+
+
 // Genera i pulsanti di paginazione
 $pagination_html = '';
 if ($total_pages > 1) {
