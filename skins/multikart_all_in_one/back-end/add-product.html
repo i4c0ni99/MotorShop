@@ -1,527 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Aggiungi prodotto</title>
-
-    <!-- Google font-->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-
-
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/assets/css/vendors/font-awesome.css">
-
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/assets/css/vendors/flag-icon.css">
-
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/assets/css/vendors/bootstrap.css">
-
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/assets/css/style.css">
-</head>
-
-<body>
-
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
-
-        <!-- Page Header Start-->
-        <div class="page-main-header">
-            <div class="main-header-right row">
-                <div class="main-header-left d-lg-none w-auto">
-                    <div class="logo-wrapper">
-                        <a href="index.html">
-                            <img class="blur-up lazyloaded d-block d-lg-none"
-                                src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/multikart-logo-black.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="mobile-sidebar w-auto">
-                    <div class="media-body text-end switch-sm">
-                        <label class="switch"><a href="javascript:void(0)"><i id="sidebar-toggle"
-                                    data-feather="align-left"></i></a></label>
-                    </div>
-                </div>
-                <div class="nav-right col">
-                    <ul class="nav-menus">
-                        <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i
-                                    data-feather="maximize-2"></i></a></li>
-                        <li class="onhover-dropdown">
-                            <div class="media align-items-center"><img
-                                    class="align-self-center pull-right img-50 blur-up lazyloaded"
-                                    src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/user3.jpg" alt="header-user">
-                                <div class="dotted-animation"><span class="animate-circle"></span><span
-                                        class="main-circle"></span></div>
-                            </div>
-                            <ul class="profile-dropdown onhover-show-div p-20">
-                                <li><a href="javascript:void(0)"><i data-feather="user"></i>Profilo</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="settings"></i>Impostazioni</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="log-out"></i>Esci</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
-                </div>
-            </div>
-        </div>
-        <!-- Page Header Ends -->
-
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
-
-            <!-- Page Sidebar Start-->
-            <div class="page-sidebar">
-                <div class="main-header-left d-none d-lg-block">
-                    <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded"
-                                src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/multikart-logo.png" alt=""></a></div>
-                </div>
-                <div class="sidebar custom-scrollbar">
-                    <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times"
-                            aria-hidden="true"></i></a>
-                    <div class="sidebar-user">
-                        <img class="img-60" src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/user3.jpg" alt="#">
-                        <div>
-                            <h6 class="f-14">JOHN</h6>
-                            <p>general manager.</p>
-                        </div>
-                    </div>
-                    <ul class="sidebar-menu">
-                        <li>
-                            <a class="sidebar-header" href="index.html">
-                                <i data-feather="home"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="box"></i>
-                                <span>Prodotti</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="add-product.html">
-                                                <i class="fa fa-circle"></i>Aggiungi prodotto
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="product-list.html">
-                                                <i class="fa fa-circle"></i>Lista prodotti</a>
-                                        </li>
-										
-										<li>
-                                            <a href="category.html">
-                                                <i class="fa fa-circle"></i>Categorie
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="category-sub.html">
-                                                <i class="fa fa-circle"></i>Sottocategorie</a>
-                                        </li>
-                                
-                                <li>
-                                    <a href="product-review.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Recensioni</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="archive"></i>
-                                <span>Ordini</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                            <ul class="sidebar-submenu">
-								<li>
-                                    <a href="order.html">
-                                        <i class="fa fa-circle"></i>Lista ordini
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-detail.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Dettagli ordini</span>
-                                    </a>
-                                </li>
-								
-								<li>
-                                    <a href="order-tracking.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Tracking</span>
-                                    </a>
-                                </li>
-								
-                            </ul>
-                        </li>
-                        
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="user-plus"></i>
-                                <span>Utenti</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="user-list.html">
-                                        <i class="fa fa-circle"></i>Lista utenti
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-user.html">
-                                        <i class="fa fa-circle"></i>Aggiungi utente
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-
-                        <li>
-                            <a class="sidebar-header" href="reports.html"><i
-                                    data-feather="bar-chart"></i><span>Report</span>
-                            </a>
-                        </li> 
-      
-                    </ul>
-                </div>
-            </div>
-            <!-- Page Sidebar Ends-->
-
-            <!-- Right sidebar Start-->
-            <div class="right-sidebar" id="right_side_bar">
-                <div>
-                    <div class="container p-0">
-                        <div class="modal-header p-l-20 p-r-20">
-                            <div class="col-sm-8 p-0">
-                                <h6 class="modal-title font-weight-bold">FRIEND LIST</h6>
-                            </div>
-                            <div class="col-sm-4 text-end p-0">
-                                <i class="me-2" data-feather="settings"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="friend-list-search mt-0">
-                        <input type="text" placeholder="search friend">
-                        <i class="fa fa-search"></i>
-                    </div>
-                    <div class="p-l-30 p-r-30 friend-list-name">
-                        <div class="chat-box">
-                            <div class="people-list friend-list">
-                                <ul class="list">
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Vincent Porter</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user1.jpg" alt="">
-                                        <div class="status-circle away"></div>
-                                        <div class="about">
-                                            <div class="name">Ain Chavez</div>
-                                            <div class="status">28 minutes ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user2.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Kori Thomas</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user3.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Erica Hughes</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user3.jpg" alt="">
-                                        <div class="status-circle offline"></div>
-                                        <div class="about">
-                                            <div class="name">Ginger Johnston</div>
-                                            <div class="status">2 minutes ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user5.jpg" alt="">
-                                        <div class="status-circle away"></div>
-                                        <div class="about">
-                                            <div class="name">Prasanth Anand</div>
-                                            <div class="status">2 hour ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/designer.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Hileri Jecno</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Aggiungi prodotto</h3>
                     </div>
                 </div>
             </div>
-            <!-- Right sidebar Ends-->
-
-            <div class="page-body">
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="page-header-left">
-                                    <h3>Aggiungi prodotto</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Container-fluid Ends-->
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3>Aggiungi foto :</h3>
-                                    <div class="row product-adding">
-                                        <div class="col-xl-5">
-                                            <div class="add-product">
-                                                <div class="row">
-                                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
-                                                        <img src="assets/images/pro3/1.jpg" alt=""
-                                                            class="img-fluid image_zoom_1 blur-up lazyloaded">
-                                                    </div>
-                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
-                                                        <ul class="file-upload-product">
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload"
-                                                                        type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-7">
-                                            <form class="needs-validation add-product-form" novalidate="">
-                                                <div class="form">
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustom01"
-                                                            class="col-xl-3 col-sm-4 mb-0">Titolo :</label>
-                                                        <div class="col-xl-8 col-sm-7">
-                                                            <input class="form-control" id="validationCustom01"
-                                                                type="text" required="true">
-                                                        </div>
-                                                        <div class="valid-feedback">Sembra ok!</div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustom02"
-                                                            class="col-xl-3 col-sm-4 mb-0">Prezzo :</label>
-                                                        <div class="col-xl-8 col-sm-7">
-                                                            <input class="form-control" id="validationCustom02"
-                                                                type="text" required="true">
-                                                        </div>
-                                                        <div class="valid-feedback">Sembra ok!</div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustomUsername"
-                                                            class="col-xl-3 col-sm-4 mb-0">Codice prodotto :</label>
-                                                        <div class="col-xl-8 col-sm-7">
-                                                            <input class="form-control" id="validationCustomUsername"
-                                                                type="text" required="true">
-                                                        </div>
-                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Inserisci un codice valido</div>
-                                                    </div>
-                                                </div>
-                                                <div class="form">
-                                                    <div class="form-group row">
-                                                        <label for="exampleFormControlSelect1"
-                                                            class="col-xl-3 col-sm-4 mb-0">Taglia :</label>
-                                                        <div class="col-xl-8 col-sm-7">
-                                                            <select class="form-control digits"
-                                                                id="exampleFormControlSelect1">
-                                                                <option>XS</option>
-                                                                <option>S</option>
-                                                                <option>M</option>
-                                                                <option>L</option>
-                                                                <option>XL</option>
-                                                                <option>XXL</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4 mb-0">Totale prodotti :</label>
-                                                        <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7">
-                                                            <div class="input-group">
-                                                                <input class="touchspin" type="text" value="1">
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4">Descrizione :</label>
-                                                        <div class="col-xl-8 col-sm-7 description-sm">
-                                                            <textarea id="editor1" name="editor1" cols="10" required="true"
-                                                                rows="4"></textarea>
-                                                        </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-xl-3 col-sm-4">Specifiche :</label>
-                                                            <div class="col-xl-8 col-sm-7 description-sm">
-                                                                <textarea id="editor1" name="editor1" cols="10" required="true"
-                                                                    rows="4"></textarea>
-                                                            </div>
-                                                            </div>
-                                                                <div class="form-group row">
-                                                                    <label for="exampleFormControlSelect1"
-                                                                        class="col-xl-3 col-sm-4 mb-0">Categoria :</label>
-                                                                    <div class="col-xl-8 col-sm-7">
-                                                                        <select class="form-control digits"
-                                                                            id="exampleFormControlSelect1">
-                                                                            <option>Scegli categoria</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group mb-3 row">
-                                                                    <label for="validationCustom01"
-                                                                        class="col-xl-3 col-sm-4 mb-0">Tags :</label>
-                                                                    <div class="col-xl-8 col-sm-7">
-                                                                        <input class="form-control" id="validationCustom01"
-                                                                            type="text" required="true">
-                                                                    </div>
-                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
-                                                            <button type="submit" class="btn btn-primary">Aggiungi</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Container-fluid Ends-->
-            </div>
-
-            <!-- footer start-->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 footer-copyright text-start">
-                            <p class="mb-0">Copyright 2022 © MotorShop</p>
-                        </div>
-                        <div class="col-md-6 pull-right text-end">
-                            <p class=" mb-0">Realizzato in Abruzzo con <i class="fa fa-heart"></i></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- footer end-->
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 
-    <!-- latest jquery-->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-
-    <!-- feather icon js-->
-    <script src="assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
-
-    <!-- Sidebar jquery-->
-    <script src="assets/js/sidebar-menu.js"></script>
-
-    <!-- touchspin js-->
-    <script src="assets/js/touchspin/vendors.min.js"></script>
-    <script src="assets/js/touchspin/touchspin.js"></script>
-    <script src="assets/js/touchspin/input-groups.min.js"></script>
-
-    <!-- form validation js-->
-    <script src="assets/js/dashboard/form-validation-custom.js"></script>
-
-    <!-- ckeditor js-->
-    <script src="assets/js/editor/ckeditor/ckeditor.js"></script>
-    <script src="assets/js/editor/ckeditor/ckeditor.custom.js"></script>
-
-    <!-- Zoom js-->
-    <script src="assets/js/jquery.elevatezoom.js"></script>
-    <script src="assets/js/zoom-scripts.js"></script>
-
-    <!--Customizer admin-->
-    <script src="assets/js/admin-customizer.js"></script>
-
-    <!-- lazyload js-->
-    <script src="assets/js/lazysizes.min.js"></script>
-
-    <!--right sidebar js-->
-    <script src="assets/js/chat-menu.js"></script>
-
-    <!--script admin-->
-    <script src="assets/js/admin-script.js"></script>
-</body>
-
-</html>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-7">
+                                <form class="needs-validation add-product-form" novalidate method="post" enctype="multipart/form-data" action="/MotorShop/addProduct.php">
+                                    <input type="hidden" name="csrf_token" value="<[csrf_token]>">
+                                    <div class="form">
+                                        <div class="form-group mb-3 row">
+                                            <label for="title" class="col-xl-3 col-sm-4 mb-0">Titolo:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="title" type="text" name="title" pattern=".{3,}" title="Il titolo deve avere almeno 3 caratteri" required="true">
+                                                <div class="valid-feedback">Sembra ok!</div>
+                                                <div class="invalid-feedback">Il titolo deve avere almeno 3 caratteri.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label for="code" class="col-xl-3 col-sm-4 mb-0">Codice prodotto:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="code" type="text" name="code" pattern="[A-Za-z0-9]{5}" title="Il codice prodotto deve essere composto da 5 caratteri alfanumerici" required="true">
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Inserisci un codice valido (5 caratteri alfanumerici)</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label for="productImage" class="col-xl-3 col-sm-4 mb-0">Immagine prodotto:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control-file" id="productImage" type="file" name="product_image" accept="image/*" required="true">
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Carica un'immagine del prodotto.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form">
+                                        <div class="form-group row">
+                                            <label for="description" class="col-xl-3 col-sm-4">Descrizione:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="description" name="description" class="form-control" style="resize: vertical;" rows="4" minlength="5" maxlength="2000" required="true"></textarea>
+                                                <div class="invalid-feedback">La descrizione è obbligatoria e deve avere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="details" class="col-xl-3 col-sm-4">Specifiche:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="details" name="details" class="form-control" style="resize: vertical;" rows="4" minlength="5" maxlength="2000" required="true"></textarea>
+                                                <div class="invalid-feedback">Le specifiche sono obbligatorie e devono avere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="category" class="col-xl-3 col-sm-4 mb-0">Categoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <select class="form-control digits" id="category" name="category" required="true">
+                                                    <[foreach]>
+                                                        <option><[categories]></option>
+                                                    <[/foreach]>
+                                                </select>
+                                                <div class="invalid-feedback">Seleziona una categoria.</div>
+                                            </div>
+                                        </div>
+                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                            <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div>
+                                    <!-- Area per visualizzare eventuali messaggi di errore -->
+                                    <[errorMessages]>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>

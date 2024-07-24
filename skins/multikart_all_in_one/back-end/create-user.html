@@ -1,706 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
-
-    <!-- Google font-->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap">
-
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-
-
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/font-awesome.css">
-
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/flag-icon.css">
-
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/vendors/bootstrap.css">
-
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/multikart_all_in_one/back-end/assets/css/style.css">
-</head>
-
-<body>
-
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
-
-       <div class="page-main-header">
-            <div class="main-header-right row">
-                <div class="main-header-left d-lg-none w-auto">
-                    <div class="logo-wrapper">
-                        <a href="index.html">
-                            <img class="blur-up lazyloaded d-block d-lg-none"
-                                src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo-black.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="mobile-sidebar w-auto">
-                    <div class="media-body text-end switch-sm">
-                        <label class="switch"><a href="javascript:void(0)"><i id="sidebar-toggle"
-                                    data-feather="align-left"></i></a></label>
-                    </div>
-                </div>
-                <div class="nav-right col">
-                    <ul class="nav-menus">
-                        <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i
-                                    data-feather="maximize-2"></i></a></li>
-                        <li class="onhover-dropdown">
-                            <div class="media align-items-center"><img
-                                    class="align-self-center pull-right img-50 blur-up lazyloaded"
-                                    src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="header-user">
-                                <div class="dotted-animation"><span class="animate-circle"></span><span
-                                        class="main-circle"></span></div>
-                            </div>
-                            <ul class="profile-dropdown onhover-show-div p-20">
-                                <li><a href="javascript:void(0)"><i data-feather="user"></i>Profilo</a></li>
-                                <li><a href="javascript:void(0)"><i data-feather="settings"></i>Impostazioni</a></li>
-                                <li><a href="/MotorShop/logout.php"><i data-feather="log-out"></i>Esci</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
-                </div>
-            </div>
-        </div>
-        <!-- Page Header Ends -->
-
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
-
-            <!-- Page Sidebar Start-->
-            <div class="page-sidebar">
-                <div class="main-header-left d-none d-lg-block">
-                    <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded"
-                                src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo.png" alt=""></a></div>
-                </div>
-                <div class="sidebar custom-scrollbar">
-                    <a href="javascript:void(0)" class="sidebar-back d-lg-none d-block"><i class="fa fa-times"
-                            aria-hidden="true"></i></a>
-                    <div class="sidebar-user">
-                        <img class="img-60" src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg" alt="#">
-                        <div>
-                            <h6 class="f-14">JOHN</h6>
-                            <p>general manager.</p>
-                        </div>
-                    </div>
-                    <ul class="sidebar-menu">
-                        <li>
-                            <a class="sidebar-header" href="index.html">
-                                <i data-feather="home"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="box"></i>
-                                <span>Prodotti</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Prodotti</span>
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </a>
-
-                                    <ul class="sidebar-submenu">
-                                        <li>
-                                            <a href="add-product.html">
-                                                <i class="fa fa-circle"></i>Aggiungi prodotto
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="product-list.html">
-                                                <i class="fa fa-circle"></i>Lista prodotti</a>
-                                        </li>
-										
-										<li>
-                                            <a href="category.html">
-                                                <i class="fa fa-circle"></i>Categorie
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="category-sub.html">
-                                                <i class="fa fa-circle"></i>Sottocategorie</a>
-                                        </li>
-										
-                                    </ul>
-                                </li>
-                                
-                                <li>
-                                    <a href="product-review.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Recensioni</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="archive"></i>
-                                <span>Ordini</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order-list.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Ordini</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-tracking.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Tracking</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="order-detail.html">
-                                        <i class="fa fa-circle"></i>
-                                        <span>Dettagli ordini</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="dollar-sign"></i>
-                                <span>Vendite</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="order.html">
-                                        <i class="fa fa-circle"></i>Ordini
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="transactions.html">
-                                        <i class="fa fa-circle"></i>Transazioni
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="clipboard"></i>
-                                <span>Pagine</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="pages-list.html">
-                                        <i class="fa fa-circle"></i>Lista pagine
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="page-create.html">
-                                        <i class="fa fa-circle"></i>Crea pagina
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="media.html">
-                                <i data-feather="camera"></i>
-                                <span>Media</span>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a class="sidebar-header" href="javascript:void(0)">
-                                <i data-feather="user-plus"></i>
-                                <span>Utenti</span>
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li>
-                                    <a href="user-list.html">
-                                        <i class="fa fa-circle"></i>Lista utenti
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="create-user-admin.php">
-                                        <i class="fa fa-circle"></i>Aggiungi utente
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="support-ticket.html"><i
-                                    data-feather="phone"></i><span>Supporto</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="sidebar-header" href="reports.html"><i
-                                    data-feather="bar-chart"></i><span>Report</span>
-                            </a>
-                        </li> 
-
-                        <li>
-                            <a class="sidebar-header" href="invoice.html"><i
-                                    data-feather="archive"></i><span>Fatture</span></a>
-                        </li>
-      
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Right sidebar Start-->
-            <div class="right-sidebar" id="right_side_bar">
-                <div>
-                    <div class="container p-0">
-                        <div class="modal-header p-l-20 p-r-20">
-                            <div class="col-sm-8 p-0">
-                                <h6 class="modal-title font-weight-bold">FRIEND LIST</h6>
-                            </div>
-                            <div class="col-sm-4 text-end p-0">
-                                <i class="me-2" data-feather="settings"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="friend-list-search mt-0">
-                        <input type="text" placeholder="search friend">
-                        <i class="fa fa-search"></i>
-                    </div>
-                    <div class="p-l-30 p-r-30 friend-list-name">
-                        <div class="chat-box">
-                            <div class="people-list friend-list">
-                                <ul class="list">
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Vincent Porter</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user1.jpg" alt="">
-                                        <div class="status-circle away"></div>
-                                        <div class="about">
-                                            <div class="name">Ain Chavez</div>
-                                            <div class="status">28 minutes ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user2.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Kori Thomas</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user3.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Erica Hughes</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="assets/images/dashboard/user3.jpg" alt="">
-                                        <div class="status-circle offline"></div>
-                                        <div class="about">
-                                            <div class="name">Ginger Johnston</div>
-                                            <div class="status">2 minutes ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user5.jpg" alt="">
-                                        <div class="status-circle away"></div>
-                                        <div class="about">
-                                            <div class="name">Prasanth Anand</div>
-                                            <div class="status">2 hour ago</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <img class="rounded-circle user-image blur-up lazyloaded"
-                                            src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/designer.jpg" alt="">
-                                        <div class="status-circle online"></div>
-                                        <div class="about">
-                                            <div class="name">Hileri Jecno</div>
-                                            <div class="status">Online</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Aggiungi amministratore</h3>
                     </div>
                 </div>
             </div>
-            <!-- Right sidebar Ends-->
-
-            <div class="page-body">
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="page-header-left">
-                                    <h3>Create User
-                                        <small>Multikart Admin panel</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item">
-                                        <a href="index.html">
-                                            <i data-feather="home"></i>
-                                        </a>
-                                    </li>
-                                    <li class="breadcrumb-item">Users </li>
-                                    <li class="breadcrumb-item active">Create User </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Container-fluid Ends-->
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card tab2-card">
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist">
-                                        <li class="nav-item"><a class="nav-link active show" id="account-tab"
-                                                data-bs-toggle="tab" href="#account" role="tab" aria-controls="account"
-                                                aria-selected="true" data-original-title="" title="">Account</a></li>
-                                        <li class="nav-item"><a class="nav-link" id="permission-tabs"
-                                                data-bs-toggle="tab" href="#permission" role="tab"
-                                                aria-controls="permission" aria-selected="false" data-original-title=""
-                                                title="">Permission</a></li>
-                                    </ul>
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade active show" id="account" role="tabpanel"
-                                            aria-labelledby="account-tab">
-                                            <form class="needs-validation user-add" method="post" action="/MotorShop/create-user-admin.php">
-                                                <h4>Account Details</h4>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom0"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Nome</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom0" type="text"
-                                                            name="name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom1"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Cognome</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom1" type="text"
-                                                             name="surname">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom2"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom2" type="email"
-                                                             name="email">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom5"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Cellulare</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom5" type="text"
-                                                             name="phoneNumber">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom3"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom3"
-                                                            type="password"  name="password">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="validationCustom4"
-                                                        class="col-xl-3 col-md-4"><span>*</span> Confirm
-                                                        Password</label>
-                                                    <div class="col-xl-8 col-md-7">
-                                                        <input class="form-control" id="validationCustom4"
-                                                            type="password"  name="confirmPassword">
-                                                    </div>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane fade" id="permission" role="tabpanel"
-                                            aria-labelledby="permission-tabs">
-                                            <form class="needs-validation user-add" novalidate="">
-                                                <div class="permission-block">
-                                                    <div class="attribute-blocks">
-                                                        <h5 class="f-w-600 mb-3">Product Related permition </h5>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Add Product</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani1">
-                                                                        <input class="radio_animated" id="edo-ani1"
-                                                                            type="radio" name="rdo-ani">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani2">
-                                                                        <input class="radio_animated" id="edo-ani2"
-                                                                            type="radio" name="rdo-ani" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Update Product</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani3">
-                                                                        <input class="radio_animated" id="edo-ani3"
-                                                                            type="radio" name="rdo-ani1">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani4">
-                                                                        <input class="radio_animated" id="edo-ani4"
-                                                                            type="radio" name="rdo-ani1" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Delete Product</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani5">
-                                                                        <input class="radio_animated" id="edo-ani5"
-                                                                            type="radio" name="rdo-ani2">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani6">
-                                                                        <input class="radio_animated" id="edo-ani6"
-                                                                            type="radio" name="rdo-ani2" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label class="mb-0 sm-label-radio">Apply
-                                                                    discount</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated pb-0">
-                                                                    <label class="d-block mb-0" for="edo-ani7">
-                                                                        <input class="radio_animated" id="edo-ani7"
-                                                                            type="radio" name="rdo-ani3">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block mb-0" for="edo-ani8">
-                                                                        <input class="radio_animated" id="edo-ani8"
-                                                                            type="radio" name="rdo-ani3" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="attribute-blocks">
-                                                        <h5 class="f-w-600 mb-3">Category Related permition </h5>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Add Category</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani9">
-                                                                        <input class="radio_animated" id="edo-ani9"
-                                                                            type="radio" name="rdo-ani4">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani10">
-                                                                        <input class="radio_animated" id="edo-ani10"
-                                                                            type="radio" name="rdo-ani4" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Update Category</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani11">
-                                                                        <input class="radio_animated" id="edo-ani11"
-                                                                            type="radio" name="rdo-ani5">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani12">
-                                                                        <input class="radio_animated" id="edo-ani12"
-                                                                            type="radio" name="rdo-ani5" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label>Delete Category</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                                    <label class="d-block" for="edo-ani13">
-                                                                        <input class="radio_animated" id="edo-ani13"
-                                                                            type="radio" name="rdo-ani6">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block" for="edo-ani14">
-                                                                        <input class="radio_animated" id="edo-ani14"
-                                                                            type="radio" name="rdo-ani6" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-3 col-sm-4">
-                                                                <label class="mb-0 sm-label-radio">Apply
-                                                                    discount</label>
-                                                            </div>
-                                                            <div class="col-xl-9 col-sm-8">
-                                                                <div
-                                                                    class="form-group m-checkbox-inline custom-radio-ml d-flex radio-animated pb-0">
-                                                                    <label class="d-block mb-0" for="edo-ani15">
-                                                                        <input class="radio_animated" id="edo-ani15"
-                                                                            type="radio" name="rdo-ani7">
-                                                                        Allow
-                                                                    </label>
-                                                                    <label class="d-block mb-0" for="edo-ani16">
-                                                                        <input class="radio_animated" id="edo-ani16"
-                                                                            type="radio" name="rdo-ani7" checked="">
-                                                                        Deny
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Container-fluid Ends-->
-            </div>
-
-            <!-- footer start-->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 footer-copyright text-start">
-                            <p class="mb-0">Copyright 2019 © Multikart All rights reserved.</p>
-                        </div>
-                        <div class="col-md-6 pull-right text-end">
-                            <p class=" mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- footer end-->
         </div>
     </div>
+    <!-- Container-fluid Ends-->
 
-    <!-- latest jquery-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/jquery-3.3.1.min.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/bootstrap.bundle.min.js"></script>
-
-    <!-- feather icon js-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather.min.js"></script>
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/icons/feather-icon/feather-icon.js"></script>
-
-    <!-- Sidebar jquery-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/sidebar-menu.js"></script>
-
-    <!--Customizer admin-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-customizer.js"></script>
-
-    <!-- lazyload js-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/lazysizes.min.js"></script>
-
-    <!--right sidebar js-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/chat-menu.js"></script>
-
-    <!--form validation js-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/dashboard/form-validation-custom.js"></script>
-
-    <!--script admin-->
-    <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-script.js"></script>
-
-</body>
-
-</html>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card tab2-card">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist">
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="register-user" role="tabpanel" aria-labelledby="account-tab">
+                                <form class="needs-validation user-add" method="post" action="/../MotorShop/create-user-admin.php">
+                                    <h4>Crea utente amministratore</h4>
+                                    <h6>L'utente riceverà la password via email.</h6>
+                                    <hr>
+                                    <br>
+                                    <div class="form-group row">
+                                        <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span> Nome </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" minlength="3" id="validationCustom0" type="text" name="name" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom1" class="col-xl-3 col-md-4"><span>*</span> Cognome </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" minlength="3" id="validationCustom1" type="text" name="surname" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom2" class="col-xl-3 col-md-4"><span>*</span> Email </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" minlength="6" id="validationCustom2" type="email" name="email" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom5" class="col-xl-3 col-md-4"><span>*</span> Cellulare </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" pattern="[3]{1}[0-9]{9}" minlength="10" id="validationCustom5" type="text" name="phoneNumber" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom3" class="col-xl-3 col-md-4"><span>*</span> Password </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" id="validationCustom3" type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="password" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom4" class="col-xl-3 col-md-4"><span>*</span> Conferma Password </label>
+                                        <div class="col-xl-8 col-md-7">
+                                            <input class="form-control" id="validationCustom4" type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmPassword" required="true">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+            </div>
+        </div>
+    </div>
+</div>
