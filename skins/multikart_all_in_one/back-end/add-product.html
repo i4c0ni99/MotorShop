@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="row product-adding">
                             <div class="col-xl-7">
-                                <form class="needs-validation add-product-form" novalidate method="post" enctype="multipart/form-data" action="/MotorShop/addProduct.php">
+                                <form class="needs-validation add-product-form" novalidate method="post" enctype="multipart/form-data" action="/MotorShop/addProduct.php?cat_id=&sub_cat_id="> <!-- Aggiungere i parametri cat_id e sub_cat-id -->
                                     <input type="hidden" name="csrf_token" value="<[csrf_token]>">
                                     <div class="form">
                                         <div class="form-group mb-3 row">
@@ -62,20 +62,37 @@
                                                 <div class="invalid-feedback">Le specifiche sono obbligatorie e devono avere almeno 5 caratteri.</div>
                                             </div>
                                         </div>
+                                        <br>
                                         <div class="form-group row">
                                             <label for="category" class="col-xl-3 col-sm-4 mb-0">Categoria:</label>
                                             <div class="col-xl-8 col-sm-7">
-                                                <select class="form-control digits" id="category" name="category" required="true">
+                                                <select onchange="window.location.href='addProduct.php?cat_id=' + this.value" id="category" name="category" required="true">
+                                                    <option value="">Scegli categoria</option>
                                                     <[foreach]>
-                                                        <option><[categories]></option>
+                                                        <option value="<[cat_id]>"><[categories]></option>
                                                     <[/foreach]>
                                                 </select>
                                                 <div class="invalid-feedback">Seleziona una categoria.</div>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="subcategory" class="col-xl-3 col-sm-4 mb-0">Sottocategoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <select onchange="window.location.href='addProduct.php?cat_id=<[cat_id_in_sub]>&sub_cat_id=' + this.value" id="subcategory" name="subcategory">
+                                                    <option value="">Scegli sottocategoria</option>
+                                                    <[foreach]>
+                                                        <option value="<[sub_cat_id]>"><[sub_cat_name]></option>
+                                                    <[/foreach]>
+                                                </select>
+                                                <div class="invalid-feedback">Seleziona una sottocategoria.</div>
+                                            </div>
+                                        </div>
+
                                         <div class="offset-xl-3 offset-sm-4 mt-4">
                                             <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                            <button type="reset" class="btn btn-light">Annulla</button>
                                         </div>
+
                                     </div>
                                 </form>
                                 <div>

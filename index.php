@@ -111,7 +111,6 @@ ORDER BY mediumRate DESC limit 0,9");
 $resultProtezioni=$oidProtezioni;
 if($resultProtezioni->num_rows > 0){
 foreach($resultProtezioni as $key){
-    echo($key['title']);
     $imgOidCatProtezioni= $mysqli->query("SELECT imgsrc from images where product_id={$key['prod_id']}");
     $imgCatProtezioni=$imgOidCatProtezioni->fetch_assoc();
     $body->setContent("priceCatProtezioni",$key['price']);
