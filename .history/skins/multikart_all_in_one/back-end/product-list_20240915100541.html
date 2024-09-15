@@ -30,15 +30,11 @@
                                 </a>
                                 <div class="product-hover">
                                     <ul>
-
                                         <li>
-                                            <form method="post" action="/MotorShop/deleteProduct.php">
-                                                <input type="hidden" name="id" value="<[id]>">
-                                                <button class="btn" type="submit" title="Delete Product">
-                                                    <img src="/MotorShop/skins/multikart_all_in_one/assets/svg/feature/edit.svg" alt="D">
-                                                </button>
-                                            </form>
-                                        </li>                                        
+                                            <a class="btn" href="http://localhost/MotorShop/editproduct.php?id=<[id]>" title="Edit Product" style="font-size: 20px;">
+                                                <i class="ti-pencil-alt">e</i>
+                                            </a>
+                                        </li>
                                         
                                         <li>
                                             <form method="post" action="/MotorShop/deleteProduct.php">
@@ -52,7 +48,7 @@
                                         <li>
                                             <form method="get" action="/MotorShop/subproduct-list.php">
                                                 <input type="hidden" name="id" value="<[id]>">
-                                                <button class="btn" type="submit" title="Add Sub-Product" style="font-size: 24px;">
+                                                <button class="btn" type="submit" title="Add Sub-Product" style="font-size: 20px;">
                                                     +
                                                 </button>
                                             </form>
