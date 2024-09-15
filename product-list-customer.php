@@ -210,7 +210,7 @@ if ($result && $result->num_rows > 0) {
         $product_id = $mysqli->real_escape_string($key['id']);
 
         $image_query = "
-            SELECT images.imgsrc, sub_products.price 
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
             FROM products 
             JOIN sub_products ON sub_products.products_id = products.id 
             JOIN images ON images.product_id = products.id 
@@ -219,24 +219,135 @@ if ($result && $result->num_rows > 0) {
         ";
 
         $image_data = $mysqli->query($image_query);
-
+        
         if ($image_data && $image_data->num_rows > 0) {
             $item = $image_data->fetch_assoc();
-            $price = strval($item['price']);
-            $body->setContent("img", $item['imgsrc']);
-            $body->setContent("price", formatPrice($price));
+            $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
+            $offerItem = $offer->fetch_assoc();
+            if($offerItem){
+            $price = $item['price'];
+            $img =  $item['imgsrc'];
+            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
+            $price=formatPrice($price);
+            $body->setContent("code",
+            '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
+            <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
+            <div style="background-color: #fff;" class="content-thumb">
+                <div class="thumb-inner mv-effect-relative">
+                  
+                    <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
+                        <img src="data:image;base64,'.$img.'" alt="demo" class="mv-effect-item" />
+                    </a>
+                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs">
+                        <span class="btn-inner"></span>
+                    </a>
+    
+                    <div class="content-message mv-message-style-1">
+                        <div class="message-inner"></div>
+                    </div>
+                
+                   <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
+                <div class="label-2-inner">
+                    <ul class="label-2-ul">
+                        <li class="number">-'.$offerItem['percentage'].'%</li>
+                        <li class="text">Sconto</li>
+                    </ul>
+                </div>
+                </div>
+                
+                </div>
+            </div>
+    
+            <div class="content-default">
+                <div class="content-desc">
+                    <a href="#" class="mv-overflow-ellipsis">'.$title.'</a>
+                </div>
+                <br>
+                <div class="content-price">
+                    <span class="new-price">€ '.$pricePercentage.' </span>
+                    <span class="old-price">€ '.$price.'</span>
+                </div>
+                <input type="hidden" value="'.$product_id.'" name="id" href="javascript:void(0)">
+            </div>
+    
+            <div class="content-hover">
+                <div class="content-button mv-btn-group text-center">
+                    <div class="group-inner">
+                        <form method="post" action="product-detail.php?id=<[id]>">
+                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                <span class="btn-inner">
+                                    <span class="btn-text">Scopri</span>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>                                
+        </div>
+    </article>');
+            }else{
+            $img =  $item['imgsrc'];
+            $price=formatPrice($item['price']);
+            
+            $body->setContent("code",
+            '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
+            <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
+            <div style="background-color: #fff;" class="content-thumb">
+                <div class="thumb-inner mv-effect-relative">
+                  
+                    <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
+                        <img src="data:image;base64,'.$img.'" alt="demo" class="mv-effect-item" />
+                    </a>
+                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs">
+                        <span class="btn-inner"></span>
+                    </a>
+    
+                    <div class="content-message mv-message-style-1">
+                        <div class="message-inner"></div>
+                    </div>
+                
+                </div>
+            </div>
+    
+            <div class="content-default">
+                <div class="content-desc">
+                    <a href="#" class="mv-overflow-ellipsis">'.$title.'</a>
+                </div>
+                <br>
+                <div class="content-price">
+                    <span class="new-price">€ '.$price.' </span>
+                </div>
+                <input type="hidden" value="'.$product_id.'" name="id" href="javascript:void(0)">
+            </div>
+    
+            <div class="content-hover">
+                <div class="content-button mv-btn-group text-center">
+                    <div class="group-inner">
+                        <form method="post" action="product-detail.php?id='.$product_id.'">
+                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                <span class="btn-inner">
+                                    <span class="btn-text">Scopri</span>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>                                
+        </div>
+    </article>');
+            }
+            
+
         } else {
             // Immagine non trovata
             $body->setContent("img", "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/shopping-trolley.png"); // Placeholder image path
             // $body->setContent("price", "0.00"); // Placeholder price
         }
+;
     }
 } else {
     // Nessun prodotto trovato
-    $body->setContent("id", "");
-    $body->setContent("title", "Nessun prodotto trovato");
-    $body->setContent("img", "");
-    $body->setContent("price", "");
+   $body->setContent('code','<p>Nessun Dispositivo trovato</p>');
 }
 
 // Passa le categorie al template
