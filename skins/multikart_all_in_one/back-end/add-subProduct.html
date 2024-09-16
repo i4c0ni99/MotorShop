@@ -19,7 +19,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="needs-validation add-product-form" novalidate method="post" action="add-subProduct.php" enctype="multipart/form-data" onreset="resetImagePreviews()">
+                        <form class="needs-validation add-product-form" novalidate method="post" action="add-subProduct.php?id=<[id]>" enctype="multipart/form-data" onreset="resetImagePreviews()">
                             <div class="row product-adding">
                                 <div class="col-xl-7">
                                     <div class="form">
@@ -59,20 +59,7 @@
 
                                         <div class="form-group row">
                                             <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Seleziona taglia:</label>
-                                            <div class="col-xl-8 col-sm-7">
-                                                <select class="form-control digits" id="exampleFormControlSelect1" name="size" required>
-                                                    <option value="" disabled selected>Scegli una taglia</option>
-                                                    <option>XXS</option>
-                                                    <option>XS</option>
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                    <option>XL</option>
-                                                    <option>XXL</option>
-                                                    <option>XXXL</option>
-                                                </select>
-                                                <div class="invalid-feedback">La taglia è obbligatoria.</div>
-                                            </div>
+                                            <[sizes]>
                                         </div>
 
                                         <div class="form-group row">

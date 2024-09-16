@@ -14,12 +14,12 @@ $body = new Template("skins/multikart_all_in_one/back-end/add-subProduct.html");
 if (isset($_GET['id'])) {
     $productId = $_GET['id'];
     $body->setContent('id', $_GET['id']);
-
+    echo "<script>console.log('".$_GET['id']."');</script>";
     // Recupera il nome della categoria associata al prodotto
-    $result = $mysqli->query("SELECT categories.name FROM categories JOIN products ON categories.id = products.categories_id WHERE products.id = {$productId}");
+    $result = $mysqli->query("SELECT categories.name FROM categories JOIN products ON categories.id = products.categories_id WHERE products.id = {$productId} LIMIT 1");
     if ($result && $result->num_rows > 0) {
         $data = $result->fetch_assoc();
-
+        
         // Imposta le taglie in base alla categoria
         if ($data['name'] != 'STIVALI') {
             $body->setContent('sizes', '
@@ -36,9 +36,11 @@ if (isset($_GET['id'])) {
                 </div>
             ');
         } else {
+            echo "<script>console.log('".$data['name']."');</script>";
             $body->setContent('sizes', '
                 <div class="col-xl-8 col-sm-7">
                     <select class="form-control digits" id="exampleFormControlSelect1" name="size" required>
+                    <option value="">Scegli una taglia</option>
                         <option>36</option>
                         <option>37</option>
                         <option>38</option>
@@ -71,20 +73,18 @@ if (isset($_POST['save'])) {
     // Validazione dei dati ricevuti dal form
     $errors = array();
 
-    // ID del prodotto
-    if (isset($_POST['id']) && is_numeric($_POST['id'])) {
-        $productId = intval($_POST['id']);
-    } else {
-        $errors[] = "ID del prodotto non valido.";
-    }
+    
+   
 
     // Prezzo
     if (isset($_POST['price'])) {
         $price = filter_var($_POST['price'], FILTER_VALIDATE_FLOAT);
         if ($price === false || $price < 1.00 || $price > 2000.00) {
+            echo "<script>console.log('Il prezzo deve essere compreso tra 1.00 e 2000.00.');</script>";
             $errors[] = "Il prezzo deve essere compreso tra 1.00 e 2000.00.";
         }
     } else {
+        echo "<script>console.log('Il prezzo è obbligatorio');</script>";
         $errors[] = "Il prezzo è obbligatorio.";
     }
 
@@ -94,15 +94,18 @@ if (isset($_POST['save'])) {
             "options" => array("min_range" => 1, "max_range" => 9999)
         ));
         if ($quantity === false) {
+            echo "<script>console.log('Il numero di sottoprodotti deve essere compreso tra 1 e 9999.');</script>";
             $errors[] = "Il numero di sottoprodotti deve essere compreso tra 1 e 9999.";
         }
     } else {
+        echo "<script>console.log(Il numero di sottoprodotti è obbligatorio.');</script>";
         $errors[] = "Il numero di sottoprodotti è obbligatorio.";
     }
 
     // Taglia
     if (empty($_POST['size'])) {
         $errors[] = "La taglia è obbligatoria.";
+        echo "<script>console.log('La taglia è obbligatoria.');</script>";
     } else {
         $size = $_POST['size'];
     }
@@ -110,13 +113,16 @@ if (isset($_POST['save'])) {
     // Colore
     if (empty($_POST['color'])) {
         $errors[] = "Il colore è obbligatorio.";
+        echo "<script>console.log('Il colore è obbligatorio');</script>";
     } else {
         $color = $_POST['color'];
     }
 
     // Verifica che non ci siano errori
     if (empty($errors)) {
+
         // Costruzione della query di inserimento del sottoprodotto
+        
         $insertSubProductQuery = "INSERT INTO sub_products (products_id, color, price, availability, quantity, size) VALUES ";
         $insertSubProductQuery .= "(" . intval($productId) . ", '" . $mysqli->real_escape_string($color) . "', ";
         $insertSubProductQuery .= floatval($price) . ", 1, " . intval($quantity) . ", '" . $mysqli->real_escape_string($size) . "')";
