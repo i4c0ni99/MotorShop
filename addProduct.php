@@ -14,10 +14,69 @@ $body = new Template("skins/multikart_all_in_one/back-end/add-product.html");
 $main->setContent('name', $_SESSION['user']['name']);
 
 // Carica le categorie per il form di aggiunta prodotto
-$data = $mysqli->query("SELECT name FROM categories");
+$data = $mysqli->query("SELECT id, name FROM categories");
+if(!isset($_GET['cat_id'])){
+    $body->setContent('select_cat','Scegli una categoria');
+    $body->setContent('select_cat_id','');
+}
+if(!isset($_GET['sub_cat_id'])){
+    $body->setContent('select_sub_cat','Segli una sotto categoria');
+    $body->setContent('select_sub_id','');
+}
 
 foreach ($data as $item) {
+    $body->setContent('cat_id', $item['id']);
     $body->setContent('categories', $item['name']);
+    if (isset($_GET['cat_id']) && !empty($_GET['cat_id']) && $_GET['cat_id'] == $item['id']){
+        echo "<script>console.log('".$item['name']."');</script>";
+          
+     $body->setContent('select_cat',$item['name']);
+     $body->setContent('select_cat_id',$item['id']);
+    }
+    
+}
+// La categoria è già stata selezionata
+$category_condition = '';
+if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
+    $category_id = $mysqli->real_escape_string($_GET['cat_id']);
+    $category_condition = " AND products.categories_id = $category_id ";
+    $subCat = $mysqli->query("SELECT * FROM subcategories WHERE categories_id={$category_id}");
+    $body->setContent("cat_id_in_sub", $category_id);
+    $body->setContent("title", $_GET['title']);
+    $body->setContent("description", $_GET['description']);
+    $body->setContent("details", $_GET['details']);
+    $body->setContent("code", $_GET['code']);
+    $body->setContent("product_image", $_GET['product_image']);
+    $body->setContent("category_id",$_GET['category_id']);
+    
+
+    
+    foreach($subCat as $key) {
+        $body->setContent("sub_cat_id", $key['id']);
+        $body->setContent("sub_cat_name", $key['name']);
+        if (isset($_GET['sub_cat_id']) && !empty($_GET['sub_cat_id']) && $_GET['sub_cat_id'] == $key['id']){
+            $body->setContent('select_sub_cat',$key['name']);
+            $body->setContent('select_sub_id',$key['id']);
+           }
+          
+    }
+
+    // La sottocategoria è già stata selezionata
+    if (isset($_GET['sub_cat_id']) && !empty($_GET['sub_cat_id'])) {
+        $body->setContent("cat_id_in_sub", $category_id);
+        $body->setContent("title", $_GET['title']);
+        $body->setContent("description", $_GET['description']);
+        $body->setContent("details", $_GET['details']);
+        $body->setContent("code", $_GET['code']);
+        $body->setContent("product_image", $_GET['product_image']);
+        $body->setContent("category_id",$_GET['category_id']);
+        $subcategory_id = $mysqli->real_escape_string($_GET['sub_cat_id']);
+    } else {
+        $subcategory_id = "NULL";  // Set default if not provided
+    }
+} else {
+    $category_id = "NULL";  // Set default if not provided
+    $subcategory_id = "NULL";  // Set default if not provided
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -36,18 +95,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Descrizione e specifiche sono campi obbligatori da almeno 5 caratteri
-    if (strlen($_POST['description']) < 5) {
+    if (strlen($_POST['descriptionProduct']) < 5) {
         $errors[] = "La descrizione deve avere almeno 5 caratteri.";
     }
 
-    if (strlen($_POST['details']) < 5) {
+    if (strlen($_POST['detailsProduct']) < 5) {
         $errors[] = "Le specifiche devono avere almeno 5 caratteri.";
     }
 
     // Categoria è obbligatoria
-    if (empty($_POST['category'])) {
-        $errors[] = "Seleziona una categoria.";
-    }
+    // if (empty($_POST['category'])) {
+    //     $errors[] = "Seleziona una categoria.";
+    // }
+
+    // Sottocategoria (non ancora) è obbligatoria
+    // if (empty($_POST['subcategory'])) {
+    //     $errors[] = "Seleziona una sottocategoria.";
+    // }
 
     // Verifica che il file sia stato caricato
     if (!isset($_FILES['product_image']) || $_FILES['product_image']['error'] != 0) {
@@ -57,12 +121,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Se non ci sono errori, procedi con l'inserimento nel database
     if (empty($errors)) {
         // Recupera l'id della categoria selezionata
-        $categoryName = $mysqli->real_escape_string($_POST['category']);
-        $result = $mysqli->query("SELECT id FROM categories WHERE name='$categoryName'");
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $categoryId = $row['id'];
+        // $categoryName = $mysqli->real_escape_string($_POST['category']);
+        // $result = $mysqli->query("SELECT id FROM categories WHERE name='$categoryName'");
+        
+        // if ($result->num_rows > 0) {
+            // $row = $result->fetch_assoc();
+            // $categoryId = $row['id'];
 
             // Esegui l'inserimento nel database
             $code = $mysqli->real_escape_string($_POST['code']);
@@ -70,8 +134,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $description = $mysqli->real_escape_string($_POST['description']);
             $details = $mysqli->real_escape_string($_POST['details']);
 
+            echo "Category ID: $category_id<br>";
+            echo "Subcategory ID: $subcategory_id<br>";
+
             $insertQuery = "INSERT INTO products (code, title, description, availability, specification, categories_id, subcategories_id) 
-                            VALUES ('$code', '$title', '$description', 0, '$details', $categoryId, 12)"; // Inserire form JS per sottocategoria e inserire il valore della POST
+                            VALUES ('$code', '$title', '$description', 0, '$details', ".$_GET['cat_id'].",".$_GET['sub_cat_id'].")";
+
+            echo $insertQuery;  // Debug: Print the query
 
             if ($mysqli->query($insertQuery)) {
                 $product_id = $mysqli->insert_id;
@@ -92,25 +161,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $errors[] = "Errore nell'esecuzione della query di inserimento.";
             }
-        } else {
-            $errors[] = "Categoria non valida.";
+    // Mostra errori
+    if (!empty($errors)) {
+        $errorMessages = "<ul>";
+        foreach ($errors as $error) {
+            $errorMessages .= "<li>$error</li>";
         }
+        $errorMessages .= "</ul>";
+        $body->setContent('errorMessages', $errorMessages);
     }
 }
-
-// Mostra errori
-if (!empty($errors)) {
-    $errorMessages = "<ul>";
-    foreach ($errors as $error) {
-        $errorMessages .= "<li>$error</li>";
-    }
-    $errorMessages .= "</ul>";
-    $body->setContent('errorMessages', $errorMessages);
 }
 } else {
-    header("Location: /MotorShop/login.php");
-    exit;
-}
+        header("Location: /MotorShop/login.php");
+        exit;
+    }
 
 $main->setContent("body", $body->get());
 $main->close();
