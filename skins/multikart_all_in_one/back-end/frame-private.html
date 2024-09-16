@@ -384,6 +384,40 @@
 
     <!--script admin-->
     <script src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/js/admin-script.js"></script>
+
+    <script>
+        function get_category(){
+            console.log('entra')
+            const title = document.getElementsByName('title')[0].value
+            const code = document.getElementsByName('code')[0].value
+            const description = document.getElementsByName('descriptionProduct')[0].value
+            const details = document.getElementsByName('detailsProduct')[0].value
+            const category = document.getElementsByName('category')[0].value
+            window.location.href = "addProduct.php?cat_id=" + encodeURIComponent(category) +
+                           "&title=" + encodeURIComponent(title) +
+                           "&code=" + encodeURIComponent(code) +
+                           "&description=" + encodeURIComponent(description) +
+                           "&details=" + encodeURIComponent(details)
+    
+        }
+
+        function get_sub_category(){
+            console.log('entra')
+            const title = document.getElementsByName('title')[0].value
+            const code = document.getElementsByName('code')[0].value
+            const description = document.getElementsByName('descriptionProduct')[0].value
+            const details = document.getElementsByName('detailsProduct')[0].value
+            const category = document.getElementsByName('category')[0].value
+            const category_sub = document.getElementsByName('subcategory')[0].value
+            
+            window.location.href = "addProduct.php?cat_id=" + encodeURIComponent(category) +"&sub_cat_id="+encodeURIComponent(category_sub)+
+                           "&title=" + encodeURIComponent(title) +
+                           "&code=" + encodeURIComponent(code) +
+                           "&description=" + encodeURIComponent(description) +
+                           "&details=" + encodeURIComponent(details) ;
+    
+        }
+    </script>
 </body>
 
 </html>
