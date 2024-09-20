@@ -90,14 +90,51 @@ foreach ($data as $item) {
     }else{echo('ciao');}
 }
 
+
+   
+
 if (isset($_GET['subId'])) {
 
    $data1 = $mysqli->query("SELECT size from sub_products where products_id ={$_GET['id']}");
    foreach ($data1 as $item2) {
 
-      $body->setContent("size", '<li class="active"><a href="#" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
-   
+      $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item['id'] . '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
+    
    }
+   
+
+   if (isset($_GET['size'])) 
+   $body->setContent("buttons",'
+            <div class="block-27-button">
+                        <div class="mv-dp-table align-middle">
+                        <div class="mv-dp-table-cell">
+                            <div class="mv-btn-group text-left">
+                            <div class="group-inner">
+                                <form method="post" action="/MotorShop/cart.php?id='.$_GET['subId'].'">
+                                <input type="hidden" name="add_to_cart" value="1">
+                                <button type="submit" class="mv-btn mv-btn-style-1 btn-1-h-50 responsive-btn-1-type-3 btn-add-to-cart">
+                                    <span class="btn-inner">
+                                    <i class="btn-icon fa fa-cart-plus"></i>
+                                    <span class="btn-text">Carrello</span>
+                                    </span>
+                                </button>
+                                </form>
+                                <form method="post" action="/MotorShop/wishlist.php?id='.$_GET['subId'].'">
+                                <input type="hidden" name="wishlist" value="1">
+                                <button type="submit" class="mv-btn mv-btn-style-3 btn-3-h-50 responsive-btn-3-type-1 btn-add-to-wishlist"
+                                    name="add_to_wishlist">
+                                    <span class="btn-inner">
+                                    <span class="btn-text">Wishlist</span>
+                                    <i class="fa fa-heart-o"></i>
+                                    </span>
+                                </button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>   ');
+
    $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$_GET['id']}");
             $offerItem = $offer->fetch_assoc();
             if($offerItem){
