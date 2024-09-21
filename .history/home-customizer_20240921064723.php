@@ -38,37 +38,40 @@ if (isset($_SESSION['user'])) {
                 }
     }
 
-    if (isset($_POST['delete'])) {
-        if (isset($_POST['sliderId']) && is_numeric($_POST['sliderId'])) {
-            $id = intval($_POST['sliderId']);
+if (isset($_POST['delete'])) {
+    if (isset($_POST['sliderId']) && is_numeric($_POST['sliderId'])) {
+        $id = intval($_POST['sliderId']);
+
+    try {
+        // Elimina dalla tabella slider
+        $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = '$id'");
+        $deleteSlider->execute();
+
+        $mysqli->commit();
+        // Redirect alla lista dei prodotti con un messaggio di successo
+        $_SESSION['message'] = "Prodotto eliminato con successo.";
+        header('Location: /MotorShop/product-list.php');
+        exit();
+    } catch (Exception $e) {
+        // In caso di errore
+        $mysqli->rollback();
+        
+        $_SESSION['error'] = "Errore durante l'eliminazione del prodotto.";
+        header('Location: /MotorShop/product-list.php');
+        exit();
+    }
     
-            // Inizia una transazione
-            $mysqli->begin_transaction();
-            
-            try {
-                // Query preparata per eliminare la slide
-                $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = ?");
-                $deleteSlider->bind_param("i", $id);  // 'i' per tipo integer
-                $deleteSlider->execute();
-    
-                // Conferma l'eliminazione
-                $mysqli->commit();
-    
-                // Messaggio di successo
-                $_SESSION['message'] = "Slide eliminata con successo.";
-            } catch (Exception $e) {
-                // In caso di errore, esegui un rollback
-                $mysqli->rollback();
-    
-                // Messaggio di errore
-                $_SESSION['error'] = "Errore durante l'eliminazione della slide.";
+    $title = $mysqli->real_escape_string($_POST['title']);
+    $description = $mysqli->real_escape_string($_POST['description']);
+    $button = $mysqli->real_escape_string($_POST['button-text']);
+    $link = $mysqli->real_escape_string($_POST['link']);
+    $insertQuery = "INSERT INTO slider (title, description, button, link) 
+            VALUES ('$title', '$description', '$button', '$link')";
+            if ($mysqli->query($insertQuery)) {
+                $product_id = $mysqli->insert_id;
             }
-    
-            // Redirect per aggiornare la pagina
-            header('Location: /MotorShop/home-customizer.php');
-            exit();
         }
-    }    
+}
     
     $main->setContent('user',$_SESSION['user']['name']);
     $main->setContent("body", $body->get());

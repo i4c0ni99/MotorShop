@@ -68,7 +68,8 @@ if (isset($_SESSION['user'])) {
             header('Location: /MotorShop/home-customizer.php');
             exit();
         }
-    }    
+    }
+    
     
     $main->setContent('user',$_SESSION['user']['name']);
     $main->setContent("body", $body->get());

@@ -38,37 +38,30 @@ if (isset($_SESSION['user'])) {
                 }
     }
 
-    if (isset($_POST['delete'])) {
-        if (isset($_POST['sliderId']) && is_numeric($_POST['sliderId'])) {
-            $id = intval($_POST['sliderId']);
-    
-            // Inizia una transazione
-            $mysqli->begin_transaction();
-            
-            try {
-                // Query preparata per eliminare la slide
-                $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = ?");
-                $deleteSlider->bind_param("i", $id);  // 'i' per tipo integer
-                $deleteSlider->execute();
-    
-                // Conferma l'eliminazione
-                $mysqli->commit();
-    
-                // Messaggio di successo
-                $_SESSION['message'] = "Slide eliminata con successo.";
-            } catch (Exception $e) {
-                // In caso di errore, esegui un rollback
-                $mysqli->rollback();
-    
-                // Messaggio di errore
-                $_SESSION['error'] = "Errore durante l'eliminazione della slide.";
-            }
-    
-            // Redirect per aggiornare la pagina
-            header('Location: /MotorShop/home-customizer.php');
-            exit();
-        }
-    }    
+if (isset($_POST['delete'])) {
+    if (isset($_POST['sliderId']) && is_numeric($_POST['sliderId'])) {
+        $id = intval($_POST['sliderId']);
+
+    try {
+        // Elimina dalla tabella slider
+        $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = '$id'");
+        $deleteSlider->execute();
+
+        $mysqli->commit();
+        // Redirect alla lista dei prodotti con un messaggio di successo
+        $_SESSION['message'] = "Prodotto eliminato con successo.";
+        header('Location: /MotorShop/product-list.php');
+        exit();
+    } catch (Exception $e) {
+        // In caso di errore
+        $mysqli->rollback();
+        
+        $_SESSION['error'] = "Errore durante l'eliminazione del prodotto.";
+        header('Location: /MotorShop/product-list.php');
+        exit();
+    }
+    }
+}
     
     $main->setContent('user',$_SESSION['user']['name']);
     $main->setContent("body", $body->get());

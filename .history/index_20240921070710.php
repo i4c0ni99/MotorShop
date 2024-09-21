@@ -18,22 +18,23 @@ if (isset($_SESSION['user'])) {
     $body->setContent('email', htmlspecialchars($_SESSION['user']['email']));
     $body->setContent('phone', htmlspecialchars($_SESSION['user']['phone']));
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 } else {
     // Se la sessione non è attiva, carica frame-public
     $main = new Template("skins/motor-html-package/motor/frame_public.html");
     $body = new Template("skins/motor-html-package/motor/home.html");
 }
 
-$slides = $mysqli->query("SELECT * FROM slider"); 
-$slide_result = $slides;
-if($slide_result && $slide_result -> num_rows > 0) {
-    foreach ($slide_result as $page) {
-        $body->setContent("sliderTitle",$page['title']);
-        $body->setContent("sliderDescription",$page['description']);
-        $body->setContent("sliderButton",$page['button']);
-        $body->setContent("sliderLink",$page['link']);
-    }
-} 
 
 $helmet= $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 )")->fetch_assoc(); 
 $body-> setContent('helmetTitle',$helmet['title']);
