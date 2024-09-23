@@ -273,13 +273,11 @@ if ($result && $result->num_rows > 0) {
             <div class="content-hover">
                 <div class="content-button mv-btn-group text-center">
                     <div class="group-inner">
-                        <form method="post" action="product-detail.php?id=<[id]>">
-                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                        <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
                                 <span class="btn-inner">
                                     <span class="btn-text">Scopri</span>
                                 </span>
-                            </button>
-                        </form>
+                            </a>
                     </div>
                 </div>
             </div>                                
@@ -323,13 +321,13 @@ if ($result && $result->num_rows > 0) {
             <div class="content-hover">
                 <div class="content-button mv-btn-group text-center">
                     <div class="group-inner">
-                        <form method="post" action="product-detail.php?id='.$product_id.'">
-                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                       
+                            <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
                                 <span class="btn-inner">
                                     <span class="btn-text">Scopri</span>
                                 </span>
-                            </button>
-                        </form>
+                            </a>
+                        
                     </div>
                 </div>
             </div>                                
@@ -347,7 +345,7 @@ if ($result && $result->num_rows > 0) {
     }
 } else {
     // Nessun prodotto trovato
-   $body->setContent('code','<p>Nessun Dispositivo trovato</p>');
+   $body->setContent('code','<p>Nessun prodotto trovato</p>');
 }
 
 // Passa le categorie al template
