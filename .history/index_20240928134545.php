@@ -296,11 +296,12 @@ if ($resultCatCasco->num_rows > 0) {
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
                                           
-                                          <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
                                           
                                         </div>
                                     </div>
@@ -371,13 +372,14 @@ if ($resultCatStivali->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -405,6 +407,9 @@ if ($resultCatStivali->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        
+
                              
                                     </div>
 
@@ -496,13 +501,14 @@ if ($resultProtezioni->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -547,13 +553,14 @@ if ($resultProtezioni->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                           
-                                           <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                           
+                                            <div class="group-inner">
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -621,13 +628,14 @@ if ($resultCatPantaloni->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -674,13 +682,14 @@ if ($resultCatPantaloni->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -749,13 +758,14 @@ if ($resultCatTute->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -802,13 +812,14 @@ if ($resultCatTute->num_rows > 0) {
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                           
-                                           <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                           
+                                            <div class="group-inner">
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
