@@ -417,6 +417,9 @@ if ($resultCatStivali->num_rows > 0) {
                                                     title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
                                         </div>
                                     </div>
+
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
                                     
                                         <div class="content-hover">
         <div class="content-button mv-btn-group text-center">

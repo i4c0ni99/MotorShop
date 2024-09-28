@@ -153,29 +153,7 @@ if ($resultCat->num_rows > 0) {
                              
                                     </div>
 
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
-                                            </div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            
-                                            <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
+                                    
                              
                             </article>');
     }
@@ -230,7 +208,6 @@ if ($resultCatCasco->num_rows > 0) {
                                         <div class="content-text">
                                             <div class="content-price">
                                                 <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <br>
                                                 <span class="old-price">€ '.$price.'</span>
                                             </div>
                                             <div class="content-desc"><a
@@ -281,29 +258,29 @@ if ($resultCatCasco->num_rows > 0) {
                              
                                     </div>
 
-                                        <div class="content-main">
-        <div class="content-text">
-            <div class="content-price">
-                <span class="new-price">€ '.$pricePercentage.' </span>
-                <br>
-                <span class="old-price">€ '.$price.'</span>
-            </div>
-            <div class="content-desc"><a
-                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
-        </div>
-    </div>
-    <div class="content-hover">
-        <div class="content-button mv-btn-group text-center">
-            <div class="group-inner">
-               
-               <a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-               <span class="btn-inner">
-               <span class="btn-text">Scopri</span>
-            
-        </div>
-    </div>
+                                    <div class="content-main">
+                                        <div class="content-text">
+                                            <div class="content-price">
+                                                <span class="new-price">€ '.$key['price'].' </span>
+                                            </div>
+                                            <div class="content-desc"><a
+                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
+                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
+                                          
+                                          <div class="group-inner">
+<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+<span class="btn-inner">
+<span class="btn-text">Scopri</span>
 </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
                              
                             </article>');
      
@@ -417,18 +394,19 @@ if ($resultCatStivali->num_rows > 0) {
                                                     title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
                                         </div>
                                     </div>
-                                    
-                                        <div class="content-hover">
-        <div class="content-button mv-btn-group text-center">
-            <div class="group-inner">
-               
-               <a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-               <span class="btn-inner">
-               <span class="btn-text">Scopri</span>
-            
-        </div>
-    </div>
-                                    
+
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
+                                            <div class="group-inner">
+                                                <button type="button" onclick="window.location.href='."product-detail.php?id=".$key['prod_id'].'" title="Scopri"
+                                                    class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                    <span class="btn-inner">
+                                                        <span class="btn-text">Scopri</span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                              
                             </article>');
