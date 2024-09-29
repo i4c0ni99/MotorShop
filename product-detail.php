@@ -105,30 +105,19 @@ if (isset($_GET['subId'])) {
 
    if (isset($_GET['size'])) 
    $body->setContent("buttons",'
-            <div class="block-27-button">
+                    <div class="block-27-button">
                         <div class="mv-dp-table align-middle">
                         <div class="mv-dp-table-cell">
                             <div class="mv-btn-group text-left">
-                            <div class="group-inner">
-                                <form method="post" action="/MotorShop/cart.php?id='.$_GET['subId'].'">
-                                <input type="hidden" name="add_to_cart" value="1">
-                                <button type="submit" class="mv-btn mv-btn-style-1 btn-1-h-50 responsive-btn-1-type-3 btn-add-to-cart">
-                                    <span class="btn-inner">
-                                    <i class="btn-icon fa fa-cart-plus"></i>
-                                    <span class="btn-text">Carrello</span>
-                                    </span>
+                            <div class="group-inner" >
+                                <button type="button" class="mv-btn mv-btn-style-1 btn-1-h-50 responsive-btn-1-type-3 btn-add-to-cart" data-id="'.$_GET['subId'].'">
+                                <span class="btn-inner">
+                                <i class="btn-icon fa fa-cart-plus">
+                                </i><span class="btn-text">add to cart</span>
+                                </span>
                                 </button>
-                                </form>
-                                <form method="post" action="/MotorShop/wishlist.php?id='.$_GET['subId'].'">
-                                <input type="hidden" name="wishlist" value="1">
-                                <button type="submit" class="mv-btn mv-btn-style-3 btn-3-h-50 responsive-btn-3-type-1 btn-add-to-wishlist"
-                                    name="add_to_wishlist">
-                                    <span class="btn-inner">
-                                    <span class="btn-text">Wishlist</span>
-                                    <i class="fa fa-heart-o"></i>
-                                    </span>
-                                </button>
-                                </form>
+                            
+                                <button type="button" class="mv-btn mv-btn-style-3 btn-3-h-50 responsive-btn-3-type-1 btn-add-to-wishlist" data-id="'.$_GET['subId'].'"><i class="fa fa-heart-o"></i></button>
                             </div>
                             </div>
                         </div>
