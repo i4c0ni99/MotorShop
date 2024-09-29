@@ -9,6 +9,7 @@ require_once "include/utils/priceFormatter.php";
 
 // Verifica se l'utente è loggato
 if (isset($_SESSION['user']['email'])) {
+    require "include/auth.inc.php";
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
     $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
     // Popola il template con i dati dell'utente
