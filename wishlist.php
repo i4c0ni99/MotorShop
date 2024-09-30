@@ -69,9 +69,9 @@ function moveProductToCart($subproductId) {
 if (isset($_SESSION['user'])) {
     
     // Gestione dell'aggiunta alla wishlist
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wishlist']) && isset($_GET['id'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wishlist'])) {
         $userEmail = $_SESSION['user']['email'];
-        $subproductId = (int) $_GET['id'];
+        $subproductId = (int) $_POST['wishlist'];
 
         $query = "INSERT INTO wishlist (subproduct_id, user_email) VALUES (?, ?)";
         $stmt = $mysqli->prepare($query);

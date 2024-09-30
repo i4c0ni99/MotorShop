@@ -57,71 +57,108 @@
                         <!-- .mv-aside-search-->
   
                         <div class="mv-aside mv-aside-filter-by-price">
-                            <div class="aside-title mv-title-style-11">Prezzo</div>
+                            <div class="aside-title mv-title-style-11">filter by price</div>
                             <div class="aside-body">
-                                <form method="GET" action="product-list-customer.php">
-                                    <div class="mv-dp-table align-middle">
-                                        <div class="mv-dp-table-cell view-values">
-                                            Prezzo minimo: <input type="number" name="min_price" id="min_price" value="<?php echo isset($_GET['min_price']) ? htmlspecialchars($_GET['min_price']) : ''; ?>" step="1">
-                                            Prezzo massimo: <input type="number" name="max_price" id="max_price" value="<?php echo isset($_GET['max_price']) ? htmlspecialchars($_GET['max_price']) : ''; ?>" step="1">
+                                <form method="GET" class="form-aside-filter-by-price">
+                                    <div class="mv-slider-range">
+                                        <div class="slider-range-wrapper mv-slider-range-style-1">
+                                            <div class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                                            </div>
                                         </div>
-                                        <br>
-                                        <div class="mv-dp-table-cell filter-button">
-                                            <button type="submit" class="mv-btn mv-btn-style-5 btn-5-h-30">Filtra</button>
+                                        <div class="mv-dp-table align-middle">
+                                            <div class="mv-dp-table-cell view-values">
+                                                Price: $<span  class="min-value"  aria-valuemin="10">10</span> - $<span  class="max-value"  aria-valuemax="2500">2500</span>
+                                            </div>
+                                            <div class="mv-dp-table-cell filter-button">
+                                                <button type="submit" class="mv-btn mv-btn-style-5 btn-5-h-30">filter</button>
+                                            </div>
                                         </div>
                                     </div>
+                                
+                                    <!-- Input nascosti per i valori min e max del prezzo -->
+                                    <input type="hidden" name="min_price"  id="min_price">
+                                    <input type="hidden" name="max_price"  id="max_price">
                                 </form>
                             </div>
-                        </div>
+                          </div>
+                    
                         <!-- .mv-aside-filter-by-price-->
   
                         <div class="mv-aside mv-aside-size">
-                            <div class="aside-title mv-title-style-11">Taglia</div>
+                            <div class="aside-title mv-title-style-11">size</div>
                             <div class="aside-body">
-                                <form action="product-list-customer.php" method="GET">
-                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($product_id); ?>">
-                                    <select name="size" onchange="this.form.submit()">
-                                        <option value="">Tutte le taglie</option>
-                                        <option>XXS</option>
-                                        <option>XS</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                        <option>XXL</option>
-                                        <option>XXXL</option>  
-                                        <option>unic</option>
-                                    </select>
-                                </form>
+                              <nav class="size-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">
+                                    <a href="product-list-customer.php?size=xxl" class="mv-btn mv-btn-style-21">XXL</a>
+                                    <a href="product-list-customer.php?size=XL" class="mv-btn mv-btn-style-21 ">XL</a>
+                                    <a href="product-list-customer.php?size=L" class="mv-btn mv-btn-style-21">L</a>
+                                    <a href="product-list-customer.php?size=M" class="mv-btn mv-btn-style-21">M</a>
+                                    <a href="product-list-customer.php?size=S" class="mv-btn mv-btn-style-21">S</a>
+                                    <a href="product-list-customer.php?size=XS" class="mv-btn mv-btn-style-21">XS</a>
+                                    <a href="product-list-customer.php?size=XXS" class="mv-btn mv-btn-style-21">XXS</a>
+                                    <a href="product-list-customer.php?size=36" class="mv-btn mv-btn-style-21">36</a>
+                                    <a href="product-list-customer.php?size=37" class="mv-btn mv-btn-style-21 ">37</a>
+                                    <a href="product-list-customer.php?size=38" class="mv-btn mv-btn-style-21">38</a>
+                                    <a href="product-list-customer.php?size=39" class="mv-btn mv-btn-style-21">39</a>
+                                    <a href="product-list-customer.php?size=40" class="mv-btn mv-btn-style-21">40</a>
+                                    <a href="product-list-customer.php?size=41" class="mv-btn mv-btn-style-21">41</a>
+                                    <a href="product-list-customer.php?size=42" class="mv-btn mv-btn-style-21">42</a>
+                                    <a href="product-list-customer.php?size=43" class="mv-btn mv-btn-style-21">43</a>
+                                    <a href="product-list-customer.php?size=44" class="mv-btn mv-btn-style-21 ">44</a>
+                                    <a href="product-list-customer.php?size=45" class="mv-btn mv-btn-style-21">45</a>
+                                    <a href="product-list-customer.php?size=46" class="mv-btn mv-btn-style-21">46</a>
+                                    <a href="product-list-customer.php?size=47" class="mv-btn mv-btn-style-21">47</a>
+                                </div>
+                                </div>
+                              </nav>
                             </div>
-                        </div>
+                          </div>
                         <!-- .mv-aside-size-->
-
-
-  
-                        <div class="mv-aside mv-aside-product-type">
-                            <div class="aside-title mv-title-style-11">Categoria</div>
+                        <div class="mv-aside mv-aside-color">
+                            <div class="aside-title mv-title-style-11">color</div>
                             <div class="aside-body">
-                                <select onchange="window.location.href='product-list-customer.php?cat_id=' + this.value">
-                                    <option value="">Tutte le categorie></option>
-                                    <[foreach]>
-                                        <option value="<[cat_id]>"><[cat_name]></option>
-                                    <[/foreach]>
-                                </select>
+                              <div class="color-list mv-list-inline-style-1 space-10">
+                                <ul class="list-inline-1">
+                                  <li class="active"><a href="#"><span style="background-color: #7bef66;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FF0000;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #00FF00;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #0000FF;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFFF00;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFA500;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #800080;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFFFFF" class="icon-color"></span></a></li>
+                                </ul>
+                              </div>
                             </div>
-                        </div>
-                        <div class="mv-aside mv-aside-product-type">
-                            <div class="aside-title mv-title-style-11">Sottocategoria</div>
+                          </div>
+
+                        <div class="mv-aside mv-aside-tags">
+                            <div class="aside-title mv-title-style-11">tags</div>
                             <div class="aside-body">
-                                <select onchange="window.location.href='product-list-customer.php?cat_id=<[cat_id_in_sub]>&sub_cat_id=' + this.value">
-                                    <option value="">Tutte le sottocategorie</option>
+                              <div class="tag-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">
                                     <[foreach]>
-                                        <option value="<[sub_cat_id]>"><[sub_cat_name]></option>
+                                    <a href="product-list-customer.php?cat_id=<[cat_id]>" class="mv-btn mv-btn-style-22"><[cat_name]></a>
                                     <[/foreach]>
-                                </select>
+                                </div>
+                              </div>
                             </div>
-                        </div>
+                          </div>
+
+                        
+
+                        <[sub_tags_start]>
+                            <[foreach]>
+                                <[sub_tag]>
+                            <[/foreach]>
+                        <[sub_tags_end]>
                         <!-- .mv-aside-category-->
+                    </div>     
                     </div>
                     <!-- .mv-c-s-sidebar-inner-->
                 </div>

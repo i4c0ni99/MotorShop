@@ -29,6 +29,12 @@ body {
   overflow-x: hidden;
 }
 .mv-noscroll {
+    position: fixed;
+    overflow-y: scroll;
+    width: 100%;
+  }
+
+.mv-noscroll .well-1-body {
   position: fixed;
   overflow-y: scroll;
   width: 100%;

@@ -9,88 +9,62 @@
 </section>
 <!-- .main-banner-->
 
-<section class="mv-main-body wishlist-main mv-bg-gray mv-wrap">
-  <div class="container">
-    <div class="wishlist-inner mv-bg-white mv-box-shadow-gray-1">
-      <div class="mv-table-responsive">
-        <form method="post" action="/MotorShop/cart.php">
-          <table class="mv-table-style-2">
-            <thead>
-              <tr>
-                <th>Prodotto</th>
-                <th>Prezzo</th>
-                <th>Stock</th>
-                <th>Quantità</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <[foreach]>
-              <tr class="post">
-                <td>
-                  <div class="mv-block-style-24">
-                    <div class="block-24-list">
-                      <article class="item item-cart">
-                        <div class="item-inner">
-                          <div class="mv-dp-table">
-                            <div class="mv-dp-table-cell block-24-thumb">
-                              <div class="thumb-inner mv-lightbox-style-1">
-                                <img src="<[imgView]>" alt="<[title]>" />
-                                <a href="<[imgView]>" title="<[title]>" data-lightbox-href="subproduct-detail.php?id=<[id]>" class="mv-lightbox-item">
-                                  <i class="icon fa fa-search"></i>
-                                </a>
-                              </div>
-                            </div>
-                            <div class="mv-dp-table-cell block-24-main">
-                              <div class="block-24-title">
-                                <a href="subproduct-detail.php?id=<[id]>" title="<[title]>" class="mv-overflow-ellipsis"><[title]></a>
-                              </div>
-                              <div class="block-24-content">
-                                <div class="mv-overflow-ellipsis">Taglia: <[size]></div>
-                                <div class="mv-overflow-ellipsis">Colore: <[color]></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </article>
+
+  <table class="mv-table-style-2">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <[foreach]>
+      <tr class="calculate-price-wrapper post" data-id="<[id]>">
+        <td>
+          <div class="mv-block-style-24">
+            <div class="block-24-list">
+              <article class="item item-cart">
+                <div class="item-inner">
+                  <div class="mv-dp-table">
+                    <div class="mv-dp-table-cell block-24-thumb">
+                      <div class="thumb-inner mv-lightbox-style-1">
+                        <img src="<[imgView]>" alt="<[title]>" />
+                            <a href="<[imgView]>" title="<[title]>" data-lightbox-href="subproduct-detail.php?id=<[id]>" class="mv-lightbox-item">
+                            <i class="icon fa fa-search"></i></a></div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="mv-font-secondary mv-f-18"><strong>€ <[price]> x <[quantity]></strong></div>
-                </td>
-                <td>
-                  <div class="mv-btn mv-btn-style-6 btn-6-instock"><[availability]></div>
-                </td>
-                
-                <td>
-                  <form id="updateForm[<[id]>]" method="post" action="/MotorShop/cart.php">
-                    <div class="mv-btn small">
-                      <div class="quantity-container quantity-container-small">
-                        <input type="number" name="quantities[<[id]>]" class="quantity-input" min="1" value="<[quantity]>" />
-                        <button type="submit" name="update_quantities" class="btn btn-primary">Aggiorna</button>
+                    <div class="mv-dp-table-cell block-24-main">
+                      <div class="block-24-title"><a href="product-detail.html" title="<[title]>" class="mv-overflow-ellipsis"><[title]></a></div>
+                      <div class="block-24-content">
+                        <div class="mv-overflow-ellipsis">Taglia: <[size]></div>
+                        <div class="mv-overflow-ellipsis">Colore: <[color]></div>
                       </div>
                     </div>
-                  </form>
-                </td>                
-                
-                <td>
-                  <form id="removeForm<[id]>" method="post" action="/MotorShop/cart.php">
-                    <input type="hidden" name="delete" value="1">
-                    <input type="hidden" name="id" value="<[id]>">
-                    <button type="submit" title="Rimuovi dal carrello" class="mv-btn mv-btn-style-4 fa fa-close btn-delete-product"></button>
-                  </form>
-                </td>
-              </tr>
-              <[/foreach]>
-            </tbody>
-          </table>
-          <div class="offset-xl-3 offset-sm-4 mt-4">
-            <input type="submit" name="checkout" method="post" value="checkout" action="/MotorShop/checkout.php" class="btn btn-primary">
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </td>
+        <td> 
+          <div class="mv-font-secondary mv-f-18"><strong>€<span class="calculate-price-unit"><[price]></span></strong></div>
+        </td>
+        <td>
+            <div class="mv-spinner-style-2">
+                <input type="text" name="test138" value="<[quantity]>" class="mv-inputbox mv-only-numeric input-quantity-cart"/>
+              </div>
+        </td>
+        <td> 
+          <div class="mv-font-secondary mv-f-18"><strong>€<span class="calculate-price-output"><[price]></span></strong></div>
+        </td>
+        <td> 
+          <button type="button" title="Remove from Cart" class="mv-btn mv-btn-style-4 fa fa-close btn-delete-product"></button>
+        </td>
+      </tr>
+      <[/foreach]>
+    </tbody>
+  </table>
+
 <!-- .mv-main-body-->

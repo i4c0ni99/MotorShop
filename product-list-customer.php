@@ -26,23 +26,25 @@ if (!isset($_SESSION['user'])) {
 $product_id = isset($_GET['id']) ? $mysqli->real_escape_string($_GET['id']) : null;
 
 // Ottieni la taglia e il colore selezionati dall'utente
-$selected_size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : null;
-$selected_color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : null;
+/* $selected_size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : null;
+$selected_color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : null; */
 
 // Query per ottenere le opzioni disponibili per la taglia e il colore
-$sizes_query = "SELECT DISTINCT size FROM sub_products WHERE products_id = '$product_id'";
-$colors_query = "SELECT DISTINCT color FROM sub_products WHERE products_id = '$product_id'";
+/* $sizes_query = "SELECT DISTINCT size FROM sub_products WHERE products_id = {$product_id}";
+$colors_query = "SELECT DISTINCT color FROM sub_products WHERE products_id = {$product_id}'";
 
 // Filtra le opzioni di colore in base alla taglia selezionata
-if ($selected_size) {
+if ($selected_size && $selected_color) {
     $colors_query .= " AND size = '$selected_size'";
 }
 
 // Filtra le opzioni di taglia in base al colore selezionato
-if ($selected_color) {
+if ($selected_color && $selected_color) {
     $sizes_query .= " AND color = '$selected_color'";
 }
-
+if($selected_size){
+    $sizes_query .= "AND size = '$selected_size'";
+}
 // Esegui le query
 $sizes_result = $mysqli->query($sizes_query);
 $colors_result = $mysqli->query($colors_query);
@@ -78,7 +80,7 @@ if ($selected_size && $selected_color) {
         $body->setContent("error", "Nessun sottoprodotto trovato con la combinazione selezionata.");
     }
 }
-
+ */
 // Carica tutte le categorie dal database
 $categories_query = "SELECT id, name FROM categories";
 $categories_result = $mysqli->query($categories_query);
@@ -105,14 +107,14 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 
 // Aggiunta dei parametri di prezzo min e max con le nuove condizioni
 $min_price = isset($_GET['min_price']) ? max(10, floatval($_GET['min_price'])) : 10;
-$max_price = isset($_GET['max_price']) ? min(1000, floatval($_GET['max_price'])) : 1000;
+$max_price = isset($_GET['max_price']) ? min(2500, floatval($_GET['max_price'])) : 2500;
 
 // Aggiunta del parametro di taglia
-$size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : '';
+/* $size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : '';
 
 // Aggiunta del parametro di colore
 $color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : '';
-
+$product_query_base .= "AND sub_products.color = $color"; */
 // Aggiunta del parametro di categoria se specificato
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
@@ -120,11 +122,29 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_condition = " AND products.categories_id = $category_id ";
     $subCat = $mysqli -> query(" SELECT * FROM subcategories WHERE  categories_id={$category_id}");
     $body -> setContent("cat_id_in_sub",$category_id);
+    $code='<div class="mv-aside mv-aside-tags">
+                            <div class="aside-title mv-title-style-11">sub tags</div>
+                            <div class="aside-body">
+                              <div class="tag-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">';
+    $code2='                    </div>
+                              </div>
+                            </div>
+                          </div>';   
+                          
+     $body ->setContent('sub_tags_start',$code);  
+                       
     foreach($subCat as  $key){
-        $body->setContent("sub_cat_id", $key['id']);
-        $body->setContent("sub_cat_name",$key['name']);
+        $body -> setContent("sub_tag",'
+    
+                                                        
+                                    <a name="sub_tag'.$key['id'].'" href="product-list-customer.php?cat_id='.$category_id.'&sub_cat_id='.$key['id'].'" class="mv-btn mv-btn-style-22">'.$key['name'].'</a>
+             
+                               
+    ');
     }
-  
+    $body ->setContent('sub_tags_end',$code2);   
 }
 
 // Costruisci la parte iniziale della query SQL per selezionare i prodotti
@@ -138,7 +158,7 @@ $product_query_base = "
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
 
 // Aggiungi la condizione per il filtro di colore se specificato
-if (!empty($color)) {
+/* if (!empty($color)) {
     $product_query_base .= " AND sub_products.color = '$color' ";
 }
 
@@ -151,7 +171,7 @@ if (!empty($size)) {
                                   AND sizes.size = '$size'
                         ) ";
 }
-
+ */
 // Aggiungi la condizione per il filtro di categoria se specificato
 $product_query_base .= $category_condition;
 
@@ -168,9 +188,12 @@ $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM produc
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
 $count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
-
+if(isset($_GET['size'])){
+$product_query_base .= "AND sub_products.size ='{$_GET['size']}'";
+$count_query .= "AND sub_products.size ='{$_GET['size']}'";
+}
 // Aggiungi la condizione per il filtro di colore se specificato nella query di conteggio
-if (!empty($color)) {
+/* if (!empty($color)) {
     $count_query .= " AND sub_products.color = '$color' ";
 }
 
@@ -182,7 +205,7 @@ if (!empty($size)) {
                             WHERE sizes.sub_products_id = sub_products.id 
                                   AND sizes.size = '$size'
                         ) ";
-}
+} */
 
 // Aggiungi la condizione per il filtro di categoria se specificato nella query di conteggio
 $count_query .= $category_condition;
@@ -204,10 +227,12 @@ $result = $mysqli->query($product_query);
 
 if ($result && $result->num_rows > 0) {
     while ($key = $result->fetch_assoc()) {
+        
         $body->setContent("id", $key['id']);
         $body->setContent("title", $key['title']);
 
         $product_id = $mysqli->real_escape_string($key['id']);
+        $title = $mysqli->real_escape_string($key['title']);
 
         $image_query = "
             SELECT images.imgsrc, sub_products.price,sub_products.id 
@@ -220,8 +245,10 @@ if ($result && $result->num_rows > 0) {
 
         $image_data = $mysqli->query($image_query);
         
-        if ($image_data && $image_data->num_rows > 0) {
+        if ($image_data && $image_data->num_rows > 0 ) {
+            
             $item = $image_data->fetch_assoc();
+            
             $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
             $offerItem = $offer->fetch_assoc();
             if($offerItem){
@@ -273,13 +300,11 @@ if ($result && $result->num_rows > 0) {
             <div class="content-hover">
                 <div class="content-button mv-btn-group text-center">
                     <div class="group-inner">
-                        <form method="post" action="product-detail.php?id=<[id]>">
-                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                        <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
                                 <span class="btn-inner">
                                     <span class="btn-text">Scopri</span>
                                 </span>
-                            </button>
-                        </form>
+                            </a>
                     </div>
                 </div>
             </div>                                
@@ -288,7 +313,7 @@ if ($result && $result->num_rows > 0) {
             }else{
             $img =  $item['imgsrc'];
             $price=formatPrice($item['price']);
-            
+            if($item['id'] != null){
             $body->setContent("code",
             '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
             <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
@@ -323,20 +348,20 @@ if ($result && $result->num_rows > 0) {
             <div class="content-hover">
                 <div class="content-button mv-btn-group text-center">
                     <div class="group-inner">
-                        <form method="post" action="product-detail.php?id='.$product_id.'">
-                            <button type="submit" name="wishlist" class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                       
+                            <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
                                 <span class="btn-inner">
                                     <span class="btn-text">Scopri</span>
                                 </span>
-                            </button>
-                        </form>
+                            </a>
+                        
                     </div>
                 </div>
             </div>                                
         </div>
     </article>');
             }
-            
+        }
 
         } else {
             // Immagine non trovata
@@ -347,7 +372,7 @@ if ($result && $result->num_rows > 0) {
     }
 } else {
     // Nessun prodotto trovato
-   $body->setContent('code','<p>Nessun Dispositivo trovato</p>');
+   $body->setContent('code','<p>Nessun prodotto trovato</p>');
 }
 
 // Passa le categorie al template

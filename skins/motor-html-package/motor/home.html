@@ -1,58 +1,37 @@
 <div class="mv-site">
-
+    
     <section class="home-1-slideshow mv-wrap">
         <div id="home-1-slideshow" class="mv-caroufredsel">
             <ul class="mv-slider-wrapper">
+                <[foreach]>
                 <li class="mv-slider-item"><img src="skins/motor-html-package/motor/images/background/slide_1.jpg"
-                        alt="slide" class="mv-slider-img" />
-                    <div class="mv-caption-style-1">
-                        <div class="container">
-                            <div class="caption-1-text-1">PROMO FINE ESTATE</div>
-                            <div class="caption-1-text-2">
-                                <div class="mv-title-style-1"><img
-                                        src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_1.png"
-                                        alt="icon" class="line-left" /><img
-                                        src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_2.png"
-                                        alt="icon" class="line-right" />Decine di prodotti scontati ti aspettano</div>
-                            </div><a href="/MotorShop/product-list-customer.php"
-                                class="caption-1-button-1 mv-btn mv-btn-style-1 responsive-btn-1-type-2"><span
-                                    class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span class="btn-text">VAI
-                                        ALLO SHOP</span></span></a>
-                        </div>
+                    alt="slide" class="mv-slider-img" />
+                <div class="mv-caption-style-1">
+                    <div class="container">
+                        <div class="caption-1-text-1"><[sliderTitle]></div>
+                        <div class="caption-1-text-2">
+                            <div class="mv-title-style-1"><img
+                                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_1.png"
+                                    alt="icon" class="line-left" /><img
+                                    src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_2.png"
+                                    alt="icon" class="line-right" /><[sliderDescription]></div>
+                        </div><a href="<[sliderLink]>"
+                            class="caption-1-button-1 mv-btn mv-btn-style-1 responsive-btn-1-type-2"><span
+                                class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span class="btn-text"><[sliderButton]></span></span></a>
                     </div>
-                </li>
-                <!-- .mv-slider-item-->
-
-                <li class="mv-slider-item"><img src="skins/motor-html-package/motor/images/background/slide_4.jpg"
-                        alt="slide" class="mv-slider-img" />
-                    <div class="mv-caption-style-1">
-                        <div class="container">
-                            <div class="caption-1-text-1">SCOPRI LA NUOVA COLLEZIONE</div>
-                            <div class="caption-1-text-2">
-                                <div class="mv-title-style-1"><img
-                                        src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_1.png"
-                                        alt="icon" class="line-left" /><img
-                                        src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_line_2.png"
-                                        alt="icon" class="line-right" />Scopri la collezione autunno - inverno</div>
-                            </div><a href="/MotorShop/product-list-customer.php"
-                                class="caption-1-button-1 mv-btn mv-btn-style-1 responsive-btn-1-type-2"><span
-                                    class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span class="btn-text">VAI
-                                        ALLO SHOP</span></span></a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- .mv-slider-item-->
+                </div>
+            </li>
+            <[/foreach]>
             </ul>
-
             <button id="home-1-slideshow-prev" type="button"
-                class="mv-slider-control-btn prev mv-btn mv-btn-style-2"><span
-                    class="icon fa fa-angle-left"></span></button>
+            class="mv-slider-control-btn prev mv-btn mv-btn-style-2"><span
+            class="icon fa fa-angle-left"></span></button>
             <button id="home-1-slideshow-next" type="button"
-                class="mv-slider-control-btn next mv-btn mv-btn-style-2"><span
-                    class="icon fa fa-angle-right"></span></button>
+            class="mv-slider-control-btn next mv-btn mv-btn-style-2"><span
+            class="icon fa fa-angle-right"></span></button>
         </div>
     </section>
+    
     <!-- .home-1-slideshow-->
 
     <section class="home-1-highlight mv-wrap">
@@ -87,7 +66,7 @@
                                         € <[helmetPrice]>
                                     </div>
                                     <div class="content-desc"><a
-                                            href="/product-detail.php?id=<[helmetId]>"
+                                            href="/MotorShop/product-detail.php?id=<[helmetId]>"
                                             title="<[helmetTitle]>" class="mv-overflow-ellipsis">
                                             <[helmetTitle]>
                                         </a></div>
@@ -97,26 +76,21 @@
                             <div class="content-hover">
                                 <div class="content-button mv-btn-group text-center">
                                     <div class="group-inner">
-                                        <button type="button" title="Add To Wishlist"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                class="fa fa-heart-o"></i></button>
-                                        <button type="button" title="Add To Cart"
-                                            class="mv-btn mv-btn-style-1 responsive-btn-1-type-1 btn-add-to-cart"><span
-                                                class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span
-                                                    class="btn-text">Add to cart</span></span></button>
-                                        <button type="button" title="Compare"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                class="fa fa-signal"></i></button>
+                                        <a href="/MotorShop/product-detail.php?id=<[helmetId]>"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                <span class="btn-inner">
+                                                    <span class="btn-text">Scopri</span>
+                                                </span>
+                                            </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </article>
                     <article class="col-xs-6 col-sm-4 item post">
                         <div class="item-inner mv-effect-translate-1">
                             <div class="content-thumb">
                                 <div class="thumb-inner mv-effect-relative"><a
-                                        href="/product-detail.php?id=<[stivalId]>"
+                                        href="/MotorShop/product-detail.php?id=<[stivalId]>"
                                         title="<[stivaliTitle]>""><img
                                             src=" data:image;base64,<[stivalImg]>"
                                         alt="demo" class="mv-effect-item" /></a><a href="/MotorShop/product-detail.php?id=<[stivalId]>"
@@ -151,19 +125,14 @@
                             <div class="content-hover">
                                 <div class="content-button mv-btn-group text-center">
                                     <div class="group-inner">
-                                        <button type="button" title="Add To Wishlist"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                class="fa fa-heart-o"></i></button>
-                                        <button type="button" title="Add To Cart"
-                                            class="mv-btn mv-btn-style-1 responsive-btn-1-type-1 btn-add-to-cart"><span
-                                                class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span
-                                                    class="btn-text">Add to cart</span></span></button>
-                                        <button type="button" title="Compare"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                class="fa fa-signal"></i></button>
+                                        <a href="/MotorShop/product-detail.php?id=<[stivalId]>"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                <span class="btn-inner">
+                                                    <span class="btn-text">Scopri</span>
+                                                </span>
+                                            </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </article>
                     <article class="col-xs-6 col-sm-4 item post">
@@ -205,19 +174,14 @@
                             <div class="content-hover">
                                 <div class="content-button mv-btn-group text-center">
                                     <div class="group-inner">
-                                        <button type="button" title="Add To Wishlist"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                class="fa fa-heart-o"></i></button>
-                                        <button type="button" title="Add To Cart"
-                                            class="mv-btn mv-btn-style-1 responsive-btn-1-type-1 btn-add-to-cart"><span
-                                                class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span
-                                                    class="btn-text">Add to cart</span></span></button>
-                                        <button type="button" title="Compare"
-                                            class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                class="fa fa-signal"></i></button>
+                                        <a href="/MotorShop/product-detail.php?id=<[giaccaId]>"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                <span class="btn-inner">
+                                                    <span class="btn-text">Scopri</span>
+                                                </span>
+                                            </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </article>
                 </div>
@@ -256,417 +220,30 @@
                     <div class="filter-list mv-block-style-2">
                         <div class="block-2-list">
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatGiacche]>"><img
-                                                        src="data:image;base64,<[imgCatGiacche]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatGiacche]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatGiacche]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatGiacche]>" class="mv-overflow-ellipsis"><[titleCatGiacche]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                            <[giacche]>
                             <[/foreach]>
 
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
-                                
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatCasco]>"><img
-                                                        src="data:image;base64,<[imgCatCasco]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatCasco]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatCasco]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatCasco]>" class="mv-overflow-ellipsis"><[titleCatCasco]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                            <[caschi]>
                             <[/foreach]>
 
+                            
+
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item boots">
-                                
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatStivali]>"><img
-                                                        src="data:image;base64,<[imgCatStivali]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatStivali]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatStivali]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatStivali]>" class="mv-overflow-ellipsis"><[titleCatStivali]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                            <[stivali]>
                             <[/foreach]>
 
 
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
-                                
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatProtezioni]>"><img
-                                                        src="data:image;base64,<[imgCatProtezioni]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatProtezioni]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatProtezioni]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatProtezioni]>" class="mv-overflow-ellipsis"><[titleCatProtezioni]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                            <[protezioni]>
                             <[/foreach]>
                             
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item suits">
-                                
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatTute]>"><img
-                                                        src="data:image;base64,<[imgCatTute]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatTute]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatTute]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatTute]>" class="mv-overflow-ellipsis"><[titleCatTute]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                           <[tute]>
                             <[/foreach]>
 
                             <[foreach]>
-                            <article class="col-xs-6 col-sm-4 col-md-3 item post filter-item pants">
-                                
-                                <div class="item-inner mv-effect-translate-1">
-                                    <div class="content-default">
-                                        <div class="content-thumb">
-                                            <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatPantaloni]>"><img
-                                                        src="data:image;base64,<[imgCatPantaloni]>"
-                                                        alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatPantaloni]>"
-                                                    class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
-                                                        class="btn-inner"></span></a>
-
-                                                <div class="content-message mv-message-style-1">
-                                                    <div class="message-inner"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
-                                            <div class="rate-inner mv-f-14 text-left">
-                                                <div class="stars-wrapper empty-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                                <div class="stars-wrapper filled-stars"><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span><span class="item-rate"></span><span
-                                                        class="item-rate"></span></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="content-sale-off mv-label-style-3 label-primary">
-                                            <div class="label-inner">-25%</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-main">
-                                        <div class="content-text">
-                                            <div class="content-price"><span class="new-price">$ <[priceCatPantaloni]></span></div>
-                                            <div class="content-desc"><a
-                                                    href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                                    title="<[titleCatPantaloni]>" class="mv-overflow-ellipsis"><[titleCatPantaloni]></a></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-                                                <button type="button" title="Add To Wishlist"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-wishlist"><i
-                                                        class="fa fa-heart-o"></i></button>
-                                                <button type="button" title="Compare"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-compare"><i
-                                                        class="fa fa-signal"></i></button>
-                                                <button type="button" title="Add To Cart"
-                                                    class="mv-btn mv-btn-style-3 responsive-btn-3-type-1 btn-add-to-cart"><i
-                                                        class="fa fa-cart-plus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-                            </article>
+                            <[pantaloni]>
                             <[/foreach]>
 
 
@@ -681,46 +258,7 @@
     </section>
     <!-- .home-1-featured-products-->
 
-    <section class="home-1-shop hidden-xs hidden-sm mv-wrap">
-        <div class="container">
-            <div class="block-list-1">
-                <div class="mv-block-style-3">
-                    <div class="block-3-list">
-                        <div class="item">
-                            <div class="block-3-title">
-                                <div class="main"><a
-                                        href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                        title="<[titleBestPrice]>"><[titleBestPrice]></a></div>
-                                <div class="sub"><[descriptionBestPrice]></div>
-                            </div>
-                            <div class="block-3-thumb"><a
-                                href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                title="<[titleBestPrice]>"><img
-                                    src="data:image;base64,<[bestPriceImg]>"
-                                    alt="demo" class="block-3-thumb-img hidden-xs hidden-sm" /></a></div>
-                        </div>
-
-                        <div class="item">
-                            
-                            <div class="block-3-title">
-                                <div class="main"><a
-                                        href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                        title="<[titleminPrice]>"><[titleminPrice]></a></div>
-                                <div class="sub"><[descriptionminPrice]>
-                                </div>
-                            </div>
-                            <div class="block-3-thumb"><a
-                                href="/MotorShop/skins/motor-html-package/motor/product-detail.html"
-                                title="<[titleminPrice]>"><img
-                                    src="data:image;base64,<[minPriceImg]>"
-                                    alt="demo" class="block-3-thumb-img hidden-xs hidden-sm" /></a></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- .mv-block-style-3-->
-            </div>
-        </div>
-    </section>
+     
     <!-- .home-1-shop-->
 
 
@@ -768,9 +306,8 @@
                                                                     <div class="mv-dp-table-cell block-6-main">
                                                                         <div class="block-6-name"> <a href="#">Carlo
                                                                                 Castellano</a></div>
-                                                                        <div class="block-6-office"><span class="sub">13
-                                                                                Giugno
-                                                                                2024</span></div>
+                                                                        <div class="block-6-office"><span class="sub">16
+                                                                                Settembre 2024</span></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -807,8 +344,8 @@
                                                                     <div class="mv-dp-table-cell block-6-main">
                                                                         <div class="block-6-name"> <a href="#">Alfredo
                                                                                 Andreozzi</a></div>
-                                                                        <div class="block-6-office"><span class="sub">19
-                                                                                Giugno 2024</span></div>
+                                                                        <div class="block-6-office"><span class="sub">27
+                                                                                Agosto 2024</span></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -842,7 +379,7 @@
                                                                     <div class="mv-dp-table-cell block-6-main">
                                                                         <div class="block-6-name"> <a href="#">Chiara
                                                                                 Lalli</a></div>
-                                                                        <div class="block-6-office"><span class="sub">10
+                                                                        <div class="block-6-office"><span class="sub">9
                                                                                 Luglio
                                                                                 2024</span></div>
                                                                     </div>
