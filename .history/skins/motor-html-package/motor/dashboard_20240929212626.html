@@ -1,0 +1,85 @@
+<div class="mv-site">
+  <section class="main-banner mv-wrap">
+      <section data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+          <div class="page-name mv-caption-style-6">
+              <div class="container">
+                  <div class="mv-title-style-9"><span class="main">Dashboard</span></div>
+              </div>
+          </div>
+      </section>
+  </section>
+  <!-- .main-banner -->
+
+  <section class="mv-main-body checkout-main mv-bg-gray mv-wrap">
+      <div class="container">
+
+              <div class="mv-btn-3d">
+                  <a href="/../MotorShop/logout.php" class="mv-btn-3d">Logout</a>
+              </div>
+              <br>
+          <div class="checkout-block block-billing-address mv-mb-50">
+              <div class="mv-form-style-2 mv-box-shadow-gray-1">
+                  <div class="row">
+                      <div class="col-sm-12 col-billing-address">
+                          <div class="form-header">
+                              <div class="mv-title-style-13">
+                          <div class="text-main">I miei ordini</div>
+                          </div>
+                          </div>
+<br>
+<div class="table-responsive table-desi">
+  <table class="all-package coupon-table table table-striped">
+      <thead>
+          <tr>
+              <th>Codice</th>
+              <th>Data ordine</th>
+              <th>Stato ordine</th>
+              <th>Metodo di pagamento</th>
+              <th>Dettagli</th>
+              <th>Totale</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <[foreach]>
+              <tr>
+                  <td><[ord_number]></td>
+                  <td><[ord_date]></td>
+                  <td><[ord_state]></td>
+                  <td><[ord_paymentMethod]></td>
+                  <td><[ord_details]></td>
+                  <td>€ <[ord_totalPrice]></td>
+                  <td><a href="/MotorShop/my-orders.php?id=<[ord_id]>" class="btn btn-primary">Apri</a></td>
+              </tr>
+          <[/foreach]>
+      </tbody>
+  </table>
+</div>
+<br>
+<hr>    
+<div class="form-header">
+    <div class="mv-title-style-13">
+<div class="text-main">Le mie recensioni</div>
+</div>
+</div>
+<br>
+<div class=".mv-quote-style-1">
+<p>Prodotto:  |  Ordinato il:  | Taglia:  | Colore: </p>
+<p>Valutazione: <[rate]> </p>
+<quote class=".mv-quote-style-1">
+    <span><[review]></span>
+    <p>Recensito il: <[date]></p>
+</quote>
+
+</div>
+<br>
+<hr>    
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- .checkout-main -->
+</div>
+<!-- .mv-site -->
