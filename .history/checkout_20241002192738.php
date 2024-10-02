@@ -241,6 +241,44 @@ function priceFormatter($price) {
     return '€ ' . number_format($price, 2);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+
+
+
+
+
+
+
+
+
+
+
+
 $main->setContent("dynamic", $body->get());
 $main->close();
 

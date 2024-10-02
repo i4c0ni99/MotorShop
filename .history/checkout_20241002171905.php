@@ -87,14 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $resultCart = $mysqli->query($queryCart);
 
 if ($resultCart) {
-
     $products = []; // Array per memorizzare i dettagli dei prodotti
     $allAvailable = true; // Variabile per verificare la disponibilità dei prodotti
 
     // Calcolo del totale dell'ordine e costruzione dei dettagli del prodotto
     while ($row = $resultCart->fetch_assoc()) {
         if ($row['availability'] == 0) {
-            echo 'Prodotto NON DISPONIBILE';
             $allAvailable = false;
             break;
         }
@@ -140,17 +138,18 @@ if ($resultCart) {
 
     // Query per inserire l'ordine nella tabella orders
     $insertOrderQuery = "INSERT INTO orders (shipping_address_id, totalPrice, details, paymentMethod, date, state, number, users_email) 
-                     VALUES ('$shippingAddressId', $totalPrice, '$orderDetails', '$paymentMethod', '$currentDate', '$orderState', '$uniqueOrderNumber', '$userEmail')";
+                         VALUES ('$shippingAddressId', '$totalPrice', '$orderDetails', '$paymentMethod', '$currentDate', '$orderState', '$uniqueOrderNumber', '$userEmail')";
 
     // Esegui la query di inserimento
     if ($mysqli->query($insertOrderQuery)) {
-        // Ordine inserito con successo
-        echo "Ordine inserito con successo! Numero ordine: " . $uniqueOrderNumber;
-    
-        // Codice per invio email e svuotamento carrello...
+        echo "Ordine inserito con successo!";
     } else {
-        echo "Errore durante l'inserimento dell'ordine: " . $mysqli->error;
-    }    
+        echo "Errore nell'inserimento dell'ordine: " . $mysqli->error;
+    }
+} else {
+    echo "Errore nel recupero del carrello: " . $mysqli->error;
+}
+}
 
 if ($mysqli->query($insertOrderQuery)) {
     // Ordine inserito con successo
@@ -239,6 +238,54 @@ function generateUniqueOrderNumber($mysqli) {
 function priceFormatter($price) {
     // Personalizza la formattazione del prezzo come necessario (esempio: € 200.00)
     return '€ ' . number_format($price, 2);
+}
+
+// Query per recuperare le istanze nel carrello dell'utente
+
+$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, p.title as product_title
+              FROM cart c 
+              INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
+              INNER JOIN products p ON sp.products_id = p.id
+              WHERE c.user_email = '$userEmail'";
+
+$resultCart = $mysqli->query($queryCart);
+
+if ($resultCart) {
+    $products = [];
+    $totalPrice = 0;
+
+    while ($row = $resultCart->fetch_assoc()) {
+        $subtotal = $row['price'] * $row['quantity'];
+        $totalPrice += $subtotal;
+
+        // Aggiungi il prodotto alla lista dei prodotti
+        $products[] = [
+            'title' => $row['product_title'], // Corretto: utilizza 'product_title' anziché 'title'
+            'quantity' => $row['quantity'],
+            'subtotal' => $subtotal
+        ];
+    }
+
+    // Inserisci il riepilogo dell'ordine nel template HTML
+    $orderSummary = '';
+    foreach ($products as $product) {
+        $productTitle = $product['title'];
+        $productQuantity = $product['quantity'];
+        $productPriceFormatted = priceFormatter($product['subtotal']);
+
+        $orderSummary .= '<tr>';
+        $orderSummary .= '<td>' . htmlspecialchars($productTitle) . ' x ' . $productQuantity . '</td>';
+        $orderSummary .= '<td>' . $productPriceFormatted . '</td>';
+        $orderSummary .= '</tr>';
+    }
+    
+    // Formatta il prezzo totale dell'ordine
+    $totalPriceFormatted = priceFormatter($totalPrice);
+
+    $body->setContent('order_summary', $orderSummary);
+    $body->setContent('total_price', $totalPriceFormatted);
+} else {
+    echo "Errore durante la query del carrello: " . $mysqli->error;
 }
 
 $main->setContent("dynamic", $body->get());

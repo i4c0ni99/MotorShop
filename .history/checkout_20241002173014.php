@@ -87,14 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $resultCart = $mysqli->query($queryCart);
 
 if ($resultCart) {
-
     $products = []; // Array per memorizzare i dettagli dei prodotti
     $allAvailable = true; // Variabile per verificare la disponibilità dei prodotti
 
     // Calcolo del totale dell'ordine e costruzione dei dettagli del prodotto
     while ($row = $resultCart->fetch_assoc()) {
         if ($row['availability'] == 0) {
-            echo 'Prodotto NON DISPONIBILE';
             $allAvailable = false;
             break;
         }
@@ -239,6 +237,49 @@ function generateUniqueOrderNumber($mysqli) {
 function priceFormatter($price) {
     // Personalizza la formattazione del prezzo come necessario (esempio: € 200.00)
     return '€ ' . number_format($price, 2);
+}
+
+// Query per recuperare le istanze nel carrello dell'utente
+
+$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, p.title as product_title
+              FROM cart c 
+              INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
+              INNER JOIN products p ON sp.products_id = p.id
+              WHERE c.user_email = '$userEmail'";
+
+$resultCart = $mysqli->query($queryCart);
+
+if ($resultCart) {
+    $products = [];
+    $totalPrice = 0;
+
+    while ($row = $resultCart->fetch_assoc()) {
+        $subtotal = $row['price'] * $row['quantity'];
+        $totalPrice += $subtotal;
+    
+        // Debug: controlla i valori di prezzo e quantità
+        echo 'Prezzo: ' . $row['price'] . ' Quantità: ' . $row['quantity'] . ' Subtotale: ' . $subtotal . '<br>';
+    }
+    
+    echo 'Totale Ordine: ' . $totalPrice;
+
+    // Inserisci il riepilogo dell'ordine nel template HTML
+    $orderSummary = '';
+foreach ($products as $product) {
+    $orderSummary .= '<tr>';
+    $orderSummary .= '<td>' . htmlspecialchars($product['title']) . ' x ' . $product['quantity'] . '</td>';
+    $orderSummary .= '<td>' . priceFormatter($product['subtotal']) . '</td>';
+    $orderSummary .= '</tr>';
+}
+$body->setContent('order_summary', $orderSummary);
+    
+    // Formatta il prezzo totale dell'ordine
+    $totalPriceFormatted = priceFormatter($totalPrice);
+
+    $body->setContent('order_summary', $orderSummary);
+    $body->setContent('total_price', $totalPriceFormatted);
+} else {
+    echo "Errore durante la query del carrello: " . $mysqli->error;
 }
 
 $main->setContent("dynamic", $body->get());

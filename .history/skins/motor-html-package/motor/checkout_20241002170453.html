@@ -104,7 +104,7 @@
                   <div class="mv-form-group">
                     <div class="mv-label"> <strong class="text-uppercase">Cellulare <span class="mv-color-primary">*</span></strong></div>
                     <div class="mv-field">
-                      <input type="text" placeholder="Cellulare" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" class="mv-inputbox mv-inputbox-style-2"/>
+                      <input type="text" placeholder="Cellulare" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10"  class="mv-inputbox mv-inputbox-style-2"/>
                     </div>
                   </div>
                 </div>
@@ -172,7 +172,6 @@
             </div>
           </div>          
           
-          
           <div class="col-xs-12 col-sm-12 col-md-4 col-cart-totals mv-mb-50">
             <div class="mv-well-style-2 mv-box-shadow-gray-1 mv-bg-white">
               <div class="well-2-header">
@@ -191,7 +190,7 @@
                           Si prega di utilizzare il numero d'ordine come riferimento di pagamento. 
                           Si noti che l'ordine non verrà spedito fino a quando i fondi non saranno ricevuti.</div>
                       </div>
-                      <input type="radio" name="payment_method" value="Bonifico bancario" class="hidden">
+                      <input type="radio" name="payment_method" value="Bonifico bancario" >
                     </div>
                     <div class="item">
                       <label class="block-38-header mv-btn mv-btn-style-4 btn-choose-method"><span class="block-38-visual-box"><span class="icon-checked"></span>
@@ -199,11 +198,11 @@
                       <div class="block-38-body">
                         <div class="block-38-content">Paga tramite PayPal; puoi pagare con la tua carta di credito se non hai un account PayPal.</div>
                       </div>
-                      <input type="radio" name="payment_method" value="PayPal">
+                      <input type="radio" name="payment_method" value="PayPal" class="hidden">
                     </div>
                   </div>
                 </div>
-                <input type="hidden" name="payment_method" id="payment_method" value="Bonifico Bancario">
+                <input type="hidden" name="payment_method" id="payment_method" value="">
               </div>
             </div>
           </div>
