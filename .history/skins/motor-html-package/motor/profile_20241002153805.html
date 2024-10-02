@@ -126,6 +126,7 @@
                             <br>
                             <form class="needs-validation add-product-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
                                 <input type="submit" value="Elimina" name="delete-account-button" class="btn btn-primary">
+                            </form>
                             <br>
                             <hr>
                             <br>
@@ -136,6 +137,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+                                                <form class="needs-validation delete-address-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
+                                                    <input type="submit" class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina">
+                                                </form>
                                             </th>
                                             <th>Nome</th>
                                             <th>Cognome</th>
@@ -149,12 +153,9 @@
                                     <tbody>
                                         <[foreach]>
                                             <tr data-row-id="<['id']>">
-                                                <form class="needs-validation delete-address-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
-                                                    <input type="submit" class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina">
                                                 <td>
-                                                    <input class="checkbox_animated check-it" type="submit" name="check" value="<['id']>" id="flexCheckDefault" data-id="1">
+                                                    <input class="checkbox_animated check-it" type="checkbox" name="check" value="<['id']>" id="flexCheckDefault" data-id="1">
                                                 </td>
-                                                </form>
                                                 <td><[ADname]></td>
                                                 <td><[ADsurname]></td>
                                                 <td><[ADphone]></td>
@@ -217,10 +218,11 @@
                                         </div>
                                     </div>
                                     <div class="offset-xl-3 offset-sm-4 mt-4">
-                                        <input type="submit" name="add-address-button" class="btn btn-primary">
+                                        <input type="submit" value="Aggiungi" name="add-address-button" class="btn btn-primary">
                                     </div>
                                 </div>
                                 <!-- .form-body -->
+                            </form>
                             <br>
                             <hr>
                         </div>

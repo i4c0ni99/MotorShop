@@ -133,9 +133,9 @@ if (isset($_POST['delete-account-button'])) {
     header("location:/../MotorShop/logout.php");
 }
 
-if (isset($_POST['check'])) {
+if (isset($_POST['delete-address-button'])) {
     // Eliminazione di un indirizzo di spedizione
-    $address_id = $_POST["check"];
+    $address_id = $_POST["xhexk"];
     $mysqli->query("DELETE FROM shipping_address WHERE id = '{$address_id}'");
     header("location:/../MotorShop/editCustomerProfile.php");
 }

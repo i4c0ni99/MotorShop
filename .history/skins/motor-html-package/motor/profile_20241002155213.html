@@ -132,6 +132,8 @@
                             <h3><b>I tuoi indirizzi di spedizione:</b></h3>
                             <br>
                             <div class="table-responsive table-desi">
+                                <form class="needs-validation delete-address-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
+                                    <input type="submit" class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina">
                                 <table class="all-package coupon-table table table-striped">
                                     <thead>
                                         <tr>
@@ -149,12 +151,9 @@
                                     <tbody>
                                         <[foreach]>
                                             <tr data-row-id="<['id']>">
-                                                <form class="needs-validation delete-address-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
-                                                    <input type="submit" class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina">
                                                 <td>
-                                                    <input class="checkbox_animated check-it" type="submit" name="check" value="<['id']>" id="flexCheckDefault" data-id="1">
+                                                    <input class="checkbox_animated check-it" type="checkbox" name="check" value="<['id']>" id="flexCheckDefault" data-id="1">
                                                 </td>
-                                                </form>
                                                 <td><[ADname]></td>
                                                 <td><[ADsurname]></td>
                                                 <td><[ADphone]></td>
@@ -221,6 +220,7 @@
                                     </div>
                                 </div>
                                 <!-- .form-body -->
+                            </form>
                             <br>
                             <hr>
                         </div>

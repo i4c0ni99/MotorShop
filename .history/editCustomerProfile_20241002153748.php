@@ -133,10 +133,10 @@ if (isset($_POST['delete-account-button'])) {
     header("location:/../MotorShop/logout.php");
 }
 
-if (isset($_POST['check'])) {
+if (isset($_POST['delete-address-button'])) {
     // Eliminazione di un indirizzo di spedizione
     $address_id = $_POST["check"];
-    $mysqli->query("DELETE FROM shipping_address WHERE id = '{$address_id}'");
+    $mysqli->query("DELETE FROM shipping_address WHERE id = $address_id");
     header("location:/../MotorShop/editCustomerProfile.php");
 }
 
@@ -147,7 +147,7 @@ if (isset($_POST['add-address-button'])) {
     $phone = $_POST["phone"];
     $province = $_POST["province"];
     $city = $_POST["city"];
-    $address = $_POST["streetAddress"];
+    $address = $_POST["address"];
     $cap = $_POST["cap"];
 
     if ($name != "" && $surname != "" && $phone != "" && $province != "" && $city != "" && $address != "" && $cap != "") {
@@ -157,9 +157,39 @@ if (isset($_POST['add-address-button'])) {
     }
 }
 
+// Query per ottenere gli ordini del cliente
+$query = "SELECT id, number, state, date, paymentMethod, totalPrice, details FROM orders WHERE users_email = '{$_SESSION['user']['email']}'";
+
+$oid = $mysqli->query($query);
+$result = $oid;
+
+if ($result && $result->num_rows > 0) {
+    foreach ($result as $order) {
+        $body->setContent("ord_id", $order['id']);
+        $body->setContent("ord_number", $order['number']);
+        $body->setContent("ord_state", $order['state']);
+        $body->setContent("ord_date", $order['date']);
+        $body->setContent("ord_paymentMethod", $order['paymentMethod']);
+        $body->setContent("ord_totalPrice", $order['totalPrice']);
+        $body->setContent("ord_details", $order['details']);
+    }
+} else {
+    // Nessun ordine trovato
+    $body->setContent("ord_id", '');
+    $body->setContent("ord_number", 'Non hai ancora fatto il primo ordine!');
+    $body->setContent("ord_state", '');
+    $body->setContent("ord_date", '');
+    $body->setContent("ord_paymentMethod", '');
+    $body->setContent("ord_totalPrice", '');
+    $body->setContent("ord_details", '');
+}
+
+} else {
+    header("location:/../MotorShop/login.php");
+    exit;
+}
+
 $main->setContent("dynamic", $body->get());
 $main->close();
-
-}
 
 ?>
