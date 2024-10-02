@@ -63,6 +63,7 @@ if ($reviews != null) {
             
             $info_title = $mysqli->query("SELECT title FROM products WHERE id = " . $f['products_id']);
             $prod_title = $info_title->fetch_assoc();
+            echo $prod_title['title'];
             $body->setContent("prod_title", $prod_title['title']);
         }
         

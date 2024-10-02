@@ -60,10 +60,9 @@ if ($reviews != null) {
             $body->setContent("f_rate", $f['rate']);
             $body->setContent("f_review", $f['review']);
             $body->setContent("f_date", $f['date']);
-            
-            $info_title = $mysqli->query("SELECT title FROM products WHERE id = " . $f['products_id']);
-            $prod_title = $info_title->fetch_assoc();
-            $body->setContent("prod_title", $prod_title['title']);
+            echo $f['products_id'];
+            $info_title = $mysqli->query("SELECT title FROM products WHERE id = {$f['products_id']}");
+            $body->setContent("prod_title", $info_title);
         }
         
     }

@@ -50,22 +50,15 @@ if (isset($_SESSION['user']['email'])) { // Verifica se l'utente è loggato
 // Recupera le recensioni dell'utente
 $reviews = $mysqli->query("SELECT products_id, rate, review, date from feedbacks WHERE users_email =
 '{$_SESSION['user']['email']}'");
-
-if ($reviews != null) {
+if ($reviews != null) {}
     $feed = $reviews;
 
-    if ($feed && $feed->num_rows > 0) {
-        foreach ($feed as $f) {
-            $body->setContent("prod_id", $f['products_id']);
-            $body->setContent("f_rate", $f['rate']);
-            $body->setContent("f_review", $f['review']);
-            $body->setContent("f_date", $f['date']);
-            
-            $info_title = $mysqli->query("SELECT title FROM products WHERE id = " . $f['products_id']);
-            $prod_title = $info_title->fetch_assoc();
-            $body->setContent("prod_title", $prod_title['title']);
-        }
-        
+if ($feed && $feed->num_rows > 0) {
+    foreach ($feed as $f) {
+        $body->setContent("prod_id", $f['id']);
+        $body->setContent("rate", $f['rate']);
+        $body->setContent("review", $f['state']);
+        $body->setContent("date", $f['date']);
     }
 }
 
