@@ -3,11 +3,24 @@
 session_start();
 
 require "include/dbms.inc.php";
+require "include/auth.inc.php";
 require "include/template2.inc.php";
 include "include/utils/priceFormatter.php";
 
-$main = new Template("skins/motor-html-package/motor/frame_public.html");
-$body = new Template("skins/motor-html-package/motor/product-detail.html");
+// Verifica se l'utente è loggato
+if (isset($_SESSION['user']['email'])) {
+  $main = new Template("skins/motor-html-package/motor/frame-customer.html");
+  $body = new Template("skins/motor-html-package/motor/product-detail.html");
+      // Popola il template con i dati dell'utente
+      $body->setContent('name', htmlspecialchars($_SESSION['user']['name']));
+      $body->setContent('surname', htmlspecialchars($_SESSION['user']['surname']));
+      $body->setContent('email', htmlspecialchars($_SESSION['user']['email']));
+      $body->setContent('phone', htmlspecialchars($_SESSION['user']['phone']));
+  } else {
+      // Se l'utente non è loggato, carica frame_public
+      $main = new Template("skins/motor-html-package/motor/frame_public.html");
+      $body = new Template("skins/motor-html-package/motor/product-detail.html");
+  }
 
 $oid = $mysqli->query("SELECT title,id,categories_id,description,specification,information FROM products where id={$_GET['id']}");
 $result = $oid->fetch_assoc();
@@ -47,8 +60,9 @@ $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id
             }
 $oid1 = $mysqli->query("SELECT imgsrc FROM images where product_id={$_GET['id']} ");
 $result2 = $oid1->fetch_assoc();
-//visualizzazione feedback
-$feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
+
+// Visualizzazione feedback
+$feedback = $mysqli->query("SELECT * FROM feedbacks WHERE products_id = {$_GET['id']} ORDER BY date DESC");
 $count = 0;
 $mediumReateRet;
 if( $feedback -> num_rows > 0){
@@ -159,21 +173,42 @@ if (isset($_GET['subId'])) {
 
 if (isset($_POST['post-review'])) {
 
-   $name = $_SESSION['user']['name'];
-   $surname = $_SESSION['user']['surname'];
-   $comment = $_POST["review"];
-   $rating = $_POST["rate"];
-   $curdate = date("Y/m/d");
+  if (isset($_SESSION['user']) && !empty($_POST['review']) && !empty($_POST['rate'])) {
+      
+      // Prendi i dati utente
+      $name = $mysqli->real_escape_string($_SESSION['user']['name']);
+      $surname = $mysqli->real_escape_string($_SESSION['user']['surname']);
+      $email = $mysqli->real_escape_string($_SESSION['user']['email']);
+      $comment = $mysqli->real_escape_string($_POST["review"]);
+      $rating = intval($_POST["rate"]); 
+      $curdate = date("Y/m/d");
 
-   if ( $comment != "" ) {
-   
-   $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
-   VALUES ('".$_SESSION['user']['email']."', ".$_GET['id'].", '$rating', '$comment', '$curdate')");
+      // Verifica che il rating sia valido (tra 1 e 5)
+      if ($rating >= 1 && $rating <= 5) {
 
-   header("location:/MotorShop/product-list-customer.php");
+          // Prepara la query di inserimento
+          $stmt = $mysqli->prepare("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
+                                    VALUES (?, ?, ?, ?, ?)");
+          if ($stmt) {
+              // Binding dei parametri per evitare SQL injection
+              $stmt->bind_param("sisis", $email, $_GET['id'], $rating, $comment, $curdate);
+              $stmt->execute();
+              $stmt->close();
 
-   }
+              // Redireziona l'utente alla pagina del prodotto con l'ID corretto
+              header("Location: /MotorShop/product-detail.php?id=" . $_GET['id']);
+              exit(); // Assicura che lo script si interrompa dopo la redirezione
+          } else {
+              echo "Errore nella preparazione della query.";
+          }
 
+      } else {
+          echo "Errore: il rating deve essere compreso tra 1 e 5.";
+      }
+
+  } else {
+      echo "Errore: compila tutti i campi richiesti prima di inviare la recensione.";
+  }
 }
 
 $main->setContent('dynamic',$body->get());
