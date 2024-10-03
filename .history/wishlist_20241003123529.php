@@ -146,7 +146,7 @@ if ($stmt) {
         $query = "SELECT sp.id as subproduct_id, sp.products_id, sp.price, sp.availability, sp.color, sp.size, i.imgsrc
 FROM sub_products sp
 LEFT JOIN images i ON sp.id = i.sub_products_id
-WHERE sp.id = ? AND sp.availability = 1"; // gestire errore se availability = 0
+WHERE sp.id = ? AND sp.availability = 1";
         $stmt_subproduct = $mysqli->prepare($query);
         if ($stmt_subproduct) {
             $stmt_subproduct->bind_param("i", $subproductId);

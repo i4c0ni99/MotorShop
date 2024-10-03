@@ -172,19 +172,19 @@ if (!empty($size)) {
                         ) ";
 }
  */
-//Condizione per il filtro per categoria
+// Aggiungi la condizione per il filtro di categoria se specificato
 $product_query_base .= $category_condition;
 
-// Condizione per il filtro per ricerca testuale
+// Aggiungi la condizione per il filtro di testo di ricerca se specificato
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
 
-// Query per contare i prodotti (escludere quelli non disponibili)
+// Completamento della query SQL per contare i prodotti
 $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM products 
                 JOIN sub_products ON sub_products.products_id = products.id 
-                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
+                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) ";
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
 $count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price ";

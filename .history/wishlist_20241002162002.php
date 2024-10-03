@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require "include/template2.inc.php";
 require "include/auth.inc.php";
@@ -14,8 +14,7 @@ if (isset($_SESSION['user']['groups'])) {
 
 $body = new Template("skins/motor-html-package/motor/wishlist.html");
 
-function moveProductToCart($subproductId)
-{
+function moveProductToCart($subproductId) {
     global $mysqli;
 
     if (isset($_SESSION['user'])) {
@@ -68,7 +67,7 @@ function moveProductToCart($subproductId)
 
 // Verifica se l'utente è loggato
 if (isset($_SESSION['user'])) {
-
+    
     // Gestione dell'aggiunta alla wishlist
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wishlist'])) {
         $userEmail = $_SESSION['user']['email'];
@@ -94,38 +93,38 @@ if (isset($_SESSION['user'])) {
         exit; // Termina lo script dopo l'inserimento nella wishlist
     }
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart']) && isset($_POST['id'])) {
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart']) && isset($_POST['id'])) {
     $subproductId = (int) $_POST['id'];
     moveProductToCart($subproductId);
     // Reindirizza l'utente alla pagina del carrello o dove desiderato dopo l'operazione
     header("Location: /MotorShop/cart.php");
     exit;
-}
+    }
 
 // Gestione della rimozione dalla wishlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id'])) {
-    $userEmail = $_SESSION['user']['email'];
-    $subproductId = (int) $_POST['id'];
+$userEmail = $_SESSION['user']['email'];
+$subproductId = (int) $_POST['id'];
 
-    $query = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
-    $stmt = $mysqli->prepare($query);
-    if ($stmt) {
-        $stmt->bind_param("is", $subproductId, $userEmail);
-        if ($stmt->execute()) {
-            echo "Prodotto rimosso dalla wishlist con successo!";
-            header("Location: /MotorShop/wishlist.php");
-            exit;
-        } else {
-            echo "Errore durante la rimozione del prodotto dalla wishlist.";
-            error_log("Execute statement failed: " . $stmt->error);
-        }
-        $stmt->close();
-    } else {
-        echo "Errore durante la rimozione del prodotto dalla wishlist.";
-        error_log("Prepare statement failed: " . $mysqli->error);
-    }
-    exit; // Termina lo script dopo la rimozione dalla wishlist
+$query = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
+$stmt = $mysqli->prepare($query);
+if ($stmt) {
+$stmt->bind_param("is", $subproductId, $userEmail);
+if ($stmt->execute()) {
+echo "Prodotto rimosso dalla wishlist con successo!";
+header("Location: /MotorShop/wishlist.php");
+exit;
+} else {
+echo "Errore durante la rimozione del prodotto dalla wishlist.";
+error_log("Execute statement failed: " . $stmt->error);
+}
+$stmt->close();
+} else {
+echo "Errore durante la rimozione del prodotto dalla wishlist.";
+error_log("Prepare statement failed: " . $mysqli->error);
+}
+exit; // Termina lo script dopo la rimozione dalla wishlist
 }
 
 // Ottenimento dei prodotti nella wishlist dell'utente
@@ -135,71 +134,72 @@ FROM wishlist w
 WHERE w.user_email = ?";
 $stmt = $mysqli->prepare($query);
 if ($stmt) {
-    $stmt->bind_param("s", $userEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt->bind_param("s", $userEmail);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    while ($wishlistItem = $result->fetch_assoc()) {
-        $subproductId = $wishlistItem['subproduct_id'];
+while ($wishlistItem = $result->fetch_assoc()) {
+$subproductId = $wishlistItem['subproduct_id'];
 
-        // Ottieni products_id, price, availability, color e size dalla tabella sub_products
-        $query = "SELECT sp.id as subproduct_id, sp.products_id, sp.price, sp.availability, sp.color, sp.size, i.imgsrc
+// Ottieni products_id, price, availability, color e size dalla tabella sub_products
+$query = "SELECT sp.id as subproduct_id, sp.products_id, sp.price, sp.availability, sp.color, sp.size, i.imgsrc
 FROM sub_products sp
 LEFT JOIN images i ON sp.id = i.sub_products_id
-WHERE sp.id = ? AND sp.availability = 1"; // gestire errore se availability = 0
-        $stmt_subproduct = $mysqli->prepare($query);
-        if ($stmt_subproduct) {
-            $stmt_subproduct->bind_param("i", $subproductId);
-            $stmt_subproduct->execute();
-            $subProductResult = $stmt_subproduct->get_result();
+WHERE sp.id = ?";
+$stmt_subproduct = $mysqli->prepare($query);
+if ($stmt_subproduct) {
+$stmt_subproduct->bind_param("i", $subproductId);
+$stmt_subproduct->execute();
+$subProductResult = $stmt_subproduct->get_result();
 
-            if ($subProductData = $subProductResult->fetch_assoc()) {
-                $subProductId = $subProductData['subproduct_id'];
-                $productsId = $subProductData['products_id'];
-                $color = $subProductData['color'];
-                $size = $subProductData['size'];
+if ($subProductData = $subProductResult->fetch_assoc()) {
+$subProductId = $subProductData['subproduct_id'];
+$productsId = $subProductData['products_id'];
+$color = $subProductData['color'];
+$size = $subProductData['size'];
 
-                // Ottieni title dalla tabella products
-                $query = "SELECT title FROM products WHERE id = ?";
-                $stmt_product = $mysqli->prepare($query);
-                if ($stmt_product) {
-                    $stmt_product->bind_param("i", $productsId);
-                    $stmt_product->execute();
-                    $productResult = $stmt_product->get_result();
+// Ottieni title dalla tabella products
+$query = "SELECT title FROM products WHERE id = ?";
+$stmt_product = $mysqli->prepare($query);
+if ($stmt_product) {
+$stmt_product->bind_param("i", $productsId);
+$stmt_product->execute();
+$productResult = $stmt_product->get_result();
 
-                    if ($productData = $productResult->fetch_assoc()) {
-                        $title = $productData['title'];
-                        // Altri dati del prodotto
-                        $price = formatPrice($subProductData['price']);
-                        $availability = $subProductData['availability'] == 1 ? "Disponibile" : "Non disponibile";
-                        $imgsrc = $subProductData['imgsrc'];
+if ($productData = $productResult->fetch_assoc()) {
+$title = $productData['title'];
+// Altri dati del prodotto
+$price = formatPrice($subProductData['price']);
+$availability = $subProductData['availability'] == 1 ? "Disponibile" : "Non disponibile";
+$imgsrc = $subProductData['imgsrc'];
 
-                        $body->setContent("title", $title);
-                        $body->setContent("color", $color);
-                        $body->setContent("size", $size);
-                        $body->setContent("price", $price);
-                        $body->setContent("availability", $availability);
-                        $body->setContent("imgView", $imgsrc);
-                        $body->setContent("img", $imgsrc);
-                        $body->setContent("product_id", $productsId); // Aggiungi product_id al body content
-                        $body->setContent("id", $subProductId); // Aggiungi subproduct_id al body content come id
-                    } else {
-                        error_log("Fetch product data failed: " . $stmt_product->error);
-                    }
-                    $stmt_product->close();
-                } else {
-                    error_log("Prepare statement failed: " . $mysqli->error);
-                }
-            }
-            $stmt_subproduct->close();
-        } else {
-            error_log("Prepare statement failed: " . $mysqli->error);
-        }
-    }
-    $stmt->close();
+$body->setContent("title", $title);
+$body->setContent("color", $color);
+$body->setContent("size", $size);
+$body->setContent("price", $price);
+$body->setContent("availability", $availability);
+$body->setContent("imgView", $imgsrc);
+$body->setContent("img", $imgsrc);
+$body->setContent("product_id", $productsId); // Aggiungi product_id al body content
+$body->setContent("id", $subProductId); // Aggiungi subproduct_id al body content come id
 } else {
-    error_log("Prepare statement failed: " . $mysqli->error);
+error_log("Fetch product data failed: " . $stmt_product->error);
+}
+$stmt_product->close();
+} else {
+error_log("Prepare statement failed: " . $mysqli->error);
+}
+}
+$stmt_subproduct->close();
+} else {
+error_log("Prepare statement failed: " . $mysqli->error);
+}
+}
+$stmt->close();
+} else {
+error_log("Prepare statement failed: " . $mysqli->error);
 }
 
 $main->setContent("dynamic", $body->get());
 $main->close();
+?>

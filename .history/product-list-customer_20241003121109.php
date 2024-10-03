@@ -24,6 +24,7 @@ if (isset($_SESSION['user']['email'])) {
 
 // Ottieni l'ID del prodotto dall'URL
 $product_id = isset($_GET['id']) ? $mysqli->real_escape_string($_GET['id']) : null;
+$available 
 
 // Ottieni la taglia e il colore selezionati dall'utente
 /* $selected_size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : null;
@@ -147,12 +148,12 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body ->setContent('sub_tags_end',$code2);   
 }
 
-// Query per selezionare i prodotti disponibili
+// Costruisci la parte iniziale della query SQL per selezionare i prodotti
 $product_query_base = "
-    SELECT products.title, products.id, products.availability 
+    SELECT products.title, products.id 
     FROM products 
     JOIN sub_products ON sub_products.products_id = products.id 
-    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) AND products.availability = 1";
+    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
 
 // Aggiungi la condizione per il filtro di prezzo
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
@@ -172,19 +173,19 @@ if (!empty($size)) {
                         ) ";
 }
  */
-//Condizione per il filtro per categoria
+// Aggiungi la condizione per il filtro di categoria se specificato
 $product_query_base .= $category_condition;
 
-// Condizione per il filtro per ricerca testuale
+// Aggiungi la condizione per il filtro di testo di ricerca se specificato
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
 
-// Query per contare i prodotti (escludere quelli non disponibili)
+// Completamento della query SQL per contare i prodotti
 $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM products 
                 JOIN sub_products ON sub_products.products_id = products.id 
-                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
+                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) ";
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
 $count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price ";

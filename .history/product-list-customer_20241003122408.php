@@ -172,10 +172,10 @@ if (!empty($size)) {
                         ) ";
 }
  */
-//Condizione per il filtro per categoria
+//Condizione per il filtro di categoria se specificato
 $product_query_base .= $category_condition;
 
-// Condizione per il filtro per ricerca testuale
+// Condizione per il filtro di ricerca testuale
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
