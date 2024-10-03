@@ -54,8 +54,7 @@ $body->setContent('giaccaImg', $giacca['imgsrc']);
 $body->setContent('giaccaPrice', $giacca['price']);
 $body->setContent('giaccaId', $giacca['products_id']);
 
-
-$oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
                       sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA')
                       ORDER BY mediumRate DESC limit 0,5");
 
@@ -66,24 +65,24 @@ if ($resultCat->num_rows > 0) {
         $imgCat = $imgOidCat->fetch_assoc();
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $$body->setContent(
                 "giacche",
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
-                                
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCat['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCat['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -93,52 +92,53 @@ if ($resultCat->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
+                        <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
                     </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
                                             <div class="group-inner">
-                                               
-                                               <a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+
+                                               <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
                                                <span class="btn-inner">
                                                <span class="btn-text">Scopri</span>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('giacche','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
-                                
+
+        } else {
+            $body->setContent('giacche', '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCat['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCat['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -148,40 +148,42 @@ if ($resultCat->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
 
-                             
+
+
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>');
+        }
+
     }
 }
 
-$oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
                           sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO')
                           ORDER BY mediumRate DESC limit 0,5");
 
@@ -192,24 +194,24 @@ if ($resultCatCasco->num_rows > 0) {
         $imgCatCasco = $imgOidCatCasco->fetch_assoc();
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $body->setContent(
                 "caschi",
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
-                                
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatCasco['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatCasco['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -219,54 +221,56 @@ if ($resultCatCasco->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
+                        <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
                     </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
                                                 <br>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('caschi','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
-                                
+
+        } else {
+            $body->setContent('caschi', 
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatCasco['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatCasco['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -275,46 +279,41 @@ if ($resultCatCasco->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        
-
-                             
                                     </div>
 
-                                        <div class="content-main">
-        <div class="content-text">
-            <div class="content-price">
-                <span class="new-price">€ '.$pricePercentage.' </span>
-                <br>
-                <span class="old-price">€ '.$price.'</span>
-            </div>
-            <div class="content-desc"><a
-                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
-        </div>
-    </div>
-    <div class="content-hover">
-        <div class="content-button mv-btn-group text-center">
-            <div class="group-inner">
-               
-               <a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-               <span class="btn-inner">
-               <span class="btn-text">Scopri</span>
-            
-        </div>
-    </div>
-</div>
-                             
+                                    <div class="content-main">
+                                        <div class="content-text">
+                                            <div class="content-price">
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <br>
+                                                <span class="old-price">€ ' . $price . '</span>
+                                            </div>
+                                            <div class="content-desc"><a
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
+                                            <div class="group-inner">
+
+                                            <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                            <span class="btn-inner">
+                                            <span class="btn-text">Scopri</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </article>');
-     
-       
+        }
+
     }
 }
 
-$resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
 sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI')
 ORDER BY mediumRate DESC limit 0,9");
-
 
 if ($resultCatStivali->num_rows > 0) {
     foreach ($resultCatStivali as $key) {
@@ -322,24 +321,24 @@ if ($resultCatStivali->num_rows > 0) {
 
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $body->setContent(
                 "stivali",
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item boots">
-                                
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgOidCatStivali['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgOidCatStivali['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -349,53 +348,54 @@ if ($resultCatStivali->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
-                    </div>
+                                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                                        </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('stivali','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item boots">
-                                
+
+        } else {
+            $body->setContent('stivali', '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item boots">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgOidCatStivali['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgOidCatStivali['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -404,38 +404,40 @@ if ($resultCatStivali->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
-                             
+
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
-                                    
-                                        <div class="content-hover">
-        <div class="content-button mv-btn-group text-center">
-            <div class="group-inner">
-               
-               <a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-               <span class="btn-inner">
-               <span class="btn-text">Scopri</span>
-            
-        </div>
-    </div>
-                                    
-                                </div>
-                             
+
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
+                                            <div class="group-inner">
+
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                             </article>');
-        //aggiungere il medium rate 
+        }
+
+        //aggiungere il medium rate
     }
 }
-$oidProtezioni = $mysqli->query("SELECT products.title as title ,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$oidProtezioni = $mysqli->query("SELECT products.title as title ,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
 sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI')
 ORDER BY mediumRate DESC limit 0,9");
 
@@ -446,24 +448,24 @@ if ($resultProtezioni->num_rows > 0) {
         $imgCatProtezioni = $imgOidCatProtezioni->fetch_assoc();
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $$body->setContent(
                 "protezioni",
-                '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
-                                
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatProtezioni['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatProtezioni['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -473,53 +475,54 @@ if ($resultProtezioni->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
-                    </div>
+                                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                                        </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('protezioni','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
-                                
+
+        } else {
+            $body->setContent('protezioni', 
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatProtezioni['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatProtezioni['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -533,33 +536,35 @@ if ($resultProtezioni->num_rows > 0) {
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
-                                            href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                            title="'.$key['title'].'" class="mv-overflow-ellipsis">
-                                            '.$key['title'].'
+                                            href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                            title="' . $key['title'] . '" class="mv-overflow-ellipsis">
+                                            ' . $key['title'] . '
                                             </a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                           
+
                                            <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                           
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>');
+        }
+
     }
 }
-$oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
 sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI')
 ORDER BY mediumRate DESC limit 0,9");
 
@@ -571,24 +576,24 @@ if ($resultCatPantaloni->num_rows > 0) {
 
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $body->setContent(
                 "pantaloni",
-                '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item pants">
-                                
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item pants">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatPantaloni['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatPantaloni['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -598,53 +603,54 @@ if ($resultCatPantaloni->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
-                    </div>
+                                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                                        </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('pantaloni','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item pants">
-                                
+
+        } else {
+            $body->setContent('pantaloni', '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item pants">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatPantaloni['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatPantaloni['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -653,41 +659,39 @@ if ($resultCatPantaloni->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        
-
-                             
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>');
-        //aggiungere il medium rate 
+        }
+
+        //aggiungere il medium rate
     }
 }
-$oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON 
+$oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
 sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE')
 ORDER BY mediumRate DESC limit 0,9");
 
@@ -699,24 +703,24 @@ if ($resultCatTute->num_rows > 0) {
 
         $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$key['id']}");
         $offerItem = $offer->fetch_assoc();
-        if ($offerItem){
+        if ($offerItem) {
             $price = $key['price'];
-            $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-            $price=formatPrice($price);
+            $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
+            $price = formatPrice($price);
             $body->setContent(
                 "tute",
-                '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item suits">
-                                
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item suits">
+
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatTute['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatTute['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -726,53 +730,53 @@ if ($resultCatTute->num_rows > 0) {
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-'.$offerItem['percentage'].'%</div>
-                    </div>
+                                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                                         </div>
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$pricePercentage.' </span>
-                                                <span class="old-price">€ '.$price.'</span>
+                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
+                                                <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                            
+
                                             <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                            
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>'
             );
-           
-        }else $body->setContent('tute','<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item suits">
-                                
+
+        } else {
+            $body->setContent('tute', 
+                            '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item suits">
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"><img
-                                                        src="data:image;base64,'.$imgCatTute['imgsrc'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"><img
+                                                        src="data:image;base64,' . $imgCatTute['imgsrc'] . '"
                                                         alt="demo" class="mv-effect-item" /></a><a
-                                                    href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"
-                                                    title="'.$key['title'].'"
+                                                    href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '"
                                                     class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs"><span
                                                         class="btn-inner"></span></a>
 
@@ -781,41 +785,37 @@ if ($resultCatTute->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        
-
-                             
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ '.$key['price'].' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
-                                                    href="/MotorShop/product-detail.php?id=.'.$key["prod_id"].'"
-                                                    title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                                                    href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
+                                                    title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
 
                                     <div class="content-hover">
                                         <div class="content-button mv-btn-group text-center">
-                                           
-                                           <div class="group-inner">
-<a href="/MotorShop/product-detail.php?id='.$key["prod_id"].'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-<span class="btn-inner">
-<span class="btn-text">Scopri</span>
-</div>
-                                           
+
+                                            <div class="group-inner">
+                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
+                                                <span class="btn-inner">
+                                                <span class="btn-text">Scopri</span>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                             
+
                             </article>');
+        }
+
     }
 }
 
 $main->setContent("dynamic", $body->get());
 $main->close();
-
-?>
