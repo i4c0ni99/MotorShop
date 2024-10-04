@@ -160,8 +160,6 @@ if (isset($_POST['add-address-button'])) {
 $main->setContent("dynamic", $body->get());
 $main->close();
 
-} else {
-    header("location: /MotorShop/login.php");
 }
 
 ?>
