@@ -27,7 +27,7 @@ if (!isset($_SESSION['user']['phone'])) {
         exit();
      }
  } else {
-    header("location: /MotorShop/login.php");
+    header("location: /MotorShop/index.php");
  }
  
  $main->setContent('phone', $_SESSION['user']['phone']);
