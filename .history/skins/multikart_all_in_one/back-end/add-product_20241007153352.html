@@ -1,0 +1,130 @@
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Aggiungi prodotto</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-7">
+                                <form class="needs-validation add-product-form" novalidate method="post" enctype="multipart/form-data" action="/MotorShop/addProduct.php?cat_id=<[select_cat_id]>&sub_cat_id=<[select_sub_id]>"=> <!-- Aggiungere i parametri cat_id e sub_cat-id -->
+                                    <input type="hidden" name="csrf_token" value="<[csrf_token]>">
+
+                                    <div class="form">
+                                        <div class="form-group mb-3 row">
+                                            <label for="title" class="col-xl-3 col-sm-4 mb-0">Titolo:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="title" type="text" value="<[title]>" name="title" pattern=".{3,}" title="Il titolo deve avere almeno 3 caratteri" required="true">
+                                                <div class="valid-feedback">Sembra ok!</div>
+                                                <div class="invalid-feedback">Il titolo deve avere almeno 3 caratteri.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label for="code" class="col-xl-3 col-sm-4 mb-0">Codice prodotto:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="code" type="text" value="<[code]>" name="code" pattern="[A-Za-z0-9]{5}" title="Il codice prodotto deve essere composto da 5 caratteri alfanumerici" required="true">
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Inserisci un codice valido (5 caratteri alfanumerici)</div>
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="form">
+                                        <div class="form-group row">
+                                            <label for="description" class="col-xl-3 col-sm-4">Descrizione:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="description" name="descriptionProduct"  class="form-control" style="resize: vertical;" rows="4" minlength="5" maxlength="2000" required="true" value=""><[description]></textarea>
+                                                <div class="invalid-feedback">La descrizione è obbligatoria e deve avere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="details" class="col-xl-3 col-sm-4">Specifiche:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="details" name="detailsProduct"  class="form-control" style="resize: vertical;" rows="4" minlength="5" maxlength="2000" required="true"><[details]></textarea>
+                                                <div class="invalid-feedback">Le specifiche sono obbligatorie e devono avere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        
+                                        <div class="form-group row">
+                                            <label for="brand" class="col-xl-3 col-sm-4 mb-0">Marca:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                    <select onchange="get_brand()" id="brand" name="brand" required="true">
+                                                        <option value="<[select_brand_id]>"><[select_brand]></option>
+                                                        <[foreach]>
+                                                            <option value="<[brand_id]>"><[brand_name]></option>
+                                                        <[/foreach]>       
+                                                </select>
+                                                <div class="invalid-feedback">Seleziona una marca.</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="category" class="col-xl-3 col-sm-4 mb-0">Categoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <select onchange="get_category()" id="category" name="category" required="true">
+                                                    <option value="<[select_cat_id]>"><[select_cat]></option>
+                                                    <[foreach]>
+                                                        <option value="<[cat_id]>"><[categories]></option>
+                                                    <[/foreach]>
+                                                </select>
+                                                <div class="invalid-feedback">Seleziona una categoria.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="subcategory" class="col-xl-3 col-sm-4 mb-0">Sottocategoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <select onchange="get_sub_category()" id="subcategory" name="subcategory">
+                                                    <option value="<[select_sub_id]>"><[select_sub_cat]></option>
+                                                    <[foreach]>
+                                                        <option value="<[sub_cat_id]>"><[sub_cat_name]></option>
+                                                    <[/foreach]>
+                                                </select>
+                                                <div class="invalid-feedback">Seleziona una sottocategoria.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3 row">
+                                            <label for="productImage" class="col-xl-3 col-sm-4 mb-0">Immagine prodotto:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control-file" id="productImage" value="<[product_image]>" type="file" name="product_image" accept="image/*" required="true" >
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Carica un'immagine del prodotto.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                            <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                            <button type="reset" class="btn btn-light">Annulla</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div>
+                                    <!-- Area per visualizzare eventuali messaggi di errore -->
+                                    <[errorMessages]>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
