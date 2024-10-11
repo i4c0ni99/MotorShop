@@ -817,5 +817,100 @@ if ($resultCatTute->num_rows > 0) {
     }
 }
 
+
+$result_offer = $mysqli->query("SELECT products.title, products.id, products.availability,sub_products.id as sub_id 
+FROM products JOIN sub_products ON sub_products.products_id = products.id WHERE
+ EXISTS (SELECT 1 FROM offers WHERE offers.subproduct_id = sub_products.id) AND products.availability = 1");
+
+if ($result_offer && $result_offer->num_rows > 0) {
+    while ($key = $result_offer->fetch_assoc()) {
+        
+        $body->setContent("id", $key['id']);
+        $body->setContent("title", $key['title']);
+
+        $product_id = $mysqli->real_escape_string($key['id']);
+        $title = $mysqli->real_escape_string($key['title']);
+
+        $image_query = "
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
+            FROM products 
+            JOIN sub_products ON sub_products.products_id = products.id 
+            JOIN images ON images.product_id = products.id 
+            WHERE products.id = '$product_id'
+            LIMIT 1
+        ";
+
+        $image_data = $mysqli->query($image_query);
+        
+            if ($image_data && $image_data->num_rows > 0 ) {
+                
+                $item = $image_data->fetch_assoc();
+                
+                $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
+                $offerItem = $offer->fetch_assoc();
+                if($offerItem){
+                $price = $item['price'];
+                $img =  $item['imgsrc'];
+                $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
+                $price=formatPrice($price);
+                $body->setContent("code",
+                '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
+                <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
+                <div style="background-color: #fff;" class="content-thumb">
+                    <div class="thumb-inner mv-effect-relative">
+                    
+                        <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
+                            <img src="data:image;base64,'.$img.'" alt="demo" class="mv-effect-item" />
+                        </a>
+                        <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs">
+                            <span class="btn-inner"></span>
+                        </a>
+        
+                        <div class="content-message mv-message-style-1">
+                            <div class="message-inner"></div>
+                        </div>
+                    
+                    <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
+                            <div class="label-2-inner">
+                                <ul class="label-2-ul">
+                                    <li class="number">-'.$offerItem['percentage'].'%</li>
+                                    <li class="text">Sconto</li>
+                                </ul>
+                            </div>
+                    </div>
+                    
+                    </div>
+                </div>
+        
+                <div class="content-default">
+                    <div class="content-desc">
+                        <a href="#" class="mv-overflow-ellipsis">'.$title.'</a>
+                    </div>
+                    <br>
+                    <div class="content-price">
+                        <span class="new-price">€ '.$pricePercentage.' </span>
+                        <span class="old-price">€ '.$price.'</span>
+                    </div>
+                    <input type="hidden" value="'.$product_id.'" name="id" href="javascript:void(0)">
+                </div>
+        
+                <div class="content-hover">
+                    <div class="content-button mv-btn-group text-center">
+                        <div class="group-inner">
+                            <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                    <span class="btn-inner">
+                                        <span class="btn-text">Scopri</span>
+                                    </span>
+                                </a>
+                        </div>
+                    </div>
+                </div>                                
+            </div>
+        </article>');
+                }
+        }
+    }
+}
+
 $main->setContent("dynamic", $body->get());
 $main->close();
