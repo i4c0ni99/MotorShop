@@ -109,7 +109,6 @@ if ($resultCart) {
 
         // Aggiungi dettagli del prodotto all'array
         $products[] = [
-            'subproduct_id' => $subproductId, 
             'title' => $productTitle,
             'quantity' => $quantity,
             'subtotal' => $subtotal
@@ -140,106 +139,101 @@ if ($resultCart) {
                      VALUES ('$shippingAddressId', $totalPrice, '$orderDetails', '$paymentMethod', '$currentDate', '$orderState', '$uniqueOrderNumber', '$userEmail')";
 
 
-// Query per inserire l'ordine nella tabella orders
-$insertOrderQuery = "INSERT INTO orders (shipping_address_id, totalPrice, details, paymentMethod, date, state, number, users_email) 
-                     VALUES ('$shippingAddressId', $totalPrice, '$orderDetails', '$paymentMethod', '$currentDate', '$orderState', '$uniqueOrderNumber', '$userEmail')";
 
-// Esegui la query di inserimento dell'ordine
-if ($mysqli->query($insertOrderQuery)) {
-    // Ottieni l'ID dell'ordine appena inserito
-    $orderId = $mysqli->insert_id;
 
-    // Aggiungi i prodotti associati all'ordine nella tabella orders_has_products
-    foreach ($products as $product) {
-        $subproductId = $product['subproduct_id']; // Ottieni l'ID del sottoprodotto
-        $quantity = $product['quantity']; // Quantità nel carrello
 
-        // Query per inserire i dati nella tabella orders_has_products
-        $insertOrderHasProductsQuery = "INSERT INTO orders_has_products (order_id, sub_products_id, quantity)
-                                        VALUES (?, ?, ?)";
 
-        $stmtOrderHasProducts = $mysqli->prepare($insertOrderHasProductsQuery);
-        $stmtOrderHasProducts->bind_param("iii", $orderId, $subproductId, $quantity);
 
-        if ($stmtOrderHasProducts->execute()) {
-            // Inserimento riuscito
-            echo "Prodotto con ID $subproductId inserito correttamente nell'ordine.<br>";
-        } else {
-            // Errore durante l'inserimento
-            echo "Errore durante l'inserimento del prodotto con ID $subproductId nell'ordine: " . $stmtOrderHasProducts->error . "<br>";
-        }
 
-        $stmtOrderHasProducts->close();
-    }
+
+
+
+
+
+
+
+
+
+
+
+";
+
+
+
+
+    // Invio email, svuotamento carrello, ecc.
     
-    // Ordine inserito con successo
-echo "Ordine inserito con successo! Numero ordine: " . $uniqueOrderNumber;
-// Recupera i dettagli dell'indirizzo di spedizione selezionato
-$addressQuery = "SELECT * FROM shipping_address WHERE id = ?";
-$stmtAddress = $mysqli->prepare($addressQuery);
-$stmtAddress->bind_param("i", $shippingAddressId);
-$stmtAddress->execute();
-$resultAddress = $stmtAddress->get_result();
-$address = $resultAddress->fetch_assoc();
-$stmtAddress->close();
-// Corpo email
-$to = $userEmail;
-$subject = 'Conferma Ordine #' . $uniqueOrderNumber;
-$message = '<html><body>';
-$message .= '<h2>Gentile cliente,</h2>';
-$message .= '<p>Grazie per il tuo ordine! Ecco i dettagli:</p>';
-$message .= '<h3>Indirizzo di Spedizione</h3>';
-$message .= '<p>';
-$message .= 'Nome: ' . $address['name'] . '<br>';
-$message .= 'Cognome: ' . $address['surname'] . '<br>';
-$message .= 'Telefono: ' . $address['phone'] . '<br>';
-$message .= 'Provincia: ' . $address['province'] . '<br>';
-$message .= 'Città: ' . $address['city'] . '<br>';
-$message .= 'Indirizzo: ' . $address['streetAddress'] . '<br>';
-$message .= 'CAP: ' . $address['cap'] . '<br>';
-$message .= '</p>';
-$message .= '<h3>Riepilogo Ordine</h3>';
-$message .= '<table border="1">';
-$message .= '<tr><th>Prodotto</th><th>Quantità</th><th>Subtotale</th></tr>';
-foreach ($products as $product) {
-    $message .= '<tr>';
-    $message .= '<td>' . htmlspecialchars($product['title']) . '</td>';
-    $message .= '<td>' . $product['quantity'] . '</td>';
-    $message .= '<td>' . priceFormatter($product['subtotal']) . '</td>';
-    $message .= '</tr>';
-}
-$message .= '</table>';
-$message .= '<p><strong>Totale Ordine:</strong> ' . priceFormatter($totalPrice) . '</p>';
-$message .= '<p>Dettagli aggiuntivi: ' . $orderDetails . '</p>';
-$message .= '<p>Metodo di Pagamento: ' . $paymentMethod . '</p>';
-$message .= '<p>Grazie per aver scelto il nostro negozio!</p>';
-$message .= '</body></html>';
-// Intestazioni dell'email
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= 'From: <noreply@motorshop.com>' . "\r\n";
-// Invio dell'email
-if (mail($to, $subject, $message, $headers)) {
-    echo "Email di conferma inviata con successo.";
 } else {
-    echo "Errore durante l'invio dell'email di conferma.";
+    echo "Errore durante l'inserimento dell'ordine: " . $mysqli->error;
 }
-        // Ora puoi svuotare il carrello eliminando le righe associate all'utente
-        $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
-        if ($mysqli->query($deleteCartQuery)) {
-            echo "Carrello svuotato con successo.";
+
+if ($mysqli->query($insertOrderQuery)) {
+    // Ordine inserito con successo
+    echo "Ordine inserito con successo! Numero ordine: " . $uniqueOrderNumber;
+    // Recupera i dettagli dell'indirizzo di spedizione selezionato
+    $addressQuery = "SELECT * FROM shipping_address WHERE id = ?";
+    $stmtAddress = $mysqli->prepare($addressQuery);
+    $stmtAddress->bind_param("i", $shippingAddressId);
+    $stmtAddress->execute();
+    $resultAddress = $stmtAddress->get_result();
+    $address = $resultAddress->fetch_assoc();
+    $stmtAddress->close();
+    // Corpo email
+    $to = $userEmail;
+    $subject = 'Conferma Ordine #' . $uniqueOrderNumber;
+    $message = '<html><body>';
+    $message .= '<h2>Gentile cliente,</h2>';
+    $message .= '<p>Grazie per il tuo ordine! Ecco i dettagli:</p>';
+    $message .= '<h3>Indirizzo di Spedizione</h3>';
+    $message .= '<p>';
+    $message .= 'Nome: ' . $address['name'] . '<br>';
+    $message .= 'Cognome: ' . $address['surname'] . '<br>';
+    $message .= 'Telefono: ' . $address['phone'] . '<br>';
+    $message .= 'Provincia: ' . $address['province'] . '<br>';
+    $message .= 'Città: ' . $address['city'] . '<br>';
+    $message .= 'Indirizzo: ' . $address['streetAddress'] . '<br>';
+    $message .= 'CAP: ' . $address['cap'] . '<br>';
+    $message .= '</p>';
+    $message .= '<h3>Riepilogo Ordine</h3>';
+    $message .= '<table border="1">';
+    $message .= '<tr><th>Prodotto</th><th>Quantità</th><th>Subtotale</th></tr>';
+    foreach ($products as $product) {
+        $message .= '<tr>';
+        $message .= '<td>' . htmlspecialchars($product['title']) . '</td>';
+        $message .= '<td>' . $product['quantity'] . '</td>';
+        $message .= '<td>' . priceFormatter($product['subtotal']) . '</td>';
+        $message .= '</tr>';
+    }
+    $message .= '</table>';
+    $message .= '<p><strong>Totale Ordine:</strong> ' . priceFormatter($totalPrice) . '</p>';
+    $message .= '<p>Dettagli aggiuntivi: ' . $orderDetails . '</p>';
+    $message .= '<p>Metodo di Pagamento: ' . $paymentMethod . '</p>';
+    $message .= '<p>Grazie per aver scelto il nostro negozio!</p>';
+    $message .= '</body></html>';
+    // Intestazioni dell'email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= 'From: <noreply@motorshop.com>' . "\r\n";
+    // Invio dell'email
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Email di conferma inviata con successo.";
+    } else {
+        echo "Errore durante l'invio dell'email di conferma.";
+    }
+
+            // Ora puoi svuotare il carrello eliminando le righe associate all'utente
+            $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
+            if ($mysqli->query($deleteCartQuery)) {
+                echo "Carrello svuotato con successo.";
+            } else {
+                echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
+            }
         } else {
-            echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
+            echo "Errore durante l'inserimento dell'ordine: " . $mysqli->error;
         }
     } else {
-        echo "Errore durante l'inserimento dell'ordine: 1" . $mysqli->error;
+        echo "Errore durante la query del carrello: " . $mysqli->error;
     }
-} else {
-    echo "Errore durante la query del carrello: " . $mysqli->error;
-}
-    
-} else {
-    echo "Errore durante l'inserimento dell'ordine: 2" . $mysqli->error;
 }
 
 // Funzione per generare un numero casuale univoco di 5 cifre per l'ordine

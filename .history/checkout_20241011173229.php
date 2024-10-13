@@ -109,7 +109,6 @@ if ($resultCart) {
 
         // Aggiungi dettagli del prodotto all'array
         $products[] = [
-            'subproduct_id' => $subproductId, 
             'title' => $productTitle,
             'quantity' => $quantity,
             'subtotal' => $subtotal

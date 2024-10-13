@@ -109,7 +109,6 @@ if ($resultCart) {
 
         // Aggiungi dettagli del prodotto all'array
         $products[] = [
-            'subproduct_id' => $subproductId, 
             'title' => $productTitle,
             'quantity' => $quantity,
             'subtotal' => $subtotal
@@ -232,14 +231,83 @@ if (mail($to, $subject, $message, $headers)) {
             echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
         }
     } else {
-        echo "Errore durante l'inserimento dell'ordine: 1" . $mysqli->error;
+        echo "Errore durante l'inserimento dell'ordine: " . $mysqli->error;
     }
 } else {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
 } else {
-    echo "Errore durante l'inserimento dell'ordine: 2" . $mysqli->error;
+    echo "Errore durante l'inserimento dell'ordine: " . $mysqli->error;
+}
+
+if ($mysqli->query($insertOrderQuery)) {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 // Funzione per generare un numero casuale univoco di 5 cifre per l'ordine
