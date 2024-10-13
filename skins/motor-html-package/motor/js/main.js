@@ -1301,9 +1301,11 @@ $(document).ready(function () {
     $(".input-quantity-product-detail").each(function () {
       var inputQuantity = $(this);
       var minNum = 1;
-      var maxNum = 999;
-
-      var spinner = inputQuantity.spinner({
+      var maxNum = $(this).attr('data-prodQuantity')
+        ? $(this).attr('data-prodQuantity')
+        : 1;
+        console.log($(this).attr('data-prodQuantity'))
+      inputQuantity.spinner({
         numberFormat: "n",
         min: minNum,
         max: maxNum,
@@ -1329,7 +1331,7 @@ $(document).ready(function () {
       var output = wraper.find(".calculate-price-output");
       
       
-      var minNum = 1;
+      var minNum = 0;
       var maxNum = $(this).closest(".post").data("quantity")
         ? $(this).closest(".post").data("quantity")
         : 0;
@@ -1856,6 +1858,8 @@ $(document).ready(function () {
       .on("click", ".btn-add-to-cart", function () {
         var post = $(this).closest(".post");
         var subId = $(this).data("id");
+        var quantity = $(".input-quantity-product-detail").val();
+        console.log(quantity)
         var messageAction = post.find(".content-message .message-inner");
         var htmlString =
           '<i class="fa fa-check mv-color-primary"></i> 1 item added to cart. <a href="/../MotorShop/cart.php"><strong>View cart</strong></a>';
@@ -1864,7 +1868,9 @@ $(document).ready(function () {
           $.ajax({
             url: "cart.php", // Endpoint che verrà chiamato
             method: "POST",
-            data: { add_to_cart: subId }, // I parametri verranno aggiunti all'URL
+            data: { add_to_cart: subId,
+                    quantity: quantity
+             }, // I parametri verranno aggiunti all'URL
             success: function (response) {
               // Prova a forzare il parsing della risposta se non è JSON
               // Visualizza la risposta nella console per il debug
