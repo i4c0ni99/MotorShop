@@ -66,7 +66,6 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body->setContent("code", $_GET['code']);
     $body->setContent("product_image", $_GET['product_image']);
     $body->setContent("category_id",$_GET['category_id']);
-    $body->setContent('brand_id', $_GET['brand_id']);
     
 
     
@@ -89,7 +88,6 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
         $body->setContent("code", $_GET['code']);
         $body->setContent("product_image", $_GET['product_image']);
         $body->setContent("category_id",$_GET['category_id']);
-        $body->setContent('brand_id', $_GET['brand_id']);
         $subcategory_id = $mysqli->real_escape_string($_GET['sub_cat_id']);
     } else {
         $subcategory_id = "NULL";  // Set default if not provided
@@ -153,13 +151,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $mysqli->real_escape_string($_POST['title']);
             $description = $mysqli->real_escape_string($_POST['description']);
             $details = $mysqli->real_escape_string($_POST['details']);
-            $brand_id = $mysqli->real_escape_string($_POST['brand']);
- 
+
             echo "Category ID: $category_id<br>";
             echo "Subcategory ID: $subcategory_id<br>";
 
-            $insertQuery = "INSERT INTO products (code, title, description, availability, specification, brand_id, categories_id, subcategories_id) 
-                VALUES ('$code', '$title', '$description', 1, '$details', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+            $insertQuery = "INSERT INTO products (code, title, description, availability, specification, categories_id, subcategories_id) 
+                            VALUES ('$code', '$title', '$description', 0, '$details', ".$_GET['cat_id'].",".$_GET['sub_cat_id'].")";
 
             echo $insertQuery;  // Debug: Print the query
 

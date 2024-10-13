@@ -6,38 +6,35 @@ require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
 $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/add-product.html");
 
 $main->setContent('name', $_SESSION['user']['name']);
 
-// Carica le marche per il form di aggiunta prodotto
+// Carica le marche
 $brands = $mysqli->query("SELECT id, name FROM brands");
 
 if(!isset($_GET['brand_id'])){
     $body->setContent('select_brand','Scegli una marca');
     $body->setContent('select_brand_id','');
 }
-
 foreach ($brands as $marca) {
-    $body->setContent('brand_name', $marca['name']);
+    $body->setContent('brand_name',$marca['name']);
     $body->setContent('brand_id', $marca['id']);
-    if (isset($_GET['brand_id']) && !empty($_GET['brand_id']) && $_GET['brand_id'] == $marca['id']){
-        $body->setContent('select_brand', $marca['name']);
-        $body->setContent('select_brand_id', $marca['id']);
-    }
+    $body->setContent('select_brand',$marca['name']);
+    $body->setContent('select_brand_id',$marca['id']);
 }
 
-// Carica le categorie per il form di aggiunta prodotto
+// Carica le categorie e sottocategorie
 $data = $mysqli->query("SELECT id, name FROM categories");
 if(!isset($_GET['cat_id'])){
     $body->setContent('select_cat','Scegli una categoria');
     $body->setContent('select_cat_id','');
 }
 if(!isset($_GET['sub_cat_id'])){
-    $body->setContent('select_sub_cat','Segli una sotto categoria');
+    $body->setContent('select_sub_cat','Scegli una sotto categoria');
     $body->setContent('select_sub_id','');
 }
 
@@ -52,7 +49,6 @@ foreach ($data as $item) {
     }
     
 }
-
 // La categoria è già stata selezionata
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
@@ -65,9 +61,8 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body->setContent("details", $_GET['details']);
     $body->setContent("code", $_GET['code']);
     $body->setContent("product_image", $_GET['product_image']);
+    $body->setContent("brand_id", $_GET['brand_id']);
     $body->setContent("category_id",$_GET['category_id']);
-    $body->setContent('brand_id', $_GET['brand_id']);
-    
 
     
     foreach($subCat as $key) {
@@ -77,19 +72,18 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
             $body->setContent('select_sub_cat',$key['name']);
             $body->setContent('select_sub_id',$key['id']);
            }
-          
     }
 
     // La sottocategoria è già stata selezionata
     if (isset($_GET['sub_cat_id']) && !empty($_GET['sub_cat_id'])) {
         $body->setContent("cat_id_in_sub", $category_id);
-        $body->setContent("title", $_GET['title']);
-        $body->setContent("description", $_GET['description']);
-        $body->setContent("details", $_GET['details']);
+        $body->setContent("title", $_POST[['title']);
+        $body->setContent("description", $_POST['description']);
+        $body->setContent("details", $_POST[['details']);
         $body->setContent("code", $_GET['code']);
         $body->setContent("product_image", $_GET['product_image']);
+        $body->setContent("brand_id", $_GET['brand_id']);
         $body->setContent("category_id",$_GET['category_id']);
-        $body->setContent('brand_id', $_GET['brand_id']);
         $subcategory_id = $mysqli->real_escape_string($_GET['sub_cat_id']);
     } else {
         $subcategory_id = "NULL";  // Set default if not provided
@@ -98,8 +92,10 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = "NULL";  // Set default if not provided
     $subcategory_id = "NULL";  // Set default if not provided
 }
+// debugging
+echo"<script>console.log(".$_GET['code'].")</script>";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit'])) {
     $errors = [];
 
     // Verifica dei dati inseriti
@@ -115,11 +111,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Descrizione e specifiche sono campi obbligatori da almeno 5 caratteri
-    if (strlen($_POST['descriptionProduct']) < 5) {
+    if (strlen($_POST['description']) < 5) {
         $errors[] = "La descrizione deve avere almeno 5 caratteri.";
     }
 
-    if (strlen($_POST['detailsProduct']) < 5) {
+    if (strlen($_POST['details']) < 5) {
         $errors[] = "Le specifiche devono avere almeno 5 caratteri.";
     }
 
@@ -153,15 +149,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $mysqli->real_escape_string($_POST['title']);
             $description = $mysqli->real_escape_string($_POST['description']);
             $details = $mysqli->real_escape_string($_POST['details']);
-            $brand_id = $mysqli->real_escape_string($_POST['brand']);
- 
+
             echo "Category ID: $category_id<br>";
             echo "Subcategory ID: $subcategory_id<br>";
+            echo "Brand ID: $brand<br>";
 
             $insertQuery = "INSERT INTO products (code, title, description, availability, specification, brand_id, categories_id, subcategories_id) 
-                VALUES ('$code', '$title', '$description', 1, '$details', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+                            VALUES ('$code', '$title', '$description', 0, '$details', ".$_GET['brand_id'].", ".$_GET['cat_id'].",".$_GET['sub_cat_id'].")";
 
-            echo $insertQuery;  // Debug: Print the query
+            echo $insertQuery; 
 
             if ($mysqli->query($insertQuery)) {
                 $product_id = $mysqli->insert_id;
@@ -193,12 +189,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 }
+
+$main->setContent('body', $body->get());
+$main->close();
+
 } else {
         header("Location: /MotorShop/login.php");
         exit;
     }
-
-$main->setContent("body", $body->get());
-$main->close();
 
 ?>

@@ -13,23 +13,6 @@ $body = new Template("skins/multikart_all_in_one/back-end/add-product.html");
 
 $main->setContent('name', $_SESSION['user']['name']);
 
-// Carica le marche per il form di aggiunta prodotto
-$brands = $mysqli->query("SELECT id, name FROM brands");
-
-if(!isset($_GET['brand_id'])){
-    $body->setContent('select_brand','Scegli una marca');
-    $body->setContent('select_brand_id','');
-}
-
-foreach ($brands as $marca) {
-    $body->setContent('brand_name', $marca['name']);
-    $body->setContent('brand_id', $marca['id']);
-    if (isset($_GET['brand_id']) && !empty($_GET['brand_id']) && $_GET['brand_id'] == $marca['id']){
-        $body->setContent('select_brand', $marca['name']);
-        $body->setContent('select_brand_id', $marca['id']);
-    }
-}
-
 // Carica le categorie per il form di aggiunta prodotto
 $data = $mysqli->query("SELECT id, name FROM categories");
 if(!isset($_GET['cat_id'])){
@@ -52,7 +35,6 @@ foreach ($data as $item) {
     }
     
 }
-
 // La categoria è già stata selezionata
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
@@ -66,7 +48,6 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body->setContent("code", $_GET['code']);
     $body->setContent("product_image", $_GET['product_image']);
     $body->setContent("category_id",$_GET['category_id']);
-    $body->setContent('brand_id', $_GET['brand_id']);
     
 
     
@@ -89,7 +70,6 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
         $body->setContent("code", $_GET['code']);
         $body->setContent("product_image", $_GET['product_image']);
         $body->setContent("category_id",$_GET['category_id']);
-        $body->setContent('brand_id', $_GET['brand_id']);
         $subcategory_id = $mysqli->real_escape_string($_GET['sub_cat_id']);
     } else {
         $subcategory_id = "NULL";  // Set default if not provided
@@ -153,13 +133,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $mysqli->real_escape_string($_POST['title']);
             $description = $mysqli->real_escape_string($_POST['description']);
             $details = $mysqli->real_escape_string($_POST['details']);
-            $brand_id = $mysqli->real_escape_string($_POST['brand']);
- 
+
             echo "Category ID: $category_id<br>";
             echo "Subcategory ID: $subcategory_id<br>";
 
-            $insertQuery = "INSERT INTO products (code, title, description, availability, specification, brand_id, categories_id, subcategories_id) 
-                VALUES ('$code', '$title', '$description', 1, '$details', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+            $insertQuery = "INSERT INTO products (code, title, description, availability, specification, categories_id, subcategories_id) 
+                            VALUES ('$code', '$title', '$description', 0, '$details', ".$_GET['cat_id'].",".$_GET['sub_cat_id'].")";
 
             echo $insertQuery;  // Debug: Print the query
 

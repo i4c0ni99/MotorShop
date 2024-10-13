@@ -153,13 +153,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $mysqli->real_escape_string($_POST['title']);
             $description = $mysqli->real_escape_string($_POST['description']);
             $details = $mysqli->real_escape_string($_POST['details']);
-            $brand_id = $mysqli->real_escape_string($_POST['brand']);
- 
+
             echo "Category ID: $category_id<br>";
             echo "Subcategory ID: $subcategory_id<br>";
 
             $insertQuery = "INSERT INTO products (code, title, description, availability, specification, brand_id, categories_id, subcategories_id) 
-                VALUES ('$code', '$title', '$description', 1, '$details', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+                VALUES ('$code', '$title', '$description', 1, '$details', ".$_GET['brand_id'].", ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+
 
             echo $insertQuery;  // Debug: Print the query
 
