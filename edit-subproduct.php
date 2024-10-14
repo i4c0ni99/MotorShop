@@ -24,7 +24,10 @@ if (isset($_SESSION['user'])) {
             $body->setContent('id', $_GET['id']);
             $body->setContent('color', $subproduct['color']);
             $body->setContent('price', $subproduct['price']);
-            $body->setContent('availability', $subproduct['availability']);
+            $body->setContent('src',$subproduct['availability'] == 1?'<input name="availability" class="checkbox_animated check-it"
+                                                            type="checkbox" value="0" checked="">':
+                                                            '<input name="availability" class="checkbox_animated check-it"
+                                                            type="checkbox" value="1">');
             $body->setContent('quantity', $subproduct['quantity']);
             $body->setContent('size', $subproduct['size']);
             // Salviamo l'id del prodotto nella variabile $productId
@@ -72,11 +75,19 @@ if (isset($_SESSION['user'])) {
             $updates[] = "quantity = ?";
             $params[] = $_POST['quantity'];
         }
-        if (isset($_POST['availability'])) {
-            // Converti il valore del checkbox in un intero 0 o 1
-            $availability = $_POST['availability'] ? 1 : 0;
-            $updates[] = "availability = ?";
-            $params[] = $availability;
+        if (!empty($_POST['availability'])) {
+        
+            $availability = $mysqli->real_escape_string($_POST['availability']);
+            echo "<script>console.log(".$_POST['availability'].")</script>";
+            $updates[] = "availability = '$availability'";
+           
+        }
+        if (empty($_POST['availability'])) {
+            
+            $availability = $mysqli->real_escape_string(0);
+            echo "<script>console.log(".$_POST['availability'].")</script>";
+            $updates[] = "availability = '$availability'";
+           
         }
         if (!empty($_POST['size'])) {
             $updates[] = "size = ?";
