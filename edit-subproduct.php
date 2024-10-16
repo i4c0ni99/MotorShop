@@ -64,13 +64,16 @@ if (isset($_SESSION['user'])) {
         #header('Location: /MotorShop/product-list.php');
         exit;
     }
-
-    if(!empty($_FILES['image']) && isset($_POST['img_id'])){
-        echo "<script>console.log('".$_POST['img_id']."');</script>";
-        $fileTmpPath = $_FILES['image' . $i]['tmp_name'];
+    
+    if(!empty($_FILES['image']) && !empty($_POST['img_id'])){
+        
+        $fileTmpPath = $_FILES['image']['tmp_name'];
                     $data = file_get_contents($fileTmpPath);
+                    echo "<script>console.log('".$_POST['img_id']."');</script>";
+                    echo "<script>console.log('".$fileTmpPath."');</script>";
                     $data64 = base64_encode($data);
         $mysqli->query("UPDATE images SET imgsrc ='".$data64."' WHERE  id =".$_POST['img_id']);
+        header('Location: /MotorShop/edit-subproduct.php?id=' . $_GET['id']);
         
     }
 

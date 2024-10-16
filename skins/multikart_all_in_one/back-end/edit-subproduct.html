@@ -166,16 +166,16 @@
                                                                     <ul>
                                                                         <li>
                                                                             <form method="post"
-                                                                                id="uploadForm"
+                                                                                id="uploadForm<[img_id]>"
                                                                                 action="/MotorShop/edit-subproduct.php?id=<[id_sub]>" enctype="multipart/form-data">
-                                                                                <input type="hidden" name="id"
-                                                                                    value="<[image_id]>">
+                                                                                <input type="hidden" name="img_id" 
+                                                                                    value="<[img_id]>">
                                                                                     
                                                                                  <!-- Nascondere l'input file -->
-                                                                                <input type="file" name="image" id="fileInput" style="display:none;" accept="image/*">
-                                                                                <!-- <h1><[img_id]></h1> -->
+                                                                                <input type="file" name="image" id="fileInput<[img_id]>" style="display:none;" accept="image/*">
+                                                                                
                                                                                 <!-- Pulsante personalizzato per attivare il caricamento del file -->
-                                                                                <button class="btn" type="button" onclick="document.getElementById('fileInput').click();" title="Edit Product">
+                                                                                <button class="btn" type="button" onclick="document.getElementById('fileInput<[img_id]>').click();" title="Edit Product">
                                                                                     <img src="/MotorShop/skins/multikart_all_in_one/assets/svg/feature/edit.svg" alt="Edit">
                                                                                 </button>
 
@@ -183,10 +183,10 @@
                                                                             </form>
                                                                             <script>
                                                                                 // Ascolta il cambiamento del file input
-                                                                                document.getElementById('fileInput').addEventListener('change', function() {
+                                                                                document.getElementById('fileInput<[img_id]>').addEventListener('change', function() {
                                                                                     // Se viene selezionato un file, invia automaticamente il form
                                                                                     if (this.files.length > 0) {
-                                                                                        document.getElementById('uploadForm').submit();
+                                                                                        document.getElementById('uploadForm<[img_id]>').submit();
                                                                                     }
                                                                                 });
                                                                             </script>
