@@ -43,9 +43,9 @@
                                                 <label class="col-xl-3 col-sm-4 mb-0">Quantità:</label>
                                                 <div class="col-xl-8 col-sm-7">
                                                     <div class="my-form form-control">
-                                                        <input class="form-control" type="number"
-                                                        name="quantity"
-                                                            placeholder="<[quantity]>" min="<[quantity]>" max="9999" required>
+                                                        <input class="form-control" type="number" name="quantity"
+                                                            placeholder="<[quantity]>" min="<[quantity]>" max="9999"
+                                                            required>
                                                         <div class="invalid-feedback">Il numero deve essere compreso tra
                                                             1 e 9999</div>
                                                     </div>
@@ -145,7 +145,62 @@
                                 </div>
                             </form>
                             <!-- Fine form per l'inserimento dei dettagli dello sconto -->
+                            <br>
+                            <br>
+                            <br>
+                            <h3>Cambia le immagini</h3>
+                            <div class="container-fluid">
+                                <div class="row products-admin ratio_asos">
+                                        <[foreach]>
+                                            <div class="col-xl-4 col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-body product-box">
+                                                        <div class="img-wrapper">
+                                                            <div class="front">
+                                                                <a
+                                                                    href="http://localhost/MotorShop/product-detail.php?id=<[id_sub]>">
+                                                                    <img src="data:image;base64,<[img]>" width="300"
+                                                                        height="300">
+                                                                </a>
+                                                                <div class="product-hover">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <form method="post"
+                                                                                id="uploadForm"
+                                                                                action="/MotorShop/edit-subproduct.php?id=<[id_sub]>" enctype="multipart/form-data">
+                                                                                <input type="hidden" name="id"
+                                                                                    value="<[image_id]>">
+                                                                                    
+                                                                                 <!-- Nascondere l'input file -->
+                                                                                <input type="file" name="image" id="fileInput" style="display:none;" accept="image/*">
+                                                                                <!-- <h1><[img_id]></h1> -->
+                                                                                <!-- Pulsante personalizzato per attivare il caricamento del file -->
+                                                                                <button class="btn" type="button" onclick="document.getElementById('fileInput').click();" title="Edit Product">
+                                                                                    <img src="/MotorShop/skins/multikart_all_in_one/assets/svg/feature/edit.svg" alt="Edit">
+                                                                                </button>
 
+                                    
+                                                                            </form>
+                                                                            <script>
+                                                                                // Ascolta il cambiamento del file input
+                                                                                document.getElementById('fileInput').addEventListener('change', function() {
+                                                                                    // Se viene selezionato un file, invia automaticamente il form
+                                                                                    if (this.files.length > 0) {
+                                                                                        document.getElementById('uploadForm').submit();
+                                                                                    }
+                                                                                });
+                                                                            </script>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <[/foreach]>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

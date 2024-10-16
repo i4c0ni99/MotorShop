@@ -14,7 +14,7 @@ $body = new Template("skins/multikart_all_in_one/back-end/add-subProduct.html");
 if (isset($_GET['id'])) {
     $productId = $_GET['id'];
     $body->setContent('id', $_GET['id']);
-    echo "<script>console.log('".$_GET['id']."');</script>";
+    
     // Recupera il nome della categoria associata al prodotto
     $result = $mysqli->query("SELECT categories.name FROM categories JOIN products ON categories.id = products.categories_id WHERE products.id = {$productId} LIMIT 1");
     if ($result && $result->num_rows > 0) {
