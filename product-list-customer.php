@@ -158,7 +158,8 @@ if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
-if(!isset($_GET['offert_pergentage'])){
+
+if(isset($_GET['offert_percentage'])){
     $product_query_base = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
     = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10";
 }
