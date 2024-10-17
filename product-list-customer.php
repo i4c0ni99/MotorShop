@@ -109,13 +109,7 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 $min_price = isset($_GET['min_price']) ? max(10, floatval($_GET['min_price'])) : 10;
 $max_price = isset($_GET['max_price']) ? min(2500, floatval($_GET['max_price'])) : 2500;
 
-// Aggiunta del parametro di taglia
-/* $size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : '';
 
-// Aggiunta del parametro di colore
-$color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : '';
-$product_query_base .= "AND sub_products.color = $color"; */
-// Aggiunta del parametro di categoria se specificato
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = $mysqli->real_escape_string($_GET['cat_id']);
@@ -147,32 +141,16 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body ->setContent('sub_tags_end',$code2);   
 }
 
+
 // Costruisci la parte iniziale della query SQL per selezionare i prodotti
-$product_query_base = "
+$product_query_base ="
     SELECT products.title, products.id 
-    FROM products 
+    FROM products  
     JOIN sub_products ON sub_products.products_id = products.id 
     WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
 
 // Aggiungi la condizione per il filtro di prezzo
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
-
-// Aggiungi la condizione per il filtro di colore se specificato
-/* if (!empty($color)) {
-    $product_query_base .= " AND sub_products.color = '$color' ";
-}
-
-// Aggiungi la condizione per il filtro di taglia se specificato
-if (!empty($size)) {
-    $product_query_base .= " AND EXISTS (
-                            SELECT * 
-                            FROM sizes 
-                            WHERE sizes.sub_products_id = sub_products.id 
-                                  AND sizes.size = '$size'
-                        ) ";
-}
- */
-// Aggiungi la condizione per il filtro di categoria se specificato
 $product_query_base .= $category_condition;
 
 // Aggiungi la condizione per il filtro di testo di ricerca se specificato
@@ -180,7 +158,10 @@ if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
-
+if(!isset($_GET['offert_pergentage'])){
+    $product_query_base = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10";
+}
 // Completamento della query SQL per contare i prodotti
 $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM products 
                 JOIN sub_products ON sub_products.products_id = products.id 
@@ -192,20 +173,7 @@ if(isset($_GET['size'])){
 $product_query_base .= "AND sub_products.size ='{$_GET['size']}'";
 $count_query .= "AND sub_products.size ='{$_GET['size']}'";
 }
-// Aggiungi la condizione per il filtro di colore se specificato nella query di conteggio
-/* if (!empty($color)) {
-    $count_query .= " AND sub_products.color = '$color' ";
-}
 
-// Aggiungi la condizione per il filtro di taglia se specificato nella query di conteggio
-if (!empty($size)) {
-    $count_query .= " AND EXISTS (
-                            SELECT * 
-                            FROM sizes 
-                            WHERE sizes.sub_products_id = sub_products.id 
-                                  AND sizes.size = '$size'
-                        ) ";
-} */
 
 // Aggiungi la condizione per il filtro di categoria se specificato nella query di conteggio
 $count_query .= $category_condition;
