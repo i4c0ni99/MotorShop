@@ -19,44 +19,49 @@ if (isset($_SESSION['user'])) {
     // Connessione al database già inclusa in "dbms.inc.php"
 
     // Funzione per aggiungere un prodotto al carrello
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart']) && isset($_POST['quantity'])) {
 
         $userEmail = $_SESSION['user']['email'];
         $subproductId = (int) $_POST['add_to_cart'];
         
         // Controlla se il prodotto è già nel carrello
-        $checkQuery = "SELECT * FROM cart WHERE subproduct_id = ? AND user_email = ?";
-        $stmt_check = $mysqli->prepare($checkQuery);
-        if ($stmt_check) {
-            $stmt_check->bind_param("is", $subproductId, $userEmail);
-            $stmt_check->execute();
-            $stmt_check->store_result();
-            if ($stmt_check->num_rows > 0) {
-                // Prodotto già presente nel carrello, aggiorna la quantità
-                $updateQuery = "UPDATE cart SET quantity = quantity + 1 WHERE subproduct_id = ? AND user_email = ?";
+        $checkQuery = "SELECT * FROM cart  WHERE  subproduct_id = ".$subproductId." AND user_email = '".$userEmail."'";
+        $stmt_check = $mysqli->query($checkQuery);
+        $stmt_result = $stmt_check->fetch_assoc();            
+            if ($stmt_result) {
+              
+                $updateQuery = "UPDATE cart SET quantity = ? WHERE subproduct_id = ? AND user_email = ?";
                 $stmt_update = $mysqli->prepare($updateQuery);
                 if ($stmt_update) {
-                    $stmt_update->bind_param("is", $subproductId, $userEmail);
+                    $quantity = $_POST['quantity'];
+                    if( $quantity == $stmt_result['quantity'] ){
+                        echo "<script>console.log('Messaggio di debug nel browser');</script>";
+                        $quantityZero = 0;
+                        $stmt_update->bind_param("iis", $stmt_result['quantity'],$subproductId, $userEmail);
+                    }
+                    else{ 
+                        echo "<script> console.log('entrato')</script>";
+                        $stmt_update->bind_param("iis",$quantity ,$subproductId, $userEmail);
+                     }   
                     if ($stmt_update->execute()) {
-                        echo "Quantità del prodotto nel carrello aggiornata con successo!";
+                        echo json_encode(['success' => 'success']);
                     } else {
-                        echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
                         error_log("Execute statement failed: " . $stmt_update->error);
                     }
                     $stmt_update->close();
                 } else {
-                    echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
                     error_log("Prepare statement failed: " . $mysqli->error);
                 }
             } else {
                 // Prodotto non presente nel carrello, aggiungilo
-                echo 'sono entrato';
-                $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, 1, ?)";
+                
+                $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, ?, ?)";
                 $stmt_insert = $mysqli->prepare($insertQuery);
                 if ($stmt_insert) {
-                    $stmt_insert->bind_param("is", $subproductId, $userEmail);
+                    $stmt_insert->bind_param("iis", $subproductId,$_POST['quantity'], $userEmail);
                     if ($stmt_insert->execute()) {
                         echo "Prodotto aggiunto al carrello con successo!";
+                        echo json_encode(['success' => 'success']);
                         exit;
                     } else {
                         echo "Errore durante l'aggiunta del prodotto al carrello.";
@@ -68,11 +73,8 @@ if (isset($_SESSION['user'])) {
                     error_log("Prepare statement failed: " . $mysqli->error);
                 }
             }
-            $stmt_check->close();
-        } else {
-            echo "Errore durante la verifica del prodotto nel carrello.";
-            error_log("Prepare statement failed: " . $mysqli->error);
-        }
+            
+      
         exit; // Termina lo script dopo l'aggiunta al carrello
     }
 
@@ -103,51 +105,32 @@ if (isset($_SESSION['user'])) {
     // Funzione per aggiornare le quantità dei prodotti nel carrello
     if (isset($_POST['update_quantities']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $userEmail = $_SESSION['user']['email'];
-        $quantities = $_POST['quantities']; // Array associativo con id prodotto e quantità
-
-        foreach ($quantities as $subproductId => $newQuantity) {
-            $subproductId = (int) $subproductId;
-            $newQuantity = (int) $newQuantity;
-
-            // Ottieni la quantità attuale dal database
-            $query = "SELECT quantity FROM cart WHERE subproduct_id = ? AND user_email = ?";
-            $stmt = $mysqli->prepare($query);
-            if ($stmt) {
-                $stmt->bind_param("is", $subproductId, $userEmail);
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($cartItem = $result->fetch_assoc()) {
-                    $currentQuantity = (int) $cartItem['quantity'];
-
-                    // Aggiorna solo se la nuova quantità è diversa dalla quantità attuale
-                    if ($currentQuantity !== $newQuantity) {
-                        $updateQuery = "UPDATE cart SET quantity = ? WHERE subproduct_id = ? AND user_email = ?";
-                        $stmt_update = $mysqli->prepare($updateQuery);
-                        if ($stmt_update) {
-                            $stmt_update->bind_param("iis", $newQuantity, $subproductId, $userEmail);
-                            if ($stmt_update->execute()) {
-                                echo "Quantità del prodotto nel carrello aggiornata con successo!";
-                            } else {
-                                echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
-                                error_log("Execute statement failed: " . $stmt_update->error);
-                            }
-                            $stmt_update->close();
-                        } else {
-                            echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
-                            error_log("Prepare statement failed: " . $mysqli->error);
-                        }
-                    }
-                } else {
-                    echo "Prodotto non trovato nel carrello.";
-                    error_log("Fetch cart data failed: " . $stmt->error);
-                }
-                $stmt->close();
-            } else {
-                echo "Errore durante il recupero della quantità del prodotto nel carrello.";
-                error_log("Prepare statement failed: " . $mysqli->error);
-            }
+        $quantities = $_POST['update_quantities']; // Array associativo con id prodotto e quantità
+        $subproductId = $_POST['id'];
+        if($quantities == 0){ 
+            $mysqli->query("DELETE FROM cart WHERE subproduct_id = ".$subproductId." AND user_email = '".$userEmail."'");   
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         }
+        $updateQuery = "UPDATE cart SET quantity = ? WHERE subproduct_id = ? AND user_email = ?";
+        $stmt_update = $mysqli->prepare($updateQuery);
+        if ($stmt_update) {
+            $stmt_update->bind_param("iis", $quantities, $subproductId, $userEmail);
+            if ($stmt_update->execute()) {
+                echo "Quantità del prodotto nel carrello aggiornata con successo!";
+                echo json_encode(['success' => 'success']);
+            } else {
+                echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
+                error_log("Execute statement failed: " . $stmt_update->error);
+            }
+            $stmt_update->close();
+        } else {
+            echo "Errore durante l'aggiornamento della quantità del prodotto nel carrello.";
+            error_log("Prepare statement failed: " . $mysqli->error);
+        }
+            
+        
+        
         // Ricarica la pagina del carrello dopo l'aggiornamento
         header("Location: /MotorShop/cart.php");
         exit;
@@ -155,7 +138,7 @@ if (isset($_SESSION['user'])) {
 
     // Funzione per mostrare il carrello dell'utente
     $userEmail = $_SESSION['user']['email'];
-    $query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.availability, sp.color, sp.size, i.imgsrc
+    $query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc
           FROM cart c
           INNER JOIN sub_products sp ON c.subproduct_id = sp.id
           LEFT JOIN images i ON sp.id = i.sub_products_id
@@ -165,8 +148,7 @@ if (isset($_SESSION['user'])) {
         $stmt->bind_param("s", $userEmail);
         $stmt->execute();
         $result = $stmt->get_result();
-        $cartItems = []; // Array per memorizzare i dati del carrello
-
+        
         while ($cartItem = $result->fetch_assoc()) {
             $subproductId = $cartItem['subproduct_id'];
 
@@ -183,10 +165,8 @@ if (isset($_SESSION['user'])) {
                     // Altri dati del prodotto
                     $quantity = $cartItem['quantity'];
                     $price = formatPrice($cartItem['price']);
-
-                    // Ricevi e converti quantity
-                    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
-
+                    echo '<script>console.log('.$cartItem['quantity'].');</script>';
+                
                     // Converti $price da stringa a float (se necessario)
 //$price = floatval(str_replace(',', '.', $price));
 
@@ -198,7 +178,7 @@ if (isset($_SESSION['user'])) {
                     // Gestisci il caso in cui $price o $quantity non siano numerici
                     //echo "Errore: Prezzo o quantity non sono valori numerici validi.";
 //}
-
+                    $quantities = $cartItem['prod_quantity'];
                     $size = $cartItem['size'];
                     $color = $cartItem['color'];
                     $availability = $cartItem['availability'] == 1 ? "Disponibile" : "Non disponibile";
@@ -216,6 +196,7 @@ if (isset($_SESSION['user'])) {
                         "img" => $imgsrc,
                         "product_id" => $cartItem['products_id'],
                         "id" => $subproductId,
+                        "prod_quantity" => $cartItem['prod_quantity']
                     ];
                 } else {
                     error_log("Fetch product data failed: " . $stmt_product->error);
@@ -229,6 +210,8 @@ if (isset($_SESSION['user'])) {
 
         // Imposta i contenuti nel template
         foreach ($cartItems as $cartItem) {
+            
+
             $body->setContent("title", $cartItem['title']);
             $body->setContent("quantity", $cartItem['quantity']);
             $body->setContent("size", $cartItem['size']);
@@ -239,6 +222,8 @@ if (isset($_SESSION['user'])) {
             $body->setContent("img", $cartItem['img']);
             $body->setContent("product_id", $cartItem['product_id']);
             $body->setContent("id", $cartItem['id']);
+            $body->setContent("quantities",$cartItem['prod_quantity']);
+            
         }
     } else {
         error_log("Prepare statement failed: " . $mysqli->error);

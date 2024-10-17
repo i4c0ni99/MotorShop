@@ -1301,9 +1301,11 @@ $(document).ready(function () {
     $(".input-quantity-product-detail").each(function () {
       var inputQuantity = $(this);
       var minNum = 1;
-      var maxNum = 999;
-
-      var spinner = inputQuantity.spinner({
+      var maxNum = $(this).attr('data-prodQuantity')
+        ? $(this).attr('data-prodQuantity')
+        : 1;
+        console.log($(this).attr('data-prodQuantity'))
+      inputQuantity.spinner({
         numberFormat: "n",
         min: minNum,
         max: maxNum,
@@ -1327,13 +1329,18 @@ $(document).ready(function () {
       var wraper = inputQuantity.closest(".calculate-price-wrapper");
       var unit = wraper.find(".calculate-price-unit");
       var output = wraper.find(".calculate-price-output");
-      var minNum = 1;
-      var maxNum = 999;
+      
+      
+      var minNum = 0;
+      var maxNum = $(this).closest(".post").data("quantity")
+        ? $(this).closest(".post").data("quantity")
+        : 0;
+      
 
+      
       var outputNum = parseFloat(unit.text()) * parseFloat($(this).val());
       output.text(outputNum.toFixed(2));
-
-      var spinner = inputQuantity.spinner({
+      inputQuantity.spinner({
         numberFormat: "n",
         min: minNum,
         max: maxNum,
@@ -1341,7 +1348,21 @@ $(document).ready(function () {
         change: function () {
           $(this).val() < minNum ? $(this).val(minNum) : null;
           $(this).val() > maxNum ? $(this).val(maxNum) : null;
-
+          console.log($(this).val()) 
+          $.ajax({
+            url: "cart.php", // Endpoint che verrà chiamato
+            method: "POST",
+            data: { 
+                update_quantities: $(this).val(),
+                id : $(this).closest(".post").data("id")
+             }, // I parametri verranno aggiunti all'URL
+            success: function (response) {
+            console.log("aggiornato con succcesso")
+            },
+            error: function () {
+              alert("Errore durante la connessione al server.");
+            },
+          });
           var outputNum = parseFloat(unit.text()) * parseFloat($(this).val());
           output.text(outputNum.toFixed(2));
         },
@@ -1349,6 +1370,7 @@ $(document).ready(function () {
         stop: function () {
           var outputNum = parseFloat(unit.text()) * parseFloat($(this).val());
           output.text(outputNum.toFixed(2));
+         
         },
       });
     });
@@ -1472,8 +1494,8 @@ $(document).ready(function () {
       var sliderRange = wrapper.find(".slider-range");
       var minValue = wrapper.find(".min-value");
       var maxValue = wrapper.find(".max-value");
-      var minPriceInput = document.getElementById('min_price');
-      var maxPriceInput = document.getElementById('max_price');
+      var minPriceInput = document.getElementById("min_price");
+      var maxPriceInput = document.getElementById("max_price");
 
       sliderRange.slider({
         range: true,
@@ -1483,19 +1505,19 @@ $(document).ready(function () {
         slide: function (event, ui) {
           minValue.text(ui.values[0]);
           maxValue.text(ui.values[1]);
-          minPriceInput.value=ui.values[0]
-          maxPriceInput.value=ui.values[1]
+          minPriceInput.value = ui.values[0];
+          maxPriceInput.value = ui.values[1];
         },
       });
-      
+
       minValue.text(sliderRange.slider("values", 0));
       maxValue.text(sliderRange.slider("values", 1));
-      
-      $(document).ready(function() {
+
+      $(document).ready(function () {
         minPriceInput.value = sliderRange.slider("values", 0);
         maxPriceInput.value = sliderRange.slider("values", 1);
-    });
-      console.log('slider')
+      });
+      console.log("slider");
     });
   })(jQuery);
 
@@ -1835,33 +1857,33 @@ $(document).ready(function () {
       .off("dbclick")
       .on("click", ".btn-add-to-cart", function () {
         var post = $(this).closest(".post");
-        var subId = $(this).data('id');
-        var messageAction = post.find('.content-message .message-inner');
-        var htmlString =  '<i class="fa fa-check mv-color-primary"></i> 1 item added to cart. <a href="/../MotorShop/cart.php"><strong>View cart</strong></a>';
-  
+        var subId = $(this).data("id");
+        var quantity = $(".input-quantity-product-detail").val();
+        console.log(quantity)
+        var messageAction = post.find(".content-message .message-inner");
+        var htmlString =
+          '<i class="fa fa-check mv-color-primary"></i> 1 item added to cart. <a href="/../MotorShop/cart.php"><strong>View cart</strong></a>';
 
         if (!$(this).hasClass("active")) {
-          
-          
-          
           $.ajax({
-            url: 'cart.php', // Endpoint che verrà chiamato
-            method: 'POST', 
-            data: { add_to_cart : subId }, // I parametri verranno aggiunti all'URL
-            success: function(response) {
-                // Prova a forzare il parsing della risposta se non è JSON
-                 // Visualizza la risposta nella console per il debug
-                 console.log(subId)
-                 $(this).addClass('active');
-                 $(this).find('.btn-text').text('added to cart');
-                 messageAction.html(htmlString).hide().fadeIn(); 
-                //window.location.href='/MotorShop/cart.php'
+            url: "cart.php", // Endpoint che verrà chiamato
+            method: "POST",
+            data: { add_to_cart: subId,
+                    quantity: quantity
+             }, // I parametri verranno aggiunti all'URL
+            success: function (response) {
+              // Prova a forzare il parsing della risposta se non è JSON
+              // Visualizza la risposta nella console per il debug
+              console.log(subId);
+              $(this).addClass("active");
+              $(this).find(".btn-text").text("added to cart");
+              messageAction.html(htmlString).hide().fadeIn();
+              //window.location.href='/MotorShop/cart.php'
             },
-            error: function() {
-                alert('Errore durante la connessione al server.');
-            }
-        });
-        
+            error: function () {
+              alert("Errore durante la connessione al server.");
+            },
+          });
         } else {
           messageAction.html(htmlString).hide().fadeIn();
         }
@@ -1873,39 +1895,35 @@ $(document).ready(function () {
   /* --------------------------------------------------------------------- */
   (function ($) {
     if (!$(".btn-add-to-wishlist").length) {
-      
       return;
     }
 
     $(document.body)
       .off("dbclick")
       .on("click", ".btn-add-to-wishlist", function () {
-
         var post = $(this).closest(".post");
-        var subId= $(this).data('id')
+        var subId = $(this).data("id");
         var messageAction = post.find(".content-message .message-inner");
         var htmlString =
           '<i class="fa fa-check mv-color-primary"></i> prodoto aggiunto in wishlist . <a href="wishlist.php"><strong>View wishlist</strong></a>';
 
         if (!$(this).hasClass("active")) {
-
-            $.ajax({
-                url: "wishlist.php", // L'endpoint del server per eliminare il prodotto
-                method: "POST",
-                data: { wishlist : subId }, // Invia l'ID del prodotto come dato
-                success: function(response) {
-                    console.log(subId)
-                    $(this).addClass("active");
-                    $(this).find(".btn-text").text("aggiunto");
-                    messageAction.html(htmlString).hide().fadeIn();
-                  },
-                  error: function(xhr, status, error) {
-                    console.log('Errore: ' + error);
-                    console.log(xhr.responseText); // Stampa la risposta completa del server
-                    alert('Errore durante la connessione al server.');
-                  }
-              });
-         
+          $.ajax({
+            url: "wishlist.php", // L'endpoint del server per eliminare il prodotto
+            method: "POST",
+            data: { wishlist: subId }, // Invia l'ID del prodotto come dato
+            success: function (response) {
+              console.log(subId);
+              $(this).addClass("active");
+              $(this).find(".btn-text").text("aggiunto");
+              messageAction.html(htmlString).hide().fadeIn();
+            },
+            error: function (xhr, status, error) {
+              console.log("Errore: " + error);
+              console.log(xhr.responseText); // Stampa la risposta completa del server
+              alert("Errore durante la connessione al server.");
+            },
+          });
         } else {
           messageAction.html(htmlString).hide().fadeIn();
         }
@@ -1926,19 +1944,19 @@ $(document).ready(function () {
       $.ajax({
         url: "cart.php", // L'endpoint del server per eliminare il prodotto
         method: "POST",
-        data: { delete : productId }, // Invia l'ID del prodotto come dato
-        success: function(response) {
-            console.log('Risposta del server:', response); // Log per verificare la risposta
-              // Se la richiesta ha successo, rimuovi il prodotto dalla vista
-              $post.fadeOut(300, function() {
-                $(this).remove();
-              });
-          },
-          error: function(xhr, status, error) {
-            console.log('Errore: ' + error);
-            console.log(xhr.responseText); // Stampa la risposta completa del server
-            alert('Errore durante la connessione al server.');
-          }
+        data: { delete: productId }, // Invia l'ID del prodotto come dato
+        success: function (response) {
+          console.log("Risposta del server:", response); // Log per verificare la risposta
+          // Se la richiesta ha successo, rimuovi il prodotto dalla vista
+          $post.fadeOut(300, function () {
+            $(this).remove();
+          });
+        },
+        error: function (xhr, status, error) {
+          console.log("Errore: " + error);
+          console.log(xhr.responseText); // Stampa la risposta completa del server
+          alert("Errore durante la connessione al server.");
+        },
       });
     });
   })(jQuery);

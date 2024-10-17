@@ -14,7 +14,7 @@ $result = $oid->fetch_assoc();
 $categories = $mysqli->query("SELECT name FROM categories where id={$result['categories_id']}");
 $category = $categories->fetch_assoc();
 $body->setContent('category', $category['name']);
-
+$dizionario= array();   
 $body->setContent("id", $result['id']);
 $body->setContent("title", $result['title']);
 $body->setContent("descrizione", $result['description']);
@@ -22,7 +22,7 @@ $body->setContent("information", $result['information']);
 $body->setContent("specification", $result['specification']);
 
 
-$data = $mysqli->query("SELECT id,price,color FROM sub_products where products_id={$_GET['id']}");
+$data = $mysqli->query("SELECT id,price,color,quantity as sub_quantity FROM sub_products where products_id={$_GET['id']}");
 $result1 = $data->fetch_assoc();
 $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id']}");
             $offerItem = $offer->fetch_assoc();
@@ -43,9 +43,8 @@ $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id
             $price = strval($result1['price']);
             $body->setContent("percentage",$offerItem['percentage']);
             $body->setContent("pricePercentage",formatPrice($price));
-            
             }
-$oid1 = $mysqli->query("SELECT imgsrc FROM images where product_id={$_GET['id']} ");
+$oid1 = $mysqli->query("SELECT imgsrc FROM images where product_id={$_GET['id']}");
 $result2 = $oid1->fetch_assoc();
 //visualizzazione feedback
 $feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
@@ -83,11 +82,13 @@ foreach ($data as $item) {
             <span style="background-color:' . $item['color'] . '" class="icon-color"></span>
           </a>
       </li>');
+
     $uniqueColor[$item['color']]=0;
+   
    $body->setContent("subId", $item['id']);
    $body->setContent("color", $item['color']);
-   $body->setContent("quantity", $item['quantity']);
-    }else{echo('ciao');}
+   
+}
 }
 
 
@@ -95,13 +96,23 @@ foreach ($data as $item) {
 
 if (isset($_GET['subId'])) {
 
-   $data1 = $mysqli->query("SELECT size from sub_products where products_id ={$_GET['id']}");
+   $data1 = $mysqli->query("SELECT size,quantity from sub_products where products_id ={$_GET['id']}");
    foreach ($data1 as $item2) {
 
       $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item['id'] . '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
-    
+      $dizionario[$item2['size']] = $item2['quantity']; 
+       
    }
-   
+$cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = {$item['id']}");
+   $cartData=$cart_quantity->fetch_assoc();
+   $body->setContent("prodQuantity",$dizionario[$_GET['size']]);
+   if($cartData){
+    $body->setContent("quantity", $cartData['quantity']);
+       
+    }else {
+        $body->setContent("quantity", 1);
+    }
+    
 
    if (isset($_GET['size'])) 
    $body->setContent("buttons",'
@@ -156,6 +167,7 @@ if (isset($_GET['subId'])) {
    }
 
 }
+
 
 if (isset($_POST['post-review'])) {
 

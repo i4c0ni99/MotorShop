@@ -4,11 +4,11 @@ session_start();
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
-require "include/auth.inc.php";
 require_once "include/utils/priceFormatter.php";
 
 // Verifica se l'utente è loggato
-if (isset($_SESSION['user']['email'])) {
+if (!isset($_SESSION['user'])) {
+    require "include/auth.inc.php";
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
     $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
     // Popola il template con i dati dell'utente
@@ -109,13 +109,7 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 $min_price = isset($_GET['min_price']) ? max(10, floatval($_GET['min_price'])) : 10;
 $max_price = isset($_GET['max_price']) ? min(2500, floatval($_GET['max_price'])) : 2500;
 
-// Aggiunta del parametro di taglia
-/* $size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : '';
 
-// Aggiunta del parametro di colore
-$color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : '';
-$product_query_base .= "AND sub_products.color = $color"; */
-// Aggiunta del parametro di categoria se specificato
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = $mysqli->real_escape_string($_GET['cat_id']);
@@ -147,44 +141,31 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body ->setContent('sub_tags_end',$code2);   
 }
 
-// Query per selezionare i prodotti disponibili
-$product_query_base = "
-    SELECT products.title, products.id, products.availability 
-    FROM products 
+
+// Costruisci la parte iniziale della query SQL per selezionare i prodotti
+$product_query_base ="
+    SELECT products.title, products.id 
+    FROM products  
     JOIN sub_products ON sub_products.products_id = products.id 
-    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) AND products.availability = 1";
+    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
 
 // Aggiungi la condizione per il filtro di prezzo
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
-
-// Aggiungi la condizione per il filtro di colore se specificato
-/* if (!empty($color)) {
-    $product_query_base .= " AND sub_products.color = '$color' ";
-}
-
-// Aggiungi la condizione per il filtro di taglia se specificato
-if (!empty($size)) {
-    $product_query_base .= " AND EXISTS (
-                            SELECT * 
-                            FROM sizes 
-                            WHERE sizes.sub_products_id = sub_products.id 
-                                  AND sizes.size = '$size'
-                        ) ";
-}
- */
-//Condizione per il filtro per categoria
 $product_query_base .= $category_condition;
 
-// Condizione per il filtro per ricerca testuale
+// Aggiungi la condizione per il filtro di testo di ricerca se specificato
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $searchText = $mysqli->real_escape_string($_GET['search_text']);
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
-
-// Query per contare i prodotti (escludere quelli non disponibili)
+if(!isset($_GET['offert_pergentage'])){
+    $product_query_base = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10";
+}
+// Completamento della query SQL per contare i prodotti
 $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM products 
                 JOIN sub_products ON sub_products.products_id = products.id 
-                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
+                WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) ";
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
 $count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
@@ -192,20 +173,7 @@ if(isset($_GET['size'])){
 $product_query_base .= "AND sub_products.size ='{$_GET['size']}'";
 $count_query .= "AND sub_products.size ='{$_GET['size']}'";
 }
-// Aggiungi la condizione per il filtro di colore se specificato nella query di conteggio
-/* if (!empty($color)) {
-    $count_query .= " AND sub_products.color = '$color' ";
-}
 
-// Aggiungi la condizione per il filtro di taglia se specificato nella query di conteggio
-if (!empty($size)) {
-    $count_query .= " AND EXISTS (
-                            SELECT * 
-                            FROM sizes 
-                            WHERE sizes.sub_products_id = sub_products.id 
-                                  AND sizes.size = '$size'
-                        ) ";
-} */
 
 // Aggiungi la condizione per il filtro di categoria se specificato nella query di conteggio
 $count_query .= $category_condition;
@@ -274,12 +242,12 @@ if ($result && $result->num_rows > 0) {
                     </div>
                 
                    <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
-                <div class="label-2-inner">
-                    <ul class="label-2-ul">
-                        <li class="number">-'.$offerItem['percentage'].'%</li>
-                        <li class="text">Sconto</li>
-                    </ul>
-                </div>
+                        <div class="label-2-inner">
+                            <ul class="label-2-ul">
+                                <li class="number">-'.$offerItem['percentage'].'%</li>
+                                <li class="text">Sconto</li>
+                            </ul>
+                        </div>
                 </div>
                 
                 </div>
@@ -327,9 +295,9 @@ if ($result && $result->num_rows > 0) {
                         <span class="btn-inner"></span>
                     </a>
     
-                    <div class="content-message mv-message-style-1">
-                        <div class="message-inner"></div>
-                    </div>
+                            <div class="content-message mv-message-style-1">
+                                <div class="message-inner"></div>
+                            </div>
                 
                 </div>
             </div>

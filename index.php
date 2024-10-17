@@ -69,7 +69,7 @@ if ($resultCat->num_rows > 0) {
             $price = $key['price'];
             $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
             $price = formatPrice($price);
-            $$body->setContent(
+            $body->setContent(
                 "giacche",
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
 
@@ -95,8 +95,8 @@ if ($resultCat->num_rows > 0) {
 
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
-                    </div>
+                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                        </div>
                                     </div>
 
                                     <div class="content-main">
@@ -115,9 +115,10 @@ if ($resultCat->num_rows > 0) {
                                         <div class="content-button mv-btn-group text-center">
                                             <div class="group-inner">
 
-                                               <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-                                               <span class="btn-inner">
-                                               <span class="btn-text">Scopri</span>
+                                               <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                               
 
                                         </div>
                                     </div>
@@ -125,7 +126,6 @@ if ($resultCat->num_rows > 0) {
 
                             </article>'
             );
-
         } else {
             $body->setContent('giacche', '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item jackets">
 
@@ -164,26 +164,24 @@ if ($resultCat->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                        <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>');
+                                </article>
+                               ');
         }
 
     }
 }
 
-$oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
+ $oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
                           sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO')
                           ORDER BY mediumRate DESC limit 0,5");
 
@@ -232,7 +230,6 @@ if ($resultCatCasco->num_rows > 0) {
                                         <div class="content-text">
                                             <div class="content-price">
                                                 <span class="new-price">€ ' . $pricePercentage . ' </span>
-                                                <br>
                                                 <span class="old-price">€ ' . $price . '</span>
                                             </div>
                                             <div class="content-desc"><a
@@ -241,20 +238,17 @@ if ($resultCatCasco->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                              <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>'
+                                </article>'
             );
 
         } else {
@@ -284,9 +278,7 @@ if ($resultCatCasco->num_rows > 0) {
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ ' . $pricePercentage . ' </span>
-                                                <br>
-                                                <span class="old-price">€ ' . $price . '</span>
+                                                <span class="new-price">€ ' . $price . ' </span>
                                             </div>
                                             <div class="content-desc"><a
                                                     href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
@@ -294,18 +286,16 @@ if ($resultCatCasco->num_rows > 0) {
                                         </div>
                                     </div>
                                     <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-
-                                            <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-                                            <span class="btn-inner">
-                                            <span class="btn-text">Scopri</span>
-
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>');
+                                </article>');
         }
 
     }
@@ -367,20 +357,17 @@ if ($resultCatStivali->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                     <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>'
+                                </article>'
             );
 
         } else {
@@ -418,20 +405,17 @@ if ($resultCatStivali->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-                                            <div class="group-inner">
-
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
-
+                                      <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
-
-                            </article>');
+                                </article>');
         }
 
         //aggiungere il medium rate
@@ -494,20 +478,17 @@ if ($resultProtezioni->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                     <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>'
+                                </article>'
             );
 
         } else {
@@ -547,19 +528,16 @@ if ($resultProtezioni->num_rows > 0) {
                                     </div>
 
                                     <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                           <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>');
+                                </article>');
         }
 
     }
@@ -622,20 +600,17 @@ if ($resultCatPantaloni->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                   <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>'
+                                </article>'
             );
 
         } else {
@@ -672,20 +647,17 @@ if ($resultCatPantaloni->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                     <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>');
+                                </article>');
         }
 
         //aggiungere il medium rate
@@ -749,19 +721,17 @@ if ($resultCatTute->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                      <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>'
+                                </article>'
             );
 
         } else {
@@ -798,24 +768,251 @@ if ($resultCatTute->num_rows > 0) {
                                         </div>
                                     </div>
 
-                                    <div class="content-hover">
-                                        <div class="content-button mv-btn-group text-center">
-
-                                            <div class="group-inner">
-                                                <a href="/MotorShop/product-detail.php?id=' . $key["prod_id"] . '"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist"
-                                                <span class="btn-inner">
-                                                <span class="btn-text">Scopri</span>
+                                      <div class="content-hover">
+                                            <div class="content-button mv-btn-group text-center">
+                                                <div class="group-inner">
+                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-                            </article>');
+                                </article>');
         }
 
     }
+} 
+
+
+/* $result_offer = $mysqli->query("SELECT products.title, products.id, products.availability,sub_products.id as sub_id 
+FROM products JOIN sub_products ON sub_products.products_id = products.id WHERE
+ EXISTS (SELECT 1 FROM offers WHERE offers.subproduct_id = sub_products.id) AND products.availability = 1");
+
+if ($result_offer && $result_offer->num_rows > 0) {
+    while ($key = $result_offer->fetch_assoc()) {
+        
+        $body->setContent("id", $key['id']);
+        $body->setContent("title", $key['title']);
+
+        $product_id = $mysqli->real_escape_string($key['id']);
+        $title = $mysqli->real_escape_string($key['title']);
+
+        $image_query = "
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
+            FROM products 
+            JOIN sub_products ON sub_products.products_id = products.id 
+            JOIN images ON images.product_id = products.id 
+            WHERE products.id = '$product_id'
+            LIMIT 1
+        ";
+
+        $image_data = $mysqli->query($image_query);
+        
+            if ($image_data && $image_data->num_rows > 0 ) {
+                
+                $item = $image_data->fetch_assoc();
+                
+                $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
+                $offerItem = $offer->fetch_assoc();
+                if($offerItem){
+                $price = $item['price'];
+                $img =  $item['imgsrc'];
+                $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
+                $price=formatPrice($price);
+                $body->setContent("code",
+                '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
+                <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
+                <div style="background-color: #fff;" class="content-thumb">
+                    <div class="thumb-inner mv-effect-relative">
+                    
+                        <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
+                            <img src="data:image;base64,'.$img.'" alt="demo" class="mv-effect-item" />
+                        </a>
+                        <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs">
+                            <span class="btn-inner"></span>
+                        </a>
+        
+                        <div class="content-message mv-message-style-1">
+                            <div class="message-inner"></div>
+                        </div>
+                    
+                    <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
+                            <div class="label-2-inner">
+                                <ul class="label-2-ul">
+                                    <li class="number">-'.$offerItem['percentage'].'%</li>
+                                    <li class="text">Sconto</li>
+                                </ul>
+                            </div>
+                    </div>
+                    
+                    </div>
+                </div>
+        
+                <div class="content-default">
+                    <div class="content-desc">
+                        <a href="#" class="mv-overflow-ellipsis">'.$title.'</a>
+                    </div>
+                    <br>
+                    <div class="content-price">
+                        <span class="new-price">€ '.$pricePercentage.' </span>
+                        <span class="old-price">€ '.$price.'</span>
+                    </div>
+                    <input type="hidden" value="'.$product_id.'" name="id" href="javascript:void(0)">
+                </div>
+        
+                <div class="content-hover">
+                    <div class="content-button mv-btn-group text-center">
+                        <div class="group-inner">
+                            <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
+                                    <span class="btn-inner">
+                                        <span class="btn-text">Scopri</span>
+                                    </span>
+                                </a>
+                        </div>
+                    </div>
+                </div>                                
+            </div>
+        </article>');
+                }
+        }
+    }
+} */
+
+$outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10"
+. " GROUP BY products.id LIMIT 3";
+
+$result = $mysqli->query($outlet);
+
+$offert_prew = $mysqli->query("SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 GROUP BY products.id LIMIT 5");
+
+if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows > 0) {
+        $key= $offert_prew->fetch_assoc();
+        $row = $result->fetch_all(PDO::FETCH_NUM);
+        
+
+        $product_id = $row[0][1];
+
+        $image_query = "
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
+            FROM products 
+            JOIN sub_products ON sub_products.products_id = products.id 
+            JOIN images ON images.product_id = products.id 
+            WHERE products.id = $product_id
+            LIMIT 1
+        ";
+
+        $image_data = $mysqli->query($image_query);
+       
+        if ($image_data && $image_data->num_rows > 0 ) {
+            $image_data = $image_data->fetch_assoc(); 
+            
+            $body->setContent('img_1_outlet',$image_data['imgsrc']);
+                
+            
+        }
+
+        
+        
+
+        $product_id2 = $row[1][1];
+        
+        $image_query2 = "
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
+            FROM products 
+            JOIN sub_products ON sub_products.products_id = products.id 
+            JOIN images ON images.product_id = products.id 
+            WHERE products.id = $product_id2
+            LIMIT 1
+        ";
+
+        
+        $image_data2= $mysqli->query($image_query2);
+        if ($image_data2 && $image_data2->num_rows > 0 ) {
+            $image_data2 = $image_data2->fetch_assoc(); 
+            
+            $body->setContent('img_2_outlet',$image_data2['imgsrc']);
+                
+            
+        }
+
+        foreach($offert_prew as $key) {
+            $product_id= $key['id'];
+         $img = $mysqli->query("
+            SELECT images.imgsrc, sub_products.price,sub_products.id 
+            FROM products 
+            JOIN sub_products ON sub_products.products_id = products.id 
+            JOIN images ON images.product_id = products.id 
+            WHERE products.id = ".$key['id']."
+            LIMIT 1
+        ")->fetch_assoc();
+
+        $price = $key['price'];
+        $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
+        $price=formatPrice($price);
+
+        $body->setContent("offer_cat",'
+                    <article class="col-xs-6 col-sm-4 col-md-3 item post">
+                        <div class="item-inner mv-effect-translate-1">
+                          <div class="content-thumb">
+                            <div class="thumb-inner mv-effect-relative">
+                                <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
+                                    <img src="data:image;base64,'.$img['imgsrc'].'" alt="demo" class="mv-effect-item" />
+                                </a>
+      
+                              <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
+                                <div class="label-2-inner">
+                                  <ul class="label-2-ul">
+                                    <li class="number">-'.$key['percentage'].'%</li>
+                                    <li class="text">Sconto</li>
+                                  </ul>
+                                </div>
+                              </div>
+      
+                              <div class="content-message mv-message-style-1">
+                                <div class="message-inner"></div>
+                              </div>
+                            </div>
+      
+                            <div class="content-hover">
+                              <div class="content-button mv-btn-group text-center">
+                                <div class="group-inner">
+                                  <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                            class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
+                                more</span></span></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <div class="content-default">
+                            <div data-rate="true" data-score="5.0" class="content-rate mv-rate text-center">
+                              <div class="rate-inner mv-f-14 text-left">
+                                <div class="content-price"><span class="new-price">$ '.$pricePercentage.'</span><span class="old-price">$ '.$price.'</span></div>
+                              </div>
+                            </div>
+      
+                            
+                            <div class="content-desc"><a href="product-detail.php?id='.$product_id.'" title="'.$key['title'].'" class="mv-overflow-ellipsis">'.$key['title'].'</a></div>
+                          </div>
+                        </div>
+                    </article>
+
+
+
+
+
+
+        ');
+        }
+    
 }
+
+
+
+
 
 $main->setContent("dynamic", $body->get());
 $main->close();

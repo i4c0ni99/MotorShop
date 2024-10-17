@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <[foreach]>
-      <tr class="calculate-price-wrapper post" data-id="<[id]>">
+      <tr class="calculate-price-wrapper post" data-id="<[id]>" data-quantity = "<[quantities]>">
         <td>
           <div class="mv-block-style-24">
             <div class="block-24-list">
@@ -52,8 +52,9 @@
           <div class="mv-font-secondary mv-f-18"><strong>€<span class="calculate-price-unit"><[price]></span></strong></div>
         </td>
         <td>
-            <div class="mv-spinner-style-2">
-                <input type="text" name="test138" value="<[quantity]>" class="mv-inputbox mv-only-numeric input-quantity-cart"/>
+            
+            <div class="mv-spinner-style-2" >
+                <input type="text" name="test138" value="<[quantity]>" class="mv-inputbox mv-only-numeric input-quantity-cart" />
               </div>
         </td>
         <td> 
