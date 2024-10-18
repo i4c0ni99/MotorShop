@@ -1,0 +1,247 @@
+            <div class="page-body">
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Modifica profilo</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+
+                <!-- Container-fluid starts-->
+                <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="profile-details text-center">
+                                        <img class="rounded-circle user-image blur-up lazyloaded"
+                                            src="<[img]>" alt="">
+                                        <h5 class="f-w-600 mb-0"><[name]> <[surname]></h5>
+                                        <span><[email]></span>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <form class="needs-validation add-avatar-form" novalidate="" method="post" action="editProfile.php" enctype="multipart/form-data">
+                                    <div class="row product-adding">
+                                            <div class="add-product">
+                                                <div class="row">
+                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                        <ul class="file-upload-product">
+                                                            <li>
+                                                                <div class="box-input-file"><input class="upload"
+                                                                        type="file" name="avatar"><i class="fa fa-plus"></i></div>
+                                                            </li>
+                                                        <ul class="file-upload-product">
+                                                            <br>
+                                                            <li>
+															<input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>
+                                                            </li>
+                                                            <li>
+                                                                <input type="submit" value="Elimina avatar" name="delete-avatar-button" class="btn btn-primary"></input>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+							</div>
+							</div>
+                            
+                        <div class="col-xl-8">
+                            <div class="card tab2-card">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" id="top-profile-tab"
+                                                data-bs-toggle="tab" href="#top-profile" role="tab"
+                                                aria-controls="top-profile" aria-selected="true"><i data-feather="user"
+                                                    class="me-2"></i>Dettagli</a>
+                                        </li>
+                                    </ul>
+                                    <br>
+
+                                    <div class="tab-content" id="top-tabContent">
+                                        <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
+                                            aria-labelledby="top-profile-tab">
+                                            <div class="table-responsive profile-table">
+
+                                                <form class="needs-validation edit-details-form" method="post" action="/MotorShop/editProfile.php">
+                                                    <div class="form">
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="name" class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input type="text" name="name" placeholder="<[name]>" value="<[name]>" minlength="2" required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="surname" class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input type="text" name="surname" placeholder="<[surname]>" value="<[surname]>" minlength="2" required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="phone" class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input type="text" name="phone" placeholder="<[phone]>" value="<[phone]>" pattern="[3]{1}[0-9]{9}" minlength="10" required="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                            <input type="submit" value="Modifica" name="edit-details-button" class="btn btn-primary">
+                                                        </div>
+                                                    </div>
+                                                </form>                                                
+
+                                        <br>
+                                        <br>
+                                        <hr>			
+                                        <br>
+                                        <br>				
+                                        <h3><b>Crea una nuova password:</b></h3>
+                                        <br>									
+                                        <p>Scegli una password robusta.</p>
+                                        <br>
+										<form class="needs-validation add-product-form" method="post" action="/MotorShop/editProfile.php">
+                                                    <div class="form">
+													<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Password corrente:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input class="form-control" id="currentpassword"
+                                                                    type="password" name="currentpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                        </div>
+                                                        <div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input type="password" id="newpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="newpassword" required="true">
+                                                            </div>
+                                                            </div>            
+														<div class="form-group mb-3 row">
+                                                            <label for="validationCustom01"
+                                                                class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
+                                                            <div class="col-xl-8 col-sm-7">
+                                                                <input type="password" id="confirmpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmpassword" required="true">
+                                                            </div>
+                                                            </div>            
+                                                            <div class="offset-xl-3 offset-sm-4 mt-4">
+                                                                <input type="submit" value="Modifica" name="change-pass-button" class="btn btn-primary"></input>
+                                                        </div>
+                                                </form>
+                                                <br>
+                                        <br>
+										<hr>
+                                        <br>
+                                        <br>
+                                        
+                                                <h3><b>Aggiungi indirizzo:</b></h3>
+<br>
+<form class="needs-validation add-product-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
+    <div class="form">
+        <div class="form-group mb-3 row">
+            <label for="name" class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="name" name="name" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="surname" class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="surname" name="surname" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="phone" class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="phone" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="province" class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="province" name="province" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="city" class="col-xl-3 col-sm-4 mb-0">Città:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="city" name="city" required="true" minlength="2">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="streetAddress" class="col-xl-3 col-sm-4 mb-0">Indirizzo:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="streetAddress" name="streetAddress" minlength="3" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="cap" class="col-xl-3 col-sm-4 mb-0">CAP:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="cap" name="cap" pattern="[0-9]{5}" required="true">
+            </div>
+        </div>
+        <div class="offset-xl-3 offset-sm-4 mt-4">
+            <input type="submit" value="Aggiungi" name="add-address-button" class="btn btn-primary">
+        </div>
+    </div>
+    <!-- .form-body -->
+</form>
+<br>
+<hr>
+                                                <h3><b>Indirizzi salvati:</b></h3>
+                                                <div class="table-responsive table-desi">
+                                                    <table class="all-package coupon-table table table-striped">
+                                                        <thead>
+                                                            <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Cellulare</th>
+                            <th>Provincia</th>
+							<th>Città</th>
+							<th>Indirizzo</th>
+							<th>CAP</th>
+                        </tr>
+                    </thead>
+               
+                    <tbody>
+                      <[foreach]>
+                        <tr data-row-id="<[ADid]>">
+                            <td><[ADname]></td>
+                            <td><[ADsurname]></td>
+                            <td><[ADphone]></td>
+                            <td><[ADprovince]></td>
+							
+							<td><[ADcity]></td>
+							
+							<td><[ADstreetAddress]></td>
+							
+							<td><[ADcap]></td>
+                         
+                        </tr>
+                      <[/foreach]>
+					  </tbody>
+                    
+                </table>
+                </form>
+				
+</div>
+<br>
+<hr>
+<br>
+
+							</div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                </div>

@@ -1,0 +1,76 @@
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Aggiungi amministratore</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card tab2-card">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist"></ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="register-user" role="tabpanel" aria-labelledby="account-tab">
+                                <form class="needs-validation user-add" method="post" action="/../MotorShop/create-user-admin.php">
+                                    <h4>Crea utente amministratore</h4>
+                                    <h6>L'utente riceverà la password via email.</h6>
+                                    <hr>
+                                    <br>
+                                    <!-- Inserisci qui il resto del modulo di registrazione -->
+                                </form>
+
+                                <hr>
+
+                                <h4>Lista Utenti</h4>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Nome</th>
+                                            <th>Cognome</th>
+                                            <th>Telefono</th>
+                                            <th>Ruolo</th>
+                                            <th>Cambia Ruolo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <[foreach]>
+                                        <tr>
+                                            <td><[user_email]></td>
+                                            <td><[user_name]></td>
+                                            <td><[user_surname]></td>
+                                            <td><[user_phone]></td>
+                                            <td><[user_role]></td>
+                                            <td>
+                                                <a href="<[toggle_role_link]>" class="btn btn-primary">Cambia Ruolo</a>
+                                            </td>
+                                        </tr>
+                                        <[/foreach]>
+                                    </tbody>
+                                </table>
+
+                                <!-- Paginazione -->
+                                <div class="pagination">
+                                    <[pagination]>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Slider Homepage</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-7">
+                                <form class="needs-validation add-slider-form" novalidate method="post" enctype="multipart/form-data" action="/MotorShop/home-customizer.php">
+                                    <div class="form">
+                                        <h4>Aggiungi slide</h4>
+                                        <div class="form-group mb-3 row">
+                                            <label for="title" class="col-xl-3 col-sm-4 mb-0">Titolo:*</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="title" type="text" name="title" pattern=".{5,}" title="Il titolo deve avere almeno 5 caratteri" required="true">
+                                                <div class="valid-feedback">Sembra ok!</div>
+                                                <div class="invalid-feedback">Il titolo è obbligatorio e deve avere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form">
+                                        <div class="form-group mb-3 row">
+                                            <label for="description" class="col-xl-3 col-sm-4">Descrizione:*</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="description" name="description" class="form-control" style="resize: vertical;" rows="1" minlength="5" maxlength="255" required="true"></textarea>
+                                                <div class="invalid-feedback">La descrizione è obbligatoria e deve contenere almeno 5 caratteri.</div>
+                                            </div>
+                                        </div>
+                                                                                
+                                        <div class="form-group mb-3 row">
+                                            <label for="productImage" class="col-xl-3 col-sm-4 mb-0">Immagine slider:*</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control-file" id="productImage" value="<[slider_image]>" type="file" name="slider_image" accept="image/*" required="true" >
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Carica un'immagine in alta qualità per lo slider.</div>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                            <button type="submit" name="submit" class="btn btn-primary">Aggiungi</button>
+                                            <button type="reset" class="btn btn-light">Annulla</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+    
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <b><h4>Gestisci slider</h4></b>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive table-desi">
+                        <table class="display table table-striped" id="basic-1">
+                            <thead>
+                                <tr>
+                                    <th>Titolo</th>
+                                    <th>Descrizione</th>
+                                    <th>Testo bottone</th>
+                                    <th>Link</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Ciclo per le slide -->
+                                <[foreach]>
+                                <tr data-row-id="<[sliderId]>">
+                                    <td><[sliderTitle]></td>
+                                    <td><[sliderDescription]></td>
+                                    <td>
+                                        <!-- Form per l'eliminazione -->
+                                        <form method="post" action="/MotorShop/home-customizer.php">
+                                            <input type="hidden" name="sliderId" value="<[sliderId]>">
+                                            <button type="submit" name="delete" class="btn btn-danger">Elimina</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <[/foreach]>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+</div>
