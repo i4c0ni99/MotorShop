@@ -100,7 +100,6 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // var_dump($_POST);
     $errors = [];
 
     // Verifica dei dati inseriti
@@ -116,11 +115,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Descrizione e specifiche sono campi obbligatori da almeno 5 caratteri
-    if (strlen($_POST['description']) < 5) {
+    if (strlen($_POST['descriptionProduct']) < 5) {
         $errors[] = "La descrizione deve avere almeno 5 caratteri.";
     }
 
-    if (strlen($_POST['details']) < 5) {
+    if (strlen($_POST['detailsProduct']) < 5) {
         $errors[] = "Le specifiche devono avere almeno 5 caratteri.";
     }
 
@@ -139,24 +138,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Il codice prodotto o il titolo esistono già.";
     }
 
-    if (isset($_POST['information'])) {
-        $information = $_POST['information'];
-    } else {
-        $information = NULL;
-    }
-
     // Se non ci sono errori, procedi con l'inserimento nel database
     if (empty($errors)) {
-       
         $description = $mysqli->real_escape_string($_POST['description']);
         $details = $mysqli->real_escape_string($_POST['details']);
-        $information = isset($_POST['information']) ? $mysqli->real_escape_string($_POST['information']) : NULL;
+        $brand_id = $mysqli->real_escape_string($_POST['brand']);
  
         echo "Category ID: $category_id<br>";
         echo "Subcategory ID: $subcategory_id<br>";
 
-        $insertQuery = "INSERT INTO products (code, title, description, availability, specification, information, brand_id, categories_id, subcategories_id) 
-            VALUES ('$code', '$title', '$description', 1, '$details', '$information', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+        $insertQuery = "INSERT INTO products (code, title, description, availability, specification, brand_id, categories_id, subcategories_id) 
+            VALUES ('$code', '$title', '$description', 1, '$details', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
 
         echo $insertQuery;  // Debug: Print the query
 

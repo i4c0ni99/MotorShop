@@ -31,7 +31,6 @@
                                 </div>
                             </form>
                         </div>
-                        
                         <div class="card-body">
                             <div class="table-responsive table-desi">
                                 <table class="display table table-striped" id="basic-1">
@@ -43,7 +42,6 @@
                                             <th>Importo</th>
                                             <th>Dettagli</th>
                                             <th>Stato</th>
-                                            <th>Visualizza</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -56,20 +54,13 @@
                                             <td><[ord_totalPrice]></td>
                                             <td><[ord_details]></td>
                                             <td><[ord_state]></td>
-                                            <td><a href="/MotorShop/my-orders.php?id=<[ord_id]>" class="btn btn-primary">Apri</a></td>
                                             <td><a href="/MotorShop/orders-list.php?id=<[ord_id]>" class="btn btn-primary">Spedisci</a></td>
                                         </tr>
                                         <[/foreach]>
                                     </tbody>
                                 </table>
                             </div>
-                            
-                            <!-- Sezione per la paginazione -->
-                            <div class="pagination">
-                                <[pagination]>
-                            </div>
-                        </div>                        
-                        
+                        </div>
                     </div>
                 </div>
             </div>
