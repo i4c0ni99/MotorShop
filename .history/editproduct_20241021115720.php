@@ -37,11 +37,6 @@ if (isset($_POST['edit'])) {
         $details = $mysqli->real_escape_string($_POST['details']);
         $updates[] = "specification = '$details'";
     }
-    if (!empty($_POST['information'])) {
-        $information = $mysqli->real_escape_string($_POST['information']);
-        $updates[] = "information = '$information'";
-    }
-
     if (!empty($_POST['availability'])) {
         
         $availability = $mysqli->real_escape_string($_POST['availability']);
@@ -49,7 +44,6 @@ if (isset($_POST['edit'])) {
         $updates[] = "availability = '$availability'";
        
     }
-    
     if (empty($_POST['availability'])) {
         
         $availability = $mysqli->real_escape_string(0);
@@ -57,11 +51,15 @@ if (isset($_POST['edit'])) {
         $updates[] = "availability = '$availability'";
        
     }
+    // if (!empty($_POST['category'])) {
+    //    $category = $mysqli->real_escape_string($_POST['category']);
+    //    $updates[] = "categories_id = '$category'";
+    // }
 
     // Verifica se ci sono campi da aggiornare
     if (!empty($updates)) {
         $update_query .= implode(", ", $updates);
-        $update_query .= " WHERE id = ".$_GET['id'];
+        $update_query .= " WHERE id = '".$_GET['id']."'";
 
         // Esegui la query di aggiornamento
         if ($mysqli->query($update_query)) {
@@ -89,10 +87,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $category_result = $mysqli->query($category_query);
         $category_name = $category_result->fetch_assoc()['name'];
 
-        $subcategory_query = "SELECT name FROM subcategories WHERE id = '".$product['subcategories_id']."'";
-        $subcategory_result = $mysqli->query($subcategory_query);
-        $subcategory_name = $subcategory_result->fetch_assoc()['name'];
-
         $body->setContent('id', $productId);
         $body->setContent('code', $product['code']);
         $body->setContent('title', $product['title']);
@@ -104,9 +98,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
         $body->setContent('description', $product['description']);
         $body->setContent('details', $product['specification']);
-        $body->setContent('information', $product['information']);
         $body->setContent('category', $category_name);
-        $body->setContent('subcategory', $subcategory_name);
     } else {
         echo "Nessun prodotto trovato con ID: " . $productId;
     }

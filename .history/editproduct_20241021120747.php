@@ -39,7 +39,7 @@ if (isset($_POST['edit'])) {
     }
     if (!empty($_POST['information'])) {
         $information = $mysqli->real_escape_string($_POST['information']);
-        $updates[] = "information = '$information'";
+        $updates[] = "information = '$information";
     }
 
     if (!empty($_POST['availability'])) {
@@ -49,7 +49,6 @@ if (isset($_POST['edit'])) {
         $updates[] = "availability = '$availability'";
        
     }
-    
     if (empty($_POST['availability'])) {
         
         $availability = $mysqli->real_escape_string(0);
@@ -61,7 +60,7 @@ if (isset($_POST['edit'])) {
     // Verifica se ci sono campi da aggiornare
     if (!empty($updates)) {
         $update_query .= implode(", ", $updates);
-        $update_query .= " WHERE id = ".$_GET['id'];
+        $update_query .= WHERE id = ".$_GET['id']."";
 
         // Esegui la query di aggiornamento
         if ($mysqli->query($update_query)) {
