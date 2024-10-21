@@ -20,7 +20,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             file_put_contents($filePath, $htmlContent);
 
             echo "Contenuto salvato correttamente!";
-            header("Location: /MotorShop/select-file.php");
+            
         } else {
             echo "File non valido!";
         }

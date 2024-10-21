@@ -66,59 +66,6 @@ foreach ($addresses as $address) {
 $totalPrice = 0;
 $products = [];
 
-// Funzione per mostrare il carrello dell'utente nel riepilogo ordine
-$userEmail = $_SESSION['user']['email'];
-$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc
-          FROM cart c
-          INNER JOIN sub_products sp ON c.subproduct_id = sp.id
-          LEFT JOIN images i ON sp.id = i.sub_products_id
-          WHERE c.user_email = ?";
-$stmt = $mysqli->prepare($query);
-if ($stmt) {
-    $stmt->bind_param("s", $userEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $totalPrice = 0;
-
-    while ($cartItem = $result->fetch_assoc()) {
-        $subproductId = $cartItem['subproduct_id'];
-
-        // Ottieni title dalla tabella products
-        $productQuery = "SELECT title FROM products WHERE id = ?";
-        $stmt_product = $mysqli->prepare($productQuery);
-        if ($stmt_product) {
-            $stmt_product->bind_param("i", $cartItem['products_id']);
-            $stmt_product->execute();
-            $productResult = $stmt_product->get_result();
-            if ($productData = $productResult->fetch_assoc()) {
-                $title = $productData['title'];
-                $quantity = $cartItem['quantity'];
-                $price = formatPrice($cartItem['price']);
-                $size = $cartItem['size'];
-                $color = $cartItem['color'];
-                
-                // Calcola il totale parziale
-                $subtotal = $price * $quantity;
-                $totalPrice += $subtotal;
-
-                // Popola il template del riepilogo ordine
-                $body->setContent("title", $title);
-                $body->setContent("quantity", $quantity);
-                $body->setContent("size", $size);
-                $body->setContent("color", $color);
-                $body->setContent("price", priceFormatter($subtotal));
-            }
-            $stmt_product->close();
-        }
-    }
-    $stmt->close();
-
-    // Imposta il prezzo totale nel template
-    $body->setContent("total_price", priceFormatter($totalPrice));
-} else {
-    echo "Errore nella query del carrello: " . $mysqli->error;
-}
-
 // Verifica se l' indirizzo di spedizione è stato selezionato
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['address_list'])) {
@@ -129,13 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recupera l'ID dell'indirizzo di spedizione
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
 
-// Prodotti nel carrello dell'utente
-$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, sp.availability, sp. quantity AS stock 
-FROM cart c 
-INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
-WHERE c.user_email = '$userEmail'";
+    // Prodotti nel carrello dell'utente
+    $queryCart = "SELECT sp.name AS product_name, c.quantity, (sp.price * c.quantity) AS total_price
+                      FROM cart c
+                      INNER JOIN sub_products sp ON c.subproduct_id = sp.id
+                      WHERE c.email = '$userEmail'";
+    
 $resultCart = $mysqli->query($queryCart);
-
 
 if ($resultCart) {
 
@@ -178,7 +125,7 @@ if ($resultCart) {
     $uniqueOrderNumber = generateUniqueOrderNumber($mysqli);
 
     // Dettagli dell'ordine (presi dalla form)
-    $orderDetails = $mysqli->real_escape_string($_POST['order_details']);
+    $orderDetails = $mysqli->real_escape_string($_POST['order_summary']);
 
     // Metodo di pagamento selezionato dalla form
     $paymentMethod = $mysqli->real_escape_string($_POST['payment_method']);
@@ -293,7 +240,11 @@ if (mail($to, $subject, $message, $headers)) {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
+} else {
+    echo "Errore durante l'inserimento dell'ordine: 2" . $mysqli->error;
 }
+
+
 
 // Funzione per generare un numero casuale univoco di 5 cifre per l'ordine
 function generateUniqueOrderNumber($mysqli) {

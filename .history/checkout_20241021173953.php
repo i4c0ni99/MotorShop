@@ -129,13 +129,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recupera l'ID dell'indirizzo di spedizione
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
 
-// Prodotti nel carrello dell'utente
-$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, sp.availability, sp. quantity AS stock 
-FROM cart c 
-INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
-WHERE c.user_email = '$userEmail'";
+    // Prodotti nel carrello dell'utente
+    $queryCart = "SELECT sp.name AS product_name, c.quantity, (sp.price * c.quantity) AS total_price
+                      FROM cart c
+                      INNER JOIN sub_products sp ON c.subproduct_id = sp.id
+                      WHERE c.email = '$userEmail'";
+    
 $resultCart = $mysqli->query($queryCart);
-
 
 if ($resultCart) {
 
@@ -293,7 +293,11 @@ if (mail($to, $subject, $message, $headers)) {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
+} else {
+    echo "Errore durante l'inserimento dell'ordine: 2" . $mysqli->error;
 }
+
+
 
 // Funzione per generare un numero casuale univoco di 5 cifre per l'ordine
 function generateUniqueOrderNumber($mysqli) {

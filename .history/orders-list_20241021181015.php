@@ -91,7 +91,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])
     // Chiama la funzione per cancellare l'ordine
     if (cancelOrder($orderId)) {
         echo "Ordine cancellato con successo!";
-        header("Location: /MotorShop/orders-list.php");
+        header("Location/MotorShop/login.php);
     } else {
         echo "Errore durante la cancellazione dell'ordine.";
     }

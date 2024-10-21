@@ -129,13 +129,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recupera l'ID dell'indirizzo di spedizione
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
 
-// Prodotti nel carrello dell'utente
-$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, sp.availability, sp. quantity AS stock 
-FROM cart c 
-INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
-WHERE c.user_email = '$userEmail'";
-$resultCart = $mysqli->query($queryCart);
-
+    
+    
+    
+    
+    
+$res
 
 if ($resultCart) {
 
