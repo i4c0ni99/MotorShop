@@ -145,7 +145,8 @@ $main->setContent('dynamic', $body->get());
 $main->close();
 
 } else {
-    header("Location: /MotorShop/login.php");
+    
+
 }
 
 ?>

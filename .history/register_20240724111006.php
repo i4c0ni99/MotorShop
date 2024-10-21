@@ -31,10 +31,13 @@ function isEmailOrPhoneUnique($email, $phone) {
     $stmt->close();
 
     if ($emailResult > 0) {
+        // L'email è già presente nel database
         return "email";
     } elseif ($phoneResult > 0) {
+        // Il numero di cellulare è già presente nel database
         return "phone";
     } else {
+        // Sia l'email che il numero di cellulare sono univoci
         return "unique";
     }
 }
@@ -52,6 +55,7 @@ function sendMail($email, $v_cod) {
         return false;
     }
 
+    // Sostituisce i segnaposto con i valori assegnati all' utente
     $htmlContent = str_replace(
         ['{{name}}', '{{verification_link}}'], 
         [$name, $verificationLink], 
@@ -107,28 +111,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['v_cod'] = $v_cod;
             $criptoPass = password_hash($password, PASSWORD_DEFAULT);
 
-            // Prepared statement per inserire l'utente nel database
-            $stmt = $mysqli->prepare("INSERT INTO users (email, name, surname, password, phone, verified, verification_id) VALUES (?, ?, ?, ?, ?, 0, ?)");
-            $stmt->bind_param("ssssss", $email, $_POST['name'], $_POST['surname'], $criptoPass, $_POST['phoneNumber'], $v_cod);
-            
-            if ($stmt->execute()) {
-                $stmt->close();
-                
-                // Inserimento dell'utente nel gruppo 2
-                $stmt = $mysqli->prepare("INSERT INTO users_has_groups (users_email, groups_id) VALUES (?, 2)");
-                $stmt->bind_param("s", $email);
-                $stmt->execute();
-                $stmt->close();
+            $exist = $mysqli->query("SELECT email FROM users WHERE email='$email'");
 
-                if (sendMail($email, $v_cod)) {
-                    echo "<script>alert('Registrazione completata! Verifica la tua email dal link che hai ricevuto, se non lo trovi controlla su Spam.');</script>";
-                    header("location:/../MotorShop/login.php");
-                    exit();  // Chiusura del flusso dopo il redirect
-                } else {
-                    echo "<script>alert('Non siamo riusciti ad inviarti l'email di verifica. Riprova!');</script>";
-                }
+            if ($exist->num_rows > 0) {
+                echo "<script>alert('Attenzione, l'email è già in uso');</script>";
             } else {
-                echo "<script>alert('Errore durante la registrazione. Riprova più tardi.');</script>";
+                // Prepared statement per inserire l'utente nel database
+                $stmt = $mysqli->prepare("INSERT INTO users (email, name, surname, password, phone, verified, verification_id) VALUES (?, ?, ?, ?, ?, 0, ?)");
+                $stmt->bind_param("ssssss", $email, $_POST['name'], $_POST['surname'], $criptoPass, $_POST['phoneNumber'], $v_cod);
+                
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    
+                    // Inserimento dell'utente nel gruppo 2
+                    $stmt = $mysqli->prepare("INSERT INTO users_has_groups (users_email, groups_id) VALUES (?, 2)");
+                    $stmt->bind_param("s", $email);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    if (sendMail($email, $v_cod)) {
+                        echo "<script>alert('Registrazione completata! Verifica la tua email dal link che hai ricevuto, se non lo trovi controlla su Spam.');</script>";
+                    } else {
+                        echo "<script>alert('Non siamo riusciti ad inviarti l'email di verifica. Riprova!');</script>";
+                    }
+                    header("location:/../MotorShop/login.php");
+                    exit();
+                } else {
+                    echo "<script>alert('Errore durante la registrazione. Riprova più tardi.');</script>";
+                }
             }
         } elseif ($unique === "email") {
             echo "<script>alert('Attenzione, l'email è già in uso!');</script>";

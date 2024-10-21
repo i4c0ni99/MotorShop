@@ -7,9 +7,13 @@ require "include/template2.inc.php";
 require_once "include/utils/priceFormatter.php";
 
 // Verifica se l'utente è loggato e ha groups_id = 2
-if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
+if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 2) {
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
-    $body = new Template("skins/motor-html-package/motor/subproduct-detail.html");
+} else {
+    $main = new Template("skins/motor-html-package/motor/frame_public.html");
+}
+
+$body = new Template("skins/motor-html-package/motor/subproduct-detail.html");
 
 // Verifica se è presente l'ID del sottoprodotto nell'URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) { // Verifica che id sia numerico
@@ -143,9 +147,4 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) { // Verifica che id sia nume
 
 $main->setContent('dynamic', $body->get()); 
 $main->close();
-
-} else {
-    header("Location: /MotorShop/login.php");
-}
-
 ?>

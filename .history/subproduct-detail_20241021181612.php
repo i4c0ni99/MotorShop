@@ -144,8 +144,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) { // Verifica che id sia nume
 $main->setContent('dynamic', $body->get()); 
 $main->close();
 
-} else {
-    header("Location: /MotorShop/login.php");
+} else {}
+
 }
 
 ?>
