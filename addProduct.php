@@ -16,11 +16,6 @@ $main->setContent('name', $_SESSION['user']['name']);
 // Carica le marche per il form di aggiunta prodotto
 $brands = $mysqli->query("SELECT id, name FROM brands");
 
-if(!isset($_GET['brand_id'])){
-    $body->setContent('select_brand','Scegli una marca');
-    $body->setContent('select_brand_id','');
-}
-
 foreach ($brands as $marca) {
     $body->setContent('brand_name', $marca['name']);
     $body->setContent('brand_id', $marca['id']);
@@ -29,6 +24,13 @@ foreach ($brands as $marca) {
         $body->setContent('select_brand_id', $marca['id']);
     }
 }
+
+if(!isset($_GET['brand_id'])){
+    $body->setContent('select_brand','Scegli una marca');
+    $body->setContent('select_brand_id','');
+}
+
+
 
 // Carica le categorie per il form di aggiunta prodotto
 $data = $mysqli->query("SELECT id, name FROM categories");
@@ -45,8 +47,7 @@ foreach ($data as $item) {
     $body->setContent('cat_id', $item['id']);
     $body->setContent('categories', $item['name']);
     if (isset($_GET['cat_id']) && !empty($_GET['cat_id']) && $_GET['cat_id'] == $item['id']){
-        echo "<script>console.log('".$item['name']."');</script>";
-          
+
      $body->setContent('select_cat',$item['name']);
      $body->setContent('select_cat_id',$item['id']);
     }
@@ -64,6 +65,7 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $body->setContent("description", $_GET['description']);
     $body->setContent("details", $_GET['details']);
     $body->setContent("code", $_GET['code']);
+    $body->setContent("information",$_GET['information']);
     $body->setContent("product_image", $_GET['product_image']);
     $body->setContent("category_id",$_GET['category_id']);
     $body->setContent('brand_id', $_GET['brand_id']);
@@ -87,6 +89,7 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
         $body->setContent("description", $_GET['description']);
         $body->setContent("details", $_GET['details']);
         $body->setContent("code", $_GET['code']);
+        $body->setContent("information",$_GET['information']);
         $body->setContent("product_image", $_GET['product_image']);
         $body->setContent("category_id",$_GET['category_id']);
         $body->setContent('brand_id', $_GET['brand_id']);
@@ -98,7 +101,16 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = "NULL";  // Set default if not provided
     $subcategory_id = "NULL";  // Set default if not provided
 }
-
+if(isset($_GET['brand_id'])){
+    $body->setContent("cat_id_in_sub", $category_id);
+    $body->setContent("title", $_GET['title']);
+    $body->setContent("description", $_GET['description']);
+    $body->setContent("details", $_GET['details']);
+    $body->setContent("information",$_GET['information']);
+    $body->setContent("code", $_GET['code']);
+    $body->setContent("product_image", $_GET['product_image']);
+    $body->setContent('brand_id', $_GET['brand_id']);
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // var_dump($_POST);
     $errors = [];
