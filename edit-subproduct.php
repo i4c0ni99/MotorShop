@@ -14,7 +14,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
     // Carica i dettagli del sottoprodotto per il form di modifica
     if (isset($_GET['id'])) {
-        $subproduct_query = "SELECT sp.*, p.id AS product_id 
+        $subproduct_query = "SELECT sp.*,sp.id as sub_id, p.id AS product_id 
                             FROM sub_products sp 
                             INNER JOIN products p ON sp.products_id = p.id 
                             WHERE sp.id = '" . $mysqli->real_escape_string($_GET['id']) . "'";
@@ -25,8 +25,20 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $body->setContent('id', $_GET['id']);
             $body->setContent('color', $subproduct['color']);
             $body->setContent('price', $subproduct['price']);
-            $body->setContent('availability', $subproduct['availability']);
+            $body->setContent('src',$subproduct['availability'] == 1?'<input name="availability" class="checkbox_animated check-it"
+                                                            type="checkbox" value="0" checked="">':
+                                                            '<input name="availability" class="checkbox_animated check-it"
+                                                            type="checkbox" value="1">');
             $body->setContent('quantity', $subproduct['quantity']);
+            
+            $img_query = $mysqli->query("SELECT * FROM images where sub_products_id =".$subproduct['sub_id']);
+            
+            foreach($img_query as $img){
+                
+                $body->setContent('id_sub',$img['sub_products_id']);
+                $body->setContent('img_id',$img['id']);
+                $body->setContent('img',$img['imgsrc']);
+            }
             $body->setContent('size', $subproduct['size']);
             // Salviamo l'id del prodotto nella variabile $productId
             $productId = $subproduct['product_id'];
@@ -45,13 +57,25 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
         } else {
             $_SESSION['error'] = "Nessun sottoprodotto trovato con ID: " . $_GET['id'];
-            header('Location: /MotorShop/product-list.php');
+            #header('Location: /MotorShop/product-list.php');
             exit;
         }
     } else {
         $_SESSION['error'] = "ID del sottoprodotto non specificato.";
-        header('Location: /MotorShop/product-list.php');
+        #header('Location: /MotorShop/product-list.php');
         exit;
+    }
+    
+    if(!empty($_FILES['image']) && !empty($_POST['img_id'])){
+        
+        $fileTmpPath = $_FILES['image']['tmp_name'];
+                    $data = file_get_contents($fileTmpPath);
+                    echo "<script>console.log('".$_POST['img_id']."');</script>";
+                    echo "<script>console.log('".$fileTmpPath."');</script>";
+                    $data64 = base64_encode($data);
+        $mysqli->query("UPDATE images SET imgsrc ='".$data64."' WHERE  id =".$_POST['img_id']);
+        header('Location: /MotorShop/edit-subproduct.php?id=' . $_GET['id']);
+        
     }
 
     if (isset($_POST['edit'])) {
@@ -65,6 +89,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
         $updates = [];
         $params = [];
+        
+        
         if (!empty($_POST['price'])) {
             $updates[] = "price = ?";
             $params[] = $_POST['price'];
@@ -73,11 +99,19 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $updates[] = "quantity = ?";
             $params[] = $_POST['quantity'];
         }
-        if (isset($_POST['availability'])) {
-            // Converti il valore del checkbox in un intero 0 o 1
-            $availability = $_POST['availability'] ? 1 : 0;
-            $updates[] = "availability = ?";
-            $params[] = $availability;
+        if (!empty($_POST['availability'])) {
+        
+            $availability = $mysqli->real_escape_string($_POST['availability']);
+            echo "<script>console.log(".$_POST['availability'].")</script>";
+            $updates[] = "availability = '$availability'";
+           
+        }
+        if (empty($_POST['availability'])) {
+            
+            $availability = $mysqli->real_escape_string(0);
+            echo "<script>console.log(".$_POST['availability'].")</script>";
+            $updates[] = "availability = '$availability'";
+           
         }
         if (!empty($_POST['size'])) {
             $updates[] = "size = ?";
@@ -105,21 +139,21 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
                 // Esegui la query di aggiornamento
                 if ($stmt->execute()) {
-                    header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
+                    #header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
                     exit;
                 } else {
                     $_SESSION['error'] = "Errore nell'esecuzione della query di aggiornamento: " . $stmt->error;
-                    header('Location: /MotorShop/product-list.php');
+                    #header('Location: /MotorShop/product-list.php');
                     exit;
                 }
             } else {
                 $_SESSION['error'] = "Errore nella preparazione della query: " . $mysqli->error;
-                header('Location: /MotorShop/product-list.php');
+                #header('Location: /MotorShop/product-list.php');
                 exit;
             }
         } else {
             $_SESSION['error'] = "Nessun dato da aggiornare.";
-            header('Location: /MotorShop/product-list.php');
+            #header('Location: /MotorShop/product-list.php');
             exit;
         }
     }
@@ -144,7 +178,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $_SESSION['error'] = "Errore nell'esecuzione della query di eliminazione: " . $mysqli->error;
         }
 
-        header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
+        #header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
         exit;
 
     }    
@@ -171,7 +205,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             if ($count > 0) {
                 // Esiste già un’offerta per questo sottoprodotto
                 $_SESSION['error'] = "E' già attivo uno sconto per questo articolo.";
-                header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
+                #header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
                 exit;
             }
     
@@ -184,11 +218,11 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
                 $_SESSION['error'] = "Errore nell'esecuzione della query di inserimento: " . $mysqli->error;
             }
     
-            header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
+            #header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
             exit;
         } else {
             $_SESSION['error'] = "Errore nella preparazione della query di controllo: " . $mysqli->error;
-            header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
+            #header('Location: /MotorShop/subproduct-list.php?id=' . $productId);
             exit;
         }
     }    
