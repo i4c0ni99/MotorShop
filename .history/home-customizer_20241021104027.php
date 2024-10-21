@@ -28,7 +28,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         $title = $mysqli->real_escape_string($_POST['title']);
         $description = $mysqli->real_escape_string($_POST['description']);
 
-        // Gestisci il caricamento dell'immagine - gestire eccezioni
+        // Gestisci il caricamento dell'immagine
         $fileTmpPath = $_FILES['image']['tmp_name'];
         $data = file_get_contents($fileTmpPath);
         $data64 = base64_encode($data);

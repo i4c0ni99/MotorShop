@@ -27,14 +27,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         // Inserisci pagina slider
         $title = $mysqli->real_escape_string($_POST['title']);
         $description = $mysqli->real_escape_string($_POST['description']);
-
-        // Gestisci il caricamento dell'immagine - gestire eccezioni
-        $fileTmpPath = $_FILES['image']['tmp_name'];
-        $data = file_get_contents($fileTmpPath);
-        $data64 = base64_encode($data);
-
         $insertQuery = "INSERT INTO slider (title, description, image) 
-                VALUES ('$title', '$description', '$data64')";
+                VALUES ('$title', '$description', '$button', '$link')";
                 if ($mysqli->query($insertQuery)) {
                     $product_id = $mysqli->insert_id;
                 }
