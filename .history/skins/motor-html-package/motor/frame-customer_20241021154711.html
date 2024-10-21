@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MotorShop Italia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Favicon-->
+ <!-- Favicon-->
+ <link rel="shortcut icon" href="/../MotorShop/skins/motor-html-package/motor/images/icon/favicon.ico" type="image/x-icon">
+
+ <!-- Web Fonts-->
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+
+ <!-- Vendor CSS-->
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/font-awesome/css/font-awesome.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/jquery-ui.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/superfish-menu/css/superfish.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick-theme.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/swiper-sider/dist/css/swiper.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/magnific-popup/dist/magnific-popup.min.css">
+
+ <!-- Theme CSS-->
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/main.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/shortcodes.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/style-selector.css">
+ <link id="style-main-color" rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/color/color1.css">
+
+ <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css"/>
+ <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/ckeditor5-premium-features.css"/>
+
+ <style>
+   @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700 &display=swap");
+
+   @media print {
+     body {
+       margin: 0 !important;
+     }
+   }
+
+   .main-container {
+     --ckeditor5-preview-sidebar-width: 270px;
+     --ckeditor5-preview-height: 700px;
+     font-family: "Lato";
+     width: fit-content;
+     margin-left: auto;
+     margin-right: auto;
+   }
+
+   .main-container .presence {
+     margin-bottom: 8px;
+   }
+
+   .ck-content {
+     font-family: "Lato";
+     line-height: 1.6;
+     word-break: break-word;
+   }
+
+   .editor-container__editor-wrapper {
+     display: flex;
+     width: fit-content;
+   }
+
+   .editor-container_document-editor {
+     border: 1px solid var(--ck-color-base-border);
+   }
+
+   .editor-container_document-editor .editor-container__toolbar {
+     display: flex;
+     position: relative;
+     box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
+   }
+
+   .editor-container_document-editor .editor-container__toolbar > .ck.ck-toolbar {
+     flex-grow: 1;
+     width: 0;
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+     border-top: 0;
+     border-left: 0;
+     border-right: 0;
+   }
+
+   .editor-container_document-editor .editor-container__menu-bar > .ck.ck-menu-bar {
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+     border-top: 0;
+     border-left: 0;
+     border-right: 0;
+   }
+
+   .editor-container_document-editor .editor-container__editor-wrapper {
+     max-height: var(--ckeditor5-preview-height);
+     min-height: var(--ckeditor5-preview-height);
+     overflow-y: scroll;
+     background: var(--ck-color-base-foreground);
+   }
+
+   .editor-container_document-editor .editor-container__editor {
+     margin-top: 28px;
+     margin-bottom: 28px;
+     height: 100%;
+   }
+
+   .editor-container_document-editor .editor-container__editor .ck.ck-editor__editable {
+     box-sizing: border-box;
+     min-width: calc(210mm + 2px);
+     max-width: calc(210mm + 2px);
+     min-height: 297mm;
+     height: fit-content;
+     padding: 20mm 12mm;
+     border: 1px hsl(0, 0%, 82.7%) solid;
+     background: hsl(0, 0%, 100%);
+     box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
+     flex: 1 1 auto;
+     margin-left: 72px;
+     margin-right: 72px;
+   }
+
+   .editor-container_include-outline .editor-container__editor .ck.ck-editor__editable {
+     margin-left: 0;
+   }
+
+   .editor-container_include-annotations .editor-container__editor .ck.ck-editor__editable {
+     margin-right: 0;
+   }
+
+   .editor-container__sidebar {
+     min-width: var(--ckeditor5-preview-sidebar-width);
+     max-width: var(--ckeditor5-preview-sidebar-width);
+     margin-top: 28px;
+     margin-left: 10px;
+     margin-right: 10px;
+   }
+
+   .revision-history {
+     display: none;
+   }
+
+   .revision-history__wrapper {
+     display: flex;
+   }
+
+   .revision-history__wrapper .ck.ck-editor {
+     margin: 0;
+     width: 795px;
+   }
+
+   .revision-history__wrapper .revision-history__sidebar {
+     border: 1px solid var(--ck-color-base-border);
+     border-left: 0;
+     width: var(--ckeditor5-preview-sidebar-width);
+     min-height: 100%;
+   }
+
+   .revision-history__wrapper .revision-history__sidebar .ck-revision-history-sidebar {
+     height: 100%;
+   }
+
+   .ck-content .table thead {
+     display: table-row-group;
+   }
+
+   .ck-content .table tr {
+     break-inside: avoid;
+     break-after: auto;
+   }
+ </style>
+</head>
+
+<body>
+    <header class="header mv-header-style-2 mv-wrap">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-inner">
+                    <div class="mv-col-wrapper">
+
+                        <!-- .header-contact-->
+
+
+                        <!-- .header-account-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .header-top-->
+
+        <div class="header-main-nav mv-fixed-enabled">
+            <div class="container">
+                <div class="container-inner">
+                    <div class="header-toggle-off-canvas hidden-md hidden-lg">
+                        <button type="button"
+                            class="mv-btn mv-btn-style-5 btn-off-canvas-toggle click-btn-off-canvas-left"><i
+                                class="icon fa fa-bars"></i></button>
+                    </div>
+                    <!-- .header-toggle-off-canvas-->
+
+                    <div class="header-logo"><a href="/MotorShop/index.php" title="MotorShop"><img
+                                src="/../MotorShop/skins/motor-html-package/motor/images/logo/logo_1.png" alt="logo"
+                                class="logo-img img-default image-live-view" /><img
+                                src="/MotorShop/skins/motor-html-package/motor/images/logo/logo_2.png" alt="logo"
+                                class="logo-img img-scroll image-live-view" /></a></div>
+                    <!-- .header-logo-->
+
+                    <div class="main-nav-wrapper hidden-xs hidden-sm">
+                        <nav class="main-nav">
+                            <ul class="nav sf-menu">
+                                <li class="mega-columns"><a href="/../MotorShop/index.php"><span
+                                            class="menu-text">Home</i></span></a>
+                                    <ul class="row"></ul>
+                                </li>
+                                <li><a href="/../MotorShop/product-list-customer.php"><span
+                                            class="menu-text">Shop</i></span></a>
+                                </li>
+                                <li><a href="/../MotorShop/contact.php"><span class="menu-text">Contattaci</span></a>
+                                </li>
+                                <li class="mega-columns"><a href="/../MotorShop/customer-dashboard.php"><span
+                                            class="menu-text">Ordini</i></span></a>
+                                    <ul class="row"></ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- .header-main-nav-->
+
+                    <div class="header-right-button">
+                        <div class="header-shop">
+                            <div class="item-button">
+                                <a href="/../MotorShop/wishlist.php" title="Wishlist">
+                                    <img src="/MotorShop/skins/motor-html-package/motor/images/icon/wishlist-icon.png"
+                                        alt="wishlist" class="block-39-thumb-img" />
+                                </a>
+                            </div>
+
+                            <div class="item-button">
+                                <a href="/../MotorShop/cart.php" title="Carrello">
+                                    <img src="/MotorShop/skins/motor-html-package/motor/images/icon/cart-icon.png"
+                                        alt="cart" class="block-39-thumb-img" />
+                                </a>
+                            </div>
+
+                            <div class="item-button">
+                                <a href="/../MotorShop/editCustomerProfile.php" title="Profilo">
+                                    <img src="/MotorShop/skins/motor-html-package/motor/images/icon/profile-icon.png"
+                                        alt="profilo" class="block-39-thumb-img" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <[dynamic]>
+
+        <footer class="footer mv-footer-style-2 mv-wrap">
+            <div style="background-image: url(images/background/black-wallpapers-20.png)" class="footer-bg">
+                <div class="container">
+                    <div class="footer-inner">
+                        <div id="footerNav" role="tablist" aria-multiselectable="true" class="footer-nav panel-group">
+                            <div class="row">
+                                <div class="col-md-4 footer-nav-col footer-contact"><a data-toggle="collapse"
+                                        data-parent="#footerNav" href="#footerContact" aria-expanded="true"
+                                        aria-controls="footerContact" class="footer-title collapsed"></a>
+                                    <div id="footerContact" role="tabpanel" class="footer-main collapse">
+                                        <ul class="mv-ul footer-main-inner list">
+                                            <h4><b>Contatti: </b></h4>
+                                            <br>
+                                            <li class="mv-icon-left-style-1 item">
+                                                <div class="mv-dp-table align-middle">
+                                                    <div class="mv-dp-table-cell icon"><i
+                                                            class="icon-fa fa fa-map-marker mv-f-22 mv-color-primary"></i>
+                                                    </div>
+                                                    <div class="mv-dp-table-cell text">Via Francesco Paolo Tosti 115,
+                                                        L'Aquila AQ</div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <li class="mv-icon-left-style-1 item">
+                                            <div class="mv-dp-table align-middle">
+                                                <div class="mv-dp-table-cell icon"><i
+                                                        class="icon-fa fa fa-envelope-o mv-f-20 mv-color-primary"></i>
+                                                </div>
+                                                <div class="mv-dp-table-cell text"><a href="mailto:info@motorshop.com">
+                                                        info@motorshop.com</a></div>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                        <br>
+                                        <div class="mv-col-left header-contact">
+                                            <ul class="mv-ul clearfix group-contact hidden-xs">
+                                                <li class="item-button mv-icon-left-style-2"><a href="tel:0862589863"
+                                                        class="text"> <span class="icon"><i
+                                                                class="fa fa-phone"></i></span>
+                                                        Telefono: 0862589863</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 footer-nav-col footer-about-us"><a data-toggle="collapse"
+                                        data-parent="#footerNav" href="#footerAboutUs" aria-expanded="false"
+                                        aria-controls="footerAboutUs" class="footer-title collapsed"></a>
+                                    <div id="footerAboutUs" role="tabpanel" class="footer-main collapse">
+                                        <div class="footer-main-inner">
+                                            <h4><b>Orari: </b></h4>
+                                            <br>
+                                            <div class="about-us-content">
+                                                <p>Lunedì - Venerdì (10:00 - 18:00)</p>
+                                                <br>
+                                                <p>Sabato (09:00 - 13:00)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 footer-nav-col footer-order-tracking"><a data-toggle="collapse"
+                                        data-parent="#footerNav" href="#footerOrderTracking" aria-expanded="false"
+                                        aria-controls="footerOrderTracking" class="footer-title collapsed">order
+                                        tracking</a>
+                                    <div id="footerOrderTracking" role="tabpanel" class="footer-main collapse">
+                                        <h4><b>Collegamenti rapidi: </b></h4>
+                                        <ul class="mv-ul footer-main-inner list">
+                                            <li class="item mv-icon-left-style-2"><a href="/Applications/XAMPP/xamppfiles/htdocs/MotorShop/skins/motor-html-package/motor/shipping.html"><span class="text"><span
+                                                            class="icon"><i class="fa fa-angle-right"></i></span>Spedizioni</span></a></li>
+                                            <li class="item mv-icon-left-style-2"><a href="#"><span class="text"><span
+                                                            class="icon"><i
+                                                                class="fa fa-angle-right"></i></span>Resi</span></a>
+                                            </li>
+                                            <li class="item mv-icon-left-style-2"><a
+                                                    href="/MotorShop/privacy-policy.php"><span class="text"><span
+                                                            class="icon"><i class="fa fa-angle-right"></i></span>Privacy
+                                                        Policy</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .footer-nav-->
+
+                        <div class="footer-payment">
+                            <ul class="mv-ul list">
+                                <li class="item"><a href="#"><img
+                                            src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_paypal.png"
+                                            alt="icon" /></a></li>
+                                <li class="item"><a href="#"><img
+                                            src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_master_card.png"
+                                            alt="icon" /></a>
+                                </li>
+                                <li class="item"><a href="#"><img
+                                            src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_american_express.png"
+                                            alt="icon" /></a></li>
+                                <li class="item"><a href="#"><img
+                                            src="/MotorShop/skins/motor-html-package/motor/images/icon/icon_visa.png"
+                                            alt="icon" /></a></li>
+                            </ul>
+                        </div>
+                        <!-- .footer-payment-->
+                        <br>
+                        <div class="footer-copyright text-center">Copyright &copy; 2024 MotorShop</div>
+                        <!-- .footer-copyright-->
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="mv-btn mv-btn-style-17 mv-back-to-top fixed-right-bottom"><i
+                    class="btn-icon fa fa-long-arrow-up"></i></button>
+        </footer>
+
+        <div class="popup-wrapper">
+            <!-- .popup-search-->
+        </div>
+        <!-- .popup-wrapper-->
+
+        <div class="off-canvas-wrapper-left hidden-md hidden-lg">
+            <div class="off-canvas-left">
+                <div class="off-canvas-header">
+                    <button class="btn-close-off-canvas click-close-off-canvas">x</button>
+                </div>
+                <div class="off-canvas-body">
+                    <nav class="main-nav">
+                        <ul class="nav sf-menu expand-all">
+                            <li class="mega-columns"><a href="home.html"><span class="menu-text">Home <i
+                                            class="menu-icon fa fa-angle-down"></i></span></a>
+                                <ul class="row">
+                                    <li class="col-xs-3 mega-col"><a href="home.html" class="mega-title"><span
+                                                class="menu-text">Homepage
+                                                Demos</span></a>
+                                        <ul class="mega-content">
+                                            <li class="active"><a href="home.html">Home</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><span class="menu-text">Product <i
+                                                    class="menu-icon fa fa-angle-down"></i></span></a>
+                                        <ul>
+                                            <li><a href="product-grid-3.html">Shop</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><span class="menu-text">Shop <i
+                                                    class="menu-icon fa fa-angle-down"></i></span></a>
+                                        <ul>
+                                            <li><a href="cart.html">Cart</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <li><a href="compare.html">Compare</a></li>
+                                            <li><a href="track-your-order.html">Track Your Order</a></li>
+                                            <li><a href="cart-empty.html">Cart Empty</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="about-us.html"><span class="menu-text">About Us</span></a></li>
+                                    <li><a href="contact.html"><span class="menu-text">Contact</span></a></li>
+                                    <li><a href="#"><span class="menu-text">Pages <i
+                                                    class="menu-icon fa fa-angle-down"></i></span></a>
+                                        <ul class="dropdown-left">
+                                            <li><a href="login.html">Login & Register</a></li>
+                                            <li><a href="forgot-password.html">Forgot Password</a></li>
+                                            <li><a href="faqs.html">Faqs</a></li>
+                                            <li><a href="newsletter.html">Newsletter</a></li>
+                                            <li><a href="shortcodes.html">Shortcodes</a></li>
+                                            <li><a href="common-element.html">Common Element</a></li>
+                                            <li><a href="error-page.html">Error Page</a></li>
+                                            <li><a href="#"><span class="menu-text">Example menu item <i
+                                                            class="menu-icon fa fa-angle-down"></i></span></a>
+                                                <ul>
+                                                    <li><a href="#">Example menu item</a></li>
+                                                    <li><a href="#"><span class="menu-text">Example menu item <i
+                                                                    class="menu-icon fa fa-angle-down"></i></span></a>
+                                                        <ul>
+                                                            <li><a href="#">Example menu item</a></li>
+                                                            <li><a href="#">Example menu item</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="#"><span class="menu-text">Example menu item <i
+                                                                    class="menu-icon fa fa-angle-down"></i></span></a>
+                                                        <ul class="dropdown-left">
+                                                            <li><a href="#">Example menu item</a></li>
+                                                            <li><a href="#">Example menu item</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- .off-canvas-wrapper-left-->
+
+        <div class="off-canvas-wrapper-right hidden-md hidden-lg">
+            <div class="off-canvas-right">
+                <div class="off-canvas-header">
+                    <button class="btn-close-off-canvas click-close-off-canvas">x</button>
+                </div>
+
+                <div class="off-canvas-body">
+                    <div class="mv-aside mv-aside-search">
+                        <div class="aside-title mv-title-style-11">search</div>
+                        <div class="aside-body">
+                            <form method="GET" class="form-aside-search">
+                                <div class="mv-inputbox-icon right">
+                                    <input type="text" name="test138" class="mv-inputbox mv-inputbox-style-2" />
+                                    <button type="submit" class="icon mv-btn mv-btn-style-4 fa fa-search"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-search-->
+
+                    <div class="mv-aside mv-aside-filter-by-price">
+                        <div class="aside-title mv-title-style-11">filter by price</div>
+                        <div class="aside-body">
+                            <form method="GET" class="form-aside-filter-by-price">
+                                <div class="mv-slider-range">
+                                    <div class="slider-range-wrapper mv-slider-range-style-1">
+                                        <div class="slider-range"></div>
+                                    </div>
+                                    <div class="mv-dp-table align-middle">
+                                        <div class="mv-dp-table-cell view-values">Price: $<span
+                                                class="min-value"></span> - $<span class="max-value"></span></div>
+                                        <div class="mv-dp-table-cell filter-button">
+                                            <button type="submit"
+                                                class="mv-btn mv-btn-style-5 btn-5-h-30">filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <nav class="filter-by-price-menu mv-menu-style-1">
+                                <ul>
+                                    <li><a href="#" class="mv-icon-left-style-5">$10 - $50<span class="sub-text">&nbsp;
+                                                (8)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">$50 - $100<span class="sub-text">&nbsp;
+                                                (8)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">$100 - $500<span
+                                                class="sub-text">&nbsp; (3)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">$500 - $1000<span
+                                                class="sub-text">&nbsp; (16)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">$1000 - $5000<span
+                                                class="sub-text">&nbsp; (6)</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-filter-by-price-->
+
+                    <div class="mv-aside mv-aside-product-type">
+                        <div class="aside-title mv-title-style-11">product type</div>
+                        <div class="aside-body">
+                            <nav class="product-type-menu mv-menu-style-1">
+                                <ul>
+                                    <li><a href="#" class="mv-icon-left-style-5">Full Face Helmets<span
+                                                class="sub-text">&nbsp;
+                                                (8)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Flip Up Helmets<span
+                                                class="sub-text">&nbsp;
+                                                (3)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Open Face Helmets<span
+                                                class="sub-text">&nbsp;
+                                                (38)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Adventure Helmets<span
+                                                class="sub-text">&nbsp;
+                                                (12)</span></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#" class="mv-icon-left-style-5">AGV Helmets<span
+                                                        class="sub-text">&nbsp;
+                                                        (3)</span></a></li>
+                                            <li><a href="#" class="mv-icon-left-style-5">Arai Helmets<span
+                                                        class="sub-text">&nbsp;
+                                                        (12)</span></a></li>
+                                            <li class="active"><a href="#" class="mv-icon-left-style-5">Bell
+                                                    Helmets<span class="sub-text">&nbsp; (8)</span></a></li>
+                                            <li><a href="#" class="mv-icon-left-style-5">BOX Helmets<span
+                                                        class="sub-text">&nbsp;
+                                                        (15)</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Trousers<span class="sub-text">&nbsp;
+                                                (19)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Dresses<span class="sub-text">&nbsp;
+                                                (34)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Shoes<span class="sub-text">&nbsp;
+                                                (22)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Accessories<span
+                                                class="sub-text">&nbsp; (17)</span></a>
+                                    </li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Sale<span class="sub-text">&nbsp;
+                                                (3)</span></a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5"> <strong>View More</strong><span
+                                                class="sub-text">&nbsp;
+                                                (50) &nbsp;</span><i class="fa fa-caret-down"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-product-type-->
+
+                    <div class="mv-aside mv-aside-filter-by-size">
+                        <div class="aside-title mv-title-style-11">filter by</div>
+                        <div class="aside-body">
+                            <nav class="filter-by-price-menu mv-menu-style-1">
+                                <ul>
+                                    <li><a href="#" class="mv-icon-left-style-5">Extra Large</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Extra Small</a></li>
+                                    <li class="active"><a href="#" class="mv-icon-left-style-5">Large</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Medium</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">One Size Fits All</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Small</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Taille Unique</a></li>
+                                    <li><a href="#" class="mv-icon-left-style-5">Sale</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-filter-by-size-->
+
+                    <div class="mv-aside mv-aside-size">
+                        <div class="aside-title mv-title-style-11">size</div>
+                        <div class="aside-body">
+                            <nav class="size-list">
+                                <div class="mv-btn-group">
+                                    <div class="group-inner"><a href="#" class="mv-btn mv-btn-style-21">XXL</a><a
+                                            href="#" class="mv-btn mv-btn-style-21 active">XL</a><a href="#"
+                                            class="mv-btn mv-btn-style-21">L</a><a href="#"
+                                            class="mv-btn mv-btn-style-21">M</a><a href="#"
+                                            class="mv-btn mv-btn-style-21">S</a>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-size-->
+
+                    <div class="mv-aside mv-aside-color">
+                        <div class="aside-title mv-title-style-11">color</div>
+                        <div class="aside-body">
+                            <div class="color-list mv-list-inline-style-1 space-10">
+                                <ul class="list-inline-1">
+                                    <li class="active"><a href="#"><span style="background-color: #7bef66;"
+                                                class="icon-color"></span></a>
+                                    </li>
+                                    <li><a href="#"><span style="background-color: #ff8888;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #c4dd66;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #94b7f7;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #a3fbff;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #f7fb0d;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #7b7878;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #d041ff;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #fdab14;"
+                                                class="icon-color"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #eeeeee"
+                                                class="icon-color"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .mv-aside-color-->
+
+                    <article class="item post">
+                        <div class="item-inner">
+                            <div class="mv-dp-table">
+                                <div class="mv-dp-table-cell block-24-thumb">
+                                    <div class="thumb-inner mv-lightbox-style-1"><a href="product-detail.html"
+                                            title="Spada Enforcer WP"><img src="images/demo/demo_300x400.png"
+                                                alt="demo" /></a><a href="images/demo/demo_300x400.png"
+                                            title="Spada Enforcer WP" data-lightbox-href="product-detail.html"
+                                            class="mv-btn mv-btn-style-20 mv-lightbox-item"><i
+                                                class="icon fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mv-dp-table-cell block-24-main">
+                                    <div class="block-24-title"><a href="product-detail.html" title="Spada Enforcer WP"
+                                            class="mv-overflow-ellipsis">Spada Enforcer WP Spada Enforcer WP</a></div>
+                                    <div class="block-24-price">
+                                        <div class="new-price">$300,00</div>
+                                        <div class="old-price">$400,99</div>
+                                    </div>
+                                    <div data-rate="true" data-score="5.0" class="block-24-rate mv-rate text-left">
+                                        <div class="rate-inner mv-f-12">
+                                            <div class="stars-wrapper empty-stars"><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span></div>
+                                            <div class="stars-wrapper filled-stars"><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- .post-->
+
+                    <article class="item post">
+                        <div class="item-inner">
+                            <div class="mv-dp-table">
+                                <div class="mv-dp-table-cell block-24-thumb">
+                                    <div class="thumb-inner mv-lightbox-style-1"><a href="product-detail.html"
+                                            title="Richa Drift Water"><img src="images/demo/demo_300x400.png"
+                                                alt="demo" /></a><a href="images/demo/demo_300x400.png"
+                                            title="Richa Drift Water" data-lightbox-href="product-detail.html"
+                                            class="mv-btn mv-btn-style-20 mv-lightbox-item"><i
+                                                class="icon fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mv-dp-table-cell block-24-main">
+                                    <div class="block-24-title"><a href="product-detail.html" title="Richa Drift Water"
+                                            class="mv-overflow-ellipsis">Richa Drift Water</a></div>
+                                    <div class="block-24-price">
+                                        <div class="new-price">$210,00</div>
+                                        <div class="old-price">$290,99</div>
+                                    </div>
+                                    <div data-rate="true" data-score="3.0" class="block-24-rate mv-rate text-left">
+                                        <div class="rate-inner mv-f-12">
+                                            <div class="stars-wrapper empty-stars"><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span></div>
+                                            <div class="stars-wrapper filled-stars"><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span><span
+                                                    class="item-rate"></span><span class="item-rate"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- .post-->
+                </div>
+            </div>
+            <!-- .mv-block-style-24-->
+        </div>
+        </div>
+        </div>
+        <!-- .mv-aside-products-->
+
+</body>
+<!-- Vendor jQuery-->
+<!-- Vendor jQuery-->
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/smoothscroll/SmoothScroll.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/superfish-menu/js/superfish.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/external/touch-punch/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/external/jquery.mousewheel.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/parallax/parallax.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-countto/jquery.countTo.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-appear/jquery.appear.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/as-pie-progress/jquery-asPieProgress.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/caroufredsel/helper-plugins/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/caroufredsel/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/isotope/isotope.pkgd.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/isotope/fit-columns.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/lwt-countdown/jquery.lwtCountdown-1.0.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/swiper-sider/dist/js/swiper.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/jquery-cookie/jquery.cookie.min.js"></script>
+<script type="text/javascript"
+    src="/../MotorShop/skins/motor-html-package/motor/libs/parallax/parallax.min.js"></script>
+
+<!-- Theme Script-->
+<script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/style.selector.js"></script>
+<script type="text/javascript" src="/../MotorShop/skins/motor-html-package/motor/js/main.js"></script>
+
+</html>
