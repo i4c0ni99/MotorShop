@@ -4,7 +4,6 @@ session_start();
 
 require "include/dbms.inc.php";
 require "include/template2.inc.php";
-
 include "include/utils/priceFormatter.php";
 
 $main = new Template("skins/motor-html-package/motor/frame_public.html");

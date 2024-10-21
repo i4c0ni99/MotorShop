@@ -228,7 +228,6 @@ if (mail($to, $subject, $message, $headers)) {
         $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
         if ($mysqli->query($deleteCartQuery)) {
             echo "Carrello svuotato con successo.";
-            header("Location: /MotorShop/customer-dashboard.php");
         } else {
             echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
         }

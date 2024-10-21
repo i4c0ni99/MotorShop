@@ -4,7 +4,7 @@ session_start();
 
 require "include/template2.inc.php";
 require "include/auth.inc.php";
-require "include/dbms.inc.php";
+require "include/dbmslate2.inc.php";
 
 if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 

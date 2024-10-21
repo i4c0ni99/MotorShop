@@ -1,17 +1,14 @@
 <?php 
 
-session_start();
-
 require "include/template2.inc.php";
-require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
 // Controlla se la sessione è attiva e se l'utente è autenticato
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     
     // Se la sessione è attiva, carica frame-customer
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
-    $body = new Template("skins/motor-html-package/motor/refund.html");
+    $body = new Template("skins/motor-html-package/motor/privacy-policy.html");
 
     // Popola il template con i dati dell'utente
     $body->setContent('name', htmlspecialchars($_SESSION['user']['name']));
@@ -21,7 +18,7 @@ if (isset($_SESSION['user'])) {
 } else {
     // Se la sessione non è attiva, carica frame-public
     $main = new Template("skins/motor-html-package/motor/frame_public.html");
-    $body = new Template("skins/motor-html-package/motor/refund.html");
+    $body = new Template("skins/motor-html-package/motor/privacy-policy.html");
 }
 
 
