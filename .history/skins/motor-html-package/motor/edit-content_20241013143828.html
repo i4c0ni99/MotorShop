@@ -1,0 +1,49 @@
+<section class="main-banner mv-wrap">
+  <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+    <div class="page-name mv-caption-style-6">
+      <div class="container">
+        <div class="mv-title-style-9"><span class="main">Modifica Pagina</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- .main-banner-->
+
+<section class="mv-main-body faqs-main mv-bg-gray mv-wrap">
+  <div class="container">
+    <div class="faqs-inner mv-box-shadow-gray-1 mv-bg-white">
+      <div class="faqs-box mv-accordion-style-3">
+
+        <form action="save-content.php" method="POST">
+          <input type="hidden" name="file" value="[]file"> 
+          <textarea name="html_content" id="editor" rows="20" cols="80"><[html_content]></textarea>
+          <br>
+          <br>
+          <button class="mv-btn mv-btn-style-5 btn-5-h-30" type="submit">Pubblica</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</section>  
+
+<!-- Includi CKEditor -->
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('editor', {
+    height: 600,
+    fullPage: true,
+    allowedContent: true
+  });
+</script>
+
+<!-- Includi CKEditor -->
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script>
+  // Sostituisci il textarea con CKEditor usando l'id 'editor'
+  CKEDITOR.replace('editor', {
+    height: 600,  // Altezza dell'editor
+    fullPage: true,  // Abilita la modifica dell'intero documento HTML
+    allowedContent: true  // Permette tutto il contenuto HTML
+  });
+</script>

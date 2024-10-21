@@ -2,46 +2,177 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <title>MotorShop Italia</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="UTF-8">
+  <title>MotorShop Italia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Favicon-->
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="/../MotorShop/skins/motor-html-package/motor/images/icon/favicon.ico"
-        type="image/x-icon">
+  <!-- Favicon-->
+ <!-- Favicon-->
+ <link rel="shortcut icon" href="/../MotorShop/skins/motor-html-package/motor/images/icon/favicon.ico" type="image/x-icon">
 
-    <!-- Web Fonts-->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+ <!-- Web Fonts-->
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Varela+Round">
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
 
-    <!-- Vendor CSS-->
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/superfish-menu/css/superfish.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick-theme.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/swiper-sider/dist/css/swiper.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/libs/magnific-popup/dist/magnific-popup.min.css">
+ <!-- Vendor CSS-->
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/font-awesome/css/font-awesome.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/jquery-ui/jquery-ui.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/superfish-menu/css/superfish.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/slick-sider/slick-theme.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/swiper-sider/dist/css/swiper.min.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/libs/magnific-popup/dist/magnific-popup.min.css">
 
-    <!-- Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/shortcodes.css">
-    <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/style-selector.css">
-    <link id="style-main-color" rel="stylesheet" type="text/css"
-        href="/../MotorShop/skins/motor-html-package/motor/css/color/color1.css">
-        <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/home.css">
+ <!-- Theme CSS-->
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/main.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/shortcodes.css">
+ <link rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/style-selector.css">
+ <link id="style-main-color" rel="stylesheet" type="text/css" href="/../MotorShop/skins/motor-html-package/motor/css/color/color1.css">
+
+ <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css"/>
+ <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/ckeditor5-premium-features.css"/>
+
+ <style>
+   @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700 &display=swap");
+
+   @media print {
+     body {
+       margin: 0 !important;
+     }
+   }
+
+   .main-container {
+     --ckeditor5-preview-sidebar-width: 270px;
+     --ckeditor5-preview-height: 700px;
+     font-family: "Lato";
+     width: fit-content;
+     margin-left: auto;
+     margin-right: auto;
+   }
+
+   .main-container .presence {
+     margin-bottom: 8px;
+   }
+
+   .ck-content {
+     font-family: "Lato";
+     line-height: 1.6;
+     word-break: break-word;
+   }
+
+   .editor-container__editor-wrapper {
+     display: flex;
+     width: fit-content;
+   }
+
+   .editor-container_document-editor {
+     border: 1px solid var(--ck-color-base-border);
+   }
+
+   .editor-container_document-editor .editor-container__toolbar {
+     display: flex;
+     position: relative;
+     box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
+   }
+
+   .editor-container_document-editor .editor-container__toolbar > .ck.ck-toolbar {
+     flex-grow: 1;
+     width: 0;
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+     border-top: 0;
+     border-left: 0;
+     border-right: 0;
+   }
+
+   .editor-container_document-editor .editor-container__menu-bar > .ck.ck-menu-bar {
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+     border-top: 0;
+     border-left: 0;
+     border-right: 0;
+   }
+
+   .editor-container_document-editor .editor-container__editor-wrapper {
+     max-height: var(--ckeditor5-preview-height);
+     min-height: var(--ckeditor5-preview-height);
+     overflow-y: scroll;
+     background: var(--ck-color-base-foreground);
+   }
+
+   .editor-container_document-editor .editor-container__editor {
+     margin-top: 28px;
+     margin-bottom: 28px;
+     height: 100%;
+   }
+
+   .editor-container_document-editor .editor-container__editor .ck.ck-editor__editable {
+     box-sizing: border-box;
+     min-width: calc(210mm + 2px);
+     max-width: calc(210mm + 2px);
+     min-height: 297mm;
+     height: fit-content;
+     padding: 20mm 12mm;
+     border: 1px hsl(0, 0%, 82.7%) solid;
+     background: hsl(0, 0%, 100%);
+     box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
+     flex: 1 1 auto;
+     margin-left: 72px;
+     margin-right: 72px;
+   }
+
+   .editor-container_include-outline .editor-container__editor .ck.ck-editor__editable {
+     margin-left: 0;
+   }
+
+   .editor-container_include-annotations .editor-container__editor .ck.ck-editor__editable {
+     margin-right: 0;
+   }
+
+   .editor-container__sidebar {
+     min-width: var(--ckeditor5-preview-sidebar-width);
+     max-width: var(--ckeditor5-preview-sidebar-width);
+     margin-top: 28px;
+     margin-left: 10px;
+     margin-right: 10px;
+   }
+
+   .revision-history {
+     display: none;
+   }
+
+   .revision-history__wrapper {
+     display: flex;
+   }
+
+   .revision-history__wrapper .ck.ck-editor {
+     margin: 0;
+     width: 795px;
+   }
+
+   .revision-history__wrapper .revision-history__sidebar {
+     border: 1px solid var(--ck-color-base-border);
+     border-left: 0;
+     width: var(--ckeditor5-preview-sidebar-width);
+     min-height: 100%;
+   }
+
+   .revision-history__wrapper .revision-history__sidebar .ck-revision-history-sidebar {
+     height: 100%;
+   }
+
+   .ck-content .table thead {
+     display: table-row-group;
+   }
+
+   .ck-content .table tr {
+     break-inside: avoid;
+     break-after: auto;
+   }
+ </style>
 </head>
 
 <body>

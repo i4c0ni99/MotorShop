@@ -1,0 +1,44 @@
+<section class="main-banner mv-wrap">
+    <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+      <div class="page-name mv-caption-style-6">
+        <div class="container">
+          <div class="mv-title-style-9"><span class="main">Modifica Privacy Policy</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- .main-banner-->
+  
+  <section class="mv-main-body faqs-main mv-bg-gray mv-wrap">
+    <div class="container">
+      <div class="faqs-inner mv-box-shadow-gray-1 mv-bg-white">
+        <div class="faqs-box mv-accordion-style-3">
+          
+          <form method="POST" action="save_content.php">
+            <textarea name="html_content" id="editor">
+              <[html_content]>
+            </textarea>
+            <button type="submit">Salva modifiche</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Includi CKEditor -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/43.0.0/classic/ckeditor.js"></script>
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#editor'), {
+        toolbar: [
+          'heading', '|', 'bold', 'italic', 'link', '|',
+          'bulletedList', 'numberedList', '|', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+        ],
+        height: 500, // Set editor height if necessary
+        allowedContent: true // Allow full HTML editing
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>

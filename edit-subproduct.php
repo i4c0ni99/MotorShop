@@ -5,7 +5,8 @@ require "include/template2.inc.php";
 require "include/dbms.inc.php";
 include "include/auth.inc.php";
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
+    
     $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
     $body = new Template("skins/multikart_all_in_one/back-end/edit-subproduct.html");
 
