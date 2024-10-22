@@ -151,8 +151,11 @@ if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     }
     $body ->setContent('sub_tags_end',$code2);   
 }
-
-
+$sub_cat_condition = '';
+if(isset($_GET['sub_cat_id'])){
+    $sub_cat = $mysqli->real_escape_string($_GET['sub_cat_id']);
+    $sub_cat_condition = " AND products.subcategories_id = $sub_cat ";
+}
 // Costruisci la parte iniziale della query SQL per selezionare i prodotti
 $product_query_base ="
     SELECT products.title, products.id 
@@ -164,6 +167,7 @@ $product_query_base ="
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
 $product_query_base .= $category_condition;
 $product_query_base .= $brand_condition;
+$product_query_base.= $sub_cat_condition;
 
 // Aggiungi la condizione per il filtro di testo di ricerca se specificato
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
