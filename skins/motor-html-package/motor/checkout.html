@@ -44,7 +44,7 @@
                           <[foreach]>
                           <tr data-row-id="<[id]>">
                             <td>
-                              <input class="checkbox_animated check-it" type="radio" name="address_list" value="<[id]>" required="true">
+                              <input class="checkbox_animated check-it" id="select_adress" type="radio" name="address_list" value="<[id]>" required="true">
                             </td>
                             <td><[ADname]></td>
                             <td><[ADsurname]></td>
@@ -202,7 +202,7 @@
                           Si prega di utilizzare il numero d'ordine come riferimento di pagamento. 
                           Si noti che l'ordine non verrà spedito fino a quando i fondi non saranno ricevuti.</div>
                       </div>
-                      <input type="radio" name="payment_method" value="Bonifico bancario" class="hidden">
+                      <input type="radio" id="payment_method" name="payment_method" value="Bonifico bancario" class="hidden">
                     </div>
                     <div class="item">
                       <label class="block-38-header mv-btn mv-btn-style-4 btn-choose-method"><span class="block-38-visual-box"><span class="icon-checked"></span>
@@ -210,7 +210,7 @@
                       <div class="block-38-body">
                         <div class="block-38-content">Paga tramite PayPal; puoi pagare con la tua carta di credito se non hai un account PayPal.</div>
                       </div>
-                      <input type="radio" name="payment_method" value="PayPal" class="hidden">
+                      <input type="radio" id="payment_method" name="payment_method" value="PayPal" class="hidden">
                     </div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@
           <div class="col-xs-10 col-sm-10 col-md-3 col-confirm-order mv-mb-50">
             <div class="mv-well-style-2 mv-box-shadow-gray-1 mv-bg-white">
               <div class="well-2-body">
-                <button type="submit" class="mv-btn mv-btn-style-5 btn-5-h-45 responsive-btn-5-type-1 btn-confirm-order">Conferma ordine</button>
+                <button onclick="sendOrder()" class="mv-btn mv-btn-style-5 btn-5-h-45 responsive-btn-5-type-1 btn-confirm-order">Conferma ordine</button>
               </div>
             </div>
           </div>
@@ -255,4 +255,25 @@
       });
     });
   });
+
+  function sendOrder(){
+    const address = document.getElementById('select_adress').value
+    const payment_method = document.getElementById('payment_method').value
+    $.ajax({
+        url: "checkout.php", // Endpoint che verrà chiamato
+        method: "POST",
+        data: { 
+            address_list : address,
+            payment_method: payment_method
+         }, // I parametri verranno aggiunti all'URL
+        success: function (response) {
+
+        console.log("aggiornato con succcesso")
+        window.location.href="/../MotorShop/customer-dashboard.php";
+        },
+        error: function () {
+          alert("Errore durante la connessione al server.");
+        },
+      });
+  }
 </script>

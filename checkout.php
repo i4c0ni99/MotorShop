@@ -74,15 +74,15 @@ if (isset($_POST['add-address-button'])) {
 
     if ($name != "" && $surname != "" && $phone != "" && $province != "" && $city != "" && $address != "" && $cap != "") {
         $mysqli->query("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) 
-                        VALUE ('{$_SESSION['user']['email']}', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");
-        header("location:/../MotorShop/checkout.php");
+                        VALUE ('{$_SESSION['user']['email']}', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");               
+        
     }
 }
 
 // Prodotti e prezzo totale dell'ordine effettivo
 $totalPrice = 0;
 $products = [];
-
+$sub_quantity = 0;
 // Funzione per mostrare il carrello dell'utente nel riepilogo ordine
 $userEmail = $_SESSION['user']['email'];
 $query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc
@@ -99,7 +99,7 @@ if ($stmt) {
 
     while ($cartItem = $result->fetch_assoc()) {
         $subproductId = $cartItem['subproduct_id'];
-
+        $sub_quantity = $cartIitem['prod_quantity'];
         // Ottieni title dalla tabella products
         $productQuery = "SELECT title FROM products WHERE id = ?";
         $stmt_product = $mysqli->prepare($productQuery);
@@ -138,15 +138,16 @@ $totalPrice += $subtotal;
 }
 
 // Verifica se l' indirizzo di spedizione è stato selezionato
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['address_list'])) {
-        echo "Errore: nessun indirizzo di spedizione selezionato.";
-        exit();
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['address_list']) && isset($_POST['payment_method'])) {
+    
+        
+        
+        
+    
 
     // Recupera l'ID dell'indirizzo di spedizione
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
-
+    
 // Prodotti nel carrello dell'utente
 $queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, sp.availability, sp. quantity AS stock 
 FROM cart c 
@@ -184,7 +185,8 @@ if ($resultCart) {
             'subproduct_id' => $subproductId, 
             'title' => $productTitle,
             'quantity' => $quantity,
-            'subtotal' => $subtotal
+            'subtotal' => $subtotal,
+            'quantityCheck' => $stockQuantity - $quantity
         ];
     } else {
             // Prodotto non disponibile o quantità richiesta non in stock
@@ -300,10 +302,25 @@ if (mail($to, $subject, $message, $headers)) {
         $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
         if ($mysqli->query($deleteCartQuery)) {
             echo "Carrello svuotato con successo.";
-            header("Location: /MotorShop/customer-dashboard.php");
+            if ($mysqli->query($deleteCartQuery)) {
+                echo "Carrello svuotato con successo.";
+                foreach($products as $prod){
+                if($prod['quantityCheck'] > 0 ){
+                $mysqli->query("UPDATE sub_products SET quantity = quantity - " . intval($prod['quantity']) . " WHERE id = " . intval($prod['subproduct_id']));
+                echo $prod['quantity'];
+                }else{ 
+                    $mysqli->query("UPDATE sub_products SET quantity = quantity - " . intval($prod['quantity']) . ", availability = 0 WHERE id = " . intval($prod['subproduct_id']));
+                    echo $prod['quantity'];
+                }
+            }
+        }
+            echo json_encode(['success' => 'success']);
+
+            
         } else {
             echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
         }
+        
     } else {
         echo "Errore durante l'inserimento dell'ordine: 1" . $mysqli->error;
     }
@@ -311,6 +328,8 @@ if (mail($to, $subject, $message, $headers)) {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
+}else{
+    echo "Errore: nessun indirizzo di spedizione selezionato.";
 }
 
 // Funzione per generare un numero casuale univoco di 5 cifre per l'ordine
