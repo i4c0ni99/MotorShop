@@ -5,6 +5,7 @@ session_start();
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
 require_once "include/utils/priceFormatter.php";
+
 // Controlla se la sessione è attiva e se l'utente è autenticato
 if (isset($_SESSION['user'])) {
     // Se la sessione è attiva, carica frame-customer
@@ -35,7 +36,9 @@ if ($slide_result && $slide_result->num_rows > 0) {
     }
 }
 
+
 $helmet = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+
 $body->setContent('helmetTitle', $helmet['title']);
 $body->setContent('helmetBrand', $helmet['marca']);
 $body->setContent('helemtImg', $helmet['imgsrc']);
@@ -881,6 +884,7 @@ if ($result_offer && $result_offer->num_rows > 0) {
 
 $outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
     = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10 AND products.availability = 1 AND sub_products.availability = 1" 
+
 . " GROUP BY products.id LIMIT 3";
 
 $result = $mysqli->query($outlet);

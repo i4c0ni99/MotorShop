@@ -1,7 +1,12 @@
 <?php
+
 session_start();
+
 require "include/dbms.inc.php";
 require "include/auth.inc.php";
+require "include/template2.inc.php";
+
+if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id']) && is_numeric($_POST['id'])) {
@@ -75,4 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: /MotorShop/product-list.php'); // Redirect alla lista dei prodotti
     exit();
 }
+
+} else {
+    header("Location: /MotorShop/login.php");
+    exit;
+}
+
 ?>
