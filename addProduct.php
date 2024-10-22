@@ -160,15 +160,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Se non ci sono errori, procedi con l'inserimento nel database
     if (empty($errors)) {
        
-        $description = $mysqli->real_escape_string($_POST['description']);
-        $details = $mysqli->real_escape_string($_POST['details']);
-        $information = isset($_POST['information']) ? $mysqli->real_escape_string($_POST['information']) : NULL;
+        $description = $mysqli->real_escape_string(strip_tags($_POST['description']));
+        $details = $mysqli->real_escape_string(strip_tags($_POST['details']));
+        $information = isset($_POST['information']) ? $mysqli->real_escape_string(strip_tags($_POST['information'])) : NULL;
  
         echo "Category ID: $category_id<br>";
         echo "Subcategory ID: $subcategory_id<br>";
 
         $insertQuery = "INSERT INTO products (code, title, description, availability, specification, information, brand_id, categories_id, subcategories_id) 
-            VALUES ('$code', '$title', '$description', 1, '$details', '$information', '$brand_id', ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
+            VALUES ('$code', '$title', '$description', 0, '$details', '$information', ".$_GET['brand_id'].", ".$_GET['cat_id'].", ".$_GET['sub_cat_id'].")";
 
         echo $insertQuery;  // Debug: Print the query
 
