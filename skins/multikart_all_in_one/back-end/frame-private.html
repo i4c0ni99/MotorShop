@@ -350,37 +350,65 @@
     </script>
     <script>
           // Inizializza CKEditor per i campi specificati
+          function get_brand(){
+            
+            const title = document.getElementsByName('title')[0].value
+            const code = document.getElementsByName('code')[0].value
+            const brand = document.getElementsByName('brand')[0].value
+            const description = CKEDITOR.instances.description.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const details = CKEDITOR.instances.details.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const information = CKEDITOR.instances.information.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            
+            window.location.href = "addProduct.php?brand_id=" + encodeURIComponent(brand) +
+                           "&title=" + encodeURIComponent(title) +
+                           "&code=" + encodeURIComponent(code) +
+                           "&description=" + encodeURIComponent(description) +
+                           "&details=" + encodeURIComponent(details)+
+                           "&information=" + encodeURIComponent(information);
+                           
+        }
    
         function get_category(){
             
             const title = document.getElementsByName('title')[0].value
             const code = document.getElementsByName('code')[0].value
-            const description = document.getElementsByName('description')[0].value
-            const details = document.getElementsByName('details')[0].value
+            const description = CKEDITOR.instances.description.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const details = CKEDITOR.instances.details.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const information = CKEDITOR.instances.information.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const brand = document.getElementsByName('brand')[0].value
             const category = document.getElementsByName('category')[0].value
+            
+            
             console.log([title,code,description,details,category])
             window.location.href = "addProduct.php?cat_id=" + encodeURIComponent(category) +
+                            "&brand_id=" + encodeURIComponent(brand) +
                            "&title=" + encodeURIComponent(title) +
                            "&code=" + encodeURIComponent(code) +
                            "&description=" + encodeURIComponent(description) +
-                           "&details=" + encodeURIComponent(details)
+                           "&details=" + encodeURIComponent(details) +
+                           "&information=" + encodeURIComponent(information);
                            
         }
 
         function get_sub_category(){
-            console.log('entra2')
+            
             const title = document.getElementsByName('title')[0].value
             const code = document.getElementsByName('code')[0].value
-            const description = document.getElementsByName('description')[0].value
-            const details = document.getElementsByName('details')[0].value
+            const description = CKEDITOR.instances.description.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const details = CKEDITOR.instances.details.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const information = CKEDITOR.instances.information.getData().replace(/<\/?[^>]+(>|$)/g, "");
+            const brand = document.getElementsByName('brand')[0].value
             const category = document.getElementsByName('category')[0].value
             const category_sub = document.getElementsByName('subcategory')[0].value
+           
             
             window.location.href = "addProduct.php?cat_id=" + encodeURIComponent(category) +"&sub_cat_id="+encodeURIComponent(category_sub)+
-                           "&title=" + encodeURIComponent(title) +
-                           "&code=" + encodeURIComponent(code) +
-                           "&description=" + encodeURIComponent(description) +
-                           "&details=" + encodeURIComponent(details) ;
+                        "&brand_id=" + encodeURIComponent(brand) +
+                        "&title=" + encodeURIComponent(title) +
+                        "&code=" + encodeURIComponent(code) +
+                        "&description=" + encodeURIComponent(description) +
+                        "&details=" + encodeURIComponent(details)+
+                        "&information=" + encodeURIComponent(information) ;
     
         }
     </script>

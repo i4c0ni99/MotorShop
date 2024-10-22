@@ -36,19 +36,21 @@ if ($slide_result && $slide_result->num_rows > 0) {
     }
 }
 
-$helmet = $mysqli->query("SELECT sub_products.*,products.*,images.*,brands.name as marca FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands ON products.brand_id = brands.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 )")->fetch_assoc();
+
+$helmet = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+
 $body->setContent('helmetTitle', $helmet['title']);
 $body->setContent('helmetBrand', $helmet['marca']);
 $body->setContent('helemtImg', $helmet['imgsrc']);
 $body->setContent('helmetPrice', $helmet['price']);
 $body->setContent('helmetId', $helmet['products_id']);
-$stivali = $mysqli->query("SELECT sub_products.*,products.*,images.*,brands.name as marca FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands ON products.brand_id = brands.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =15 )")->fetch_assoc();
+$stivali = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =15 )AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 $body->setContent('stivaliTitle', $stivali['title']);
 $body->setContent('stivaliBrand', $stivali['marca']);
 $body->setContent('stivalImg', $stivali['imgsrc']);
 $body->setContent('stivaliPrice', $stivali['price']);
 $body->setContent('stivalId', $stivali['products_id']);
-$giacca = $mysqli->query("SELECT sub_products.*,products.*,images.*,brands.name as marca FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands ON products.brand_id = brands.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =20 )")->fetch_assoc();
+$giacca = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =20 )AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 $body->setContent('giaccaTitle', $giacca['title']);
 $body->setContent('giaccaBrand', $giacca['marca']);
 $body->setContent('giaccaImg', $giacca['imgsrc']);
@@ -56,8 +58,8 @@ $body->setContent('giaccaPrice', $giacca['price']);
 $body->setContent('giaccaId', $giacca['products_id']);
 
 $oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-                      sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA')
-                      ORDER BY mediumRate DESC limit 0,5");
+                      sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA') AND products.availability = 1 AND sub_products.availability = 1
+                      ORDER BY mediumRate DESC limit 0,5") ;
 
 $resultCat = $oidGiacca;
 if ($resultCat->num_rows > 0) {
@@ -183,7 +185,7 @@ if ($resultCat->num_rows > 0) {
 }
 
  $oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-                          sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO')
+                          sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO') AND products.availability = 1 AND sub_products.availability = 1
                           ORDER BY mediumRate DESC limit 0,5");
 
 $resultCatCasco = $oidCasco;
@@ -303,7 +305,7 @@ if ($resultCatCasco->num_rows > 0) {
 }
 
 $resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI')
+sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI') AND products.availability = 1 AND sub_products.availability = 1
 ORDER BY mediumRate DESC limit 0,9");
 
 if ($resultCatStivali->num_rows > 0) {
@@ -423,7 +425,7 @@ if ($resultCatStivali->num_rows > 0) {
     }
 }
 $oidProtezioni = $mysqli->query("SELECT products.title as title ,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI')
+sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI') AND products.availability = 1 AND sub_products.availability = 1
 ORDER BY mediumRate DESC limit 0,9");
 
 $resultProtezioni = $oidProtezioni;
@@ -544,7 +546,7 @@ if ($resultProtezioni->num_rows > 0) {
     }
 }
 $oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI')
+sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI') AND products.availability = 1 AND sub_products.availability = 1
 ORDER BY mediumRate DESC limit 0,9");
 
 $resultCatPantaloni = $oidPantaloni;
@@ -665,7 +667,7 @@ if ($resultCatPantaloni->num_rows > 0) {
     }
 }
 $oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE')
+sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE') AND products.availability = 1 AND sub_products.availability = 1
 ORDER BY mediumRate DESC limit 0,9");
 
 $resultCatTute = $oidTute;
@@ -881,13 +883,14 @@ if ($result_offer && $result_offer->num_rows > 0) {
 } */
 
 $outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
-    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id and offers.percentage >= 10"
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10 AND products.availability = 1 AND sub_products.availability = 1" 
+
 . " GROUP BY products.id LIMIT 3";
 
 $result = $mysqli->query($outlet);
 
 $offert_prew = $mysqli->query("SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
-    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 GROUP BY products.id LIMIT 5");
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id LIMIT 5") ;
 
 if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows > 0) {
         $key= $offert_prew->fetch_assoc();
@@ -895,6 +898,10 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
         
 
         $product_id = $row[0][1];
+        $product_id2 = $row[1][1];
+    if($product_id  && $product_id2){
+
+
 
         $image_query = "
             SELECT images.imgsrc, sub_products.price,sub_products.id 
@@ -905,21 +912,6 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
             LIMIT 1
         ";
 
-        $image_data = $mysqli->query($image_query);
-       
-        if ($image_data && $image_data->num_rows > 0 ) {
-            $image_data = $image_data->fetch_assoc(); 
-            
-            $body->setContent('img_1_outlet',$image_data['imgsrc']);
-                
-            
-        }
-
-        
-        
-
-        $product_id2 = $row[1][1];
-        
         $image_query2 = "
             SELECT images.imgsrc, sub_products.price,sub_products.id 
             FROM products 
@@ -929,15 +921,51 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
             LIMIT 1
         ";
 
-        
+
+        $image_data = $mysqli->query($image_query);
+
         $image_data2= $mysqli->query($image_query2);
-        if ($image_data2 && $image_data2->num_rows > 0 ) {
+
+        if ($image_data && $image_data->num_rows > 0 && $image_data2 && $image_data2->num_rows > 0 ) {
+            $image_data = $image_data->fetch_assoc(); 
             $image_data2 = $image_data2->fetch_assoc(); 
+            $body->setContent('offer_poster','
+             <div class="featured-title mv-title-style-2">
+            <div class="title-2-inner"><img
+                    src="/../MotorShop/skins/motor-html-package/motor/images/icon/icon_m.png" alt="icon"
+                    class="icon image-live-view" /><span class="main">IN OFFERTA</span><span class="sub"></span>
+            </div>
+        </div>
+            <div class="block-style bg-white">
+            <div class="mv-block-style-14">
+                <div class="block-14-main text-center">
+                    <div class="featured-title mv-title-style-2">
+                        <div class="title-2-inner">
+                            <span class="main">FUORI TUTTO</span><span class="sub">scopri i bestsellere degli scrosi anni</span>
+                        </div>
+                    </div>
+                    <div class="block-14-content mv-title-style-3 f-300">
+                        <div class="title-3-text"><span class="behind">shock</span><span class="main"> <span
+                                    class="sub-2">discount</span><span>shock</span><span class="sub">Contro lo spreco</span></span></div>
+                    </div><a href="../MotorShop/product-list-customer.php?offert_percentage"
+                        class="mv-btn mv-btn-style-1 responsive-btn-1-type-2 shop-now-button"><span
+                            class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span
+                                class="btn-text">shop now</span></span></a>
+                </div>
+                <!-- .block-14-main-->
+                <img src="data:image;base64,'.$image_data['imgsrc'].'" alt="demo"
+                    class="block-14-img left hidden-xs hidden-sm" /><img src="data:image;base64,'.$image_data2['imgsrc'].'"
+                    alt="demo" class="block-14-img right hidden-xs hidden-sm" />
+            </div>
+            <!-- .mv-block-style-14-->
+        </div>');
             
-            $body->setContent('img_2_outlet',$image_data2['imgsrc']);
                 
             
         }
+
+
+        
 
         foreach($offert_prew as $key) {
             $product_id= $key['id'];
@@ -1008,6 +1036,7 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
 
         ');
         }
+    }
     
 }
 

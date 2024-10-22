@@ -10,7 +10,7 @@ include "include/utils/priceFormatter.php";
 $main = new Template("skins/motor-html-package/motor/frame_public.html");
 $body = new Template("skins/motor-html-package/motor/product-detail.html");
 
-$oid = $mysqli->query("SELECT title,id,categories_id,description,specification,information FROM products where id={$_GET['id']}");
+$oid = $mysqli->query("SELECT title,id,categories_id,description,specification,information FROM products where id={$_GET['id']} AND products.availability = 1 ");
 $result = $oid->fetch_assoc();
 $categories = $mysqli->query("SELECT name FROM categories where id={$result['categories_id']}");
 $category = $categories->fetch_assoc();
@@ -23,9 +23,9 @@ $body->setContent("information", $result['information']);
 $body->setContent("specification", $result['specification']);
 
 
-$data = $mysqli->query("SELECT id,price,color,quantity as sub_quantity FROM sub_products where products_id={$_GET['id']}");
+$data = $mysqli->query("SELECT id,price,color,quantity as sub_quantity FROM sub_products where products_id={$_GET['id']}  AND sub_products.availability = 1");
 $result1 = $data->fetch_assoc();
-$offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id']}");
+$offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id']} ");
             $offerItem = $offer->fetch_assoc();
             if($offerItem){
             $body->setContent('offer',
@@ -97,11 +97,13 @@ foreach ($data as $item) {
 
 if (isset($_GET['subId'])) {
 
-   $data1 = $mysqli->query("SELECT size,quantity from sub_products where products_id ={$_GET['id']}");
+   $data1 = $mysqli->query("SELECT id,size,quantity from sub_products where products_id ={$_GET['id']} AND sub_products.availability = 1");
+   $body->setContent("size", '');
    foreach ($data1 as $item2) {
-
-      $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item['id'] . '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
-      $dizionario[$item2['size']] = $item2['quantity']; 
+        if($item2['id']== $_GET['subId']){
+            $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item2['id'] . '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
+            $dizionario[$item2['size']] = $item2['quantity']; 
+        }
        
    }
 $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = {$item['id']}");
