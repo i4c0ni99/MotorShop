@@ -25,62 +25,6 @@ if (!isset($_SESSION['user'])) {
 // Ottieni l'ID del prodotto dall'URL
 $product_id = isset($_GET['id']) ? $mysqli->real_escape_string($_GET['id']) : null;
 
-// Ottieni la taglia e il colore selezionati dall'utente
-/* $selected_size = isset($_GET['size']) ? $mysqli->real_escape_string($_GET['size']) : null;
-$selected_color = isset($_GET['color']) ? $mysqli->real_escape_string($_GET['color']) : null; */
-
-// Query per ottenere le opzioni disponibili per la taglia e il colore
-/* $sizes_query = "SELECT DISTINCT size FROM sub_products WHERE products_id = {$product_id}";
-$colors_query = "SELECT DISTINCT color FROM sub_products WHERE products_id = {$product_id}'";
-
-// Filtra le opzioni di colore in base alla taglia selezionata
-if ($selected_size && $selected_color) {
-    $colors_query .= " AND size = '$selected_size'";
-}
-
-// Filtra le opzioni di taglia in base al colore selezionato
-if ($selected_color && $selected_color) {
-    $sizes_query .= " AND color = '$selected_color'";
-}
-if($selected_size){
-    $sizes_query .= "AND size = '$selected_size'";
-}
-// Esegui le query
-$sizes_result = $mysqli->query($sizes_query);
-$colors_result = $mysqli->query($colors_query);
-
-// Prepara le opzioni di taglia e colore per il template
-$sizes = [];
-$colors = [];
-
-while ($row = $sizes_result->fetch_assoc()) {
-    $sizes[] = $row['size'];
-}
-
-while ($row = $colors_result->fetch_assoc()) {
-    $colors[] = $row['color'];
-}
-
-// Reindirizza al dettaglio del sottoprodotto se sia la taglia che il colore sono selezionati
-if ($selected_size && $selected_color) {
-    $sub_product_query = "
-        SELECT id FROM sub_products 
-        WHERE products_id = '$product_id' 
-        AND size = '$selected_size' 
-        AND color = '$selected_color' 
-        LIMIT 1";
-    $sub_product_result = $mysqli->query($sub_product_query);
-
-    if ($sub_product_result && $sub_product_result->num_rows > 0) {
-        $sub_product = $sub_product_result->fetch_assoc();
-        header("Location: subproduct-detail.php?id=" . $sub_product['id']);
-        exit();
-    } else {
-        // Nessun sottoprodotto trovato
-        $body->setContent("error", "Nessun sottoprodotto trovato con la combinazione selezionata.");
-    }
-}
- */
 // Carica tutte le categorie dal database
 $categories_query = "SELECT id, name FROM categories";
 $categories_result = $mysqli->query($categories_query);
@@ -147,10 +91,10 @@ $product_query_base ="
     SELECT products.title, products.id 
     FROM products  
     JOIN sub_products ON sub_products.products_id = products.id 
-    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
+    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) AND products.availability = 1";
 
 // Aggiungi la condizione per il filtro di prezzo
-$product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
+$product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price  AND sub_products.availability = 1";
 $product_query_base .= $category_condition;
 
 // Aggiungi la condizione per il filtro di testo di ricerca se specificato
@@ -169,7 +113,7 @@ $count_query = "SELECT COUNT(DISTINCT products.id) as total_products FROM produc
                 WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) ";
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
-$count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
+$count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price AND sub_products.availability = 1 ";
 if(isset($_GET['size'])){
 $product_query_base .= "AND sub_products.size ='{$_GET['size']}'";
 $count_query .= "AND sub_products.size ='{$_GET['size']}'";
