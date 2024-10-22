@@ -886,7 +886,7 @@ $outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON
 $result = $mysqli->query($outlet);
 
 $offert_prew = $mysqli->query("SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
-    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 GROUP BY products.id LIMIT 5");
+    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 GROUP BY products.id LIMIT 5");
 
 if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows > 0) {
         $key= $offert_prew->fetch_assoc();
@@ -894,6 +894,10 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
         
 
         $product_id = $row[0][1];
+        $product_id2 = $row[1][1];
+    if($product_id  && $product_id2){
+
+
 
         $image_query = "
             SELECT images.imgsrc, sub_products.price,sub_products.id 
@@ -904,21 +908,6 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
             LIMIT 1
         ";
 
-        $image_data = $mysqli->query($image_query);
-       
-        if ($image_data && $image_data->num_rows > 0 ) {
-            $image_data = $image_data->fetch_assoc(); 
-            
-            $body->setContent('img_1_outlet',$image_data['imgsrc']);
-                
-            
-        }
-
-        
-        
-
-        $product_id2 = $row[1][1];
-        
         $image_query2 = "
             SELECT images.imgsrc, sub_products.price,sub_products.id 
             FROM products 
@@ -928,15 +917,51 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
             LIMIT 1
         ";
 
-        
+
+        $image_data = $mysqli->query($image_query);
+
         $image_data2= $mysqli->query($image_query2);
-        if ($image_data2 && $image_data2->num_rows > 0 ) {
+
+        if ($image_data && $image_data->num_rows > 0 && $image_data2 && $image_data2->num_rows > 0 ) {
+            $image_data = $image_data->fetch_assoc(); 
             $image_data2 = $image_data2->fetch_assoc(); 
+            $body->setContent('offer_poster','
+             <div class="featured-title mv-title-style-2">
+            <div class="title-2-inner"><img
+                    src="/../MotorShop/skins/motor-html-package/motor/images/icon/icon_m.png" alt="icon"
+                    class="icon image-live-view" /><span class="main">IN OFFERTA</span><span class="sub"></span>
+            </div>
+        </div>
+            <div class="block-style bg-white">
+            <div class="mv-block-style-14">
+                <div class="block-14-main text-center">
+                    <div class="featured-title mv-title-style-2">
+                        <div class="title-2-inner">
+                            <span class="main">FUORI TUTTO</span><span class="sub">scopri i bestsellere degli scrosi anni</span>
+                        </div>
+                    </div>
+                    <div class="block-14-content mv-title-style-3 f-300">
+                        <div class="title-3-text"><span class="behind">shock</span><span class="main"> <span
+                                    class="sub-2">discount</span><span>shock</span><span class="sub">Contro lo spreco</span></span></div>
+                    </div><a href="../MotorShop/product-list-customer.php?offert_percentage"
+                        class="mv-btn mv-btn-style-1 responsive-btn-1-type-2 shop-now-button"><span
+                            class="btn-inner"><i class="btn-icon fa fa-cart-plus"></i><span
+                                class="btn-text">shop now</span></span></a>
+                </div>
+                <!-- .block-14-main-->
+                <img src="data:image;base64,'.$image_data['imgsrc'].'" alt="demo"
+                    class="block-14-img left hidden-xs hidden-sm" /><img src="data:image;base64,'.$image_data2['imgsrc'].'"
+                    alt="demo" class="block-14-img right hidden-xs hidden-sm" />
+            </div>
+            <!-- .mv-block-style-14-->
+        </div>');
             
-            $body->setContent('img_2_outlet',$image_data2['imgsrc']);
                 
             
         }
+
+
+        
 
         foreach($offert_prew as $key) {
             $product_id= $key['id'];
@@ -1007,6 +1032,7 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
 
         ');
         }
+    }
     
 }
 
