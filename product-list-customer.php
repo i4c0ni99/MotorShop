@@ -86,8 +86,16 @@ $categories_query = "SELECT id, name FROM categories";
 $categories_result = $mysqli->query($categories_query);
 $categories = [];
 
+$brands_query = "SELECT id, name FROM brands";
+$brands_result = $mysqli->query($brands_query);
+$brands = [];
+
 while ($row = $categories_result->fetch_assoc()) {
     $categories[] = $row;
+}
+
+while ($row = $brands_result->fetch_assoc()) {
+    $brands[] = $row;
 }
 
 
@@ -108,8 +116,11 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 // Aggiunta dei parametri di prezzo min e max con le nuove condizioni
 $min_price = isset($_GET['min_price']) ? max(10, floatval($_GET['min_price'])) : 10;
 $max_price = isset($_GET['max_price']) ? min(2500, floatval($_GET['max_price'])) : 2500;
-
-
+$brand_condition = '';
+if (isset($_GET['brand_id']) && !empty($_GET['brand_id'])) {
+    $brand_id = $mysqli->real_escape_string($_GET['brand_id']);
+    $brand_condition = " AND products.brand_id = $brand_id ";
+}
 $category_condition = '';
 if (isset($_GET['cat_id']) && !empty($_GET['cat_id'])) {
     $category_id = $mysqli->real_escape_string($_GET['cat_id']);
@@ -152,6 +163,7 @@ $product_query_base ="
 // Aggiungi la condizione per il filtro di prezzo
 $product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
 $product_query_base .= $category_condition;
+$product_query_base .= $brand_condition;
 
 // Aggiungi la condizione per il filtro di testo di ricerca se specificato
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
@@ -350,6 +362,10 @@ foreach ($categories as $category) {
     $body->setContent("cat_name", $category['name']);
 }
 
+foreach ($brands as $brand) {
+    $body->setContent("brand_id", $brand['id']);
+    $body->setContent("brand_name", $brand['name']);
+}
 
 // Genera i pulsanti di paginazione
 $pagination_html = '';
