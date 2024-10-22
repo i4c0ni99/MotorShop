@@ -1,0 +1,77 @@
+<section class="main-banner mv-wrap">
+  <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+    <div class="page-name mv-caption-style-6">
+      <div class="container">
+        <div class="mv-title-style-9"><span class="main">Carrello</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- .main-banner-->
+
+<div class="container">
+  <table class="mv-table-style-2">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <[foreach]>
+      <tr class="calculate-price-wrapper post" data-id="<[id]>" data-quantity = "<[quantities]>">
+        <td>
+          <div class="mv-block-style-24">
+            <div class="block-24-list">
+              <article class="item item-cart">
+                <div class="item-inner">
+                  <div class="mv-dp-table">
+                    <div class="mv-dp-table-cell block-24-thumb">
+                      <div class="thumb-inner mv-lightbox-style-1">
+                        <img src="data:image;base64,<[imgView]>" alt="<[title]>" />
+                            <a href="data:image;base64,<[imgView]>" title="<[title]>" data-lightbox-href="product-detail.php?id=<[product_id]>&subId=<[id]>&size=<[size]>" class="mv-lightbox-item">
+                            <i class="icon fa fa-search"></i></a></div>
+                    </div>
+                    <div class="mv-dp-table-cell block-24-main">
+                      <div class="block-24-title"><a href="product-detail.php?id=<[product_id]>&subId=<[id]>&size=<[size]>" title="<[title]>" class="mv-overflow-ellipsis"><[title]></a></div>
+                      <div class="block-24-content">
+                        <div class="mv-overflow-ellipsis">Taglia: <[size]></div>
+                        <div class="mv-overflow-ellipsis">Colore: <[color]></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </td>
+        <td> 
+          <div class="mv-font-secondary mv-f-18"><strong>€<span class="calculate-price-unit"><[price]></span></strong></div>
+        </td>
+        <td>
+            
+            <div class="mv-spinner-style-2" >
+                <input type="text" name="test138" value="<[quantity]>" class="mv-inputbox mv-only-numeric input-quantity-cart" />
+              </div>
+        </td>
+        <td> 
+          <div class="mv-font-secondary mv-f-18"><strong>€<span class="calculate-price-output"><[price]></span></strong></div>
+        </td>
+        <td> 
+          <button type="button" title="Remove from Cart" class="mv-btn mv-btn-style-4 fa fa-close btn-delete-product"></button>
+        </td>
+      </tr>
+      <[/foreach]>
+    </tbody>
+  </table>
+</div>
+
+<a href="checkout.php" class="mv-btn mv-btn-style-5 btn-5-h-45 responsive-btn-5-type-2 mv-btn-block" 
+   <[if> $checkout_disabled]>style="pointer-events: none; opacity: 0.5;"<[/if]>>
+   checkout
+</a>
+
+<!-- .mv-main-body-->

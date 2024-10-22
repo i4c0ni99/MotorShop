@@ -1,0 +1,289 @@
+<section class="main-banner mv-wrap">
+  <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+    <div class="page-name mv-caption-style-6">
+      <div class="container">
+        <div class="mv-title-style-9"><span class="main">Checkout</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- .main-banner-->
+<section class="mv-main-body checkout-main mv-bg-gray mv-wrap">
+  <div class="container">
+    <form method="post" action="checkout.php"> 
+      <div class="checkout-block block-billing-address mv-mb-50">
+        <div class="mv-form-style-2 mv-box-shadow-gray-1">
+          <div class="row">
+            <div class="col-sm-6 col-billing-address">
+              <div class="form-billing-address">
+                <div class="form-header">
+                  <div class="mv-title-style-13">
+                    <div class="text-main">Indirizzo di spedizione</div>
+                  </div>
+                </div>
+                <!-- .form-header-->
+                <div class="form-body">
+                  <div class="mv-form-group">
+                    <label class="mv-checkbox mv-checkbox-style-1">
+                      <input type="checkbox" class="hidden checkbox-different-address" name="address_list" id="choose-saved-address"/><span class="checkbox-after-input"><span class="checkbox-visual-box">
+                      <span class="icon-checked fa fa-check"></span></span><span class="checkbox-text"><strong>Scegli indirizzo salvato</strong></span></span>
+                    </label>
+                  </div>
+                  <!-- Tabella indirizzi salvati -->
+                  <div id="saved-addresses-table" style="display: none;">
+                    <br>
+                    <h3><b>Indirizzi salvati:</b></h3>
+                    <br>
+                    <div class="table-responsive table-desi">
+                      <table class="all-package coupon-table table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Scegli</th>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Cellulare</th>
+                            <th>Provincia</th>
+                            <th>Città</th>
+                            <th>Indirizzo</th>
+                            <th>CAP</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <[foreach]>
+                          <tr data-row-id="<[id]>">
+                            <td>
+                              <input class="checkbox_animated check-it" type="radio" name="address_list" value="<[id]>">
+                            </td>
+                            <td><[ADname]></td>
+                            <td><[ADsurname]></td>
+                            <td><[ADphone]></td>
+                            <td><[ADprovince]></td>
+                            <td><[ADcity]></td>
+                            <td><[ADstreetAddress]></td>
+                            <td><[ADcap]></td>
+                          </tr>
+                          <[/foreach]>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <form class="needs-validation add-product-form" method="post" action="/MotorShop/editCustomerProfile.php">
+                    <div class="mv-form-group">
+                       
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="mv-label"> <strong class="text-uppercase">Nome <span class="mv-color-primary">*</span></strong></div>
+                          <div class="mv-field">
+                            <input type="text" placeholder="Nome" name="first_name" minlength="2" required class="mv-inputbox mv-inputbox-style-2"/>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="mv-label"> <strong class="text-uppercase">Cognome <span class="mv-color-primary">*</span></strong></div>
+                          <div class="mv-field">
+                            <input type="text" placeholder="Cognome" name="last_name" minlength="2" required class="mv-inputbox mv-inputbox-style-2"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <div class="mv-label"> <strong class="text-uppercase">Provincia <span class="mv-color-primary">*</span></strong></div>
+                      <div class="mv-field">
+                        <input type="text" id="province" name="province" minlength="2" required class="mv-inputbox mv-inputbox-style-2">
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <div class="mv-label"> <strong class="text-uppercase">Città <span class="mv-color-primary">*</span></strong></div>
+                      <div class="mv-field">
+                        <input type="text" placeholder="Città" name="city" minlength="2" required class="mv-inputbox mv-inputbox-style-2"/>
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <div class="mv-label"> <strong class="text-uppercase">Città <span class="mv-color-primary">*</span></strong></div>
+                      <div class="mv-field">
+                        <input type="text" placeholder="Città" name="city" minlength="2" required class="mv-inputbox mv-inputbox-style-2"/>
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <div class="mv-label"> <strong class="text-uppercase">CAP <span class="mv-color-primary">*</span></strong></div>
+                      <div class="mv-field">
+                        <input type="text" placeholder="CAP" name="zip_code" pattern="[0-9]{5}" required class="mv-inputbox mv-inputbox-style-2"/>
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <div class="mv-label"> <strong class="text-uppercase">Cellulare <span class="mv-color-primary">*</span></strong></div>
+                      <div class="mv-field">
+                        <input type="text" placeholder="Cellulare" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" required class="mv-inputbox mv-inputbox-style-2"/>
+                      </div>
+                    </div>
+                    <div class="mv-form-group">
+                      <button type="submit" class="mv-btn mv-btn-style-5">Aggiungi Indirizzo</button>
+                    </div>
+                  </form>
+                       
+                        <div class="form-group mb-3 row">
+                            <label for="streetAddress" class="col-xl-3 col-sm-4 mb-0">Indirizzo:</label>
+                            <div class="col-xl-8 col-sm-7">
+                                <input type="text" id="streetAddress" name="streetAddress" minlength="3" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="cap" class="col-xl-3 col-sm-4 mb-0">CAP:</label>
+                            <div class="col-xl-8 col-sm-7">
+                                <input type="text" id="cap" name="cap" pattern="[0-9]{5}" required="true">
+                            </div>
+                        </div>
+                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                            <input type="submit" name="add-address-button" class="btn btn-primary">
+                        </div>
+                    </div>
+             
+                <!-- .form-body-->
+              </div>
+              <!-- .form-billing-address-->
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="col-sm-6 col-shipping-address">
+              <div class="form-different-address">
+                <div class="form-header">
+                  <div class="mv-title-style-13">
+                    <div class="text-main">Note spedizione</div>
+                  </div>
+                </div>
+                <div class="mv-form-group">
+                  <div class="mv-label"> <strong class="text-uppercase">Istruzioni per il corriere</strong></div>
+                  <div class="mv-field">
+                    <textarea name="order_details" rows="5" placeholder="Questo campo è facoltativo." data-mv-placeholder="Questo campo è facoltativo." class="mv-inputbox mv-inputbox-style-2 mv-resize-vertical"></textarea>
+                  </div>
+                </div>
+                <!-- .form-body-->
+              </div>
+              <!-- .form-shipping-address-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- .block-billing-address-->
+      <div class="checkout-block block-coupon-code">
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-12 col-md-8 col-coupon-code mv-mb-50">
+            <div class="mv-well-style-2 mv-box-shadow-gray-1 mv-bg-white">
+              <div class="well--header">
+                <div class="mv-title-style-13">
+                  <div class="text-main">Riepilogo ordine</div>
+                </div>
+              </div>
+              <div class="well-2-body">
+                <table class="mv-table-style-1">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase">Prodotto</th>
+                      <th class="text-uppercase">Quantità</th>
+                      <th class="text-uppercase">Taglia</th>
+                      <th class="text-uppercase">Colore</th>
+                      <th class="text-uppercase">Prezzo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <[foreach]>
+                      <tr>
+                        <td><[title]></td>
+                        <td><[quantity]></td>
+                        <td><[size]></td>
+                        <td><[color]></td>
+                        <td><[price]></td>
+                      </tr>
+                    <[/foreach]>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4" class="text-uppercase">Totale ordine:</td>
+                      <td class="text-uppercase"><[total_price]></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>          
+          
+          <div class="col-xs-12 col-sm-12 col-md-4 col-cart-totals mv-mb-50">
+            <div class="mv-well-style-2 mv-box-shadow-gray-1 mv-bg-white">
+              <div class="well-2-header">
+                <div class="mv-title-style-13">
+                  <div class="text-main">Metodo di pagamento</div>
+                </div>
+              </div>
+              <div class="well-2-body">
+                <div class="mv-block-style-38">
+                  <div class="block-38-list method-payment-list">
+                    <div class="item">
+                      <label class="block-38-header mv-btn mv-btn-style-4 btn-choose-method"><span class="block-38-visual-box"><span class="icon-checked"></span>
+                      </span><span class="block-38-title"><span class="title-text">Bonifico bancario</span></span><span class="block-38-minus-plus fa fa-plus"></span></label>
+                      <div class="block-38-body">
+                        <div class="block-38-content">Effettua il pagamento direttamente sul nostro conto bancario. 
+                          Si prega di utilizzare il numero d'ordine come riferimento di pagamento. 
+                          Si noti che l'ordine non verrà spedito fino a quando i fondi non saranno ricevuti.</div>
+                      </div>
+                      <input type="radio" name="payment_method" value="Bonifico bancario" class="hidden">
+                    </div>
+                    <div class="item">
+                      <label class="block-38-header mv-btn mv-btn-style-4 btn-choose-method"><span class="block-38-visual-box"><span class="icon-checked"></span>
+                      </span><span class="block-38-title"><span class="title-text">PayPal</span></span><span class="block-38-minus-plus fa fa-plus"></span></label>
+                      <div class="block-38-body">
+                        <div class="block-38-content">Paga tramite PayPal; puoi pagare con la tua carta di credito se non hai un account PayPal.</div>
+                      </div>
+                      <input type="radio" name="payment_method" value="PayPal" class="hidden">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="checkout-block block-confirm-order mv-mb-50">
+        <div class="row">
+          <div class="col-xs-10 col-sm-10 col-md-3 col-confirm-order mv-mb-50">
+            <div class="mv-well-style-2 mv-box-shadow-gray-1 mv-bg-white">
+              <div class="well-2-body">
+                <button type="submit" class="mv-btn mv-btn-style-5 btn-5-h-45 responsive-btn-5-type-1 btn-confirm-order">Conferma ordine</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkbox = document.getElementById('choose-saved-address');
+    var table = document.getElementById('saved-addresses-table');
+    var paymentMethods = document.querySelectorAll('.btn-choose-method');
+
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        table.style.display = 'block';
+      } else {
+        table.style.display = 'none';
+      }
+    });
+
+    paymentMethods.forEach(function(method) {
+      method.addEventListener('click', function() {
+        paymentMethods.forEach(function(m) {
+          m.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        var input = this.querySelector('input[type="radio"]');
+        input.checked = true;
+        document.getElementById('payment_method_input').value = input.value;
+      });
+    });
+  });
+</script>
