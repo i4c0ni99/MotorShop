@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 
 require "include/template2.inc.php";
@@ -78,7 +79,6 @@ if (isset($_GET['id'])) {
 
     // Chiama la funzione per aggiornare lo stato dell'ordine
     if (updateOrderState($orderId)) {
-        echo "Stato dell'ordine aggiornato con successo!";
     } else {
         echo "Errore durante l'aggiornamento dello stato dell'ordine.";
     }
