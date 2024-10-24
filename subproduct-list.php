@@ -11,7 +11,7 @@ $body = new Template("skins/multikart_all_in_one/back-end/subproduct-list.html")
 // Verifica se è stato passato l'id del prodotto tramite GET
 if (isset($_GET['id'])) {
     $productId = $mysqli->real_escape_string($_GET['id']);
-
+    $body->setContent("prod_id",$productId);
     // Verifica se $productId è stato impostato correttamente
     if (empty($productId)) {
         die("ID del prodotto non valido.");
