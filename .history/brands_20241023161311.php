@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['brand'])) {
             echo "Errore durante l'inserimento della marca: " . $mysqli->error;
         }
     }
-}
+
 
 } else {
     header("Location: /MotorShop/login.php");
