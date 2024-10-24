@@ -80,8 +80,8 @@ if (isset($_POST['save'])) {
     // Prezzo
     if (isset($_POST['price'])) {
         $price = filter_var($_POST['price'], FILTER_VALIDATE_FLOAT);
-        if ($price === false || $price < 1.00 || $price > 2000.00) {
-            echo "<script>console.log('Il prezzo deve essere compreso tra 1.00 e 2000.00.');</script>";
+        if ($price === false || $price < 1.00 || $price > 10000.00) {
+            echo "<script>console.log('Il prezzo deve essere compreso tra 1.00 e 10000.00.');</script>";
             $errors[] = "Il prezzo deve essere compreso tra 1.00 e 2000.00.";
         }
     } else {
@@ -154,7 +154,7 @@ if (isset($_POST['save'])) {
             }
 
             $_SESSION['success'] = "Sottoprodotto aggiunto con successo. " . implode(" ", $uploadedImages);
-            header("Location: /MotorShop/product-list.php");
+            header("Location: /MotorShop/subproduct-list.php?id=".$productId);
             exit();
         } else {
             $errors[] = "Errore durante l'inserimento dei dati del sottoprodotto: " . $mysqli->error;
