@@ -37,26 +37,26 @@ if ($brands) {
     }
 
     // Inserimento nuova marca
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['brand'])) {
-    // Trasforma il nome della marca in maiuscolo
-    $newBrandName = strtoupper($mysqli->real_escape_string($_POST['brand']));
-    
-    // Controlla se esiste già una categoria con lo stesso nome
-    $checkBrandQuery = "SELECT id FROM brands WHERE name = '$newBrandName'";
-    $checkBrandResult = $mysqli->query($checkBrandQuery);
-    if ($checkBrandResult->num_rows > 0) {
-        echo "Errore: esiste già una marca con lo stesso nome.";
-    } else {
-        $insertBrandQuery = "INSERT INTO brands (name) VALUES ('$newBrandName')";
-        if ($mysqli->query($insertBrandQuery)) {
-            echo "Marca inserita con successo.";
-            header('Location: /MotorShop/brands.php');
-            exit;
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['brand'])) {
+        $newBrandName = $mysqli->real_escape_string($_POST['brand']);
+        
+        // Controlla se esiste già una categoria con lo stesso nome
+        $checkBrandQuery = "SELECT id FROM brands WHERE name = '$newBrandName'";
+        $checkBrandResult = $mysqli->query($checkBrandQuery);
+
+        if ($checkBrandResult->num_rows > 0) {
+            echo "Errore: esiste già una marca con lo stesso nome.";
         } else {
-            echo "Errore durante l'inserimento della marca: " . $mysqli->error;
+            $insertBrandQuery = "INSERT INTO brands (name) VALUES ('$newBrandName')";
+            if ($mysqli->query($insertBrandQuery)) {
+                echo "Marca inserita con successo.";
+                header('Location: /MotorShop/brands.php');
+                exit;
+            } else {
+                echo "Errore durante l'inserimento della marca: " . $mysqli->error;
+            }
         }
     }
-}
 
 } else {
     header("Location: /MotorShop/login.php");

@@ -47,10 +47,10 @@ if ($result->num_rows > 0) {
       }
 
       // Recupera il prezzo del prodotto
-      $priceData = $mysqli->query("SELECT MIN(price) AS min_price FROM sub_products WHERE products_id = {$productId}");
+      $priceData = $mysqli->query("SELECT MIN(price) FROM sub_products WHERE products_id = {$productId}");
       if ($priceData->num_rows > 0) {
          $priceItem = $priceData->fetch_assoc();
-         $price = strval($priceItem['min_price']);
+         $price = strval($priceItem['price']);
          $body->setContent("price", formatPrice($price));
       } else {
          $body->setContent("price", "N/A");

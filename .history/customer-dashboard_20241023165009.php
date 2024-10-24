@@ -56,7 +56,7 @@ if ($reviews != null) {
 
     if ($feed && $feed->num_rows > 0) {
         foreach ($feed as $f) {
-            $body->setContent("f_id", $f['id']);
+            
             $body->setContent("prod_id", $f['products_id']);
             $body->setContent("f_rate", $f['rate']);
             $body->setContent("f_review", $f['review']);
@@ -68,19 +68,6 @@ if ($reviews != null) {
         }
         
     }
-
-// Eliminazione recensione selezionata
-if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $feedback_id = intval($_GET['delete']);
-    $deleteFeedbackQuery = "DELETE FROM feedbacks WHERE id = $feedback_id";
-    if ($mysqli->query($deleteFeedbackQuery)) {
-        header('Location: /MotorShop/customer-dashboard.php');
-        exit;
-    } else {
-        echo "Errore durante l'eliminazione della recensione: " . $mysqli->error;
-    }
-}
-
 }
 
 $main->setContent("dynamic", $body->get());

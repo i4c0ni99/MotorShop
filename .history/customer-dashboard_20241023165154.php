@@ -69,15 +69,17 @@ if ($reviews != null) {
         
     }
 
-// Eliminazione recensione selezionata
-if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $feedback_id = intval($_GET['delete']);
-    $deleteFeedbackQuery = "DELETE FROM feedbacks WHERE id = $feedback_id";
-    if ($mysqli->query($deleteFeedbackQuery)) {
-        header('Location: /MotorShop/customer-dashboard.php');
+    // Eliminazione recensione selezionata
+if (isset($_GET['elimina']) && is_numeric($_GET['elimina'])) {
+    $category_id = intval($_GET['elimina']);
+    $deleteCategoryQuery = "DELETE FROM categories WHERE id = $category_id";
+    if ($mysqli->query($deleteCategoryQuery)) {
+        echo "Categoria eliminata con successo.";
+        // Redirect dopo l'eliminazione
+        header('Location: /MotorShop/create-category.php');
         exit;
     } else {
-        echo "Errore durante l'eliminazione della recensione: " . $mysqli->error;
+        echo "Errore durante l'eliminazione della categoria: " . $mysqli->error;
     }
 }
 

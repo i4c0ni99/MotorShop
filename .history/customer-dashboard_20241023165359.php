@@ -69,7 +69,7 @@ if ($reviews != null) {
         
     }
 
-// Eliminazione recensione selezionata
+    // Eliminazione recensione selezionata
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $feedback_id = intval($_GET['delete']);
     $deleteFeedbackQuery = "DELETE FROM feedbacks WHERE id = $feedback_id";
