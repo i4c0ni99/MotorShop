@@ -79,7 +79,7 @@ $uniqueColor = [];
 foreach ($data as $item) {
 
     if(!array_key_exists($item['color'], $uniqueColor)){
-   $body->setContent("colorDiv", '<li><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item['id'] . '">
+   $body->setContent("colorDiv", '<li><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item['id'] .'&color='.urlencode($item['color']).'">
             <span style="background-color:' . $item['color'] . '" class="icon-color"></span>
           </a>
       </li>');
@@ -93,17 +93,41 @@ foreach ($data as $item) {
 }
 
 
-   
 
-if (isset($_GET['subId'])) {
-
-   $data1 = $mysqli->query("SELECT id,size,quantity from sub_products where products_id ={$_GET['id']} AND sub_products.availability = 1");
-   $body->setContent("size", '');
+echo $_GET['color'];
+if (isset($_GET['color'])) {
+    
+    
+    $data1 = $mysqli->query("SELECT id, size, quantity, color 
+FROM sub_products 
+WHERE products_id = ".$_GET['id']."
+AND sub_products.availability = 1 
+AND color = '".$_GET['color']."' 
+ORDER BY 
+    CASE 
+        -- Ordinamento per taglie alfabetiche
+        WHEN size = 'XS' THEN 1
+        WHEN size = 'S' THEN 2
+        WHEN size = 'M' THEN 3
+        WHEN size = 'L' THEN 4
+        WHEN size = 'XL' THEN 5
+        WHEN size = 'XXL' THEN 6
+        -- Ordinamento per taglie numeriche
+        WHEN size = '36' THEN 7
+        WHEN size = '38' THEN 8
+        WHEN size = '40' THEN 9
+        WHEN size = '42' THEN 10
+        WHEN size = '44' THEN 11
+        WHEN size = '46' THEN 12
+        ELSE 13 -- per eventuali taglie extra
+    END;");
+    
    foreach ($data1 as $item2) {
-        if($item2['id']== $_GET['subId']){
-            $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item2['id'] . '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
+
+    echo "<script>console.log(".$item2['size'].")</script>";
+            $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item2['id'] .'&color='.urlencode($item2['color']). '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
             $dizionario[$item2['size']] = $item2['quantity']; 
-        }
+        
        
    }
 $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = {$item['id']}");
