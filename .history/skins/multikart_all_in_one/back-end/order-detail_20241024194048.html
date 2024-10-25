@@ -1,0 +1,160 @@
+  <body>
+  <div class="page-body">
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Dettaglio ordine cliente
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="bg-inner cart-section order-details-table">
+                                        <div class="row g-4">
+                                            <div class="col-xl-8">
+                                                <div class="card-details-title">
+                                                    <h3>Numero ordine: <span></span></h3>
+                                                </div>
+                                                <div class="table-responsive table-details">
+                                                    <table class="table cart-table table-borderless">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2">Prodotti</th>
+                                                                <th class="text-end" colspan="2">
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr class="table-order">
+                                                                <[foreach]>
+                                                                <td>
+                                                                    <a href="javascript:void(0)">
+                                                                        <img src="assets/images/fashion/1.jpg"
+                                                                            class="img-fluid blur-up lazyload" alt="">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <p>Prodotto</p>
+                                                                    <h5><[title]></h5>
+                                                                </td>
+                                                                <td>
+                                                                    <p>Taglia</p>
+                                                                    <h5><[size]></h5>
+                                                                </td>
+                                                                <td>
+                                                                    <p></p>
+                                                                </td>
+                                                                <td>
+                                                                    <p>Quantità</p>
+                                                                    <h5><[sub_quantity]></h5>
+                                                                </td>
+                                                                <td>
+                                                                    <p>Prezzo</p>
+                                                                    <h5>€420.00</h5>
+                                                                </td>
+                                                                <[/foreach]>
+                                                            </tr>             
+
+                                                        </tbody>
+
+                                                        <tfoot>
+                                                            <tr class="table-order">
+                                                                <td colspan="3">
+                                                                    <h5>Totale prodotti:</h5>
+                                                                </td>
+                                                                <td>
+                                                                    <h4>€420.00</h4>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="table-order">
+                                                                <td colspan="3">
+                                                                    <h5>Spedizione:</h5>
+                                                                </td>
+                                                                <td>
+                                                                    <h4>€0.00</h4>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr class="table-order">
+                                                                <td colspan="3">
+                                                                    <h4 class="theme-color fw-bold">Totale :</h4>
+                                                                </td>
+                                                                <td>
+                                                                    <h4 class="theme-color fw-bold">€420.00</h4>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="row g-4">
+                                                    <div class="col-12">
+                                                        <div class="order-success">
+                                                            <h4>Riepilogo</h4>
+                                                            <ul class="order-details">
+                                                                <li>Cliente: Luigi Negro</li>
+                                                                <li>Data ordine: 22 Ottobre 2022</li>
+                                                                <li>Totale ordine: €420.00</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="order-success">
+                                                            <h4>Indirizzo di consegna</h4>
+                                                            <ul class="order-details">
+                                                                <li>Via Annibale Catracci 69</li>
+                                                                <li>Giulianova, Teramo</li>
+                                                                <li>64021, Abruzzo</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="order-success">
+                                                            <div class="payment-mode">
+                                                                <h4>Metodo di pagamento</h4>
+                                                                <p>Paypal: quandoceralui.gi@gmail.com</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="order-success">
+                                                            <div class="delivery-sec">
+                                                                <h3>Data di consegna:
+																<span>Prevista per il 31 Ottobre 2022</span></h3>
+                                                                <a href="/./Motorshop/track-order.php">Segui ordine</a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- section end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+            </div>
+        </body>
+        </html>
