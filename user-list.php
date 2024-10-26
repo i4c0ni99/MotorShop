@@ -43,14 +43,18 @@ function loadUsers($mysqli, $current_user_email, $searchQuery = null) {
         $body->setContent("name", $row['name']);
         $body->setContent("surname", $row['surname']);
         $body->setContent("email", $row['email']);
-        $body->setContent("roul", $row['roul']);
+        $body->setContent("roul",$row['roul']);
+        $body->setContent('src',$row['roul'] == 'Admin'?'<input id="checkall" class="checkbox_animated check-it"
+                                                            type="checkbox" checked="" post data-roul=0 data-email='.$row['email'].' >':
+                                                            '<input id="checkall" class="checkbox_animated check-it"
+                                                            type="checkbox" post data-roul=1 data-email='.$row['email'].' >');
     }
 }
 
 // Carica gli utenti all'inizio
 loadUsers($mysqli, $current_user_email);
 
-if (isset($_POST['change-role-button'])) {
+if (isset($_POST['change_role'])) {
     if (isset($_POST['selected_user'])) {
         $email = $mysqli->real_escape_string($_POST['selected_user']);
         
@@ -68,6 +72,8 @@ if (isset($_POST['change-role-button'])) {
             // Verifica aggiornamento
             if ($updateResult) {
                 echo "Il ruolo è stato cambiato con successo.";
+                echo json_encode(['success' => 'success']);
+                
             } else {
                 echo "Errore nell'aggiornamento del ruolo: " . $mysqli->error;
             }

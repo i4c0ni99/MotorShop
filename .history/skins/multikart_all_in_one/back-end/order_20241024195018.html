@@ -1,0 +1,82 @@
+<body>
+    <div class="page-body">
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="page-header-left">
+                            <h3>Ordini da elaborare</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <form class="form-inline search-form search-box" method="get" action="/MotorShop/orders-list.php">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="orderNumber" placeholder="Inserisci codice ordine.." pattern="\d{5}" title="Inserisci un numero d'ordine di 5 cifre">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-primary btn-block" type="submit">Cerca</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="table-responsive table-desi">
+                                <table class="display table table-striped" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>Codice</th>
+                                            <th>Data</th>
+                                            <th>Pagamento</th>
+                                            <th>Importo</th>
+                                            <th>Dettagli</th>
+                                            <th>Visualizza</th>
+                                            <th>Azioni</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <[foreach]>
+                                        <tr data-row-id="<[ord_number]>">
+                                            <td><[ord_number]></td>
+                                            <td><[ord_date]></td>
+                                            <td><[ord_paymentMethod]></td>
+                                            <td><[ord_totalPrice]></td>
+                                            <td><[ord_details]></td>>
+                                            <td><a href="/MotorShop/customer-order-detail.php?id=<[ord_id]>" class="btn btn-primary">Apri</a></td>
+                                            <td>
+                                                <a href="/MotorShop/orders-list.php?id=<[ord_id]>" class="btn btn-primary">Spedisci</a>
+                                                <a href="/MotorShop/orders-list.php?action=cancel&id=<[ord_id]>" class="btn btn-danger">Annulla</a>
+                                            </td>
+                                        </tr>
+                                        <[/foreach]>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>                        
+                            
+                            <!-- Sezione per la paginazione -->
+                            <div class="pagination">
+                                <[pagination]>
+                            </div>
+                        </div>                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-fluid Ends-->
+    </div>
+</body>
+</html>

@@ -7,8 +7,24 @@ require "include/template2.inc.php";
 
 include "include/utils/priceFormatter.php";
 
-$main = new Template("skins/motor-html-package/motor/frame_public.html");
-$body = new Template("skins/motor-html-package/motor/product-detail.html");
+
+if (isset($_SESSION['user'])) {
+    require "include/auth.inc.php";
+    $main = new Template("skins/motor-html-package/motor/frame-customer.html");
+    $body = new Template("skins/motor-html-package/motor/product-detail.html");
+    // Popola il template con i dati dell'utente
+    $body->setContent('name', htmlspecialchars($_SESSION['user']['name']));
+    $body->setContent('surname', htmlspecialchars($_SESSION['user']['surname']));
+    $body->setContent('email', htmlspecialchars($_SESSION['user']['email']));
+    $body->setContent('phone', htmlspecialchars($_SESSION['user']['phone']));
+} else {
+    // Se l'utente non è loggato, carica frame_public
+    $main = new Template("skins/motor-html-package/motor/frame_public.html");
+    $body = new Template("skins/motor-html-package/motor/product-detail.html");
+}
+
+
+
 
 $oid = $mysqli->query("SELECT title,id,categories_id,description,specification,information FROM products where id={$_GET['id']} AND products.availability = 1 ");
 $result = $oid->fetch_assoc();
@@ -203,16 +219,17 @@ if (isset($_POST['post-review'])) {
    $comment = $_POST["review"];
    $rating = $_POST["rate"];
    $curdate = date("Y/m/d");
-
-   if ( $comment != "" ) {
-   
-   $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
-   VALUES ('".$_SESSION['user']['email']."', ".$_GET['id'].", '$rating', '$comment', '$curdate')");
-
-   header("location:/MotorShop/product-list-customer.php");
-
+   if(empty($_SESSION['user']['email'])){
+    header("location:/MotorShop/login.php");
    }
+    elseif ( $comment != "" ) {
+        
+        $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
+        VALUES ('".$_SESSION['user']['email']."', ".$_GET['id'].", '$rating', '$comment', '$curdate')");
 
+        header("location:/MotorShop/product-detail.php?id=".$_GET['id']);
+
+    }
 }
 
 $main->setContent('dynamic',$body->get());
