@@ -28,14 +28,8 @@
                                                     <h3>Numero ordine: #<[order_number]><span></span></h3>
                                                 </div>
                                                 <div class="table-responsive table-details">
-                                                    <h5>Destinatario: <[ad_name]> <[ad_surname]></h5>
-                                                    <h5>Recapito telefonico: <[ad_phone]></h5>
-                                                    <h5>Indirizzo di consegna: <[ad_street]>, <[ad_cap]>, <[ad_city]>, <[ad_province]></h5>
-                                                    <br>
                                                     <button class="btn btn-primary" onclick = "window.location.href = '/MotorShop/orders-list.php?id=<[order_id]>'">Spedisci</button>
                                                     <button class="btn btn-danger" onclick = "window.location.href = '/MotorShop/orders-list.php?action=cancel&id=<[order_id]>'">Annulla ordine</button>
-                                                    <br>
-                                                    <br>
                                                     <table class="table cart-table table-borderless">
                                                         <thead>
                                                             <tr>
@@ -78,9 +72,8 @@
                                                             </tr>             
                                                         </tbody>
                                                     </table>
-                                                    <br>
                                                     <div>
-                                                        <h4>Importo totale: €<[order_total]></h4>
+                                                        <h3>Importo totale: €<[order_total]></h3>
                                                     </div>
                                             </div>
                                         </div>

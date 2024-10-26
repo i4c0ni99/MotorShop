@@ -30,7 +30,7 @@ if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
     $code_query_data = $code_query->fetch_assoc();
     
     $body->setContent("order_number", $code_query_data['number']);
-    $body->setContent("order_total", $code_query_data['totalPrice']);
+    
 
     $shipping_address_query = $mysqli->query(" SELECT 
     sa.name, 
