@@ -1,0 +1,200 @@
+<div class="mv-site">
+    <section class="main-banner mv-wrap">
+        <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+            <div class="page-name mv-caption-style-6">
+                <div class="container">
+                    <div class="mv-title-style-9"><span class="main">Il nostro SHOP</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- .main-banner-->
+  
+    <section class="mv-main-body product-grid-3-main mv-bg-gray mv-wrap">
+        <div class="container">
+            <div class="row mv-content-sidebar">
+                <div class="mv-c-s-content col-xs-12 col-md-8 col-lg-9">
+                    <div class="row mv-list-product-wrapper mv-block-style-9">
+                        <div class="block-9-list mv-list-product">
+                            <[foreach]>
+                            <[code]>
+                            <[/foreach]>
+                            <!-- .post-->
+                        </div>
+                    </div>
+                    <!-- .mv-list-product-wrapper-->
+  
+                    <div class="mv-pagination-wrapper">
+                      <div class="mv-pagination-style-1 has-count-post">
+                          <div class="count-post mv-title-style-10">
+                              <span class="number"><?= $total_products ?></span> Prodotti in <span class="number"><?= $total_pages ?></span> Pagine
+                          </div>
+                          <div class="pagination-wrapper">
+                              <?= $pagination_html ?>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="product-list">
+                      
+                      
+                      
+                      
+                      
+                      
+                  </div>
+                   
+                      <!-- .mv-pagination-style-1-->
+                  <!-- .mv-pagination-wrapper-->
+                  
+                  </div>
+                  <!-- .mv-pagination-wrapper-->
+                  </div>
+                <!-- .mv-c-s-content-->
+  
+                <div class="mv-c-s-sidebar col-xs-12 col-md-4 col-lg-3 hidden-xs hidden-sm">
+                    <div class="mv-c-s-sidebar-inner">
+                        <div class="mv-aside mv-aside-search">
+                            <div class="aside-title mv-title-style-11">Cerca</div>
+                            <div class="aside-body">
+                                <form method="GET" action="product-list-customer.php" class="form-aside-search">
+                                    <div class="mv-inputbox-icon right">
+                                        <input type="text" name="search_text" placeholder="Cerca un prodotto.." class="mv-inputbox mv-inputbox-style-2" />
+                                        <button type="submit" class="icon mv-btn mv-btn-style-4 fa fa-search"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- .mv-aside-search-->
+  
+                        <div class="mv-aside mv-aside-filter-by-price">
+                            <div class="aside-title mv-title-style-11">filter by price</div>
+                            <div class="aside-body">
+                                <form method="GET" class="form-aside-filter-by-price">
+                                    <div class="mv-slider-range">
+                                        <div class="slider-range-wrapper mv-slider-range-style-1">
+                                            <div class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mv-dp-table align-middle">
+                                            <div class="mv-dp-table-cell view-values">
+                                                Price: $<span  class="min-value"  aria-valuemin="10">10</span> - $<span  class="max-value"  aria-valuemax="2500">2500</span>
+                                            </div>
+                                            <div class="mv-dp-table-cell filter-button">
+                                                <button type="submit" class="mv-btn mv-btn-style-5 btn-5-h-30">filter</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- Input nascosti per i valori min e max del prezzo -->
+                                    <input type="hidden" name="min_price"  id="min_price">
+                                    <input type="hidden" name="max_price"  id="max_price">
+                                </form>
+                            </div>
+                          </div>
+                    
+                        <!-- .mv-aside-filter-by-price-->
+  
+                        <div class="mv-aside mv-aside-size">
+                            <div class="aside-title mv-title-style-11">size</div>
+                            <div class="aside-body">
+                              <nav class="size-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">
+                                    <a href="product-list-customer.php?size=xxl" class="mv-btn mv-btn-style-21">XXL</a>
+                                    <a href="product-list-customer.php?size=XL" class="mv-btn mv-btn-style-21 ">XL</a>
+                                    <a href="product-list-customer.php?size=L" class="mv-btn mv-btn-style-21">L</a>
+                                    <a href="product-list-customer.php?size=M" class="mv-btn mv-btn-style-21">M</a>
+                                    <a href="product-list-customer.php?size=S" class="mv-btn mv-btn-style-21">S</a>
+                                    <a href="product-list-customer.php?size=XS" class="mv-btn mv-btn-style-21">XS</a>
+                                    <a href="product-list-customer.php?size=XXS" class="mv-btn mv-btn-style-21">XXS</a>
+                                    <a href="product-list-customer.php?size=36" class="mv-btn mv-btn-style-21">36</a>
+                                    <a href="product-list-customer.php?size=37" class="mv-btn mv-btn-style-21 ">37</a>
+                                    <a href="product-list-customer.php?size=38" class="mv-btn mv-btn-style-21">38</a>
+                                    <a href="product-list-customer.php?size=39" class="mv-btn mv-btn-style-21">39</a>
+                                    <a href="product-list-customer.php?size=40" class="mv-btn mv-btn-style-21">40</a>
+                                    <a href="product-list-customer.php?size=41" class="mv-btn mv-btn-style-21">41</a>
+                                    <a href="product-list-customer.php?size=42" class="mv-btn mv-btn-style-21">42</a>
+                                    <a href="product-list-customer.php?size=43" class="mv-btn mv-btn-style-21">43</a>
+                                    <a href="product-list-customer.php?size=44" class="mv-btn mv-btn-style-21 ">44</a>
+                                    <a href="product-list-customer.php?size=45" class="mv-btn mv-btn-style-21">45</a>
+                                    <a href="product-list-customer.php?size=46" class="mv-btn mv-btn-style-21">46</a>
+                                    <a href="product-list-customer.php?size=47" class="mv-btn mv-btn-style-21">47</a>
+                                </div>
+                                </div>
+                              </nav>
+                            </div>
+                          </div>
+                        <!-- .mv-aside-size-->
+                        <div class="mv-aside mv-aside-color">
+                            <div class="aside-title mv-title-style-11">color</div>
+                            <div class="aside-body">
+                              <div class="color-list mv-list-inline-style-1 space-10">
+                                <ul class="list-inline-1">
+                                  <li class="active"><a href="#"><span style="background-color: #7bef66;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FF0000;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #00FF00;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #0000FF;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFFF00;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFA500;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #800080;" class="icon-color"></span></a></li>
+                                  <li><a href="#"><span style="background-color: #FFFFFF" class="icon-color"></span></a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        <div class="mv-aside mv-aside-tags">
+                            <div class="aside-title mv-title-style-11">brands</div>
+                            <div class="aside-body">
+                              <div class="tag-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">
+                                    <[foreach]>
+                                        <a href="product-list-customer.php?brand_id=<[brand_id]>" class="mv-btn mv-btn-style-22"><[brand_name]></a>
+                                    <[/foreach]>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        <div class="mv-aside mv-aside-tags">
+                            <div class="aside-title mv-title-style-11">tags</div>
+                            <div class="aside-body">
+                              <div class="tag-list">
+                                <div class="mv-btn-group">
+                                  <div class="group-inner">
+                                    <[foreach]>
+                                    <a href="product-list-customer.php?cat_id=<[cat_id]>" class="mv-btn mv-btn-style-22"><[cat_name]></a>
+                                    <[/foreach]>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        
+
+                        <[sub_tags_start]>
+                            <[foreach]>
+                                <[sub_tag]>
+                            <[/foreach]>
+                        <[sub_tags_end]>
+                        <!-- .mv-aside-category-->
+                    </div>     
+                    </div>
+                    <!-- .mv-c-s-sidebar-inner-->
+                </div>
+                <!-- .mv-c-s-sidebar-->
+            </div>
+            <!-- .mv-content-sidebar-->
+        </div>
+        <!-- .container-->
+    </section>
+    <!-- .mv-main-body-->
+  </div>
+  <!-- .mv-site-->
+  
