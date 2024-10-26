@@ -32,9 +32,16 @@ if (!isset($_SESSION['user']['phone'])) {
 $data = $mysqli->query("SELECT avatar FROM users WHERE email='{$_SESSION['user']['email']}'");
 $img = $data->fetch_assoc();
 if ($img['avatar'] == null) {
+    
     $main->setContent('img', "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg");
+    $body->setContent('img', "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg");
+    $body->setContent('btn-set','<input type="submit" value="Aggiungi avatar" name="edit-avatar-button" class="btn btn-primary"></input>');
 } else {
-    $main->setContent('img', "data:image;base64," . "{$img['avatar']}");
+    
+    $main->setContent('img', "data:image;base64," . $img['avatar']);
+    $body->setContent('img', "data:image;base64," . $img['avatar']);
+    $body->setContent('btn-set','<input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>');
+    $body->setContent('btn-del', '<input type="submit" value="Elimina avatar" name="delete-avatar-button" class="btn btn-primary"></input>');
 }
 
 // Caricamento degli indirizzi di spedizione dell'utente
@@ -59,13 +66,15 @@ if (isset($_POST['edit-avatar-button'])) {
     $data = file_get_contents($_FILES['avatar']['tmp_name']);
     $data64 = base64_encode($data);
     $mysqli->query("UPDATE users SET avatar = '$data64' WHERE email = '{$_SESSION['user']['email']}'");
-    header("location:/../MotorShop/editProfile.php");
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 if (isset($_POST['delete-avatar-button'])) {
     // Eliminazione dell'avatar
     $mysqli->query("UPDATE users SET avatar = null WHERE email = '{$_SESSION['user']['email']}'");
-    header("location:/../MotorShop/editProfile.php");
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 if (isset($_POST['edit-details-button'])) {
