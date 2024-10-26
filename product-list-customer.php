@@ -7,7 +7,7 @@ require "include/dbms.inc.php";
 require_once "include/utils/priceFormatter.php";
 
 // Verifica se l'utente è loggato
-if (!isset($_SESSION['user'])) {
+if (isset($_SESSION['user'])) {
     require "include/auth.inc.php";
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
     $body = new Template("skins/motor-html-package/motor/product-grid-3.html");
