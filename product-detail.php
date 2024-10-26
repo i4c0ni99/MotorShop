@@ -245,17 +245,26 @@ if (isset($_POST['post-review'])) {
       $check_result = $mysqli->query($check_query);
       $review_count = $check_result->fetch_assoc()['review_count'];
 
-      if ($review_count > 0) {
+     /*  if ($review_count > 0) {
           echo "Hai già valutato questo prodotto";
-      } else {
+      } else { */
           // Inserisce la recensione nel database
           $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
                                  VALUES ('$user_email', $product_id, '$rating', '$comment', '$curdate')");
-
+          $feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
+          $count = 0;
+          $mediumRateRet;
+          if( $feedback -> num_rows > 0){
+          foreach ($feedback as $mediumRate){
+              $mediumRateRet += $mediumRate['rate'];
+             }
+             $mediumReateRet /= $feedback -> num_rows ;
+             $mysqli->query("UPDATE products SET mediumRate = ".$mediumRateRet." WHERE id =".$_GET['id']);
+          }
           header("location:/MotorShop/product-detail.php?id=$product_id");
           exit; // Assicurati di uscire dopo il redirect
       }
-  }
+  //}
 }
 
 $main->setContent('dynamic',$body->get());
