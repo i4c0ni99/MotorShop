@@ -37,22 +37,22 @@ if ($slide_result && $slide_result->num_rows > 0) {
 }
 
 
-$helmet = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+$helmet = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 
 $body->setContent('helmetTitle', $helmet['title']);
-$body->setContent('helmetBrand', $helmet['marca']);
+$body->setContent('helmetBrand', $helmet['brand_name']);
 $body->setContent('helemtImg', $helmet['imgsrc']);
 $body->setContent('helmetPrice', $helmet['price']);
 $body->setContent('helmetId', $helmet['products_id']);
-$stivali = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =15 )AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+$stivali = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =15 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 $body->setContent('stivaliTitle', $stivali['title']);
-$body->setContent('stivaliBrand', $stivali['marca']);
+$body->setContent('stivaliBrand', $stivali['brand_name']);
 $body->setContent('stivalImg', $stivali['imgsrc']);
 $body->setContent('stivaliPrice', $stivali['price']);
 $body->setContent('stivalId', $stivali['products_id']);
-$giacca = $mysqli->query("SELECT * FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =20 )AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+$giacca = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =20 ) AND products.availability = 1 AND sub_products.availability = 1;")->fetch_assoc();
 $body->setContent('giaccaTitle', $giacca['title']);
-$body->setContent('giaccaBrand', $giacca['marca']);
+$body->setContent('giaccaBrand', $giacca['brand_name']);
 $body->setContent('giaccaImg', $giacca['imgsrc']);
 $body->setContent('giaccaPrice', $giacca['price']);
 $body->setContent('giaccaId', $giacca['products_id']);
