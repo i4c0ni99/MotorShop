@@ -25,17 +25,11 @@
                                         <div class="row g-8">
                                             <div class="col-xl-12">
                                                 <div class="card-details-title">
-                                                    <h3>Numero ordine: #<[order_number]><span></span></h3>
+                                                    <h3>Numero ordine: <[order_number]><span></span></h3>
                                                 </div>
                                                 <div class="table-responsive table-details">
-                                                    <h5>Destinatario: <[ad_name]> <[ad_surname]></h5>
-                                                    <h5>Recapito telefonico: <[ad_phone]></h5>
-                                                    <h5>Indirizzo di consegna: <[ad_street]>, <[ad_cap]>, <[ad_city]>, <[ad_province]></h5>
-                                                    <br>
                                                     <button class="btn btn-primary" onclick = "window.location.href = '/MotorShop/orders-list.php?id=<[order_id]>'">Spedisci</button>
                                                     <button class="btn btn-danger" onclick = "window.location.href = '/MotorShop/orders-list.php?action=cancel&id=<[order_id]>'">Annulla ordine</button>
-                                                    <br>
-                                                    <br>
                                                     <table class="table cart-table table-borderless">
                                                         <thead>
                                                             <tr>
@@ -76,23 +70,18 @@
                                                                 </td>
                                                                 <[/foreach]>
                                                             </tr>             
+
                                                         </tbody>
-                                                    </table>
-                                                    <br>
-                                                    <div>
-                                                        <h4>Importo totale: €<[order_total]></h4>
-                                                    </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- section end -->
+                                    <!-- section end --
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Container-fluid Ends-->
-                 </div>
             </div>
         </body>
         </html>

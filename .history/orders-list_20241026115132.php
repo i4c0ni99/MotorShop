@@ -14,7 +14,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
 $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/order.html");
-$orders_base="SELECT * FROM orders WHERE state = 'pending' ";
+
 // Cambia lo stato dell'ordine da 'pending' a 'delivered' e invia email di conferma spedizione
 function updateOrderState($orderId) {
     global $mysqli;
@@ -31,7 +31,8 @@ function updateOrderState($orderId) {
         if ($orderResult && $orderResult->num_rows > 0) {
             $orderData = $orderResult->fetch_assoc();
             sendConfirmationEmail($orderData);
-            return true; // Aggiornamento avvenuto con successo
+            header("Location: /MotorShop/old-orders.php");
+            return true;
         }
     } 
     return false; // Errore durante l'aggiornamento
@@ -73,10 +74,6 @@ function sendConfirmationEmail($orderData) {
     }
 }
 
-if(isset($_GET['search'])){
-    $orders_base .= "AND number = {$_GET['search']}";
-    
-}
 // Verifica se è stato passato un parametro 'id' nell'URL
 if (isset($_GET['id'])) {
     $orderId = $mysqli->real_escape_string($_GET['id']);
@@ -110,35 +107,29 @@ function cancelOrder($orderId) {
 }
 
 // Visualizzazione lista ordini in attesa
-echo "<script>console.log(".$orders_base.")</script>";
-$orders = $orders_base;
-$oid = $mysqli->query($orders);
+
+$oid = $mysqli->query("SELECT * FROM orders WHERE state = 'pending'");
 $result = $oid;
 
 if ($result && $result->num_rows > 0) {
-    
     foreach ($result as $order) {
-        
-        $body->setContent("row",'<tr data-row-id="'.$order['id'].'">
-                                            <td>'.$order['number'].'</td>
-                                            <td>'.$order['date'].'</td>
-                                            <td>'.$order['paymentMethod'].'</td>
-                                            <td>'.$order['totalPrice'].'</td>
-                                            <td>'.$order['details'].'</td>
-                                            <td><a href="/MotorShop/customer-order-detail.php?id='.$order['id'].'" class="btn btn-primary">Apri</a></td>
-                                            <td>
-                                                <a href="/MotorShop/orders-list.php?id='.$order['id'].'" class="btn btn-primary">Spedisci</a>
-                                                <a href="/MotorShop/orders-list.php?action=cancel&id='.$order['id'].'" class="btn btn-danger">Annulla</a>
-                                            </td>
-                                        </tr>');
-        
-    }
-    if(isset($_POST['id'])){
-        echo json_encode(['success' => 'success']);
+        $body->setContent("ord_id", $order['id']);
+        $body->setContent("ord_number", $order['number']);
+        $body->setContent("ord_state", $order['state']);
+        $body->setContent("ord_date", $order['date']);
+        $body->setContent("ord_paymentMethod", $order['paymentMethod']);
+        $body->setContent("ord_totalPrice", $order['totalPrice']);
+        $body->setContent("ord_details", $order['details']);
     }
 } else {
     // Nessun ordine trovato
-    $body->setContent("row",'<tr>NESSUN ORDINE TROVATO</tr>');
+    $body->setContent("ord_id", '');
+    $body->setContent("ord_number", 'Nessun ordine trovato.');
+    $body->setContent("ord_state", '');
+    $body->setContent("ord_date", '');
+    $body->setContent("ord_paymentMethod", '');
+    $body->setContent("ord_totalPrice", '');
+    $body->setContent("ord_details", '');
 }
 } else {
     header("Location: /MotorShop/login.php");

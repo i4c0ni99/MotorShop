@@ -74,6 +74,7 @@ function sendConfirmationEmail($orderData) {
 }
 
 if(isset($_GET['search'])){
+    
     $orders_base .= "AND number = {$_GET['search']}";
     
 }

@@ -23,14 +23,9 @@ if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
     $main->setContent('surname', $_SESSION['user']['surname']);
     $main->setContent('email', $_SESSION['user']['email']);
 
-    $id_order = $_GET['id'];
     $body->setContent("order_id", $_GET['id']);
 
-    $code_query = $mysqli->query("SELECT number, totalPrice FROM orders WHERE id = '$id_order'");
-    $code_query_data = $code_query->fetch_assoc();
-    
-    $body->setContent("order_number", $code_query_data['number']);
-    $body->setContent("order_total", $code_query_data['totalPrice']);
+    $code_query = $mysqli->query("SELECT code FROM orders WHERE id = "$_GET['id']"")
 
     $shipping_address_query = $mysqli->query(" SELECT 
     sa.name, 

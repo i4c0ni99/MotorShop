@@ -125,7 +125,7 @@ if ($result && $result->num_rows > 0) {
                                             <td>'.$order['paymentMethod'].'</td>
                                             <td>'.$order['totalPrice'].'</td>
                                             <td>'.$order['details'].'</td>
-                                            <td><a href="/MotorShop/customer-order-detail.php?id='.$order['id'].'" class="btn btn-primary">Apri</a></td>
+                                            <td><a href="/MotorShop//customer-order-detail.php?id='.$order['id'].'" class="btn btn-primary">Apri</a></td>
                                             <td>
                                                 <a href="/MotorShop/orders-list.php?id='.$order['id'].'" class="btn btn-primary">Spedisci</a>
                                                 <a href="/MotorShop/orders-list.php?action=cancel&id='.$order['id'].'" class="btn btn-danger">Annulla</a>
