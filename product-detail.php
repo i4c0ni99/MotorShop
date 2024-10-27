@@ -258,7 +258,7 @@ if (isset($_POST['post-review'])) {
           foreach ($feedback as $mediumRate){
               $mediumRateRet += $mediumRate['rate'];
              }
-             $mediumReateRet /= $feedback -> num_rows ;
+             $mediumRateRet /= $feedback -> num_rows ;
              $mysqli->query("UPDATE products SET mediumRate = ".$mediumRateRet." WHERE id =".$_GET['id']);
           }
           header("location:/MotorShop/product-detail.php?id=$product_id");
