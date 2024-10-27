@@ -58,3 +58,49 @@ $(document).ready(function() {
     // Opzione per selezionare/deselezionare tutte le checkbox
     
 });
+
+/* $(document).ready(function() {
+    // Listener per ciascuna checkbox
+    $(".check-it-sub-product").change(function() {
+
+        if ($(this).is(":checked")) {
+            console.log("Checkbox per l'email " + email + " è selezionata.");
+            // Esegui qui la tua chiamata AJAX, se necessario
+            $.ajax({
+                url: "edit-subProduct.php",
+                method: "POST",
+                data: {
+                    availability: 1 // Indica l'azione di selezione
+                },
+                success: function(response) {
+                    console.log("Ruolo aggiornato per: " + email);
+                    window.location.href="edit-subProduct.php"
+                },
+                error: function() {
+                    alert("Errore durante la connessione al server.");
+                }
+            });
+        } else {
+            console.log("Checkbox per l'email " + email + " è deselezionata.");
+            // Chiamata AJAX per deselezionare, se necessario
+            $.ajax({
+                url: "edit-subProduct.php",
+                method: "POST",
+                data: {
+                    
+                    availability : 0 // Indica l'azione di deselezione
+                },
+                success: function(response) {
+                    
+                    window.location.href="edit-subProduct.php"
+                },
+                error: function() {
+                    alert("Errore durante la connessione al server.");
+                }
+            });
+        }
+    });
+
+    // Opzione per selezionare/deselezionare tutte le checkbox
+    
+}); */
