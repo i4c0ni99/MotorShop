@@ -119,18 +119,15 @@ if ($result && $result->num_rows > 0) {
     
     foreach ($result as $order) {
         
-        $body->setContent("row",'<tr data-row-id="'.$order['id'].'">
-                                            <td>'.$order['number'].'</td>
-                                            <td>'.$order['date'].'</td>
-                                            <td>'.$order['paymentMethod'].'</td>
-                                            <td>'.$order['totalPrice'].'</td>
-                                            <td>'.$order['details'].'</td>
-                                            <td><a href="/MotorShop/customer-order-detail.php?id='.$order['id'].'" class="btn btn-primary">Apri</a></td>
-                                            <td>
-                                                <a href="/MotorShop/orders-list.php?id='.$order['id'].'" class="btn btn-primary">Spedisci</a>
-                                                <a href="/MotorShop/orders-list.php?action=cancel&id='.$order['id'].'" class="btn btn-danger">Annulla</a>
-                                            </td>
-                                        </tr>');
+        
+            $body->setContent("ord_id", $order['id']);
+            $body->setContent("ord_number", $order['number']);
+            $body->setContent("ord_state", $order['state']);
+            $body->setContent("ord_date", $order['date']);
+            $body->setContent("ord_paymentMethod", $order['paymentMethod']);
+            $body->setContent("ord_totalPrice", $order['totalPrice']);
+            $body->setContent("ord_details", $order['details']);
+        
         
     }
     if(isset($_POST['id'])){
@@ -138,7 +135,16 @@ if ($result && $result->num_rows > 0) {
     }
 } else {
     // Nessun ordine trovato
-    $body->setContent("row",'<tr>NESSUN ORDINE TROVATO</tr>');
+    
+        // Nessun ordine trovato
+        $body->setContent("ord_id", '');
+        $body->setContent("ord_number", 'Nessun ordine trovato.');
+        $body->setContent("ord_state", '');
+        $body->setContent("ord_date", '');
+        $body->setContent("ord_paymentMethod", '');
+        $body->setContent("ord_totalPrice", '');
+        $body->setContent("ord_details", '');
+    
 }
 } else {
     header("Location: /MotorShop/login.php");

@@ -34,9 +34,9 @@ if (!isset($_SESSION['user']['phone'])) {
 $data = $mysqli->query("SELECT avatar FROM users WHERE email='{$_SESSION['user']['email']}'");
 $img = $data->fetch_assoc();
 if ($img['avatar'] == null) {
-    $main->setContent('img', "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg");
+    $body->setContent('img','<img src="/MotorShop/skins/motor-html-package/motor/images/demo/demo_300x400.png" class="mv-effect-item active"/>');
 } else {
-    $main->setContent('img', "data:image;base64," . "{$img['avatar']}");
+    $body->setContent('img', '<img src="data:image;base64,'.$img['avatar'].'" class="mv-effect-item active"/>');
 }
 
 // Caricamento degli indirizzi di spedizione dell'utente

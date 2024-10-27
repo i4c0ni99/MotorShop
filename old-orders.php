@@ -10,7 +10,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
     $body = new Template("skins/multikart_all_in_one/back-end/order-history.html");
 
-    // Funzione per cambiare lo stato dell'ordine da 'pending' a 'delivered'
+    /* // Funzione per cambiare lo stato dell'ordine da 'pending' a 'delivered'
     function updateOrderState($orderId) {
         global $mysqli;
 
@@ -40,8 +40,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         }
     } else {
         echo "ID dell'ordine non valido.";
-    }
-
+    } */
+    
     // Definisci il numero di ordini per pagina
     $itemsPerPage = 10; // Ad esempio, 10 ordini per pagina
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -56,9 +56,14 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     // Calcola il numero totale di pagine
     $totalPages = ceil($totalOrders / $itemsPerPage);
 
+    $query_base = "SELECT * FROM orders WHERE state = 'delivered' LIMIT $offset, $itemsPerPage  ";
+    if(isset($_GET['search'])){
+        $query_base = " SELECT * FROM orders WHERE state = 'delivered' AND number = {$_GET['search']} LIMIT $offset, $itemsPerPage ";
+        
+    }
     // Visualizzazione lista ordini spediti con paginazione
-    $query = "SELECT * FROM orders WHERE state = 'delivered' LIMIT $offset, $itemsPerPage";
-    $result = $mysqli->query($query);
+    
+    $result = $mysqli->query($query_base);
 
     if ($result && $result->num_rows > 0) {
         while ($order = $result->fetch_assoc()) {
