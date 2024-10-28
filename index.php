@@ -37,29 +37,27 @@ if ($slide_result && $slide_result->num_rows > 0) {
 }
 
 
-$helmet = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =14 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+$helmet = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.price = ( SELECT MAX(sub_products.price) FROM products JOIN sub_products WHERE products.categories_id =14 AND sub_products.products_id = products.id) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 
 $body->setContent('helmetTitle', $helmet['title']);
 $body->setContent('helmetBrand', $helmet['brand_name']);
 $body->setContent('helemtImg', $helmet['imgsrc']);
 $body->setContent('helmetPrice', $helmet['price']);
 $body->setContent('helmetId', $helmet['products_id']);
-$stivali = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =15 ) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
+$stivali = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.price = ( SELECT MAX(sub_products.price) FROM products JOIN sub_products WHERE products.categories_id =15 AND sub_products.products_id = products.id) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 $body->setContent('stivaliTitle', $stivali['title']);
 $body->setContent('stivaliBrand', $stivali['brand_name']);
 $body->setContent('stivalImg', $stivali['imgsrc']);
 $body->setContent('stivaliPrice', $stivali['price']);
 $body->setContent('stivalId', $stivali['products_id']);
-$giacca = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.products_id = ( SELECT MAX(id) FROM products WHERE categories_id =20 ) AND products.availability = 1 AND sub_products.availability = 1;")->fetch_assoc();
+$giacca = $mysqli->query("SELECT products.*,sub_products.*,images.*,brands.name as brand_name FROM sub_products JOIN products ON sub_products.products_id = products.id JOIN images ON images.product_id=products.id JOIN brands on brands.id = brand_id WHERE sub_products.price = ( SELECT MAX(sub_products.price) FROM products JOIN sub_products WHERE products.categories_id =20 AND sub_products.products_id = products.id) AND products.availability = 1 AND sub_products.availability = 1")->fetch_assoc();
 $body->setContent('giaccaTitle', $giacca['title']);
 $body->setContent('giaccaBrand', $giacca['brand_name']);
 $body->setContent('giaccaImg', $giacca['imgsrc']);
 $body->setContent('giaccaPrice', $giacca['price']);
 $body->setContent('giaccaId', $giacca['products_id']);
 
-$oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-                      sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA') AND products.availability = 1 AND sub_products.availability = 1
-                      ORDER BY mediumRate DESC limit 0,5") ;
+$oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5;") ;
 
 $resultCat = $oidGiacca;
 if ($resultCat->num_rows > 0) {
@@ -184,9 +182,7 @@ if ($resultCat->num_rows > 0) {
     }
 }
 
- $oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-                          sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO') AND products.availability = 1 AND sub_products.availability = 1
-                          ORDER BY mediumRate DESC limit 0,5");
+ $oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
 
 $resultCatCasco = $oidCasco;
 if ($resultCatCasco->num_rows > 0) {
@@ -203,7 +199,7 @@ if ($resultCatCasco->num_rows > 0) {
                 "caschi",
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
 
-                                <div class="item-inner mv-effect-translate-1">
+                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
@@ -225,8 +221,8 @@ if ($resultCatCasco->num_rows > 0) {
 
 
                                         <div class="content-sale-off mv-label-style-3 label-primary">
-                        <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
-                    </div>
+                            <div class="label-inner">-' . $offerItem['percentage'] . '%</div>
+                        </div>
                                     </div>
 
                                     <div class="content-main">
@@ -241,16 +237,18 @@ if ($resultCatCasco->num_rows > 0) {
                                         </div>
                                     </div>
 
-                              <div class="content-hover">
-                                            <div class="content-button mv-btn-group text-center">
-                                                <div class="group-inner">
-                                                    <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
+                                    <div class="content-hover">
+                                        <div class="content-button mv-btn-group text-center">
+                                            <div class="group-inner">
+
+                                               <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
                             class="btn-inner"><i class="btn-icon fa fa-long-arrow-right"></i><span class="btn-text">read
                                 more</span></span></a>
-                                                </div>
-                                            </div>
+                                               
+
                                         </div>
                                     </div>
+                                </div>
                                 </article>'
             );
 
@@ -258,7 +256,7 @@ if ($resultCatCasco->num_rows > 0) {
             $body->setContent('caschi', 
                             '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item helmet">
 
-                                <div class="item-inner mv-effect-translate-1">
+                               <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
                                             <div class="thumb-inner mv-effect-relative"><a
@@ -276,19 +274,24 @@ if ($resultCatCasco->num_rows > 0) {
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
                                     </div>
 
                                     <div class="content-main">
                                         <div class="content-text">
                                             <div class="content-price">
-                                                <span class="new-price">€ ' . $price . ' </span>
+                                                <span class="new-price">€ ' . $key['price'] . ' </span>
                                             </div>
                                             <div class="content-desc"><a
                                                     href="/MotorShop/product-detail.php?id=.' . $key["prod_id"] . '"
                                                     title="' . $key['title'] . '" class="mv-overflow-ellipsis">' . $key['title'] . '</a></div>
                                         </div>
                                     </div>
-                                    <div class="content-hover">
+
+                                        <div class="content-hover">
                                             <div class="content-button mv-btn-group text-center">
                                                 <div class="group-inner">
                                                     <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-1 responsive-btn-1-type-5"><span
@@ -304,9 +307,7 @@ if ($resultCatCasco->num_rows > 0) {
     }
 }
 
-$resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI') AND products.availability = 1 AND sub_products.availability = 1
-ORDER BY mediumRate DESC limit 0,9");
+$resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
 
 if ($resultCatStivali->num_rows > 0) {
     foreach ($resultCatStivali as $key) {
@@ -424,9 +425,7 @@ if ($resultCatStivali->num_rows > 0) {
         //aggiungere il medium rate
     }
 }
-$oidProtezioni = $mysqli->query("SELECT products.title as title ,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI') AND products.availability = 1 AND sub_products.availability = 1
-ORDER BY mediumRate DESC limit 0,9");
+$oidProtezioni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
 
 $resultProtezioni = $oidProtezioni;
 if ($resultProtezioni->num_rows > 0) {
@@ -545,9 +544,7 @@ if ($resultProtezioni->num_rows > 0) {
 
     }
 }
-$oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI') AND products.availability = 1 AND sub_products.availability = 1
-ORDER BY mediumRate DESC limit 0,9");
+$oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
 
 $resultCatPantaloni = $oidPantaloni;
 if ($resultCatPantaloni->num_rows > 0) {
@@ -666,9 +663,7 @@ if ($resultCatPantaloni->num_rows > 0) {
         //aggiungere il medium rate
     }
 }
-$oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON
-sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE') AND products.availability = 1 AND sub_products.availability = 1
-ORDER BY mediumRate DESC limit 0,9");
+$oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
 
 $resultCatTute = $oidTute;
 if ($resultCatTute->num_rows > 0) {
@@ -786,101 +781,6 @@ if ($resultCatTute->num_rows > 0) {
 
     }
 } 
-
-
-/* $result_offer = $mysqli->query("SELECT products.title, products.id, products.availability,sub_products.id as sub_id 
-FROM products JOIN sub_products ON sub_products.products_id = products.id WHERE
- EXISTS (SELECT 1 FROM offers WHERE offers.subproduct_id = sub_products.id) AND products.availability = 1");
-
-if ($result_offer && $result_offer->num_rows > 0) {
-    while ($key = $result_offer->fetch_assoc()) {
-        
-        $body->setContent("id", $key['id']);
-        $body->setContent("title", $key['title']);
-
-        $product_id = $mysqli->real_escape_string($key['id']);
-        $title = $mysqli->real_escape_string($key['title']);
-
-        $image_query = "
-            SELECT images.imgsrc, sub_products.price,sub_products.id 
-            FROM products 
-            JOIN sub_products ON sub_products.products_id = products.id 
-            JOIN images ON images.product_id = products.id 
-            WHERE products.id = '$product_id'
-            LIMIT 1
-        ";
-
-        $image_data = $mysqli->query($image_query);
-        
-            if ($image_data && $image_data->num_rows > 0 ) {
-                
-                $item = $image_data->fetch_assoc();
-                
-                $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
-                $offerItem = $offer->fetch_assoc();
-                if($offerItem){
-                $price = $item['price'];
-                $img =  $item['imgsrc'];
-                $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
-                $price=formatPrice($price);
-                $body->setContent("code",
-                '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
-                <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
-                <div style="background-color: #fff;" class="content-thumb">
-                    <div class="thumb-inner mv-effect-relative">
-                    
-                        <a href="product-detail.php?id='.$product_id.'" title="'.$title.'">
-                            <img src="data:image;base64,'.$img.'" alt="demo" class="mv-effect-item" />
-                        </a>
-                        <a href="product-detail.php?id='.$product_id.'" class="mv-btn mv-btn-style-25 btn-readmore-plus hidden-xs">
-                            <span class="btn-inner"></span>
-                        </a>
-        
-                        <div class="content-message mv-message-style-1">
-                            <div class="message-inner"></div>
-                        </div>
-                    
-                    <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
-                            <div class="label-2-inner">
-                                <ul class="label-2-ul">
-                                    <li class="number">-'.$offerItem['percentage'].'%</li>
-                                    <li class="text">Sconto</li>
-                                </ul>
-                            </div>
-                    </div>
-                    
-                    </div>
-                </div>
-        
-                <div class="content-default">
-                    <div class="content-desc">
-                        <a href="#" class="mv-overflow-ellipsis">'.$title.'</a>
-                    </div>
-                    <br>
-                    <div class="content-price">
-                        <span class="new-price">€ '.$pricePercentage.' </span>
-                        <span class="old-price">€ '.$price.'</span>
-                    </div>
-                    <input type="hidden" value="'.$product_id.'" name="id" href="javascript:void(0)">
-                </div>
-        
-                <div class="content-hover">
-                    <div class="content-button mv-btn-group text-center">
-                        <div class="group-inner">
-                            <a href="product-detail.php?id='.$product_id.'"  class="mv-btn mv-btn-style-1 btn-1-h-40 responsive-btn-1-type-2 btn-add-to-wishlist">
-                                    <span class="btn-inner">
-                                        <span class="btn-text">Scopri</span>
-                                    </span>
-                                </a>
-                        </div>
-                    </div>
-                </div>                                
-            </div>
-        </article>');
-                }
-        }
-    }
-} */
 
 $outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
     = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10 AND products.availability = 1 AND sub_products.availability = 1" 

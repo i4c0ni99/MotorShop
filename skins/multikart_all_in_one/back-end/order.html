@@ -42,20 +42,24 @@
                                             <th>Pagamento</th>
                                             <th>Importo</th>
                                             <th>Dettagli</th>
-                                            <th>Visualizza</th>
-                                            <th>Azioni</th>
+                                            <th>Stato</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <[foreach]>
-
-                                            <[row]>
-
+                                        <tr data-row-id="<[ord_number]>">
+                                            <td><[ord_number]></td>
+                                            <td><[ord_date]></td>
+                                            <td><[ord_paymentMethod]></td>
+                                            <td><[ord_totalPrice]></td>
+                                            <td><[ord_details]></td>
+                                            <td><[ord_state]></td>
+                                        </tr>
                                         <[/foreach]>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>                        
+                        </div>                      
                             
                             <!-- Sezione per la paginazione -->
                             <div class="pagination">

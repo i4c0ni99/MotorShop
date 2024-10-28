@@ -97,11 +97,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $body->setContent('id', $productId);
         $body->setContent('code', $product['code']);
         $body->setContent('title', $product['title']);
-        $body->setContent('src',$product['availability'] == 1?'<input name="availability" class="checkbox_animated check-it"
+        $body->setContent('src',$product['availability'] == 1?'<input name="availability" class="checkbox_animated "
                                                             type="checkbox" value="0" checked="">':
-                                                            '<input name="availability" class="checkbox_animated check-it"
+                                                            '<input name="availability" class="checkbox_animated "
                                                             type="checkbox" value="1">');
-        echo "<script>console.log(".$product['availability'].")</script>";
+    
 
         $body->setContent('description', $product['description']);
         $body->setContent('details', $product['specification']);

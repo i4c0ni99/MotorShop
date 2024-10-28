@@ -68,6 +68,10 @@
                             <br>
                             <h3><b>Avatar:</b></h3>
                             <br>
+                            <div style="display: block; width: 270px; height: 310px; background: #fff;" class="mv-effect-one-by-one">
+                                <span class="mv-effect-relative"><a href="#" title="RST Full Zipped Sweatshirt">
+                                    <[img]>
+                                    </a></span></div>
                             <form class="needs-validation add-avatar-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php" enctype="multipart/form-data">
                                 <div class="row product-adding">
                                     <div class="add-product">
@@ -75,8 +79,8 @@
                                             <div class="col-xl-3 xl-50 col-sm-6 col-3">
                                                 <ul class="file-upload-product">
                                                     <div class="box-input-file">
-                                                        <input class="upload" type="file" name="avatar">
-                                                        <i class="fa fa-plus"></i>
+                                                        <input id="fileInput" class="hidden" type="file" name="avatar" >
+                                                        <a href="#" id="uploadIcon" class="mv-btn mv-btn-style-25"><span class="btn-inner"></span></a>
                                                     </div>
                                                     <br>
                                                     <input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary">
@@ -231,4 +235,27 @@
     </section>
     <!-- .checkout-main -->
 </div>
+<script>
+    document.getElementById('uploadIcon').addEventListener('click', function() {
+    document.getElementById('fileInput').click();
+});
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Seleziona il primo elemento <img> che vuoi sostituire
+            const imgElement = document.querySelector('.mv-effect-one-by-one .mv-effect-relative img');
+            if (imgElement) {
+                imgElement.src = e.target.result; // Imposta la nuova immagine
+            }
+        };
+        reader.readAsDataURL(file); // Legge l'immagine come URL
+    } else {
+        alert('Per favore, carica un file immagine.');
+    }
+});
+
+</script>
 <!-- .mv-site -->

@@ -26,10 +26,10 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $body->setContent('id', $_GET['id']);
             $body->setContent('color', $subproduct['color']);
             $body->setContent('price', $subproduct['price']);
-            $body->setContent('src',$subproduct['availability'] == 1?'<input name="availability" class="checkbox_animated check-it"
-                                                            type="checkbox" value="0" checked="">':
-                                                            '<input name="availability" class="checkbox_animated check-it"
-                                                            type="checkbox" value="1">');
+            $body->setContent('src',$subproduct['availability'] == 1?'<input name="availability" class="checkbox_animated "
+            type="checkbox" value="0" checked="">':
+            '<input name="availability" class="checkbox_animated "
+            type="checkbox" value="1">');
             $body->setContent('quantity', $subproduct['quantity']);
             
             $img_query = $mysqli->query("SELECT * FROM images where sub_products_id =".$subproduct['sub_id']);
