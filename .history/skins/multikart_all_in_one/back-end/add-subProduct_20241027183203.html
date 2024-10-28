@@ -1,0 +1,245 @@
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Aggiungi sottoprodotto</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="needs-validation add-product-form"  method="post"
+                            action="add-subProduct.php?id=<[id]>" enctype="multipart/form-data"
+                            onreset="resetImagePreviews()">
+                            <div class="row product-adding">
+                                <div class="col-xl-7">
+                                    <div class="form">
+                                        <div class="form-group mb-3 row">
+                                            <label for="validationCustom02"
+                                                class="col-xl-3 col-sm-4 mb-0">Prezzo:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">€</span>
+                                                    </div>
+                                                    <input class="form-control" id="validationCustom02" type="number"
+                                                        step="0.1" name="price" min="1.00" max="9999.99"
+                                                        placeholder="Inserisci il prezzo" required>
+                                                    <div class="invalid-feedback">Il prezzo è obbligatorio e deve essere
+                                                        compreso tra 1.00 e 5000.00.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3 row">
+                                            <label class="col-xl-3 col-sm-4 mb-0">Quantità:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <div class="my-form form-control">
+                                                    <input class="form-control" type="number" name="quantity" value="1"
+                                                        min="1" max="999" required>
+                                                    <input type="hidden" name="code" value="<[id]>">
+                                                    <div class="invalid-feedback">Il valore deve essere compreso tra 1 e
+                                                        999</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="disponibilita"
+                                                class="col-xl-3 col-sm-4 mb-0">Disponibilità:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <label class="switch">
+                                                    <input type="checkbox" id="disponibilita" name="disponibilita">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="exampleFormControlSelect1"
+                                                class="col-xl-3 col-sm-4 mb-0">Seleziona taglia:</label>
+                                            <[sizes]>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="color" class="col-xl-3 col-sm-4 mb-0">Scegli il colore:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <select class="form-control" id="color" name="color" required>
+                                                    <option value="" disabled selected>Scegli un colore</option>
+                                                    <option value="#000000" style="background-color: #000000;">Nero
+                                                    </option>
+                                                    <option value="#FF0000" style="background-color: #FF0000;">Rosso
+                                                    </option>
+                                                    <option value="#00FF00" style="background-color: #00FF00;">Verde
+                                                    </option>
+                                                    <option value="#0000FF" style="background-color: #0000FF;">Blu
+                                                    </option>
+                                                    <option value="#FFFF00" style="background-color: #FFFF00;">Giallo
+                                                    </option>
+                                                    <option value="#FFA500" style="background-color: #FFA500;">Arancione
+                                                    </option>
+                                                    <option value="#800080" style="background-color: #800080;">Viola
+                                                    </option>
+                                                    <option value="#FFFFFF" style="background-color: #FFFFFF;">Bianco
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Il colore è obbligatorio.</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <form class="needs-validation add-product-form" novalidate method="post"
+                                        action="add-subProduct.php?id=<[id]>" enctype="multipart/form-data">
+                                        <input type="hidden" name="productId" value="<[id]>">
+                                        <!-- resto del form -->
+                                        <button type="submit" name="save" value="save"
+                                            class="btn btn-primary">Salva</button>
+                                        <button type="reset" class="btn btn-light">Annulla</button>
+                                    </form>
+
+                                </div>
+                                <div class="col-xl-5">
+                                    <div class="add-product">
+                                        <div class="row">
+                                            <small>Inserisci almeno un'immagine</small>
+                                            <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                <img src="../../../../MotorShop/skins/multikart_all_in_one/back-end/assets/images/pro3/1.jpg" alt
+                                                    class="img-fluid image_zoom_1 blur-up lazyloaded" id="imagePreview">
+                                            </div>
+                                            <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                <ul class="file-upload-product">
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload" id="imageInput1" name="image1"
+                                                                type="file" required="true"><i
+                                                                class="fa fa-plus"></i></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload" name="image2"
+                                                            id="imageInput2" type="file"><i
+                                                                class="fa fa-plus"></i></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload" name="image3"
+                                                                id="imageInput3" type="file"><i
+                                                                class="fa fa-plus"></i></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload" name="image4"
+                                                            id="imageInput4" type="file"><i
+                                                                class="fa fa-plus"></i></div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="box-input-file"><input class="upload" name="image5"
+                                                            id="imageInput5" type="file"><i
+                                                                class="fa fa-plus"></i></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+<script>
+    // Funzione per visualizzare l'anteprima dell'immagine selezionata
+    /* function previewImage(event, imageNumber) {
+        var reader = new FileReader();
+
+        reader.onload = function () {
+            var imagePreviewId = "imagePreview" + imageNumber;
+            var imgElement = document.getElementById(imagePreviewId);
+            imgElement.src = reader.result;
+            console.log(imgElement)
+        }
+        reader.readAsDataURL(event.target.files[0]);
+
+        // Mostra il campo di caricamento successivo se non è già visibile
+        var nextImageNumber = imageNumber + 1;
+        var nextImageField = document.querySelector('input[name="image' + nextImageNumber + '"]');
+        if (nextImageField) {
+            var nextImageParent = nextImageField.parentElement.parentElement;
+            if (nextImageParent.style.display === 'none') {
+                nextImageParent.style.display = 'block';
+            }
+        }
+    }
+
+    // Funzione per resettare le anteprime delle immagini selezionate
+    function resetImagePreviews() {
+        for (let i = 1; i <= 5; i++) {
+            let imgElement = document.getElementById('imagePreview' + i);
+            imgElement.src = '/MotorShop/skins/multikart_all_in_one/back-end/assets/images/pro3/product-preview.jpg'; // Reset all'anteprima di default
+            let imageField = document.querySelector('input[name="image' + i + '"]');
+            imageField.value = ""; // Reset del campo file
+            let imageParent = imageField.parentElement.parentElement;
+            if (i > 1) {
+                imageParent.style.display = 'none'; // Nascondi i campi di caricamento delle immagini aggiuntive
+            }
+        }
+    } */
+    document.getElementById('imageInput1').addEventListener('change', function(event) {
+        var imgElement = document.getElementById("imagePreview");
+        console.log(imgElement)
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+        }
+        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+      });
+      document.getElementById('imageInput2').addEventListener('change', function(event) {
+        var imgElement = document.getElementById("imagePreview");
+        console.log(imgElement)
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+        }
+        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+      });
+      document.getElementById('imageInput3').addEventListener('change', function(event) {
+        var imgElement = document.getElementById("imagePreview");
+        console.log(imgElement)
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+        }
+        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+      });
+      document.getElementById('imageInput4').addEventListener('change', function(event) {
+        var imgElement = document.getElementById("imagePreview");
+        console.log(imgElement)
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+        }
+        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+      });
+      document.getElementById('imageInput5').addEventListener('change', function(event) {
+        var imgElement = document.getElementById("imagePreview");
+        console.log(imgElement)
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+        }
+        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+      });
+</script>

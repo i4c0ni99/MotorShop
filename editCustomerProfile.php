@@ -134,11 +134,27 @@ if (isset($_POST['delete-account-button'])) {
     header("location:/../MotorShop/logout.php");
 }
 
-if (isset($_POST['check'])) {
-    // Eliminazione di un indirizzo di spedizione
-    $address_id = $_POST["check"];
-    $mysqli->query("DELETE FROM shipping_address WHERE id = '{$address_id}'");
-    header("location:/../MotorShop/editCustomerProfile.php");
+if (isset($_POST['delete-address-button'])) {
+    // Assicurati di ottenere l'ID dell'indirizzo dall'input nascosto
+    $addressId = $_POST['address_id'];
+    
+    // Preparazione della query di eliminazione
+    $stmt = $mysqli->prepare("DELETE FROM shipping_address WHERE id = ? AND users_email = ?");
+    
+    // Bind dei parametri
+    $stmt->bind_param("is", $addressId, $_SESSION['user']['email']);
+    
+    // Esecuzione della query
+    if ($stmt->execute()) {
+        // Redirect dopo l'eliminazione
+        header("location:/../MotorShop/editCustomerProfile.php");
+        exit;
+    } else {
+        // Gestione dell'errore
+        echo "Errore durante l'eliminazione: " . $stmt->error;
+    }
+
+    $stmt->close();
 }
 
 if (isset($_POST['add-address-button'])) {
@@ -151,10 +167,36 @@ if (isset($_POST['add-address-button'])) {
     $address = $_POST["streetAddress"];
     $cap = $_POST["cap"];
 
+    // Controllo se tutti i campi sono compilati
     if ($name != "" && $surname != "" && $phone != "" && $province != "" && $city != "" && $address != "" && $cap != "") {
-        $mysqli->query("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) 
-                        VALUE ('{$_SESSION['user']['email']}', '$name', '$surname', '$phone', '$province', '$city', '$address', '$cap')");
-        header("location:/../MotorShop/editCustomerProfile.php");
+        // Controlla se l'indirizzo è già presente
+        $stmt = $mysqli->prepare("SELECT COUNT(*) FROM shipping_address WHERE streetAddress = ? AND city = ? AND province = ? AND cap = ? AND users_email = ?");
+        $stmt->bind_param("sssss", $address, $city, $province, $cap, $_SESSION['user']['email']);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($count > 0) {
+            // Indirizzo già presente
+            echo "Errore: l'indirizzo è già presente.";
+        } else {
+            // Inserimento nuovo indirizzo
+            $stmt = $mysqli->prepare("INSERT INTO shipping_address (users_email, name, surname, phone, province, city, streetAddress, cap) 
+                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssss", $_SESSION['user']['email'], $name, $surname, $phone, $province, $city, $address, $cap);
+
+            // Esegui la query
+            if ($stmt->execute()) {
+                header("location:/../MotorShop/editCustomerProfile.php");
+                exit;
+            } else {
+                // Gestione dell'errore
+                echo "Errore durante l'inserimento: " . $stmt->error;
+            }
+
+            $stmt->close();
+        }
     }
 }
 

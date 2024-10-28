@@ -115,6 +115,28 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     echo "ID prodotto non valido.";
 }
 
+// Carica recensioni
+$feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
+$count = 0;
+$mediumRate;
+if( $feedback -> num_rows > 0){
+foreach ($feedback as $medium){
+    $mediumRate += $medium['rate'];
+   }
+   $mediumRate /= $feedback -> num_rows;
+   $body -> setContent('mediumRateNum',$mediumRate);
+
+foreach ($feedback as $item) {
+   $count= 0;
+   $rate = $item['rate'] ;
+   $body->setContent("idFeed", $item['id']);
+   $body->setContent("user", $item['users_email']);
+   $body->setContent("creationDate", $item['date']);
+   $body->setContent("content", $item['review']);
+   $body->setContent("rate", $rate);
+} 
+}
+
 // Carica le categorie dal database
 // $categories_query = "SELECT id, name FROM categories";
 // $categories_result = $mysqli->query($categories_query);

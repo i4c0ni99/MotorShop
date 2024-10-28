@@ -1,0 +1,169 @@
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>Modifica prodotto</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-12">
+                                <form class="needs-validation add-product-form" method="post"
+                                    action="/MotorShop/editproduct.php?id=<[id]>">
+                                    <div class="form">
+                                        <!-- Titolo del prodotto -->
+                                        <div class="form-group mb-3 row">
+                                            <label for="validationCustom01"
+                                                class="col-xl-3 col-sm-4 mb-0"><span>*</span>Titolo:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="validationCustom01" type="text"
+                                                    name="title" value="<[title]>" placeholder="<[title]>" required="true">
+                                            </div>
+                                            <div class="valid-feedback">Sembra ok!</div>
+                                        </div>
+
+                                        <!-- Codice prodotto -->
+                                        <div class="form-group mb-3 row">
+                                            <label for="validationCode" class="col-xl-3 col-sm-4 mb-0"><span>*</span>Codice prodotto:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="validationCode" type="text" name="code"
+                                                    value="<[code]>" required="true" readonly="true">
+                                            </div>
+                                        </div>
+
+                                        <!-- Descrizione con CKEditor -->
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-sm-4"><span>*</span>Descrizione:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="description-editor" name="description" cols="10" required="true" rows="4">
+                                                    <[description]>
+                                                </textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Specifiche con CKEditor -->
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-sm-4"><span>*</span>Specifiche:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="details-editor" name="details" cols="10" required="true" rows="4">
+                                                    <[details]>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-sm-4">Informazioni aggiuntive:</label>
+                                            <div class="col-xl-8 col-sm-7 description-sm">
+                                                <textarea id="information-editor" name="information" required="false" cols="10" rows="4">
+                                                    <[information]>
+                                                </textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Categoria -->
+                                        <div class="form-group mb-3 row">
+                                            <label for="category" class="col-xl-3 col-sm-4 mb-0"><span>*</span>Categoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="category" type="text"
+                                                    name="category" value="<[category]>" required="true" readonly="true">
+                                            </div>
+                                        </div>
+
+                                        <!-- Sottocategoria -->
+                                         <div class="form-group mb-3 row">
+                                            <label for="subcategory" class="col-xl-3 col-sm-4 mb-0"><span>*</span>Sottocategoria:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <input class="form-control" id="subcategory" type="text"
+                                                name="subcategory" value="<[subcategory]>" required="true" readonly="true">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-3 row">
+                                            <label for="availability" class="col-xl-3 col-sm-4 mb-0"><span>*</span>Visibilità:</label>
+                                            <div class="col-xl-8 col-sm-7">
+                                                <[src]>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pulsanti -->
+                                        <div class="offset-xl-3 offset-sm-4 mt-4">
+                                            <button type="submit" name="edit" class="btn btn-primary">Modifica</button>
+                                            <button type="reset" class="btn btn-light">Annulla</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body"></div>
+                    <div class="review-list mv-block-style-28 ">
+                        <div class="block-28-list">
+                            <[foreach]>
+                          <div class="item">
+                            <div class="mv-dp-table">
+                              <div class="mv-dp-table-cell block-28-thumb"><a href="#"><span
+                                    style="background-image: url(images/avatar/avatar_100x100.png);"
+                                    class="block-28-thumb-img"></span></a></div>
+                              <div class="mv-dp-table-cell block-28-main">
+                                <div class="block-28-main-header">
+                                  <div class="block-28-name"><a href="#"><[user]></a></div><span
+                                    class="block-28-date"><[creationDate]></span>
+                                  <div data-rate="true" data-score="4" class="block-28-rate mv-rate">
+                                    <div class="rate-inner mv-f-14 text-left">
+                                      <div class="stars-wrapper empty-stars"> 
+                                        <span data-rate="true" data-score="<[rate]>" class="mv-rate"><span
+                                            class="rate-inner mv-f-14 text-left"><span class="stars-wrapper empty-stars"><span
+                                                class="item-rate"></span><span class="item-rate"></span><span
+                                                class="item-rate"></span><span class="item-rate"></span><span
+                                                class="item-rate"></span></span><span class="stars-wrapper filled-stars"><span
+                                                class="item-rate"></span><span class="item-rate"></span><span
+                                                class="item-rate"></span><span class="item-rate"></span><span
+                                                class="item-rate"></span></span></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="block-28-desc"><[content]></div>
+                              </div>
+                            </div>
+                          </div>
+                          <[/foreach]>
+                          <!-- .item-->
+                        </div>
+                      <!-- .review-list-->
+                      <!-- .review-pagination-->
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    <!-- Container-fluid Ends-->
+</div>
+
+<!-- Includi CKEditor script -->
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+    // Inizializza CKEditor per i campi specificati
+    CKEDITOR.replace('description-editor');
+    CKEDITOR.replace('details-editor');
+    CKEDITOR.replace('information-editor');
+</script>

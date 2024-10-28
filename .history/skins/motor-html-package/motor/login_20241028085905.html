@@ -1,0 +1,136 @@
+<body>
+<div class="mv-site">
+
+    <section class="main-banner mv-wrap">
+        <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+            <div class="page-name mv-caption-style-6">
+                <div class="container">
+                    <div class="mv-title-style-9"><span class="main">Accedi o Registrati</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- .main-banner-->
+
+    <section class="mv-main-body login-main mv-bg-gray mv-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-login">
+                    <div class="mv-form-style-1 mv-box-shadow-gray-1">
+                        <form method="POST" class="form-login" action="/MotorShop/login.php">
+                            <div class="form-header">
+                                <div class="mv-title-style-13">
+                                    <div class="text-main">Accedi</div>
+                                </div>
+                            </div>
+                            <!-- .form-header-->
+
+                            <!-- Error message display -->
+                            <div class="error-message">
+                                <[error_message)): ?>
+                                    <p style="color: red;"><?php echo htmlspecialchars($error_message); ?></p>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="form-body">
+                                <div class="mv-form-group">
+                                    <div class="mv-label"> <strong class="text-uppercase">Email</strong></div>
+                                    <div class="mv-field">
+                                        <input type="email" name="email" class="mv-inputbox mv-inputbox-style-1" required/>
+                                    </div>
+                                </div>
+
+                                <div class="mv-form-group">
+                                    <div class="mv-label"> <strong class="text-uppercase">Password</strong></div>
+                                    <div class="mv-field">
+                                        <input type="password" name="password" class="mv-inputbox mv-inputbox-style-1" required/>
+                                    </div>
+                                </div>
+
+                                <div class="mv-form-group submit-button mv-mt-30">
+                                    <button type="submit" name="login" class="mv-btn mv-btn-style-5 btn-login">Accedi</button>
+                                </div>
+
+                                <div class="mv-form-group"><a href="/MotorShop/reset-password.php" class="btn-forgot-pass">Password dimenticata?</a></div>
+                            </div>
+                            <!-- .form-body-->
+                        </form>
+                        <!-- .form-login-->
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-register">
+                    <div class="mv-form-style-1 mv-box-shadow-gray-1">
+                        <form method="POST" class="form-register" action="/MotorShop/register.php">
+                            <div class="form-header">
+                                <div class="mv-title-style-13">
+                                    <div class="text-main">Crea un nuovo account</div>
+                                    <div class="text-sub">Registrati per acquistare e tenere traccia dei tuoi ordini.</div>
+                                </div>
+                            </div>
+                            <!-- .form-header-->
+
+                            <div class="mv-form-group">
+                                <div class="mv-label"> <strong class="text-uppercase">Nome</strong></div>
+                                <div class="mv-field">
+                                    <input type="text" name="name" minlength="3" class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo nome per esteso" required/>
+                                </div>
+                            </div>
+
+                            <div class="mv-form-group">
+                                <div class="mv-label"> <strong class="text-uppercase">Cognome</strong></div>
+                                <div class="mv-field">
+                                    <input type="text" minlength="3" name="surname" class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo cognome" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-body">
+                                <div class="mv-form-group">
+                                    <div class="mv-label"> <strong class="text-uppercase">Email</strong></div>
+                                    <div class="mv-field">
+                                        <input type="email" minlength="6" name="email" class="mv-inputbox mv-inputbox-style-1" title="Inserisci la tua email primaria" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-body">
+                                    <div class="mv-form-group">
+                                        <div class="mv-label"> <strong class="text-uppercase">Cellulare</strong></div>
+                                        <div class="mv-field">
+                                            <input type="text" pattern="[3]{1}[0-9]{9}" minlength="10" name="phoneNumber" class="mv-inputbox mv-inputbox-style-1" title="Inserisci il tuo numero di cellulare" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="mv-form-group">
+                                        <div class="mv-label"> <strong class="text-uppercase">Password</strong></div>
+                                        <div class="mv-field">
+                                            <input type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="password" title="Inserisci una password robusta: almeno 7 caratteri, un carattere speciale ed un numero" class="mv-inputbox mv-inputbox-style-1" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="mv-form-group">
+                                        <div class="mv-label"> <strong class="text-uppercase">Conferma Password</strong></div>
+                                        <div class="mv-field">
+                                            <input type="password" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmPassword" title="Digita nuovamente la password scelta" class="mv-inputbox mv-inputbox-style-1" required/>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mv-form-group submit-button mv-mt-30">
+                                        <button type="submit" class="mv-btn mv-btn-style-5 btn-signup">Iscriviti</button>
+                                    </div>
+                                </div>
+                                <!-- .form-body-->
+                        </form>
+                        <!-- .form-register-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- .login-main -->
+
+</div>
+<!-- .mv-site -->
+
+</body>
+</html>

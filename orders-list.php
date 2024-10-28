@@ -10,7 +10,10 @@ require "vendor/autoload.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
+// Verifica se la chiave "groups_id" esiste
+if (isset($_SESSION['user'])) {
+
+if ($_SESSION['user']['groups'] == '1') {
 
 $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/order.html");
@@ -46,12 +49,25 @@ function sendConfirmationEmail($orderData) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'eservice19@gmail.com'; 
-        $mail->Password = 'imoddxemcldfvkol'; // Aggiornare password
+        $mail->Password = 'zfeoebfhhdlwftvz';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
         $mail->setFrom('noreply@motorshop.it', 'MotorShop Italia');
-        $mail->addAddress($orderData['customerEmail']);
+        $mail->addAddress($orderData['users_email']);
+
+        if (isset($orderData['users_email'])) {
+            $mail->addAddress($orderData['users_email']);
+        } else {
+            error_log("Errore: 'users_email' non definito.");
+        }
+
+        if (filter_var($orderData['users_email'], FILTER_VALIDATE_EMAIL)) {
+            $mail->addAddress($orderData['users_email']);
+        } else {
+            error_log("Errore: indirizzo email non valido - " . $orderData['users_emaill']);
+            return; // Esci dalla funzione se l'email non è valida
+        }
 
         // Contenuto dell'email
         $mail->isHTML(true);
@@ -153,5 +169,9 @@ if ($result && $result->num_rows > 0) {
 
 $main->setContent("body", $body->get());
 $main->close();
+
+} else {
+    header("Location /MotorShop/login.php");
+}
 
 ?>

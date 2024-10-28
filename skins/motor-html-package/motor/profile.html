@@ -133,97 +133,98 @@
                             <br>
                             <hr>
                             <br>
+
                             <h3><b>I tuoi indirizzi di spedizione:</b></h3>
-                            <br>
-                            <div class="table-responsive table-desi">
-                                <table class="all-package coupon-table table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                            </th>
-                                            <th>Nome</th>
-                                            <th>Cognome</th>
-                                            <th>Cellulare</th>
-                                            <th>Provincia</th>
-                                            <th>Città</th>
-                                            <th>Indirizzo</th>
-                                            <th>CAP</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <[foreach]>
-                                            <tr data-row-id="<['id']>">
-                                                <form class="needs-validation delete-address-form" novalidate method="post" action="/MotorShop/editCustomerProfile.php">
-                                                    <input type="submit" class="btn btn-primary add-row delete_all" name="delete-address-button" value="Elimina">
-                                                <td>
-                                                    <input class="checkbox_animated check-it" type="submit" name="check" value="<['id']>" id="flexCheckDefault" data-id="1">
-                                                </td>
-                                                </form>
-                                                <td><[ADname]></td>
-                                                <td><[ADsurname]></td>
-                                                <td><[ADphone]></td>
-                                                <td><[ADprovince]></td>
-                                                <td><[ADcity]></td>
-                                                <td><[ADstreetAddress]></td>
-                                                <td><[ADcap]></td>
-                                            </tr>
-                                        <[/foreach]>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <br>
-                            <hr>
-                            <br>
-                            <h3><b>Aggiungi indirizzo:</b></h3>
-                            <br>
-                            <form class="needs-validation add-product-form" method="post" action="/MotorShop/editCustomerProfile.php">
-                                <div class="form">
-                                    <div class="form-group mb-3 row">
-                                        <label for="name" class="col-xl-3 col-sm-4 mb-0">Nome:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="name" name="name" minlength="2" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="surname" class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="surname" name="surname" minlength="2" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="phone" class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="phone" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="province" class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="province" name="province" minlength="2" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="city" class="col-xl-3 col-sm-4 mb-0">Città:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="city" name="city" required="true" minlength="2">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="streetAddress" class="col-xl-3 col-sm-4 mb-0">Indirizzo:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="streetAddress" name="streetAddress" minlength="3" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3 row">
-                                        <label for="cap" class="col-xl-3 col-sm-4 mb-0">CAP:</label>
-                                        <div class="col-xl-8 col-sm-7">
-                                            <input type="text" id="cap" name="cap" pattern="[0-9]{5}" required="true">
-                                        </div>
-                                    </div>
-                                    <div class="offset-xl-3 offset-sm-4 mt-4">
-                                        <input type="submit" name="add-address-button" class="btn btn-primary">
-                                    </div>
-                                </div>
+<br>
+<div class="table-responsive table-desi">
+    <table class="all-package coupon-table table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Cellulare</th>
+                <th>Provincia</th>
+                <th>Città</th>
+                <th>Indirizzo</th>
+                <th>CAP</th>
+                <th>Azioni</th> <!-- Colonna per le azioni -->
+            </tr>
+        </thead>
+        <tbody>
+            <[foreach]>                    
+                    <td><[ADname]></td>
+                    <td><[ADsurname]></td>
+                    <td><[ADphone]></td>
+                    <td><[ADprovince]></td>
+                    <td><[ADcity]></td>
+                    <td><[ADstreetAddress]></td>
+                    <td><[ADcap]></td>
+                    <td>
+                        <form class="delete-address-form" method="post" action="/MotorShop/editCustomerProfile.php" style="display:inline;">
+                            <input type="hidden" name="address_id" value="<[Adid]>"> 
+                            <input type="submit" class="btn btn-danger" name="delete-address-button" value="Elimina">
+                        </form>
+                    </td>
+                </tr>
+            <[/foreach]>
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+<br>
+<h3><b>Aggiungi indirizzo:</b></h3>
+<br>
+<form class="needs-validation add-product-form" method="post" action="/MotorShop/editCustomerProfile.php">
+    <div class="form">
+        <div class="form-group mb-3 row">
+            <label for="name" class="col-xl-3 col-sm-4 mb-0">Nome:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="name" name="name" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="surname" class="col-xl-3 col-sm-4 mb-0">Cognome:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="surname" name="surname" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="phone" class="col-xl-3 col-sm-4 mb-0">Cellulare:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="phone" name="phone" pattern="[3]{1}[0-9]{9}" minlength="10" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="province" class="col-xl-3 col-sm-4 mb-0">Provincia:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="province" name="province" minlength="2" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="city" class="col-xl-3 col-sm-4 mb-0">Città:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="city" name="city" required="true" minlength="2">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="streetAddress" class="col-xl-3 col-sm-4 mb-0">Indirizzo:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="streetAddress" name="streetAddress" minlength="3" required="true">
+            </div>
+        </div>
+        <div class="form-group mb-3 row">
+            <label for="cap" class="col-xl-3 col-sm-4 mb-0">CAP:</label>
+            <div class="col-xl-8 col-sm-7">
+                <input type="text" id="cap" name="cap" pattern="[0-9]{5}" required="true">
+            </div>
+        </div>
+        <div class="offset-xl-3 offset-sm-4 mt-4">
+            <input type="submit" name="add-address-button" class="btn btn-primary">
+        </div>
+    </div>
+</form>
+             
                                 <!-- .form-body -->
                             <br>
                             <hr>
