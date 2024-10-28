@@ -1,0 +1,47 @@
+<section class="main-banner mv-wrap">
+    <div data-image-src="images/background/demo_bg_1920x1680.png" class="mv-banner-style-1 mv-bg-overlay-dark overlay-0-85 mv-parallax">
+      <div class="page-name mv-caption-style-6">
+        <div class="container">
+          <div class="mv-title-style-9"><span class="main">Wishlist</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- .main-banner-->
+  <section class="mv-main-body wishlist-main mv-bg-gray mv-wrap">
+    <div class="container">
+        <h3><b>Crea una nuova password:</b></h3>
+<br>									
+<p>Scegli una password robusta.</p>
+<br>
+<form class="needs-validation add-product-form" novalidate="" method="post" action="/MotorShop/editProfile.php">
+            <div class="form">
+			<div class="form-group mb-3 row">
+                    <label for="validationCustom01"
+                        class="col-xl-3 col-sm-4 mb-0">Password corrente:</label>
+                    <div class="col-xl-8 col-sm-7">
+                        <input class="form-control" id="currentpassword"
+                            type="password" name="currentpassword" required="true">
+                    </div>
+                    </div>            
+                </div>
+                <div class="form-group mb-3 row">
+                    <label for="validationCustom01"
+                        class="col-xl-3 col-sm-4 mb-0">Nuova password:</label>
+                    <div class="col-xl-8 col-sm-7">
+                        <input type="password" id="newpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="newpassword" required="true">
+                    </div>
+                    </div>            
+				<div class="form-group mb-3 row">
+                    <label for="validationCustom01"
+                        class="col-xl-3 col-sm-4 mb-0">Conferma password:</label>
+                    <div class="col-xl-8 col-sm-7">
+                        <input type="password" id="confirmpassword" pattern="(?=.*\d)(?=.*[\W_]).{7,}" minlength="7" name="confirmpassword" required="true">
+                    </div>
+                    </div>            
+                    <div class="offset-xl-3 offset-sm-4 mt-4">
+                        <input type="submit" value="Modifica" name="change-pass-button" class="btn btn-primary"></input>
+                </div>
+        </form>
+        <br>
+<br>
