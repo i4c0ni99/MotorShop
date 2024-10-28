@@ -320,7 +320,7 @@ if ($resultCatStivali->num_rows > 0) {
             $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
             $price = formatPrice($price);
             $body->setContent(
-                "stivali",
+                'stivali',
                 '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item boots">
 
                                 <div class="item-inner mv-effect-translate-1">
@@ -438,10 +438,9 @@ if ($resultProtezioni->num_rows > 0) {
             $price = $key['price'];
             $pricePercentage = formatPrice($price - ($price * ($offerItem['percentage'] / 100)));
             $price = formatPrice($price);
-            $$body->setContent(
+            $body->setContent(
                 "protezioni",
                             '<article class="col-xs-6 col-sm-4 col-md-3 item post filter-item protection">
-
                                 <div class="item-inner mv-effect-translate-1">
                                     <div class="content-default">
                                         <div class="content-thumb">
