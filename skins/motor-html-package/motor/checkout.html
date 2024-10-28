@@ -44,7 +44,7 @@
                           <[foreach]>
                           <tr data-row-id="<[id]>">
                             <td>
-                              <input class="checkbox_animated check-it" id="select_adress" type="radio" name="address_list" value="<[id]>" >
+                              <input class="checkbox_animated check-it" id="select_adress" type="radio" name="address_list" value="<[id]>" required>
                             </td>
                             <td><[ADname]></td>
                             <td><[ADsurname]></td>
@@ -250,7 +250,7 @@
 
 <script>
     
-    let address = 0;
+    let address = 1;
 
     document.querySelectorAll('input[name="address_list"]').forEach(radio => {
         radio.addEventListener('change', function() {
@@ -296,6 +296,7 @@
         window.location.href="/../MotorShop/customer-dashboard.php";
         },
         error: function () {
+            
           alert("Errore durante la connessione al server.");
         },
       });
