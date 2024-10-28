@@ -240,14 +240,11 @@ if (isset($_POST['post-review'])) {
       $check_query = "SELECT COUNT(*) as review_count FROM feedbacks 
                       WHERE users_email = '$user_email' 
                       AND products_id = $product_id";
-       $check_result = $mysqli->query($check_query);
-       $review_count = $check_result->fetch_assoc()['review_count'];
-
-       if ($review_count > 0) {
-           echo "Hai già inserito una recensione per questo prodotto.";
-           exit;
-       }
       
+      $check_result = $mysqli->query($check_query);
+      $review_count = $check_result->fetch_assoc()['review_count'];
+
+      // Inserisce la recensione
       $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
                              VALUES ('$user_email', $product_id, '$rating', '$comment', '$curdate')");
       

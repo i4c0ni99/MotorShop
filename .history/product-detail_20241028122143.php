@@ -217,55 +217,56 @@ $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = 
 
 }
 
-if (isset($_POST['post-review'])) {
-  if (empty($_POST["rate"])) {
-      echo "Devi inserire una valutazione per poter pubblicare la recensione";
-      exit;
-  }
+i
+ 
+ 
+ 
+ 
+ 
 
-  $name = $_SESSION['user']['name'];
-  $surname = $_SESSION['user']['surname'];
-  $comment = $_POST["review"];
-  $rating = $_POST["rate"];
-  $curdate = date("Y/m/d");
+ 
+ 
+ 
+ 
+ 
 
-  if (empty($_SESSION['user']['email'])) {
-      header("location:/MotorShop/login.php");
-      exit; 
-  } elseif (!empty($comment)) {
-      
-      $user_email = $_SESSION['user']['email'];
-      $product_id = $_GET['id'];
-      
-      $check_query = "SELECT COUNT(*) as review_count FROM feedbacks 
-                      WHERE users_email = '$user_email' 
-                      AND products_id = $product_id";
-       $check_result = $mysqli->query($check_query);
-       $review_count = $check_result->fetch_assoc()['review_count'];
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
-       if ($review_count > 0) {
-           echo "Hai già inserito una recensione per questo prodotto.";
-           exit;
-       }
-      
-      $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
-                             VALUES ('$user_email', $product_id, '$rating', '$comment', '$curdate')");
-      
-      // Calcola il nuovo mediumRate
-      $average_query = $mysqli->query("SELECT AVG(rate) AS average_rate FROM feedbacks WHERE products_id = $product_id");
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
-      if ($average_query && $average_query->num_rows > 0) {
-          $average_data = $average_query->fetch_assoc();
-          $new_medium_rate = $average_data['average_rate'];
-
-          // Aggiorna la colonna mediumRate nella tabella products
-          $mysqli->query("UPDATE products SET mediumRate = {$new_medium_rate} WHERE id = $product_id");
-      }
-
-      header("location:/MotorShop/product-detail.php?id=$product_id");
-      exit; 
-  }
-}
 
 $main->setContent('dynamic',$body->get());
 $main->close();

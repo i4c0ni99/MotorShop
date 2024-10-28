@@ -141,6 +141,7 @@ WHERE
         $body->setContent("title", '');
     }
 
+    // Gestione della paginazione
     if ($totalPages > 1) {
         $pagination = '';
         for ($i = 1; $i <= $totalPages; $i++) {

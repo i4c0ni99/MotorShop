@@ -76,11 +76,12 @@ WHERE
     $main->setContent('surname', $_SESSION['user']['surname']);
     $main->setContent('email', $_SESSION['user']['email']);
 
-    // Paginazione
+    // Definisci il numero di prodotti per pagina
     $itemsPerPage = 10;
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $offset = ($page - 1) * $itemsPerPage;
 
+    // Conta il numero totale di prodotti
     $totalItemsQuery = "SELECT COUNT(*) AS total FROM orders_has_products WHERE order_id = '{$order_id}'";
     $totalItemsResult = $mysqli->query($totalItemsQuery);
     $totalItemsRow = $totalItemsResult->fetch_assoc();
@@ -107,7 +108,7 @@ WHERE
                 $calculatedPrice = $sub_product_data['price'] * $sub['quantity']; // Calcola il prezzo totale
                 $body->setContent("size", $sub_product_data['size']);
                 $body->setContent("color", $sub_product_data['color']);
-                $body->setContent("price", formatPrice($calculatedPrice)); 
+                $body->setContent("price", formatPrice($calculatedPrice)); // Utilizzo di formatPrice() per il prezzo totale
                 
                 // Aggiungi la query per ottenere il titolo del prodotto dalla tabella products
                 $product_id = $sub_product_data['products_id'];
@@ -141,6 +142,7 @@ WHERE
         $body->setContent("title", '');
     }
 
+    // Gestione della paginazione
     if ($totalPages > 1) {
         $pagination = '';
         for ($i = 1; $i <= $totalPages; $i++) {

@@ -1,5 +1,4 @@
 <?php
-
 require "include/template2.inc.php";
 require "include/auth.inc.php";
 require "include/dbms.inc.php"; 
@@ -7,6 +6,7 @@ require "include/dbms.inc.php";
 $main = new Template("skins/motor-html-package/motor/login.html");
 
 if (isset($_GET['email']) && isset($_GET['v_cod'])) {
+    // Escape delle variabili
     $email = $mysqli->real_escape_string($_GET['email']);
     $v_cod = $mysqli->real_escape_string($_GET['v_cod']);
 

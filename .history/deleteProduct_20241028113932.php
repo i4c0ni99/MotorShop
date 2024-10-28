@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-        
+        // Redirect alla lista dei prodotti con un messaggio di errore
         $_SESSION['error'] = "ID prodotto non valido.";
         header('Location: /MotorShop/product-list.php');
         exit();

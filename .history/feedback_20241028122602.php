@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-review'])) {
         echo "Errore durante la pubblicazione della recensione: " . $mysqli->error;
     }
 }
+
         
     } else {
         echo "Prodotto non trovato.";

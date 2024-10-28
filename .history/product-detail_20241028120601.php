@@ -68,8 +68,7 @@ $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$result1['id
             }
 $oid1 = $mysqli->query("SELECT imgsrc FROM images where product_id={$_GET['id']}");
 $result2 = $oid1->fetch_assoc();
-
-// Visualizzazione feedback
+//visualizzazione feedback
 $feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
 $count = 0;
 $mediumReateRet;
@@ -90,7 +89,6 @@ foreach ($feedback as $item) {
 } 
 }
 
-// L'utente ha scelto colore e size poiché la get contiene l'id del subproduct corrispondente
 if (isset($_GET['id']) && !isset($_GET['subId'])) {
    
   $body->setContent("imgView",$result2['imgsrc']);
@@ -115,7 +113,9 @@ foreach ($data as $item) {
 }
 }
 
-// L'utente ha selezionato il colore
+
+
+echo $_GET['color'];
 if (isset($_GET['color'])) {
     
     
@@ -151,7 +151,6 @@ ORDER BY
         
        
    }
-   
 $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = {$item['id']}");
    $cartData=$cart_quantity->fetch_assoc();
    $body->setContent("prodQuantity",$dizionario[$_GET['size']]);
@@ -162,7 +161,7 @@ $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = 
         $body->setContent("quantity", 1);
     }
     
-// L'utente ha selezionato la taglia
+
    if (isset($_GET['size'])) 
    $body->setContent("buttons",'
                     <div class="block-27-button">
@@ -218,6 +217,7 @@ $cart_quantity=$mysqli->query("SELECT quantity FROM `cart`WHERE subproduct_id = 
 }
 
 if (isset($_POST['post-review'])) {
+  // Controlla se il campo rate è stato popolato
   if (empty($_POST["rate"])) {
       echo "Devi inserire una valutazione per poter pubblicare la recensione";
       exit;
@@ -231,40 +231,40 @@ if (isset($_POST['post-review'])) {
 
   if (empty($_SESSION['user']['email'])) {
       header("location:/MotorShop/login.php");
-      exit; 
+      exit; // Assicurati di uscire dopo il redirect
   } elseif (!empty($comment)) {
       
+      // Controlla se l'utente ha già inserito una recensione per il prodotto
       $user_email = $_SESSION['user']['email'];
       $product_id = $_GET['id'];
       
       $check_query = "SELECT COUNT(*) as review_count FROM feedbacks 
                       WHERE users_email = '$user_email' 
                       AND products_id = $product_id";
-       $check_result = $mysqli->query($check_query);
-       $review_count = $check_result->fetch_assoc()['review_count'];
-
-       if ($review_count > 0) {
-           echo "Hai già inserito una recensione per questo prodotto.";
-           exit;
-       }
       
-      $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
-                             VALUES ('$user_email', $product_id, '$rating', '$comment', '$curdate')");
-      
-      // Calcola il nuovo mediumRate
-      $average_query = $mysqli->query("SELECT AVG(rate) AS average_rate FROM feedbacks WHERE products_id = $product_id");
+      $check_result = $mysqli->query($check_query);
+      $review_count = $check_result->fetch_assoc()['review_count'];
 
-      if ($average_query && $average_query->num_rows > 0) {
-          $average_data = $average_query->fetch_assoc();
-          $new_medium_rate = $average_data['average_rate'];
-
-          // Aggiorna la colonna mediumRate nella tabella products
-          $mysqli->query("UPDATE products SET mediumRate = {$new_medium_rate} WHERE id = $product_id");
+     /*  if ($review_count > 0) {
+          echo "Hai già valutato questo prodotto";
+      } else { */
+          // Inserisce la recensione nel database
+          $oid = $mysqli->query("INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
+                                 VALUES ('$user_email', $product_id, '$rating', '$comment', '$curdate')");
+          $feedback = $mysqli->query("SELECT * FROM feedbacks where products_id = {$_GET['id']}");
+          $count = 0;
+          $mediumRateRet;
+          if( $feedback -> num_rows > 0){
+          foreach ($feedback as $mediumRate){
+              $mediumRateRet += $mediumRate['rate'];
+             }
+             $mediumRateRet /= $feedback -> num_rows ;
+             $mysqli->query("UPDATE products SET mediumRate = ".$mediumRateRet." WHERE id =".$_GET['id']);
+          }
+          header("location:/MotorShop/product-detail.php?id=$product_id");
+          exit; // Assicurati di uscire dopo il redirect
       }
-
-      header("location:/MotorShop/product-detail.php?id=$product_id");
-      exit; 
-  }
+  //}
 }
 
 $main->setContent('dynamic',$body->get());

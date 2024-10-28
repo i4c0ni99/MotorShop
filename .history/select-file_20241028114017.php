@@ -13,7 +13,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
    
     $body->setContent("privacy-policy", "privacy-policy.html");
     $body->setContent("refund", "refund.html");
-    $body->setContent("shipping", "shipping.html");
+    $body->setContent("shipping", "shipping.html")
     
     $main->setContent("dynamic", $body->get());
     $main->close();
