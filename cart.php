@@ -151,11 +151,7 @@ if (isset($_SESSION['user']['email'])) {
 
     // Funzione per mostrare il carrello dell'utente
     $userEmail = $_SESSION['user']['email'];
-    $query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc
-          FROM cart c
-          INNER JOIN sub_products sp ON c.subproduct_id = sp.id
-          LEFT JOIN images i ON sp.id = i.sub_products_id
-          WHERE c.user_email = ?";
+    $query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email = ? GROUP BY sp.products_id";
     $stmt = $mysqli->prepare($query);
     if ($stmt) {
         $stmt->bind_param("s", $userEmail);

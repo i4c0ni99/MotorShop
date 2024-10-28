@@ -58,8 +58,7 @@ if (isset($_GET['page']) && isset($_GET['to'])) {
 }
 
 // Aggiunta dei parametri di prezzo min e max con le nuove condizioni
-$min_price = isset($_GET['min_price']) ? max(10, floatval($_GET['min_price'])) : 10;
-$max_price = isset($_GET['max_price']) ? min(2500, floatval($_GET['max_price'])) : 2500;
+
 $brand_condition = '';
 if (isset($_GET['brand_id']) && !empty($_GET['brand_id'])) {
     $brand_id = $mysqli->real_escape_string($_GET['brand_id']);
@@ -102,14 +101,10 @@ if(isset($_GET['sub_cat_id'])){
 }
 // Costruisci la parte iniziale della query SQL per selezionare i prodotti
 $product_query_base ="
-    SELECT products.title, products.id 
-    FROM products  
-    JOIN sub_products ON sub_products.products_id = products.id 
-    WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) AND sub_products.availability = 1 
-    AND products.availability = 1";
+    SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id = products.id LEFT JOIN offers ON offers.subproduct_id = sub_products.id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) AND products.availability = 1 AND sub_products.availability = 1";
 
 // Aggiungi la condizione per il filtro di prezzo
-$product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price  AND sub_products.availability = 1";
+
 $product_query_base .= $category_condition;
 $product_query_base .= $brand_condition;
 $product_query_base.= $sub_cat_condition;
@@ -120,11 +115,7 @@ if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
     $product_query_base .= " AND products.title LIKE '%$searchText%' ";
 }
 
-if(isset($_GET['offert_percentage'])){
-    $product_query_base = "SELECT products.title, products.id FROM products JOIN sub_products ON sub_products.products_id 
-    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 10";
-}
-// Completamento della query SQL per contare i prodotti
+
 $count_query = "SELECT COUNT(DISTINCT products.id) as total_products 
                 FROM products
                 JOIN sub_products ON sub_products.products_id = products.id
@@ -133,12 +124,16 @@ $count_query = "SELECT COUNT(DISTINCT products.id) as total_products
                 AND EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
 
 // Aggiungi la condizione per il filtro di prezzo nella query di conteggio
-$count_query .= " AND sub_products.price BETWEEN $min_price AND $max_price AND sub_products.availability = 1 ";
 if(isset($_GET['size'])){
-$product_query_base .= "AND sub_products.size ='{$_GET['size']}'";
+$product_query_base .= " AND sub_products.size ='{$_GET['size']}'";
+
 $count_query .= "AND sub_products.size ='{$_GET['size']}'";
 }
-
+if(isset($_GET['min_price']) && isset($_GET['max_price'])){
+$min_price = floatval($_GET['min_price']);
+$max_price =  floatval($_GET['max_price']);
+$product_query_base .= " AND sub_products.price BETWEEN $min_price AND $max_price ";
+}
 // Aggiungi la condizione per il filtro di categoria se specificato nella query di conteggio
 $count_query .= $category_condition;
 
@@ -153,41 +148,41 @@ $total_products = $count_result->fetch_assoc()['total_products'];
 $total_pages = ceil($total_products / 12);
 
 // Completamento della query SQL per selezionare i prodotti con limitazione
-$product_query = $product_query_base . " GROUP BY products.id LIMIT $PAGE, $TO";
+$product_query = $product_query_base . " GROUP BY sub_products.id ";
+
+if(isset($_GET['offert_percentage'])){
+    $product_query = "SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
+    = products.id LEFT JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id";
+}
 
 $result = $mysqli->query($product_query);
+$prodotti = []; // Definisci l'array fuori dal ciclo
 
 if ($result && $result->num_rows > 0) {
-    while ($key = $result->fetch_assoc()) {
-        
-        $body->setContent("id", $key['id']);
-        $body->setContent("title", $key['title']);
-
-        $product_id = $mysqli->real_escape_string($key['id']);
-        $title = $mysqli->real_escape_string($key['title']);
-
-        $image_query = "
-            SELECT images.imgsrc, sub_products.price,sub_products.id 
-            FROM products 
-            JOIN sub_products ON sub_products.products_id = products.id 
-            JOIN images ON images.product_id = products.id 
-            WHERE products.id = '$product_id'
-            LIMIT 1
-        ";
-
-        $image_data = $mysqli->query($image_query);
-        
-        if ($image_data && $image_data->num_rows > 0 ) {
-            
-        $item = $image_data->fetch_assoc();
-        
-        $offer = $mysqli->query("SELECT * FROM offers WHERE subproduct_id ={$item['id']}");
-        $offerItem = $offer->fetch_assoc();
-            if($offerItem){
-                $price = $item['price'];
-                $img =  $item['imgsrc'];
-                $pricePercentage=formatPrice($price - ($price * ($offerItem['percentage']/100)));
+    foreach ($result as $key) {
+        $prodotti[$key['id']] = $key; // Usa l'id come chiave per garantire l'unicità
+    }
+}
+if ($prodotti && $result->num_rows > 0) {
+    foreach($prodotti as $key) {
+    $body->setContent("id", $key['id']);
+    $body->setContent("title", $key['title']);
+      $product_id = $key['id'];  
+      $title = $key['title']; 
+     $img = $mysqli->query("
+        SELECT images.imgsrc, sub_products.price,sub_products.id 
+        FROM products 
+        JOIN sub_products ON sub_products.products_id = products.id 
+        JOIN images ON images.product_id = products.id 
+        WHERE products.id = '".$key['id']."'
+        LIMIT 1
+    ")->fetch_assoc();
+            if($key['percentage'] != null){
+                $price = $key['price'];
+                $img =  $img['imgsrc'];
+                $pricePercentage=formatPrice($price - ($price * ($key['percentage']/100)));
                 $price=formatPrice($price);
+                
                 $body->setContent("code",
                 '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
                     <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
@@ -208,7 +203,7 @@ if ($result && $result->num_rows > 0) {
                             <div onclick="$(this).remove()" class="content-sale-off mv-label-style-2 text-center">
                                     <div class="label-2-inner">
                                         <ul class="label-2-ul">
-                                            <li class="number">-'.$offerItem['percentage'].'%</li>
+                                            <li class="number">-'.$key['percentage'].'%</li>
                                             <li class="text">Sconto</li>
                                         </ul>
                                     </div>
@@ -243,9 +238,9 @@ if ($result && $result->num_rows > 0) {
                     </div>
         </article>');
             }else{
-            $img =  $item['imgsrc'];
-            $price=formatPrice($item['price']);
-            if($item['id'] != null){
+            $img =  $img['imgsrc'];
+            $price=formatPrice($key['price']);
+            
             $body->setContent("code",
             '<article class="col-xs-6 col-sm-4 col-md-6 col-lg-4 item item-product-grid-3 post">
             <div class="item-inner mv-effect-translate-1 mv-box-shadow-gray-1">
@@ -292,15 +287,10 @@ if ($result && $result->num_rows > 0) {
             </div>                                
         </div>
     </article>');
-            }
+            
         }
 
-        } else {
-            // Immagine non trovata
-            $body->setContent("img", "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/shopping-trolley.png"); // Placeholder image path
-            // $body->setContent("price", "0.00"); // Placeholder price
-        }
-;
+        
     }
 } else {
     // Nessun prodotto trovato
@@ -341,7 +331,7 @@ $count_result = $mysqli->query($count_query);
 $total_products = $count_result->fetch_assoc()['total_products'];
 $total_pages = ceil($total_products / $items_per_page);
 
-// Limitare la pagina corrente
+/* // Limitare la pagina corrente
 if ($currentPage < 1) {
     $currentPage = 1;
 } elseif ($currentPage > $total_pages) {
@@ -352,12 +342,7 @@ if ($currentPage < 1) {
 $offset = ($currentPage - 1) * $items_per_page;
 
 // Query per recuperare i prodotti per la pagina corrente
-$product_query = "SELECT products.* 
-                  FROM products
-                  JOIN sub_products ON sub_products.products_id = products.id
-                  WHERE products.availability = 1 
-                  AND sub_products.availability = 1
-                  AND EXISTS (SELECT 1 FROM sub_products WHERE sub_products.products_id = products.id)";
+$product_query = "SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id = products.id LEFT JOIN offers ON offers.subproduct_id = sub_products.id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) AND products.availability = 1 AND sub_products.availability = 1";
 
 // Aggiungi la condizione per il filtro di testo di ricerca
 if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
@@ -404,9 +389,9 @@ if ($total_pages > 1) {
 $body->setContent("pagination", $pagination_html);
 
 // Passa il conteggio dei prodotti e il numero di pagine al template
-$body->setContent("total_products", $total_products);
-$body->setContent("total_pages", $total_pages);
 
+$body->setContent("total_pages", $total_pages); */
+$body->setContent("total_products", $total_products);
 // Passa le opzioni di taglia e colore al template
 $body->setContent("sizes", $sizes);
 $body->setContent("colors", $colors);
