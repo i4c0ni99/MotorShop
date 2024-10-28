@@ -148,7 +148,7 @@ $total_products = $count_result->fetch_assoc()['total_products'];
 $total_pages = ceil($total_products / 12);
 
 // Completamento della query SQL per selezionare i prodotti con limitazione
-$product_query = $product_query_base . " GROUP BY sub_products.id ";
+$product_query = $product_query_base . " GROUP BY sub_products.id ORDER BY `offers`.`percentage` ASC ";
 
 if(isset($_GET['offert_percentage'])){
     $product_query = "SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
@@ -159,10 +159,14 @@ $result = $mysqli->query($product_query);
 $prodotti = []; // Definisci l'array fuori dal ciclo
 
 if ($result && $result->num_rows > 0) {
+    
     foreach ($result as $key) {
         $prodotti[$key['id']] = $key; // Usa l'id come chiave per garantire l'unicità
+        
     }
 }
+
+shuffle($prodotti);
 if ($prodotti && $result->num_rows > 0) {
     foreach($prodotti as $key) {
     $body->setContent("id", $key['id']);
@@ -177,7 +181,7 @@ if ($prodotti && $result->num_rows > 0) {
         WHERE products.id = '".$key['id']."'
         LIMIT 1
     ")->fetch_assoc();
-            if($key['percentage'] != null){
+            if($key['percentage'] ){
                 $price = $key['price'];
                 $img =  $img['imgsrc'];
                 $pricePercentage=formatPrice($price - ($price * ($key['percentage']/100)));
