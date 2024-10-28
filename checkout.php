@@ -85,11 +85,7 @@ $products = [];
 $sub_quantity = 0;
 // Funzione per mostrare il carrello dell'utente nel riepilogo ordine
 $userEmail = $_SESSION['user']['email'];
-$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc
-          FROM cart c
-          INNER JOIN sub_products sp ON c.subproduct_id = sp.id
-          LEFT JOIN images i ON sp.id = i.sub_products_id
-          WHERE c.user_email = ?";
+$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email = ? GROUP BY sp.products_id ";
 $stmt = $mysqli->prepare($query);
 if ($stmt) {
     $stmt->bind_param("s", $userEmail);
@@ -144,10 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['address_list']) && is
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
     
 // Prodotti nel carrello dell'utente
-$queryCart = "SELECT c.subproduct_id, c.quantity, sp.price, sp.availability, sp. quantity AS stock 
-FROM cart c 
-INNER JOIN sub_products sp ON c.subproduct_id = sp.id 
-WHERE c.user_email = '$userEmail'";
+$queryCart = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email ='$userEmail' GROUP BY sp.products_id";
 $resultCart = $mysqli->query($queryCart);
 
 
