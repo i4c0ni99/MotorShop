@@ -102,16 +102,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Funzione per cancellare un ordine
-function cancelOrder($orderId) {
-    global $mysqli;
-
-    $deleteQuery = "DELETE FROM orders WHERE id = '{$orderId}'";
-    header("Location: /MotorShop/orders-list.php");
-    return $mysqli->query($deleteQuery);
-}
-
-
 // Verifica se è stata richiesta la cancellazione di un ordine
 if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])) {
     $orderId = $mysqli->real_escape_string($_GET['id']);

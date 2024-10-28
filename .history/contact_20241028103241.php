@@ -9,6 +9,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
+// Controlla se la sessione è attiva e se l'utente è autenticato
 if (isset($_SESSION['user']['email'])) {
     require "include/auth.inc.php";
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
@@ -16,9 +17,11 @@ if (isset($_SESSION['user']['email'])) {
     $main = new Template("skins/motor-html-package/motor/frame_public.html");
 }
 
+// Inizializza il template del body
 $body = new Template("skins/motor-html-package/motor/contact.html");
 
 if (isset($_SESSION['user']['email'])) {
+    // Popola il template con i dati dell'utente
     $body->setContent('name', htmlspecialchars($_SESSION['user']['name']));
     $body->setContent('surname', htmlspecialchars($_SESSION['user']['surname']));
     $body->setContent('email', htmlspecialchars($_SESSION['user']['email']));
@@ -58,32 +61,32 @@ $body->setContent('error_message', $errorMessage);
 $mail = new PHPMailer(true);
 
 try {
-// SMTP
+// Configura le impostazioni SMTP
 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = 'eservice19@gmail.com';
-$mail->Password = 'zfeoebfhhdlwftvz';
+$mail->Password = 'srikigsevgjzulxqc'
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 $mail->Port = 465;
 
 $mail->setFrom('noreply@motorshop.it', 'MotorShop Italia');
 $mail->addAddress($email);
 
-// Contenuto dell'email
+// Contenuto
 $mail->isHTML(true);
 $mail->Subject = 'Nuova richiesta di contatto';
 $bodyParagraphs = ["Nome: {$name}", "Cognome: {$surname}", "Email: {$email}", "Telefono: {$phone}", "Messaggio:",
 nl2br($message)];
 $bodyContent = join('<br />', $bodyParagraphs);
 
-// Template HTML per l'email
+// Leggi il template HTML per il corpo dell'email
 $bodyTemplate = new Template("skins/motor-html-package/motor/email_template.html");
 $bodyTemplate->setContent("email_content", $bodyContent);
 $mail->Body = $bodyTemplate->get();
 
-// Invia 
+// Invia l'email
 if ($mail->send()) {
 header('Location: /MotorShop/contact.php');
 exit();

@@ -11,6 +11,8 @@ function formatPrice($price) {
 }
 
 if (isset($_SESSION['user'])) {
+
+    if(isset($_GET['id']) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     
@@ -183,6 +185,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])
 } else {
     header("Location: /MotorShop/login.php");
     exit;
+}
+
 }
 
 ?>

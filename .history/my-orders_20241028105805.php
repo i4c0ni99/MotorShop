@@ -11,6 +11,8 @@ function formatPrice($price) {
 }
 
 if (isset($_SESSION['user'])) {
+
+    if(isset($_GET['id']) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     
@@ -69,7 +71,7 @@ WHERE
     } else {
         // Nessun ordine trovato o errore nella query
         error_log("Ordine non trovato per l'ordine con ID: $order_id");
-        header("Location: /MotorShop/customer-dashboard.php");
+        header("Location: /MotorShop/index.php");
     }
     
     $main->setContent('name', $_SESSION['user']['name']);
@@ -180,6 +182,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])
     $main->setContent("dynamic", $body->get());
     $main->close();
 
+} else {
+    header("Location: /MotorShop/customer-dashboard.php");
+exit;
 } else {
     header("Location: /MotorShop/login.php");
     exit;

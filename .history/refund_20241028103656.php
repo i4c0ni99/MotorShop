@@ -20,6 +20,7 @@ if (isset($_SESSION['user'])) {
     $body = new Template("skins/motor-html-package/motor/refund.html");
 }
 
+
 $main->setContent("dynamic", $body->get());
 $main->close();
 

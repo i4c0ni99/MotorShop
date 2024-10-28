@@ -11,7 +11,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Verifica se la chiave "groups_id" esiste
-if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
+
+
 
 $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/order.html");
@@ -102,16 +103,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Funzione per cancellare un ordine
-function cancelOrder($orderId) {
-    global $mysqli;
-
-    $deleteQuery = "DELETE FROM orders WHERE id = '{$orderId}'";
-    header("Location: /MotorShop/orders-list.php");
-    return $mysqli->query($deleteQuery);
-}
-
-
 // Verifica se è stata richiesta la cancellazione di un ordine
 if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])) {
     $orderId = $mysqli->real_escape_string($_GET['id']);
@@ -124,6 +115,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])
     }
 }
 
+// Funzione per cancellare un ordine
+function cancelOrder($orderId) {
+    global $mysqli;
+
+    // Cancella l'ordine
+    $deleteQuery = "DELETE FROM orders WHERE id = '{$orderId}'";
+    return $mysqli->query($deleteQuery);
+}
+
 // Visualizzazione lista ordini in attesa
 echo "<script>console.log(".$orders_base.")</script>";
 $orders = $orders_base;
@@ -134,6 +134,7 @@ if ($result && $result->num_rows > 0) {
     
     foreach ($result as $order) {
         
+        
             $body->setContent("ord_id", $order['id']);
             $body->setContent("ord_number", $order['number']);
             $body->setContent("ord_state", $order['state']);
@@ -142,11 +143,13 @@ if ($result && $result->num_rows > 0) {
             $body->setContent("ord_totalPrice", $order['totalPrice']);
             $body->setContent("ord_details", $order['details']);
         
+        
     }
     if(isset($_POST['id'])){
         echo json_encode(['success' => 'success']);
     }
 } else {
+    // Nessun ordine trovato
     
         // Nessun ordine trovato
         $body->setContent("ord_id", '');
@@ -157,6 +160,10 @@ if ($result && $result->num_rows > 0) {
         $body->setContent("ord_totalPrice", '');
         $body->setContent("ord_details", '');
     
+}
+} else {
+    header("Location: /MotorShop/login.php");
+    exit;
 }
 
 $main->setContent("body", $body->get());

@@ -78,12 +78,12 @@ $bodyParagraphs = ["Nome: {$name}", "Cognome: {$surname}", "Email: {$email}", "T
 nl2br($message)];
 $bodyContent = join('<br />', $bodyParagraphs);
 
-// Template HTML per l'email
+// Leggi il template HTML per il corpo dell'email
 $bodyTemplate = new Template("skins/motor-html-package/motor/email_template.html");
 $bodyTemplate->setContent("email_content", $bodyContent);
 $mail->Body = $bodyTemplate->get();
 
-// Invia 
+// Invia l'email
 if ($mail->send()) {
 header('Location: /MotorShop/contact.php');
 exit();

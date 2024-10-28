@@ -15,14 +15,18 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         $file = $_POST['file'];
         $allowedFiles = ['privacy-policy.html', 'refund.html', 'shipping.html'];
 
+        // Validate the file name
         if (in_array($file, $allowedFiles)) {
+            // Load the HTML content
             $filePath = "skins/motor-html-package/motor/" . $file;
             $htmlContent = file_get_contents($filePath);
         
-            // Carica il contenuto nel body, se valido
+            // Load body template for editing content
             $body = new Template("skins/motor-html-package/motor/edit-content.html");
             $body->setContent('html_content', $htmlContent);
             $body->setContent('file', $file); 
+        
+            // Set body content and display
             $main->setContent("dynamic", $body->get());
             $main->close();
         
@@ -37,5 +41,4 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     header("Location: /MotorShop/login.php");
     exit;
 }
-
 ?>

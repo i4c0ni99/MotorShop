@@ -11,6 +11,8 @@ function formatPrice($price) {
 }
 
 if (isset($_SESSION['user'])) {
+
+    if(isset($_GET['id']) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     

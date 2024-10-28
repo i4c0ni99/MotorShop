@@ -10,7 +10,7 @@ function formatPrice($price) {
     return number_format($price, 2, ',', '.'); // Formatta il prezzo con due decimali, usando la virgola come separatore decimale e il punto come separatore delle migliaia
 }
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && (isset($_GET['id']))) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     
@@ -69,7 +69,7 @@ WHERE
     } else {
         // Nessun ordine trovato o errore nella query
         error_log("Ordine non trovato per l'ordine con ID: $order_id");
-        header("Location: /MotorShop/customer-dashboard.php");
+        header("Location: /MotorShop/index.php");
     }
     
     $main->setContent('name', $_SESSION['user']['name']);

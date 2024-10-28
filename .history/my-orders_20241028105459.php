@@ -10,7 +10,7 @@ function formatPrice($price) {
     return number_format($price, 2, ',', '.'); // Formatta il prezzo con due decimali, usando la virgola come separatore decimale e il punto come separatore delle migliaia
 }
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && (isset($_GET['id']))) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     
@@ -30,8 +30,6 @@ if (isset($_SESSION['user'])) {
 
         $code_query = $mysqli->query("SELECT number, totalPrice FROM orders WHERE id = '{$order_id}'");
 $code_query_data = $code_query->fetch_assoc();
-
-$body->setContent("order_id", $order_id);
     
 $body->setContent("order_number", $code_query_data['number']);
 $body->setContent("order_total", $code_query_data['totalPrice']);
@@ -69,7 +67,7 @@ WHERE
     } else {
         // Nessun ordine trovato o errore nella query
         error_log("Ordine non trovato per l'ordine con ID: $order_id");
-        header("Location: /MotorShop/customer-dashboard.php");
+        header("Location: /MotorShop/index.php");
     }
     
     $main->setContent('name', $_SESSION['user']['name']);
@@ -162,7 +160,7 @@ WHERE
 function cancelOrder($orderId) {
    global $mysqli;
    $deleteQuery = "DELETE FROM orders WHERE id = '{$orderId}'";
-   header("Location: /MotorShop/customer-dashboard.php");
+   header("Location: /MotorShop/my-orders.php");
    return $mysqli->query($deleteQuery);
 }
 // Verifica se è stata richiesta la cancellazione di un ordine
@@ -171,7 +169,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])
    
    // Chiama la funzione per cancellare l'ordine
    if (cancelOrder($orderId)) {
-       header("Location: /MotorShop/customer-dashboard.php");
+       header("Location: /MotorShop/my-orders.php");
    } else {
        echo "Errore durante la cancellazione dell'ordine.";
    }

@@ -69,7 +69,7 @@ WHERE
     } else {
         // Nessun ordine trovato o errore nella query
         error_log("Ordine non trovato per l'ordine con ID: $order_id");
-        header("Location: /MotorShop/customer-dashboard.php");
+        header("Location: /MotorShop/index.php");
     }
     
     $main->setContent('name', $_SESSION['user']['name']);

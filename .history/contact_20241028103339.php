@@ -83,7 +83,7 @@ $bodyTemplate = new Template("skins/motor-html-package/motor/email_template.html
 $bodyTemplate->setContent("email_content", $bodyContent);
 $mail->Body = $bodyTemplate->get();
 
-// Invia 
+// Invia l'email
 if ($mail->send()) {
 header('Location: /MotorShop/contact.php');
 exit();

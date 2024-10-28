@@ -7,36 +7,32 @@ require "include/dbms.inc.php";
 require "include/auth.inc.php";
 
 function formatPrice($price) {
-    return number_format($price, 2, ',', '.'); // Formatta il prezzo con due decimali, usando la virgola come separatore decimale e il punto come separatore delle migliaia
+    return number_format($price, 2, ',', '.'); 
 }
 
-if (isset($_SESSION['user'])) {
+$main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
+$body = new Template("skins/multikart_all_in_one/back-end/order-detail.html");
+
+if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
+      
+    if (isset($_GET['id'])) {
     
     $order_id = $mysqli->real_escape_string($_GET['id']);
     
-    // Verifica lo stato dell'ordine
-    $order_status_query = $mysqli->query("SELECT state FROM orders WHERE id = '{$order_id}'");
+    $main->setContent('name', $_SESSION['user']['name']);
+    $main->setContent('surname', $_SESSION['user']['surname']);
+    $main->setContent('email', $_SESSION['user']['email']);
 
-    $main = new Template("skins/motor-html-package/motor/frame-customer.html");
+    $id_order = $_GET['id'];
+    $body->setContent("order_id", $_GET['id']);
+
+    $code_query = $mysqli->query("SELECT number, totalPrice FROM orders WHERE id = '$id_order'");
+    $code_query_data = $code_query->fetch_assoc();
     
-    if ($order_status_query && $order_status_query->num_rows > 0) {
-        $order_status_data = $order_status_query->fetch_assoc();
-        
-        if ($order_status_data['state'] == 'delivered') {
-            $body = new Template("skins/motor-html-package/motor/my-orders.html");
-        } else {
-            $body = new Template("skins/motor-html-package/motor/my-pending-orders.html");
-        }
+    $body->setContent("order_number", $code_query_data['number']);
+    $body->setContent("order_total", $code_query_data['totalPrice']);
 
-        $code_query = $mysqli->query("SELECT number, totalPrice FROM orders WHERE id = '{$order_id}'");
-$code_query_data = $code_query->fetch_assoc();
-
-$body->setContent("order_id", $order_id);
-    
-$body->setContent("order_number", $code_query_data['number']);
-$body->setContent("order_total", $code_query_data['totalPrice']);
-
-        $shipping_address_query = $mysqli->query(" SELECT 
+    $shipping_address_query = $mysqli->query(" SELECT 
     sa.name, 
     sa.surname, 
     sa.province, 
@@ -51,9 +47,8 @@ JOIN
 WHERE 
     o.id = '{$order_id}'");
 
-    if ($order_status_query && $order_status_query->num_rows > 0) {
-
         $shipping_address_data = $shipping_address_query->fetch_assoc();
+        
         $body->setContent("ad_name", $shipping_address_data['name']);
         $body->setContent("ad_surname", $shipping_address_data['surname']);
         $body->setContent("ad_province", $shipping_address_data['province']);
@@ -61,23 +56,16 @@ WHERE
         $body->setContent("ad_street", $shipping_address_data['streetAddress']);
         $body->setContent("ad_cap", $shipping_address_data['cap']);
         $body->setContent("ad_phone", $shipping_address_data['phone']);
-
-    } else {
-        error_log("Indirizzo non trovato per l'ordine con ID: $order_id");
-    }
+    
         
     } else {
         // Nessun ordine trovato o errore nella query
         error_log("Ordine non trovato per l'ordine con ID: $order_id");
-        header("Location: /MotorShop/customer-dashboard.php");
+        header("Location: /MotorShop/index.php");
     }
-    
-    $main->setContent('name', $_SESSION['user']['name']);
-    $main->setContent('surname', $_SESSION['user']['surname']);
-    $main->setContent('email', $_SESSION['user']['email']);
 
     // Definisci il numero di prodotti per pagina
-    $itemsPerPage = 10;
+    $itemsPerPage = 5;
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $offset = ($page - 1) * $itemsPerPage;
 
@@ -98,20 +86,18 @@ WHERE
             $body->setContent("id", $sub['id']);
             $body->setContent("sub_id", $sub['sub_products_id']);
             $body->setContent("sub_quantity", $sub['quantity']);
-            
-            // Aggiungi la query per ottenere size, color e price da sub_products
+
             $sub_product_id = $sub['sub_products_id'];
             $sub_product_query = $mysqli->query("SELECT size, color, price, products_id FROM sub_products WHERE id = '{$sub_product_id}'");
             
             if ($sub_product_query && $sub_product_query->num_rows > 0) {
                 $sub_product_data = $sub_product_query->fetch_assoc();
                 
-                $calculatedPrice = $sub_product_data['price'] * $sub['quantity']; // Calcola il prezzo totale
+                $calculatedPrice = $sub_product_data['price'] * $sub['quantity']; // Calcola l'importo totale
                 $body->setContent("size", $sub_product_data['size']);
                 $body->setContent("color", $sub_product_data['color']);
-                $body->setContent("price", formatPrice($calculatedPrice)); // Utilizzo di formatPrice() per il prezzo totale
+                $body->setContent("price", formatPrice($calculatedPrice)); 
                 
-                // Aggiungi la query per ottenere il titolo del prodotto dalla tabella products
                 $product_id = $sub_product_data['products_id'];
                 $order_title_query = $mysqli->query("SELECT title FROM products WHERE id = '{$product_id}'");
                 
@@ -133,6 +119,7 @@ WHERE
             }
         }
     } else {
+        
         // Nessun ordine trovato
         $body->setContent("id", 'Non abbiamo trovato il tuo ordine');
         $body->setContent("sub_id", '');
@@ -141,9 +128,10 @@ WHERE
         $body->setContent("color", '');
         $body->setContent("price", '');
         $body->setContent("title", '');
+        
     }
 
-    // Gestione della paginazione
+    // Gestione paginazione
     if ($totalPages > 1) {
         $pagination = '';
         for ($i = 1; $i <= $totalPages; $i++) {
@@ -157,32 +145,14 @@ WHERE
     } else {
         $body->setContent("pagination", '');
     }
-
-    // Funzione per cancellare un ordine
-function cancelOrder($orderId) {
-   global $mysqli;
-   $deleteQuery = "DELETE FROM orders WHERE id = '{$orderId}'";
-   header("Location: /MotorShop/customer-dashboard.php");
-   return $mysqli->query($deleteQuery);
-}
-// Verifica se è stata richiesta la cancellazione di un ordine
-if (isset($_GET['action']) && $_GET['action'] === 'cancel' && isset($_GET['id'])) {
-   $orderId = $mysqli->real_escape_string($_GET['id']);
-   
-   // Chiama la funzione per cancellare l'ordine
-   if (cancelOrder($orderId)) {
-       header("Location: /MotorShop/customer-dashboard.php");
-   } else {
-       echo "Errore durante la cancellazione dell'ordine.";
-   }
-}
-
-    $main->setContent("dynamic", $body->get());
-    $main->close();
+    
 
 } else {
     header("Location: /MotorShop/login.php");
     exit;
 }
+
+$main->setContent("body", $body->get());
+$main->close();
 
 ?>

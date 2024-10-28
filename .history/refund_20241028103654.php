@@ -16,9 +16,11 @@ if (isset($_SESSION['user'])) {
     $body->setContent('email', htmlspecialchars($_SESSION['user']['email']));
     $body->setContent('phone', htmlspecialchars($_SESSION['user']['phone']));
 } else {
+    // Se la sessione non è attiva, carica frame-public
     $main = new Template("skins/motor-html-package/motor/frame_public.html");
     $body = new Template("skins/motor-html-package/motor/refund.html");
 }
+
 
 $main->setContent("dynamic", $body->get());
 $main->close();

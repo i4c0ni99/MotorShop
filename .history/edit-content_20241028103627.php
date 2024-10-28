@@ -23,6 +23,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $body = new Template("skins/motor-html-package/motor/edit-content.html");
             $body->setContent('html_content', $htmlContent);
             $body->setContent('file', $file); 
+        
+            // Set body content and display
             $main->setContent("dynamic", $body->get());
             $main->close();
         
@@ -37,5 +39,4 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     header("Location: /MotorShop/login.php");
     exit;
 }
-
 ?>

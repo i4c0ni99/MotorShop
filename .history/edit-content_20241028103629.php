@@ -37,5 +37,4 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     header("Location: /MotorShop/login.php");
     exit;
 }
-
 ?>
