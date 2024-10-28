@@ -16,6 +16,18 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="card">
+            <div class="card-header">
+                <form class="form-inline search-form search-box" method="post" action="/../MotorShop/user-list.php">
+                    <div class="row">
+                        <div class="col-md-9"> 
+                            <input class="form-control" type="text" name="search-query" placeholder="Inserisci..">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary btn-block">Cerca</button>
+                        </div>
+                    </div>
+                </form>                
+            </div>
             <div class="card-body">
                 <div class="table-responsive table-desi">
                     <form class="needs-validation delete-user-form" novalidate="" method="post" action="/../MotorShop/user-list.php">

@@ -43,7 +43,6 @@
                                             <th>Importo</th>
                                             <th>Dettagli</th>
                                             <th>Stato</th>
-                                            <th></th>
                                             <th>Azioni</th>
                                         </tr>
                                     </thead>
@@ -56,10 +55,10 @@
                                             <td><[ord_totalPrice]></td>
                                             <td><[ord_details]></td>
                                             <td><[ord_state]></td>
-                                            <td><a href="/MotorShop/customer-order-detail.php?id=<[ord_id]>" class="btn btn-primary">Apri</a></td>
+                                            <td><a href="/MotorShop/customer-order-detail.php?id=order['id'].'" class="btn btn-primary">Apri</a></td>
                                             <td>
-                                                <a href="/MotorShop/orders-list.php?id=<[ord_id]>" class="btn btn-primary">Spedisci</a>
-                                                <a href="/MotorShop/orders-list.php?action=cancel&id=<[ord_id]>" class="btn btn-danger">Annulla</a>
+                                                <a href="/MotorShop/orders-list.php?id='.$order['id'].'" class="btn btn-primary">Spedisci</a>
+                                                <a href="/MotorShop/orders-list.php?action=cancel&id='.$order['id'].'" class="btn btn-danger">Annulla</a>
                                             </td>
                                         </tr>
                                         <[/foreach]>
