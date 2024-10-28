@@ -31,35 +31,32 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $productId = $key['id'];
             $body->setContent("id", $productId);
             $body->setContent("title", $key['title']);
-    
+
             // Media recensioni prodotto
             $average_query = $mysqli->query("SELECT AVG(rate) AS average_rate FROM feedbacks WHERE products_id = $productId");
             if ($average_query && $average_query->num_rows > 0) {
                 $average_data = $average_query->fetch_assoc();
                 $new_medium_rate = $average_data['average_rate'];
-                $body->setContent("average_rate", $new_medium_rate);
-            } else {
-                $body->setContent("average_rate", "N/A");
-            }
 
-            // Recupera l'immagine del prodotto
-            $data = $mysqli->query("SELECT imgsrc FROM images WHERE product_id={$productId} LIMIT 1");
-            if ($data->num_rows > 0) {
-                $item = $data->fetch_assoc();
-                $body->setContent("img", $item['imgsrc']);
-            } else {
-                // Immagine di default se non presente nel DB
-                $body->setContent("img", "path/to/default/image.jpg");
-            }
+                // Recupera l'immagine del prodotto
+                $data = $mysqli->query("SELECT imgsrc FROM images WHERE product_id={$productId} LIMIT 1");
+                if ($data->num_rows > 0) {
+                    $item = $data->fetch_assoc();
+                    $body->setContent("img", $item['imgsrc']);
+                } else {
+                    // Immagine di default se non presente nel DB
+                    $body->setContent("img", "path/to/default/image.jpg");
+                }
 
-            // Recupera il prezzo del prodotto
-            $priceData = $mysqli->query("SELECT MIN(price) AS min_price FROM sub_products WHERE products_id = {$productId}");
-            if ($priceData->num_rows > 0) {
-                $priceItem = $priceData->fetch_assoc();
-                $price = strval($priceItem['min_price']);
-                $body->setContent("price", formatPrice($price));
-            } else {
-                $body->setContent("price", "N/A");
+                // Recupera il prezzo del prodotto
+                $priceData = $mysqli->query("SELECT MIN(price) AS min_price FROM sub_products WHERE products_id = {$productId}");
+                if ($priceData->num_rows > 0) {
+                    $priceItem = $priceData->fetch_assoc();
+                    $price = strval($priceItem['min_price']);
+                    $body->setContent("price", formatPrice($price));
+                } else {
+                    $body->setContent("price", "N/A");
+                }
             }
         }
     }
@@ -77,6 +74,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     $main->setContent("dynamic", $body->get());
     $main->setContent("body", $body->get());
     $main->close();
+
 } else {
     header("Location: /MotorShop/login.php");
     exit;
