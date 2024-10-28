@@ -12,10 +12,10 @@ $main = new Template("skins/motor-html-package/motor/frame-customer.html");
 $body = new Template("skins/motor-html-package/motor/profile.html");
 
 // Aggiornamento dei dati dell'utente nel template principale
-$main->setContent('name', $_SESSION['user']['name']);
-$main->setContent('surname', $_SESSION['user']['surname']);
-$main->setContent('email', $_SESSION['user']['email']);
-
+$body->setContent('name', $_SESSION['user']['name']);
+$body->setContent('surname', $_SESSION['user']['surname']);
+$body->setContent('email', $_SESSION['user']['email']);
+echo $_SESSION['user']['name'];
 // Verifica e aggiunta del numero di telefono dalla tabella users se non è presente in session
 if (!isset($_SESSION['user']['phone'])) {
     $phone_query = $mysqli->query("SELECT phone FROM users WHERE email='{$_SESSION['user']['email']}'");
@@ -27,7 +27,7 @@ if (!isset($_SESSION['user']['phone'])) {
         exit();
      }
  } else {
-    $main->setContent('phone', $_SESSION['user']['phone']);
+    $body->setContent('phone', $_SESSION['user']['phone']);
  }
 
 // Caricamento dell'avatar

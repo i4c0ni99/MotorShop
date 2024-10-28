@@ -790,7 +790,7 @@ $outlet = "SELECT products.title, products.id FROM products JOIN sub_products ON
 $result = $mysqli->query($outlet);
 
 $offert_prew = $mysqli->query("SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
-    = products.id JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id LIMIT 5") ;
+    = products.id LEFT JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id LIMIT 5") ;
 
 if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows > 0) {
         $key= $offert_prew->fetch_assoc();
