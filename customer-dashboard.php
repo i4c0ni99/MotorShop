@@ -70,8 +70,8 @@ if ($reviews != null) {
     }
 
 // Eliminazione recensione selezionata
-if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $feedback_id = intval($_GET['delete']);
+if (isset($_GET['f_id']) && is_numeric($_GET['f_id'])) {
+    $feedback_id = intval($_GET['f_id']);
     $deleteFeedbackQuery = "DELETE FROM feedbacks WHERE id = $feedback_id";
     if ($mysqli->query($deleteFeedbackQuery)) {
         header('Location: /MotorShop/customer-dashboard.php');

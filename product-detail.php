@@ -83,7 +83,7 @@ foreach ($feedback as $mediumReate){
 foreach ($feedback as $item) {
    $count= 0;
    $rate = $item['rate'] ;
-   $body->setContent("user", $_SESSION['user']['name']);
+   $body->setContent("user", $item['users_email']);
    $body->setContent("creationDate", $item['date']);
    $body->setContent("content", $item['review']);
    $body->setContent("rate", $rate);
