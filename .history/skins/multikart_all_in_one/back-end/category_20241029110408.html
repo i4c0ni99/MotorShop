@@ -26,14 +26,12 @@
 
                     <div class="card-body">
                         <div class="table-responsive table-desi">
-                            <p>Per una specifica categoria, premi sul numero di sottocategorie per consultarle.</p>
-                            <br>
                             <table class="table all-package table-category " id="editableTable">
                                 <thead>
                                     <tr>
                                         <th>Categoria</th>
-                                        <th># Sottocategorie</th>
-                                        <th># Prodotti</th>
+                                        <th>Sottocategorie</th>
+                                        <th>Prodotti</th>
                                         <th>Elimina</th>
                                     </tr>
                                 </thead>
@@ -42,7 +40,7 @@
                                     <[foreach]>
                                         <tr>
                                             <td data-field="categoria"><[category]></td>
-                                            <td data-field="sottocategorie">-> <[sub-category]></td>
+                                            <td data-field="sottocategorie">APRI (<[sub-category]> sottocategorie)</td>
                                             <td data-field="prodotti"><[product]></td>
                                             <td>
                                                 <a href="<[delete-url]>">
@@ -78,7 +76,7 @@
                             <div class="form-group">
                                 <label for="validationCustom01" class="mb-1">Categoria:</label>
                                 <input type="text" minlength="3" class="form-control" id="validationCustom01"
-                                    name="category" required>
+                                    name="category">
                             </div>
                         </div>
                         <div class="modal-footer">
