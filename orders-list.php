@@ -142,7 +142,7 @@ if ($result && $result->num_rows > 0) {
             $body->setContent("ord_totalPrice", $order['totalPrice']);
             $body->setContent("ord_details", $order['details']);
             $body->setContent("open_ord",'<a href="/MotorShop/customer-order-detail.php?id='.$order['id'].'" class="btn btn-primary">Apri</a>');
-            $body->setContent("manage_ord",'<a href="/MotorShop/orders-list.php?id=<'.$order['id'].'" class="btn btn-primary">Spedisci</a>
+            $body->setContent("manage_ord",'<a href="/MotorShop/orders-list.php?id='.$order['id'].'" class="btn btn-primary">Spedisci</a>
                                                 <a href="/MotorShop/orders-list.php?action=cancel&id='.$order['id'].'" class="btn btn-danger">Annulla</a>');
         
     }
