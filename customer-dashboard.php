@@ -31,6 +31,7 @@ if (isset($_SESSION['user']['email'])) {
             $body->setContent("ord_paymentMethod", $order['paymentMethod']);
             $body->setContent("ord_totalPrice", $order['totalPrice']);
             $body->setContent("ord_details", $order['details']);
+            $body->setContent("manage",'<a href="/MotorShop/my-orders.php?id=<[ord_id]>" class="btn btn-primary">Apri</a>');
         }
     } else {
         // Nessun ordine trovato
@@ -41,6 +42,7 @@ if (isset($_SESSION['user']['email'])) {
         $body->setContent("ord_paymentMethod", '');
         $body->setContent("ord_totalPrice", '');
         $body->setContent("ord_details", '');
+        $body->setContent("manage",'');
     }
 } else {
     header("location:/../MotorShop/login.php");

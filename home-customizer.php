@@ -18,9 +18,18 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         foreach ($slide_result as $page) {
             $body->setContent("sliderId",$page['id']);
             $body->setContent("sliderTitle",$page['title']);
-            $body->setContent("sliderDescription",$page['description']);   
+            $body->setContent("sliderDescription",$page['description']);  
+            $body->setContent("manage",' <form method="post" action="/MotorShop/home-customizer.php">
+                                            <input type="hidden" name="sliderId" value="'.$page['id'].'">
+                                            <button type="submit" name="delete" class="btn btn-danger">Elimina</button>
+                                        </form>'); 
     }
-} 
+} else{
+    $body->setContent("sliderId",'');
+    $body->setContent("sliderTitle",'');
+    $body->setContent("sliderDescription",'');  
+    $body->setContent("manage",''); 
+}
 
     if (isset($_POST['submit'])) {
 
