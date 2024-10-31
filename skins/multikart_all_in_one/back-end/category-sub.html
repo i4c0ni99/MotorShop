@@ -33,7 +33,7 @@
                             <button type="button" class="btn btn-primary mt-md-0 mt-2" data-bs-toggle="modal"
                                 data-original-title="test" data-bs-target="#exampleModal">
                                 Aggiungi sottocategoria</button>
-                            <a href="create-category.php" class="btn btn-secondary mt-md-0 mt-2">Torna indietro</a>
+                            <a href="create-category.php" class="btn btn-secondary mt-md-0 mt-2">Torna alle categorie</a>
                         </div>
 
                         <div class="card-body">
@@ -42,7 +42,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sottocategoria</th>
-                                            <th>Prodotti</th>
+                                            <th># Prodotti</th>
                                             <th>Elimina</th>
                                         </tr>
                                     </thead>
@@ -50,8 +50,8 @@
                                     <tbody>
                                         <[foreach]>
                                             <tr>
-                                                <td data-field="sottocategoria"><[subcategory]></td>
-                                                <td data-field="prodotti"></td>
+                                                <td data-field="sottocategoria"><[sub-category]></td>
+                                                <td data-field="prodotti"><[product_count]></td>
                                                 <td>
                                                     <a href="<[delete_url]>">
                                                         <i class="fa fa-trash" title="Elimina"></i>
