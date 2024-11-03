@@ -141,24 +141,26 @@ if(isset($_GET['offert_percentage'])){
     = products.id LEFT JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id ORDER BY offers.percentage ASC ";
 }
 
-// completamento query SQL per selezionare i prodotti con limite della paginazione
+// Completamento della query SQL per selezionare i prodotti con limitazione
 
 $result = $mysqli->query($product_query);
-$prodotti = []; 
+$prodotti = []; // Definisci l'array fuori dal ciclo
 
 if ($result && $result->num_rows > 0) {
     foreach ($result as $key) {
-        $prodotti[$key['id']] = $key; // univoco
+        $prodotti[$key['id']] = $key; // Usa l'id come chiave per garantire l'unicità
     }
 }
 
+
 $total_products = count($prodotti);
 $total_pages = ceil($total_products / $items_per_page);
-// Calcola l'offset
+// Calcola l'offset per la query di recupero dei prodotti
 $offset = ($currentPage - 1) * $items_per_page ;
 
 
-// Limita la pagina corrente
+
+// Limitare la pagina corrente
 if ($currentPage < 1) {
     $currentPage = 1;
 } elseif ($currentPage > $total_pages) {
@@ -170,7 +172,7 @@ $pagination_html = '';
 if ($total_pages > 1) {
     $pagination_html .= '<ul class="pagination">';
     
-    // "Indietro"
+    // Pulsante "Indietro"
     if ($currentPage > 1) {
         $pagination_html .= '<li class="prev"><a href="?page=' . ($currentPage - 1) .  '">Indietro</a></li>';
     }
@@ -180,7 +182,7 @@ if ($total_pages > 1) {
         $active_class = ($i == $currentPage) ? 'class="active"' : '';
         $pagination_html .= '<li ' . $active_class . '><a href="?page=' . $i .'">' . $i . '</a></li>';
         
-        // punti di sospensione
+        // Aggiungi i puntini di sospensione
         if ($i == 2 && $currentPage > 3) {
             $pagination_html .= '<li><span>...</span></li>';
         } elseif ($i == $total_pages - 1 && $currentPage < $total_pages - 2) {
@@ -188,7 +190,7 @@ if ($total_pages > 1) {
         }
     }
 
-    // "Avanti"
+    // Pulsante "Avanti"
     if ($currentPage < $total_pages) {
         $pagination_html .= '<li class="next"><a href="?page=' . ($currentPage + 1) .  '">Avanti</a></li>';
     }
@@ -327,10 +329,11 @@ if ($prodotti && $result->num_rows > 0) {
         } 
     }
 } else {
+    // Nessun prodotto trovato
    $body->setContent('code','<p>Nessun prodotto trovato</p>');
 }
 
-// Passa categorie al template
+// Passa le categorie al template
 foreach ($categories as $category) {
     $body->setContent("cat_id", $category['id']);
     $body->setContent("cat_name", $category['name']);
@@ -341,10 +344,16 @@ foreach ($brands as $brand) {
     $body->setContent("brand_name", $brand['name']);
 }
 
+
+
+// Imposta il contenuto della paginazione nel tuo body
 $body->setContent("pagination_html", $pagination_html);
+
+// Passa il conteggio dei prodotti e il numero di pagine al template
+
 $body->setContent("total_pages", $total_pages);
 $body->setContent("total_products", $total_products);
-
+// Passa le opzioni di taglia e colore al template
 $body->setContent("sizes", $sizes);
 $body->setContent("colors", $colors);
 $body->setContent("selected_size", $selected_size);

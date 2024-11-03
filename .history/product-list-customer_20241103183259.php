@@ -188,7 +188,7 @@ if ($total_pages > 1) {
         }
     }
 
-    // "Avanti"
+    // Pulsante "Avanti"
     if ($currentPage < $total_pages) {
         $pagination_html .= '<li class="next"><a href="?page=' . ($currentPage + 1) .  '">Avanti</a></li>';
     }
@@ -327,10 +327,11 @@ if ($prodotti && $result->num_rows > 0) {
         } 
     }
 } else {
+    // Nessun prodotto trovato
    $body->setContent('code','<p>Nessun prodotto trovato</p>');
 }
 
-// Passa categorie al template
+// Passa le categorie al template
 foreach ($categories as $category) {
     $body->setContent("cat_id", $category['id']);
     $body->setContent("cat_name", $category['name']);
@@ -341,10 +342,16 @@ foreach ($brands as $brand) {
     $body->setContent("brand_name", $brand['name']);
 }
 
+
+
+// Imposta il contenuto della paginazione nel tuo body
 $body->setContent("pagination_html", $pagination_html);
+
+// Passa il conteggio dei prodotti e il numero di pagine al template
+
 $body->setContent("total_pages", $total_pages);
 $body->setContent("total_products", $total_products);
-
+// Passa le opzioni di taglia e colore al template
 $body->setContent("sizes", $sizes);
 $body->setContent("colors", $colors);
 $body->setContent("selected_size", $selected_size);

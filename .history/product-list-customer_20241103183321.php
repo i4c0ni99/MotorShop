@@ -342,9 +342,12 @@ foreach ($brands as $brand) {
 }
 
 $body->setContent("pagination_html", $pagination_html);
+
+// Passa il conteggio dei prodotti e il numero di pagine al template
+
 $body->setContent("total_pages", $total_pages);
 $body->setContent("total_products", $total_products);
-
+// Passa le opzioni di taglia e colore al template
 $body->setContent("sizes", $sizes);
 $body->setContent("colors", $colors);
 $body->setContent("selected_size", $selected_size);

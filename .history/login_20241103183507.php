@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Nessun utente trovato con questa email.";
         }
     } catch (Exception $e) {
+        // Gestione dell'eccezione
         echo "Errore: " . $e->getMessage();
     }
 }

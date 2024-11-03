@@ -15,7 +15,8 @@ $main = new Template("skins/motor-html-package/motor/frame_public.html");
 function sendMail($email, $v_cod) {
     $subject = "Recupero della Password";
     $resetLink = "http://localhost/MotorShop/reset-password.php?key=" . $email . "&reset=" . $v_cod;
-    
+
+    // Leggi il template HTML dal file
     $htmlTemplate = file_get_contents('skins/multikart_all_in_one/email-template/recovery.html');
     
     if ($htmlTemplate === false) {
@@ -23,7 +24,7 @@ function sendMail($email, $v_cod) {
         return false;
     }
 
-    // Sostituisci con i valori effettivi
+    // Sostituisci i segnaposto con i valori effettivi
     $htmlContent = str_replace(
         ['{{reset_link}}'], 
         [$resetLink], 

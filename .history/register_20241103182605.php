@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['v_cod'] = $v_cod;
             $criptoPass = password_hash($password, PASSWORD_DEFAULT);
 
-            // Inserisci utente nel database
+            // Inserisci uutente nel database
             $stmt = $mysqli->prepare("INSERT INTO users (email, name, surname, password, phone, verified, verification_id) VALUES (?, ?, ?, ?, ?, 0, ?)");
             $stmt->bind_param("ssssss", $email, $_POST['name'], $_POST['surname'], $criptoPass, $_POST['phoneNumber'], $v_cod);
             
@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (sendMail($email, $v_cod)) {
                     echo "<script>alert('Registrazione completata! Verifica la tua email dal link che hai ricevuto, se non lo trovi controlla su Spam.');</script>";
                     header("location:/../MotorShop/login.php");
-                    exit();  
+                    exit();  // Chiusura del flusso dopo il redirect
                 } else {
                     echo "<script>alert('Non siamo riusciti ad inviarti l'email di verifica. Riprova!');</script>";
                 }

@@ -23,7 +23,7 @@ function sendMail($email, $v_cod) {
         return false;
     }
 
-    // Sostituisci con i valori effettivi
+    // Sostituisci i segnaposto con i valori effettivi
     $htmlContent = str_replace(
         ['{{reset_link}}'], 
         [$resetLink], 

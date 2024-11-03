@@ -19,7 +19,7 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-// Reindirizza al login
+// Reindirizza alla pagina di login
 header("Location: /MotorShop/login.php");
 exit();
 ?>
