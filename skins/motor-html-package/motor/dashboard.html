@@ -49,7 +49,7 @@
                     <td><[ord_paymentMethod]></td>
                     <td><[ord_details]></td>
                     <td>€ <[ord_totalPrice]></td>
-                    <td><a href="/MotorShop/my-orders.php?id=<[ord_id]>" class="btn btn-primary">Apri</a></td>
+                    <td><[manage]></td>
                 </tr>
             <[/foreach]>
         </tbody>
@@ -75,7 +75,7 @@
             <br>
         </div>
         <div class="quote-line"></div>
-        <div class="well"><a href="/MotorShop/customer-dashboard.php?id=<[f_id]>" id="delete" name="delete" class="mv-btn mv-btn-style-5 btn-5-gray">Elimina recensione</a></div>
+        <a href="/MotorShop/customer-dashboard.php?f_id=<[f_id]>" id="delete" name="delete" class="mv-btn mv-btn-style-5 btn-5-danger">Elimina recensione</a>
       </div>
     </div>
   </div>
@@ -93,4 +93,3 @@
     <!-- .checkout-main -->
   </div>
   <!-- .mv-site -->
-  

@@ -129,13 +129,30 @@ foreach ($feedback as $medium){
 foreach ($feedback as $item) {
    $count= 0;
    $rate = $item['rate'] ;
-   $body->setContent("idFeed", $item['id']);
-   $body->setContent("user", $item['users_email']);
-   $body->setContent("creationDate", $item['date']);
-   $body->setContent("content", $item['review']);
-   $body->setContent("rate", $rate);
+   $body->setContent('item','<div class="item">
+                                <div class="mv-dp-table">
+                                    <div class="mv-dp-table-cell block-28-main">
+                                        <div class="block-28-main-header">
+                                        <div class="block-28-name">Email utente: '.$item['users_email'].'</div><span
+                                            class="block-28-date">Data di pubblicazione: '.$item['date'].'</span>
+                                        <div data-rate="true" data-score="4" class="block-28-rate mv-rate">
+                                            <div class="block-29-name">Valutazione: '.$rate.' / 5</div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="block-28-desc">Commento: '.$item['review'].'</div>
+                                        <div class="block-28-desc">
+                                            <form class="delete-address-form" method="post" action="/MotorShop/editproduct.php" style="display:inline;">
+                                                <input type="hidden" name="address_id" value="'.$item['id'].'"> 
+                                                <input type="submit" class="btn btn-danger" name="delete-address-button" value="Elimina">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>');
 } 
-}
+}else $body->setContent('item','non ci sono recenzione su questo prodotto');
 
 // Carica le categorie dal database
 // $categories_query = "SELECT id, name FROM categories";
