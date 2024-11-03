@@ -27,10 +27,11 @@ function loadUsers($mysqli, $current_user_email) {
     
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
+    // Svuota il contenuto degli utenti
     $body->setContent("users", []);
 
-    // Dati degli utenti nel template
+    // Imposta i dati degli utenti nel template
     while ($row = $result->fetch_assoc()) {
         $body->setContent("name", $row['name']);
         $body->setContent("surname", $row['surname']);

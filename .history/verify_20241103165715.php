@@ -30,7 +30,7 @@ if (isset($_GET['email']) && isset($_GET['v_cod'])) {
                             'groups' => $row['groups'],
                         ];
 
-                        // Reindirizza l'utente in base al gruppo di appartenenza
+                        // Reindirizza l'utente in base al gruppo di appartenenz
                         $group_sql = "SELECT groups_id FROM users_has_groups WHERE users_email = '$fetch_Email'";
                         $group_result = $mysqli->query($group_sql); 
                         if ($group_result && $group_row = $group_result->fetch_assoc()) {

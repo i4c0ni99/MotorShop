@@ -16,7 +16,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         if (in_array($file, $allowedFiles)) {
             $filePath = "skins/motor-html-package/motor/" . $file;
             
-            // Salva
+            // Salva contenuto
             file_put_contents($filePath, $htmlContent);
 
             echo "Contenuto salvato correttamente!";

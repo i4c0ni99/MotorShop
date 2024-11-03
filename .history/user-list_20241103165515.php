@@ -27,21 +27,22 @@ function loadUsers($mysqli, $current_user_email) {
     
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
+    // Svuota il contenuto degli utenti
     $body->setContent("users", []);
 
-    // Dati degli utenti nel template
+    // Imposta i dati degli utenti nel template
     while ($row = $result->fetch_assoc()) {
         $body->setContent("name", $row['name']);
         $body->setContent("surname", $row['surname']);
         $body->setContent("email", $row['email']);
         $body->setContent("roul", $row['roul']);
-        // Checkbox a seconda del ruolo
+        // Imposta il checkbox a seconda del ruolo
         $body->setContent('src', $row['roul'] == 'Admin' ? '<input id="checkall" class="checkbox_animated check-it" type="checkbox" checked="" post data-roul=0 data-email=' . $row['email'] . '>' : '<input id="checkall" class="checkbox_animated check-it" type="checkbox" post data-roul=1 data-email=' . $row['email'] . '>');
     }
 }
 
-// Carica lista degli utenti
+// Carica gli utenti all'inizio
 loadUsers($mysqli, $current_user_email);
 
 if (isset($_POST['change_role'])) {

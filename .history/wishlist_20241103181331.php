@@ -1,12 +1,11 @@
 <?php
-
 session_start();
-
 require "include/template2.inc.php";
 require "include/auth.inc.php";
 require "include/dbms.inc.php";
 include "include/utils/priceFormatter.php";
 
+// Verifica se l'utente è loggato
 if (isset($_SESSION['user']['email'])) {
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
 } else {
@@ -29,12 +28,12 @@ function moveProductToCart($subproductId)
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                // Inserimento nel carrello
+                // Il sottoprodotto è nella wishlist, procedi con l'inserimento nel carrello
                 $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, 1, ?)";
                 if ($insertStmt = $mysqli->prepare($insertQuery)) {
                     $insertStmt->bind_param("is", $subproductId, $userEmail);
                     if ($insertStmt->execute()) {
-                        // Elimina wishlist se inserimento è completato
+                        // Se l'inserimento nel carrello è avvenuto con successo, elimina dalla wishlist
                         $deleteQuery = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
                         if ($deleteStmt = $mysqli->prepare($deleteQuery)) {
                             $deleteStmt->bind_param("is", $subproductId, $userEmail);
@@ -93,25 +92,28 @@ function moveProductToCart($subproductId)
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart']) && isset($_POST['id'])) {
         $subproductId = (int) $_POST['id'];
-
+        
+        // Prepara e esegue la query per verificare la disponibilità
         $query = "SELECT availability FROM sub_products WHERE id = ?";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param('i', $subproductId);
         $stmt->execute();
         $result = $stmt->get_result();
     
-        // Verifica disponibilità
+        // Controlla se il prodotto esiste e verifica la disponibilità
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             if ($row['availability'] == 1) {
-                // Procedi con lo spostamento nel carrello
+                // Prodotto disponibile, procedi con il movimento nel carrello
                 moveProductToCart($subproductId);
                 header("Location: /MotorShop/cart.php");
                 exit;
             } else {
+                // Prodotto non disponibile
                 echo "Prodotto non disponibile.";
             }
         } else {
+            // Prodotto non trovato
             echo "Prodotto non trovato.";
         }
     }    

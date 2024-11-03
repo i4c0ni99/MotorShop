@@ -11,7 +11,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
     $body = new Template("skins/motor-html-package/motor/select-file.html");
    
-    // Scegli file
+    
     $body->setContent("privacy-policy", "privacy-policy.html");
     $body->setContent("refund", "refund.html");
     $body->setContent("shipping", "shipping.html");

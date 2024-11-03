@@ -12,11 +12,11 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         $htmlContent = $_POST['html_content'];
         $allowedFiles = ['privacy-policy.html', 'refund.html', 'shipping.html'];
 
-        // Valida nome file
+        // Valida 
         if (in_array($file, $allowedFiles)) {
             $filePath = "skins/motor-html-package/motor/" . $file;
             
-            // Salva
+            // Save the new content
             file_put_contents($filePath, $htmlContent);
 
             echo "Contenuto salvato correttamente!";

@@ -1,12 +1,11 @@
 <?php
-
 session_start();
-
 require "include/template2.inc.php";
 require "include/auth.inc.php";
 require "include/dbms.inc.php";
 include "include/utils/priceFormatter.php";
 
+// Verifica se l'utente è loggato
 if (isset($_SESSION['user']['email'])) {
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
 } else {
@@ -29,12 +28,12 @@ function moveProductToCart($subproductId)
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                // Inserimento nel carrello
+                // Il sottoprodotto è nella wishlist, procedi con l'inserimento nel carrello
                 $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, 1, ?)";
                 if ($insertStmt = $mysqli->prepare($insertQuery)) {
                     $insertStmt->bind_param("is", $subproductId, $userEmail);
                     if ($insertStmt->execute()) {
-                        // Elimina wishlist se inserimento è completato
+                        // Se l'inserimento nel carrello è avvenuto con successo, elimina dalla wishlist
                         $deleteQuery = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
                         if ($deleteStmt = $mysqli->prepare($deleteQuery)) {
                             $deleteStmt->bind_param("is", $subproductId, $userEmail);
@@ -88,33 +87,16 @@ function moveProductToCart($subproductId)
             echo "Errore durante l'aggiunta del prodotto alla wishlist.";
             error_log("Prepare statement failed: " . $mysqli->error);
         }
-        exit; 
+        exit; // Termina lo script dopo l'inserimento nella wishlist
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart']) && isset($_POST['id'])) {
-        $subproductId = (int) $_POST['id'];
-
-        $query = "SELECT availability FROM sub_products WHERE id = ?";
-        $stmt = $mysqli->prepare($query);
-        $stmt->bind_param('i', $subproductId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
-        // Verifica disponibilità
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if ($row['availability'] == 1) {
-                // Procedi con lo spostamento nel carrello
-                moveProductToCart($subproductId);
-                header("Location: /MotorShop/cart.php");
-                exit;
-            } else {
-                echo "Prodotto non disponibile.";
-            }
-        } else {
-            echo "Prodotto non trovato.";
-        }
-    }    
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['move_to_cart']) && isset($_POST['id'])) {
+    $subproductId = (int) $_POST['id'];
+    moveProductToCart($subproductId);
+    // Reindirizza l'utente alla pagina del carrello o dove desiderato dopo l'operazione
+    header("Location: /MotorShop/cart.php");
+    exit;
+}
 
 // Gestione della rimozione dalla wishlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_POST['id'])) {
@@ -138,10 +120,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) && isset($_
         echo "Errore durante la rimozione del prodotto dalla wishlist.";
         error_log("Prepare statement failed: " . $mysqli->error);
     }
-    exit; 
+    exit; // Termina lo script dopo la rimozione dalla wishlist
 }
 
-// Carica item wishlist utente
+// Ottenimento dei prodotti nella wishlist dell'utente
 $userEmail = $_SESSION['user']['email'];
 $query = "SELECT w.subproduct_id
 FROM wishlist w
@@ -152,7 +134,7 @@ if ($stmt) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Verifica se è vuota
+    // Verifica se ci sono risultati nella wishlist
     if ($result->num_rows === 0) {
         $body = new Template("skins/motor-html-package/motor/wishlist-empty.html");
     } else {
@@ -162,11 +144,11 @@ if ($stmt) {
     while ($wishlistItem = $result->fetch_assoc()) {
         $subproductId = $wishlistItem['subproduct_id'];
 
-        // Prendi i dati da sub_products
+        // Prendi i dati da subproducts
         $query = "SELECT sp.id as subproduct_id, sp.products_id, sp.price, sp.availability, sp.color, sp.size, i.imgsrc
 FROM sub_products sp
 LEFT JOIN images i ON sp.id = i.sub_products_id
-WHERE sp.id = ? AND sp.availability = 1"; 
+WHERE sp.id = ? AND sp.availability = 1"; // gestire errore se availability = 0
         $stmt_subproduct = $mysqli->prepare($query);
         if ($stmt_subproduct) {
             $stmt_subproduct->bind_param("i", $subproductId);

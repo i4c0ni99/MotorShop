@@ -27,7 +27,8 @@ function loadUsers($mysqli, $current_user_email) {
     
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
+    // Svuota il contenuto degli utenti
     $body->setContent("users", []);
 
     // Dati degli utenti nel template

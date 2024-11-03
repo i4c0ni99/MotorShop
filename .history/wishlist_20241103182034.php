@@ -29,12 +29,12 @@ function moveProductToCart($subproductId)
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                // Inserimento nel carrello
+                // Procedi con l'inserimento nel carrello
                 $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, 1, ?)";
                 if ($insertStmt = $mysqli->prepare($insertQuery)) {
                     $insertStmt->bind_param("is", $subproductId, $userEmail);
                     if ($insertStmt->execute()) {
-                        // Elimina wishlist se inserimento è completato
+                        // Se l'inserimento nel carrello è avvenuto con successo, elimina dalla wishlist
                         $deleteQuery = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
                         if ($deleteStmt = $mysqli->prepare($deleteQuery)) {
                             $deleteStmt->bind_param("is", $subproductId, $userEmail);

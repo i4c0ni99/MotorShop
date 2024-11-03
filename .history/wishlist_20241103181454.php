@@ -7,6 +7,7 @@ require "include/auth.inc.php";
 require "include/dbms.inc.php";
 include "include/utils/priceFormatter.php";
 
+// Verifica se l'utente è loggato
 if (isset($_SESSION['user']['email'])) {
     $main = new Template("skins/motor-html-package/motor/frame-customer.html");
 } else {
@@ -29,12 +30,12 @@ function moveProductToCart($subproductId)
             $stmt->store_result();
 
             if ($stmt->num_rows > 0) {
-                // Inserimento nel carrello
+                // Il sottoprodotto è nella wishlist, procedi con l'inserimento nel carrello
                 $insertQuery = "INSERT INTO cart (subproduct_id, quantity, user_email) VALUES (?, 1, ?)";
                 if ($insertStmt = $mysqli->prepare($insertQuery)) {
                     $insertStmt->bind_param("is", $subproductId, $userEmail);
                     if ($insertStmt->execute()) {
-                        // Elimina wishlist se inserimento è completato
+                        // Se l'inserimento nel carrello è avvenuto con successo, elimina dalla wishlist
                         $deleteQuery = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
                         if ($deleteStmt = $mysqli->prepare($deleteQuery)) {
                             $deleteStmt->bind_param("is", $subproductId, $userEmail);

@@ -13,7 +13,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 $current_user_email = $_SESSION['user'];
 
 // Funzione per caricare utenti
-function loadUsers($mysqli, $current_user_email) {
+function loadUsers($mysqli, $current_user_email, $searchQuery = null) {
     global $body;
     
     $query = "SELECT users.name, users.surname, users.email, groups.roul 
@@ -22,26 +22,36 @@ function loadUsers($mysqli, $current_user_email) {
               JOIN groups ON groups.id = users_has_groups.groups_id
               WHERE users.email != ?";
     
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param('s', $current_user_email);
+    if ($searchQuery) {
+        $query .= " AND (users.name LIKE ? OR users.surname LIKE ? OR users.email LIKE ?)";
+        $stmt = $mysqli->prepare($query);
+        $likeQuery = "%$searchQuery%";
+        $stmt->bind_param('ssss', $current_user_email, $likeQuery, $likeQuery, $likeQuery);
+    } else {
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param('s', $current_user_email);
+    }
     
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
+    // Svuota il contenuto degli utenti
     $body->setContent("users", []);
 
-    // Dati degli utenti nel template
+    // Imposta i dati degli utenti nel template
     while ($row = $result->fetch_assoc()) {
         $body->setContent("name", $row['name']);
         $body->setContent("surname", $row['surname']);
         $body->setContent("email", $row['email']);
-        $body->setContent("roul", $row['roul']);
-        // Checkbox a seconda del ruolo
-        $body->setContent('src', $row['roul'] == 'Admin' ? '<input id="checkall" class="checkbox_animated check-it" type="checkbox" checked="" post data-roul=0 data-email=' . $row['email'] . '>' : '<input id="checkall" class="checkbox_animated check-it" type="checkbox" post data-roul=1 data-email=' . $row['email'] . '>');
+        $body->setContent("roul",$row['roul']);
+        $body->setContent('src',$row['roul'] == 'Admin'?'<input id="checkall" class="checkbox_animated check-it"
+                                                            type="checkbox" checked="" post data-roul=0 data-email='.$row['email'].' >':
+                                                            '<input id="checkall" class="checkbox_animated check-it"
+                                                            type="checkbox" post data-roul=1 data-email='.$row['email'].' >');
     }
 }
 
-// Carica lista degli utenti
+// Carica gli utenti all'inizio
 loadUsers($mysqli, $current_user_email);
 
 if (isset($_POST['change_role'])) {
@@ -82,6 +92,11 @@ if (isset($_POST['delete-user-button'])) {
         $oid = $mysqli->query("DELETE FROM users WHERE email = '$delete'");
         header("location:/../MotorShop/user-list.php");
     }
+}
+
+if (isset($_POST['search-query'])) {
+    $searchQuery = $mysqli->real_escape_string($_POST['search-query']);
+    loadUsers($mysqli, $current_user_email, $searchQuery);
 }
 
 $main->setContent("body", $body->get());

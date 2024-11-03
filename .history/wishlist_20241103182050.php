@@ -34,7 +34,7 @@ function moveProductToCart($subproductId)
                 if ($insertStmt = $mysqli->prepare($insertQuery)) {
                     $insertStmt->bind_param("is", $subproductId, $userEmail);
                     if ($insertStmt->execute()) {
-                        // Elimina wishlist se inserimento è completato
+                        // Elimina se inserimento 
                         $deleteQuery = "DELETE FROM wishlist WHERE subproduct_id = ? AND user_email = ?";
                         if ($deleteStmt = $mysqli->prepare($deleteQuery)) {
                             $deleteStmt->bind_param("is", $subproductId, $userEmail);
