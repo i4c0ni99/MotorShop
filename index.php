@@ -421,8 +421,6 @@ if ($resultCatStivali->num_rows > 0) {
                                     </div>
                                 </article>');
         }
-
-        //aggiungere il medium rate
     }
 }
 $oidProtezioni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
@@ -658,8 +656,6 @@ if ($resultCatPantaloni->num_rows > 0) {
                                     </div>
                                 </article>');
         }
-
-        //aggiungere il medium rate
     }
 }
 $oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
@@ -927,12 +923,6 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
                           </div>
                         </div>
                     </article>
-
-
-
-
-
-
         ');
         }
     }

@@ -159,8 +159,8 @@ if (isset($_SESSION['user']['email'])) {
         $result = $stmt->get_result();
 
         // Controlla se ci sono articoli nel carrello
-$cartItems = [];
-$checkoutDisabled = true; // Imposta su true per disabilitare il pulsante di checkout
+        $cartItems = [];
+        $checkoutDisabled = true; // Imposta su true per disabilitare il pulsante di checkout
         
         while ($cartItem = $result->fetch_assoc()) {
             $checkoutDisabled = false; 
@@ -181,17 +181,6 @@ $checkoutDisabled = true; // Imposta su true per disabilitare il pulsante di che
                     $price = formatPrice($cartItem['price']);
                     echo '<script>console.log('.$cartItem['quantity'].');</script>';
                 
-                    // Converti $price da stringa a float (se necessario)
-//$price = floatval(str_replace(',', '.', $price));
-
-                    // Verifica se $price è numericamente valido e quantity è un intero
-//if (is_numeric($price) && is_int($quantity)) {
-                    // Calcola il prezzo totale per questo prodotto nel carrello
-                    //$totalPrice = $price * $quantity;
-//} else {
-                    // Gestisci il caso in cui $price o $quantity non siano numerici
-                    //echo "Errore: Prezzo o quantity non sono valori numerici validi.";
-//}
                     $quantities = $cartItem['prod_quantity'];
                     $size = $cartItem['size'];
                     $color = $cartItem['color'];

@@ -109,12 +109,12 @@ if ($stmt) {
                 $color = $cartItem['color'];
                 
                 // Assicurati che price sia un valore numerico
-$price = floatval($cartItem['price']); // Converti in float
-$quantity = intval($cartItem['quantity']); // Converti in intero
+                $price = floatval($cartItem['price']); // Converti in float
+                $quantity = intval($cartItem['quantity']); // Converti in intero
 
-// Calcola il totale parziale
-$subtotal = $price * $quantity; // Ora subtotal sarà calcolato correttamente
-$totalPrice += $subtotal;
+                // Calcola il totale parziale
+                $subtotal = $price * $quantity; // Ora subtotal sarà calcolato correttamente
+                $totalPrice += $subtotal;
                 // Popola il template del riepilogo ordine
                 $body->setContent("title", $title);
                 $body->setContent("quantity", $quantity);
@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['address_list']) && is
     // Recupera l'ID dell'indirizzo di spedizione
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
     
-// Prodotti nel carrello dell'utente
-$queryCart = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email ='$userEmail' GROUP BY sp.products_id";
-$resultCart = $mysqli->query($queryCart);
+    // Prodotti nel carrello dell'utente
+    $queryCart = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email ='$userEmail' GROUP BY sp.products_id";
+    $resultCart = $mysqli->query($queryCart);
 
 
 if ($resultCart) {

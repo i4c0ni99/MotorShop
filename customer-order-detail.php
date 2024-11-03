@@ -40,11 +40,11 @@ if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
     sa.streetAddress, 
     sa.cap, 
     sa.phone 
-FROM 
+    FROM 
     orders o 
-JOIN 
+    JOIN 
     shipping_address sa ON o.shipping_address_id = sa.id 
-WHERE 
+    WHERE 
     o.id = '{$order_id}'");
 
         $shipping_address_data = $shipping_address_query->fetch_assoc();
