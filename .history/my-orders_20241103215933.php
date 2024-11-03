@@ -122,7 +122,7 @@ WHERE
                     $body->setContent("title", 'Titolo non disponibile');
                 }
             } else {
-                // Se non viene trovato alcun sottoprodotto corrispondente
+                // Se non viene trovato alcun sub_product corrispondente
                 error_log("Sub-product not found for ID: $sub_product_id");
                 $body->setContent("size", '');
                 $body->setContent("color", '');

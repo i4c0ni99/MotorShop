@@ -20,12 +20,15 @@ $body = new Template("skins/multikart_all_in_one/back-end/create-user.html");
 function isEmailOrPhoneUnique($email, $phone) {
     global $mysqli;
 
+    // Escape delle variabili per prevenire SQL Injection
     $email = $mysqli->real_escape_string($email);
     $phone = $mysqli->real_escape_string($phone);
- 
+
+    // Query per verificare se l'email è univoca
     $emailQuery = "SELECT email FROM users WHERE email = '$email'";
     $emailResult = $mysqli->query($emailQuery);
 
+    // Query per verificare se il numero di cellulare è univoco
     $phoneQuery = "SELECT phone FROM users WHERE phone = '$phone'";
     $phoneResult = $mysqli->query($phoneQuery);
 
@@ -42,10 +45,11 @@ function isEmailOrPhoneUnique($email, $phone) {
 }
 
 function sendMail($email, $v_cod) {
-    $name = isset($_POST['name']) ? $_POST['name'] : ''; 
+    $name = isset($_POST['name']) ? $_POST['name'] : ''; // Check if 'name' key exists in $_POST
     $subject = "Benvenuto su MotorShop";
     $verificationLink = "http://localhost/MotorShop/verify.php?email=$email&v_cod=$v_cod";
 
+    // Legge il template HTML dal file
     $htmlTemplate = file_get_contents('skins/multikart_all_in_one/email-template/welcome.html');
     
     if ($htmlTemplate === false) {
@@ -53,7 +57,7 @@ function sendMail($email, $v_cod) {
         return false;
     }
 
-    // sostituisce i segnaposto con i valori effettivi
+    // Sostituisce i segnaposto con i valori effettivi
     $htmlContent = str_replace(
         ['{{name}}', '{{verification_link}}'], 
         [$name, $verificationLink], 
@@ -101,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($unique === "unique") {
                 $v_cod = bin2hex(random_bytes(16)); // Genera il codice di verifica
                 // Entrambi email e numero di cellulare sono univoci, procedi con l'inserimento nel database
-                $criptoPass = md5(md5($_POST['password'])); 
+                $criptoPass = md5(md5($_POST['password'])); // Non è consigliato utilizzare MD5 per l'hashing sicuro delle password
                 
                 // Inserisce l'utente nella tabella users
                 $insertUserQuery = "INSERT INTO users (email, name, surname, password, phone, verified, verification_id) 

@@ -58,19 +58,23 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             try {
                 // Query preparata per eliminare la slide
                 $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = ?");
-                $deleteSlider->bind_param("i", $id);  // 'i' = integer
+                $deleteSlider->bind_param("i", $id);  // 'i' per tipo integer
                 $deleteSlider->execute();
-                
+    
+                // Conferma l'eliminazione
                 $mysqli->commit();
     
-                // successo
+                // Messaggio di successo
                 $_SESSION['message'] = "Slide eliminata con successo.";
             } catch (Exception $e) {
-                // errore
+                // In caso di errore, esegui un rollback
                 $mysqli->rollback();
+    
+                // Messaggio di errore
                 $_SESSION['error'] = "Errore durante l'eliminazione della slide.";
             }
-            
+    
+            // Redirect per aggiornare la pagina
             header('Location: /MotorShop/home-customizer.php');
             exit();
         }

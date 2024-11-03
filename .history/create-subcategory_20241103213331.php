@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_subcategory'])) {
         $category_id_post = $mysqli->real_escape_string($_POST['category_id']);
         $subcategory_name = $mysqli->real_escape_string($_POST['subcategory_name']);
 
-        // Verifica che il nome della sottocategoria non esiste già
+        // Verifica che il nome della sottocategoria non esiste già per questa categoria
         $check_query = "SELECT COUNT(*) as count FROM subcategories WHERE name = '$subcategory_name' AND categories_id = $category_id_post";
         $check_result = $mysqli->query($check_query);
         $count = $check_result->fetch_assoc()['count'];

@@ -13,7 +13,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
     // Carica lista categorie
     $categories = $mysqli->query("SELECT id, name FROM categories ORDER BY name ASC");
-    if ($categories) {
+if ($categories) {
     while ($category = $categories->fetch_assoc()) {
         // Conta il numero di prodotti per questa categoria
         $productCountResult = $mysqli->query("SELECT COUNT(*) as product_count FROM products WHERE categories_id = {$category['id']}");
@@ -30,13 +30,14 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     }
 }
 
-    // Elimina categoria selezionata
+    // Eliminazione categoria selezionata
     if (isset($_GET['elimina']) && is_numeric($_GET['elimina'])) {
         $category_id = intval($_GET['elimina']);
 
         $deleteCategoryQuery = "DELETE FROM categories WHERE id = $category_id";
         if ($mysqli->query($deleteCategoryQuery)) {
             echo "Categoria eliminata con successo.";
+            // Redirect dopo l'eliminazione
             header('Location: /MotorShop/create-category.php');
             exit;
         } else {
@@ -58,6 +59,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $insertCategoryQuery = "INSERT INTO categories (name) VALUES ('$newCategoryName')";
             if ($mysqli->query($insertCategoryQuery)) {
                 echo "Categoria inserita con successo.";
+                // Redirect dopo l'inserimento
                 header('Location: /MotorShop/create-category.php');
                 exit;
             } else {

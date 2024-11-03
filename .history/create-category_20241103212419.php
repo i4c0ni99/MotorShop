@@ -58,6 +58,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             $insertCategoryQuery = "INSERT INTO categories (name) VALUES ('$newCategoryName')";
             if ($mysqli->query($insertCategoryQuery)) {
                 echo "Categoria inserita con successo.";
+                // Redirect dopo l'inserimento
                 header('Location: /MotorShop/create-category.php');
                 exit;
             } else {

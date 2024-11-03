@@ -95,7 +95,7 @@ if(isset($_GET['search'])){
 if (isset($_GET['id'])) {
     $orderId = $mysqli->real_escape_string($_GET['id']);
 
-    // funzione per aggiornare lo stato dell'ordine
+    // Chiama la funzione per aggiornare lo stato dell'ordine
     if (updateOrderState($orderId)) {
     } else {
         echo "Errore durante l'aggiornamento dello stato dell'ordine.";

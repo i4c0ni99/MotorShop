@@ -11,7 +11,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id']) && is_numeric($_POST['id'])) {
         $subproductId = intval($_POST['id']);
-        
+
+        // Inizio transazione
         $mysqli->begin_transaction();
 
         try {
@@ -34,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $mysqli->prepare("DELETE FROM cart WHERE subproduct_id = ?");
             $stmt->bind_param("i", $subproductId);
             $stmt->execute();
-            
             // Elimina dalla tabella sub_products
             $deleteSubProducts = $mysqli->prepare("DELETE FROM sub_products WHERE id = ?");
             if ($deleteSubProducts === false) {
@@ -52,20 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $deleteImages->bind_param("i", $subproductId);
             $deleteImages->execute();
             $deleteImages->close();
-         
+
+            // Commit transazione
             $mysqli->commit();
 
-            // successo
+            // Redirect alla lista dei prodotti con un messaggio di successo
             $_SESSION['message'] = "Sottoprodotto eliminato con successo.";
-            header('Location: /MotorShop/subproduct-list.php?id=' . $productId); 
+            header('Location: /MotorShop/subproduct-list.php?id=' . $productId); // Redirect alla lista dei prodotti
             exit();
     } catch (Exception $e) {
-            // in caso di errore
+            // Rollback in caso di errore
             $mysqli->rollback();
 
             // Redirect alla lista dei prodotti con un messaggio di errore
             $_SESSION['error'] = "Errore durante l'eliminazione del sottoprodotto: " . $e->getMessage();
-            header('Location: /MotorShop/product-list.php'); 
+            header('Location: /MotorShop/product-list.php'); // Redirect alla lista dei prodotti
             exit();
         } 
     } else {

@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-review'])) {
         exit;
     }
 
-    // Inserisci la recensione
+    // Inserisce la recensione
     $insert_review = $mysqli->query("
         INSERT INTO feedbacks (users_email, products_id, rate, review, date) 
         VALUES ('$user_email', '$product_id', '$rate', '$review', '$current_date')

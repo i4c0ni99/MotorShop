@@ -12,7 +12,7 @@ $body = new Template("skins/multikart_all_in_one/back-end/home-customizer.html")
 
 if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
-    // Carica slide
+    // Carica slider
     $slides = $mysqli->query("SELECT * FROM slider"); 
     $slide_result = $slides;
     if($slide_result && $slide_result -> num_rows > 0) {
@@ -34,11 +34,11 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
     if (isset($_POST['submit'])) {
 
-        // Inserisci slider
+        // Inserisci pagina slider
         $title = $mysqli->real_escape_string($_POST['title']);
         $description = $mysqli->real_escape_string($_POST['description']);
 
-        // Gestisci il caricamento dell'immagine
+        // Gestisci il caricamento dell'immagine - gestire eccezioni
         $fileTmpPath = $_FILES['image']['tmp_name'];
         $data = file_get_contents($fileTmpPath);
         $data64 = base64_encode($data);
@@ -53,24 +53,30 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
     if (isset($_POST['delete'])) {
         if (isset($_POST['sliderId']) && is_numeric($_POST['sliderId'])) {
             $id = intval($_POST['sliderId']);
-            
+    
+            // Inizia una transazione
             $mysqli->begin_transaction();
+            
             try {
                 // Query preparata per eliminare la slide
                 $deleteSlider = $mysqli->prepare("DELETE FROM slider WHERE id = ?");
-                $deleteSlider->bind_param("i", $id);  // 'i' = integer
+                $deleteSlider->bind_param("i", $id);  // 'i' per tipo integer
                 $deleteSlider->execute();
-                
+    
+                // Conferma l'eliminazione
                 $mysqli->commit();
     
-                // successo
+                // Messaggio di successo
                 $_SESSION['message'] = "Slide eliminata con successo.";
             } catch (Exception $e) {
-                // errore
+                // In caso di errore, esegui un rollback
                 $mysqli->rollback();
+    
+                // Messaggio di errore
                 $_SESSION['error'] = "Errore durante l'eliminazione della slide.";
             }
-            
+    
+            // Redirect per aggiornare la pagina
             header('Location: /MotorShop/home-customizer.php');
             exit();
         }

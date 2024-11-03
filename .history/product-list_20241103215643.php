@@ -64,7 +64,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
         }
     }
 
-    // paginazione
+    // Genera i link di paginazione
     $pagination = '';
     for ($i = 1; $i <= $totalPages; $i++) {
         $active = ($i == ($_GET['page'] ?? 1)) ? 'active' : '';

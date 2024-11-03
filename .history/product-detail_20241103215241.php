@@ -144,6 +144,7 @@ ORDER BY
     echo "<script>console.log(".$item2['size'].")</script>";
             $body->setContent("size", '<li class="active"><a href="http://localhost/MotorShop/product-detail.php?id=' . $result['id'] . '&subId=' . $item2['id'] .'&color='.urlencode($item2['color']). '&size=' . $item2['size'] . '" class="mv-btn mv-btn-style-8">' . $item2['size'] . '</a></li>');
             $dizionario[$item2['size']] = $item2['quantity']; 
+        
        
    }
    

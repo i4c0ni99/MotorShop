@@ -11,7 +11,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id']) && is_numeric($_POST['id'])) {
         $subproductId = intval($_POST['id']);
-        
+
+        // Inizio transazione
         $mysqli->begin_transaction();
 
         try {
@@ -34,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $mysqli->prepare("DELETE FROM cart WHERE subproduct_id = ?");
             $stmt->bind_param("i", $subproductId);
             $stmt->execute();
-            
             // Elimina dalla tabella sub_products
             $deleteSubProducts = $mysqli->prepare("DELETE FROM sub_products WHERE id = ?");
             if ($deleteSubProducts === false) {

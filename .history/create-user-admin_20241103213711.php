@@ -24,8 +24,7 @@ function isEmailOrPhoneUnique($email, $phone) {
     $phone = $mysqli->real_escape_string($phone);
  
     $emailQuery = "SELECT email FROM users WHERE email = '$email'";
-    $emailResult = $mysqli->query($emailQuery);
-
+    $emailResult = $mysqli->query($emailQuery)
     $phoneQuery = "SELECT phone FROM users WHERE phone = '$phone'";
     $phoneResult = $mysqli->query($phoneQuery);
 

@@ -4,15 +4,16 @@ session_start();
 
 require "include/template2.inc.php";
 require "include/dbms.inc.php";
+require "include/auth.inc.php";
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 
     $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
     $body = new Template("skins/multikart_all_in_one/back-end/category.html");
 
     // Carica lista categorie
-$categories = $mysqli->query("SELECT id, name FROM categories ORDER BY name ASC");
-if ($categories) {
+    $categories = $mysqli->query("SELECT id, name FROM categories ORDER BY name ASC");
+    if ($categories) {
     while ($category = $categories->fetch_assoc()) {
         // Conta il numero di prodotti per questa categoria
         $productCountResult = $mysqli->query("SELECT COUNT(*) as product_count FROM products WHERE categories_id = {$category['id']}");

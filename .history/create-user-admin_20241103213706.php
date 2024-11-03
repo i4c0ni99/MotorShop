@@ -26,6 +26,7 @@ function isEmailOrPhoneUnique($email, $phone) {
     $emailQuery = "SELECT email FROM users WHERE email = '$email'";
     $emailResult = $mysqli->query($emailQuery);
 
+    // Query per verificare se il numero di cellulare è univoco
     $phoneQuery = "SELECT phone FROM users WHERE phone = '$phone'";
     $phoneResult = $mysqli->query($phoneQuery);
 

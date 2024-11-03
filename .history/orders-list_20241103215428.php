@@ -15,7 +15,6 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/order.html");
 $orders_base="SELECT * FROM orders WHERE state = 'pending' ";
-
 // Cambia lo stato dell'ordine da 'pending' a 'delivered' e invia email di conferma spedizione
 function updateOrderState($orderId) {
     global $mysqli;
@@ -35,7 +34,7 @@ function updateOrderState($orderId) {
             return true; // Aggiornamento avvenuto con successo
         }
     } 
-    return false; // Errore
+    return false; // Errore durante l'aggiornamento
 }
 
 function sendConfirmationEmail($orderData) {
@@ -95,7 +94,7 @@ if(isset($_GET['search'])){
 if (isset($_GET['id'])) {
     $orderId = $mysqli->real_escape_string($_GET['id']);
 
-    // funzione per aggiornare lo stato dell'ordine
+    // Chiama la funzione per aggiornare lo stato dell'ordine
     if (updateOrderState($orderId)) {
     } else {
         echo "Errore durante l'aggiornamento dello stato dell'ordine.";

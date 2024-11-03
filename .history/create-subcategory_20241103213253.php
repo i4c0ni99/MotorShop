@@ -25,7 +25,7 @@ if (!isset($_GET['categories_id']) || !is_numeric($_GET['categories_id'])) {
 // Ottieni l'ID della categoria dal parametro passato nell'URL
 $category_id = intval($_GET['categories_id']);
 
-// Verifica l'ID della categoria
+// Verifica che l'ID della categoria
 $check_category_query = "SELECT id FROM categories WHERE id = $category_id";
 $check_category_result = $mysqli->query($check_category_query);
 
@@ -34,15 +34,16 @@ if ($check_category_result->num_rows == 0) {
     exit;
 }
 
+// Ottieni tutte le categorie esistenti per il menu a discesa nella modalità di aggiunta di sottocategoria
 $categories = $mysqli->query("SELECT id, name FROM categories");
 
-// salva sottocategoria
+// Se il form è stato inviato per salvare la sottocategoria
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_subcategory'])) {
     if (isset($_POST['category_id']) && isset($_POST['subcategory_name'])) {
         $category_id_post = $mysqli->real_escape_string($_POST['category_id']);
         $subcategory_name = $mysqli->real_escape_string($_POST['subcategory_name']);
 
-        // Verifica che il nome della sottocategoria non esiste già
+        // Verifica che il nome della sottocategoria non esista già per questa categoria
         $check_query = "SELECT COUNT(*) as count FROM subcategories WHERE name = '$subcategory_name' AND categories_id = $category_id_post";
         $check_result = $mysqli->query($check_query);
         $count = $check_result->fetch_assoc()['count'];

@@ -18,14 +18,15 @@ $main = new Template("skins/multikart_all_in_one/back-end/frame-private.html");
 $body = new Template("skins/multikart_all_in_one/back-end/create-user.html");
 
 function isEmailOrPhoneUnique($email, $phone) {
-    global $mysqli;
-
+    global $mysqli
     $email = $mysqli->real_escape_string($email);
     $phone = $mysqli->real_escape_string($phone);
- 
+
+    // Query per verificare se l'email è univoca
     $emailQuery = "SELECT email FROM users WHERE email = '$email'";
     $emailResult = $mysqli->query($emailQuery);
 
+    // Query per verificare se il numero di cellulare è univoco
     $phoneQuery = "SELECT phone FROM users WHERE phone = '$phone'";
     $phoneResult = $mysqli->query($phoneQuery);
 

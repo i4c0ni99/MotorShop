@@ -20,12 +20,15 @@ $body = new Template("skins/multikart_all_in_one/back-end/create-user.html");
 function isEmailOrPhoneUnique($email, $phone) {
     global $mysqli;
 
+    // Escape delle variabili per prevenire SQL Injection
     $email = $mysqli->real_escape_string($email);
     $phone = $mysqli->real_escape_string($phone);
- 
+
+    // Query per verificare se l'email è univoca
     $emailQuery = "SELECT email FROM users WHERE email = '$email'";
     $emailResult = $mysqli->query($emailQuery);
 
+    // Query per verificare se il numero di cellulare è univoco
     $phoneQuery = "SELECT phone FROM users WHERE phone = '$phone'";
     $phoneResult = $mysqli->query($phoneQuery);
 
@@ -42,7 +45,7 @@ function isEmailOrPhoneUnique($email, $phone) {
 }
 
 function sendMail($email, $v_cod) {
-    $name = isset($_POST['name']) ? $_POST['name'] : ''; 
+    $name = isset($_POST['name']) ? $_POST['name'] : ''; // Check if 'name' key exists in $_POST
     $subject = "Benvenuto su MotorShop";
     $verificationLink = "http://localhost/MotorShop/verify.php?email=$email&v_cod=$v_cod";
 

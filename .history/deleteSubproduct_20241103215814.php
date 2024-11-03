@@ -11,7 +11,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id']) && is_numeric($_POST['id'])) {
         $subproductId = intval($_POST['id']);
-        
+
+        // Inizio transazione
         $mysqli->begin_transaction();
 
         try {

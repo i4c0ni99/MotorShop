@@ -68,9 +68,12 @@ if (isset($_SESSION['user']) && $_SESSION['user']['groups'] == '1') {
             } catch (Exception $e) {
                 // errore
                 $mysqli->rollback();
+    
+                // Messaggio di errore
                 $_SESSION['error'] = "Errore durante l'eliminazione della slide.";
             }
-            
+    
+            // Redirect per aggiornare la pagina
             header('Location: /MotorShop/home-customizer.php');
             exit();
         }
