@@ -150,7 +150,7 @@ if (isset($_GET['search_text']) && !empty($_GET['search_text'])) {
 
 
 
-
+$product_query = $product_query_base . " GROUP BY sub_products.id ORDER BY offers.percentage ASC ";
 
 if(isset($_GET['offert_percentage'])){
     $product_query = "SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
@@ -163,7 +163,7 @@ if(isset($_GET['offert_percentage'])){
 
 
 // Completamento della query SQL per selezionare i prodotti con limitazione
-$product_query = $product_query_base . " GROUP BY sub_products.id ORDER BY offers.percentage ASC ";
+
 
 $result = $mysqli->query($product_query);
 $prodotti = []; // Definisci l'array fuori dal ciclo
