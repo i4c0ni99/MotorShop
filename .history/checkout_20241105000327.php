@@ -83,23 +83,20 @@ $totalPrice = 0;
 $products = [];
 $sub_quantity = 0;
 
-// Carrello dell'utente
+// Mostra il carrello dell'utente nel riepilogo ordine
 $userEmail = $_SESSION['user']['email'];
-$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.quantity AS prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc, i.id 
-          FROM cart c 
-          JOIN sub_products sp ON c.subproduct_id = sp.id 
-          INNER JOIN images i ON sp.products_id = i.product_id 
-          WHERE c.user_email = ? 
-          GROUP BY sp.products_id";
+$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email = ? GROUP BY sp.products_id ";
 $stmt = $mysqli->prepare($query);
 if ($stmt) {
     $stmt->bind_param("s", $userEmail);
     $stmt->execute();
     $result = $stmt->get_result();
+    $totalPrice = 0;
 
     while ($cartItem = $result->fetch_assoc()) {
         $subproductId = $cartItem['subproduct_id'];
-        $sub_quantity = $cartItem['prod_quantity'];
+        $sub_quantity = $cartIitem['prod_quantity'];
+        
         $productQuery = "SELECT title FROM products WHERE id = ?";
         $stmt_product = $mysqli->prepare($productQuery);
         if ($stmt_product) {
@@ -110,48 +107,28 @@ if ($stmt) {
                 $title = $productData['title'];
                 $size = $cartItem['size'];
                 $color = $cartItem['color'];
+                
+                $price = floatval($cartItem['price']); 
+                $quantity = intval($cartItem['quantity']); 
 
-                $price = floatval($cartItem['price']);
-                $quantity = intval($cartItem['quantity']);
-                $availability = intval($cartItem['availability']);
-                $stockQuantity = intval($cartItem['prod_quantity']);
-
-                // Verifica se il sottoprodotto è disponibile in stock
-                if ($availability == 1 && $quantity <= $stockQuantity) {
-                    // Calcola il totale per il prodotto disponibile
-                    $subtotal = $price * $quantity;
-                    $totalPrice += $subtotal;
-
-                    // Aggiungi i dettagli del prodotto all'array
-                    $products[] = [
-                        'subproduct_id' => $subproductId, 
-                        'title' => $title,
-                        'quantity' => $quantity,
-                        'subtotal' => $subtotal,
-                        'quantityCheck' => $stockQuantity - $quantity
-                    ];
-                    $body->setContent("title", $title);
-                    $body->setContent("quantity", $quantity);
-                    $body->setContent("size", $size);
-                    $body->setContent("color", $color);
-                    $body->setContent("price", priceFormatter($subtotal));
-                } else {
-                    echo "Prodotto con ID $subproductId non disponibile o quantità insufficiente. Sarà escluso dall'ordine.<br>";
-                }
+                // Calcola il totale
+                $subtotal = $price * $quantity;
+                $totalPrice += $subtotal;
+                
+                $body->setContent("title", $title);
+                $body->setContent("quantity", $quantity);
+                $body->setContent("size", $size);
+                $body->setContent("color", $color);
+                $body->setContent("price", priceFormatter($subtotal));
             }
             $stmt_product->close();
         }
     }
     $stmt->close();
+    
     $body->setContent("total_price", priceFormatter($totalPrice));
 } else {
     echo "Errore nella query del carrello: " . $mysqli->error;
-}
-
-// Verifica che ci siano prodotti da acquistare
-if (empty($products)) {
-    echo "Nessun prodotto disponibile nel carrello per l'ordine.";
-    exit; // Fermiamo l'esecuzione se non ci sono prodotti disponibili
 }
 
 // Verifica se l' indirizzo di spedizione è stato selezionato
@@ -343,7 +320,7 @@ if ($mysqli->query($deleteCartQuery)) {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
-} else{
+}else{
     echo "Errore: nessun indirizzo di spedizione selezionato.";
 }
 
