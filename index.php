@@ -57,6 +57,8 @@ $body->setContent('giaccaId', $giacca['products_id']);
 $oidGiacca = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='GIACCA') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5;") ;
 
 $resultCat = $oidGiacca;
+
+//caricamento tab per categoria giacca
 if ($resultCat->num_rows > 0) {
     foreach ($resultCat as $key) {
         $imgOidCat = $mysqli->query("SELECT imgsrc from images where product_id={$key['prod_id']}");
@@ -173,7 +175,7 @@ if ($resultCat->num_rows > 0) {
 }
 
  $oidCasco = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='CASCO') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
-
+//caricamento tab per categoria caschi
 $resultCatCasco = $oidCasco;
 if ($resultCatCasco->num_rows > 0) {
     foreach ($resultCatCasco as $key) {
@@ -292,7 +294,7 @@ if ($resultCatCasco->num_rows > 0) {
 }
 
 $resultCatStivali = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='STIVALI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
-
+//caricamento tab per categoria stivali
 if ($resultCatStivali->num_rows > 0) {
     foreach ($resultCatStivali as $key) {
         $imgOidCatStivali = $mysqli->query("SELECT imgsrc from images where product_id={$key['prod_id']}")->fetch_assoc();
@@ -406,7 +408,7 @@ if ($resultCatStivali->num_rows > 0) {
     }
 }
 $oidProtezioni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PROTEZIONI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
-
+//caricamento tab per categoria protezioni
 $resultProtezioni = $oidProtezioni;
 if ($resultProtezioni->num_rows > 0) {
     foreach ($resultProtezioni as $key) {
@@ -522,7 +524,7 @@ if ($resultProtezioni->num_rows > 0) {
     }
 }
 $oidPantaloni = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='PANTALONI') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
-
+//caricamento tab per categoria pantaloni
 $resultCatPantaloni = $oidPantaloni;
 if ($resultCatPantaloni->num_rows > 0) {
     foreach ($resultCatPantaloni as $key) {
@@ -637,7 +639,7 @@ if ($resultCatPantaloni->num_rows > 0) {
     }
 }
 $oidTute = $mysqli->query("SELECT products.title,products.id as prod_id ,sub_products.* FROM sub_products JOIN products ON sub_products.products_id=products.id WHERE categories_id=(SELECT id FROM categories WHERE name='TUTE') AND products.availability = 1 AND sub_products.availability = 1 AND products.mediumRate >= 2.5 GROUP BY products.id ORDER BY mediumRate DESC limit 0,5");
-
+//caricamento tab per categoria tute
 $resultCatTute = $oidTute;
 if ($resultCatTute->num_rows > 0) {
     foreach ($resultCatTute as $key) {
@@ -762,7 +764,7 @@ $result = $mysqli->query($outlet);
 
 $offert_prew = $mysqli->query("SELECT products.title, products.id,offers.percentage,sub_products.price FROM products JOIN sub_products ON sub_products.products_id 
     = products.id LEFT JOIN offers ON sub_products.id = offers.subproduct_id WHERE EXISTS (SELECT sub_products.id FROM sub_products WHERE sub_products.products_id = products.id) and offers.percentage >= 0 AND products.availability = 1 AND sub_products.availability = 1 GROUP BY products.id LIMIT 5") ;
-
+//caricamento dei prodotti con sconto superiore a 10 
 if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows > 0) {
         $key= $offert_prew->fetch_assoc();
         $row = $result->fetch_all(PDO::FETCH_NUM);
@@ -792,7 +794,7 @@ if ($result && $result->num_rows > 0 && $offert_prew && $offert_prew->num_rows >
         $image_data = $mysqli->query($image_query);
 
         $image_data2= $mysqli->query($image_query2);
-
+        // caricamento preview prodotti in sconto con un limite di 5 prodotti 
         if ($image_data && $image_data->num_rows > 0 && $image_data2 && $image_data2->num_rows > 0 ) {
             $image_data = $image_data->fetch_assoc(); 
             $image_data2 = $image_data2->fetch_assoc(); 
