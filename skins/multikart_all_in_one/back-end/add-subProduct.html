@@ -170,85 +170,49 @@
 </div>
 
 <script>
-    // Funzione per visualizzare l'anteprima dell'immagine selezionata
-    /* function previewImage(event, imageNumber) {
-        var reader = new FileReader();
-
-        reader.onload = function () {
-            var imagePreviewId = "imagePreview" + imageNumber;
-            var imgElement = document.getElementById(imagePreviewId);
-            imgElement.src = reader.result;
-            console.log(imgElement)
-        }
-        reader.readAsDataURL(event.target.files[0]);
-
-        // Mostra il campo di caricamento successivo se non è già visibile
-        var nextImageNumber = imageNumber + 1;
-        var nextImageField = document.querySelector('input[name="image' + nextImageNumber + '"]');
-        if (nextImageField) {
-            var nextImageParent = nextImageField.parentElement.parentElement;
-            if (nextImageParent.style.display === 'none') {
-                nextImageParent.style.display = 'block';
-            }
-        }
-    }
-
-    // Funzione per resettare le anteprime delle immagini selezionate
-    function resetImagePreviews() {
-        for (let i = 1; i <= 5; i++) {
-            let imgElement = document.getElementById('imagePreview' + i);
-            imgElement.src = '/MotorShop/skins/multikart_all_in_one/back-end/assets/images/pro3/product-preview.jpg'; // Reset all'anteprima di default
-            let imageField = document.querySelector('input[name="image' + i + '"]');
-            imageField.value = ""; // Reset del campo file
-            let imageParent = imageField.parentElement.parentElement;
-            if (i > 1) {
-                imageParent.style.display = 'none'; // Nascondi i campi di caricamento delle immagini aggiuntive
-            }
-        }
-    } */
     document.getElementById('imageInput1').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+          imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+        reader.readAsDataURL(event.target.files[0]);
       });
       document.getElementById('imageInput2').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+          imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+        reader.readAsDataURL(event.target.files[0]);
       });
       document.getElementById('imageInput3').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+          imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+        reader.readAsDataURL(event.target.files[0]);
       });
       document.getElementById('imageInput4').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+          imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+        reader.readAsDataURL(event.target.files[0]);
       });
       document.getElementById('imageInput5').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; // Imposta la sorgente dell'immagine
+          imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]); // Legge il file selezionato
+        reader.readAsDataURL(event.target.files[0]);
       });
 </script>

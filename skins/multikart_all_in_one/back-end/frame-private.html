@@ -58,7 +58,7 @@
             <div class="main-header-right row">
                 <div class="main-header-left d-lg-none w-auto">
                     <div class="logo-wrapper">
-                        <a href="index.html">
+                        <a href="/../MotorShop/dashBoard.php">
                             <img class="blur-up lazyloaded d-block d-lg-none"
                                 src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/multikart-logo-black.png"
                                 alt="">
@@ -78,7 +78,8 @@
                         <li class="onhover-dropdown">
                             <div class="media align-items-center"><img
                                     class="align-self-center pull-right img-50 blur-up lazyloaded"
-                                    src="/../MotorShop/skins/multikart_all_in_one/assets/images/dashboard/user3.jpg"
+                                    name="imageProfile"
+                                    src=""
                                     alt="header-user">
                                 <div class="dotted-animation"><span class="animate-circle"></span><span
                                         class="main-circle"></span></div>
@@ -101,7 +102,7 @@
             <!-- Page Sidebar Start-->
             <div class="page-sidebar">
                 <div class="main-header-left d-none d-lg-block">
-                    <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded"
+                    <div class="logo-wrapper"><a href="/../MotorShop/dashBoard.php"><img class="blur-up lazyloaded"
                                 src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/multikart-logo.png"
                                 alt=""></a></div>
                 </div>
@@ -110,7 +111,8 @@
                             aria-hidden="true"></i></a>
                     <div class="sidebar-user">
                         <img class="img-60"
-                            src="/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user3.jpg"
+                        name="imageProfile"
+                            src=""
                             alt="#">
                         <div>
                             <h6 class="f-14">
@@ -407,7 +409,34 @@
     
         }
     </script>
-  
+    <script>
+        $(document).ready(function() {
+            console.log('entroato')
+            // Esegui la richiesta AJAX al caricamento della pagina
+            $.ajax({
+                url: "imgProfile.php",  // Cambia con l'URL del tuo endpoint
+                method: "GET", // o POST a seconda della tua API
+                dataType: "json",
+                success: function(response) {
+                    // Assumi che il server restituisca un oggetto JSON con { "imageUrl": "url_immagine" }
+                    if (response.imageUrl) {
+                        const base64Image = "data:image/jpeg;base64," + response.imageUrl;
+                        $("img[name='imageProfile']").attr("src", base64Image);
+                        $("#imageLink").attr("href", base64Image).show();
+                    } else {
+                        $("img[name='imageProfile']").attr("src","/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg")
+                        console.error("URL immagine non trovato nella risposta");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('entroato in error')
+                    console.error("Errore nella richiesta AJAX:", error);
+                }
+            });
+        });
+        
+
+    </script>
 </body>
 
 </html>
