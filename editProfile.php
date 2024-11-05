@@ -31,13 +31,11 @@ if (!isset($_SESSION['user']['phone'])) {
 // Caricamento avatar
 $data = $mysqli->query("SELECT avatar FROM users WHERE email='{$_SESSION['user']['email']}'");
 $img = $data->fetch_assoc();
-if ($img['avatar'] == null) {
-    
+if ($img['avatar'] === null) {
     $main->setContent('img', "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg");
     $body->setContent('img', "/../MotorShop/skins/multikart_all_in_one/back-end/assets/images/dashboard/user.jpg");
     $body->setContent('btn-set','<input type="submit" value="Aggiungi avatar" name="edit-avatar-button" class="btn btn-primary"></input>');
 } else {
-    
     $main->setContent('img', "data:image;base64," . $img['avatar']);
     $body->setContent('img', "data:image;base64," . $img['avatar']);
     $body->setContent('btn-set','<input type="submit" value="Cambia avatar" name="edit-avatar-button" class="btn btn-primary"></input>');

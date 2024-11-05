@@ -54,6 +54,7 @@ function sendMail($email, $v_cod) {
     }
 
     // sostituisce con i valori effettivi
+
     $htmlContent = str_replace(
         ['{{name}}', '{{verification_link}}'], 
         [$name, $verificationLink], 
@@ -100,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if ($unique === "unique") {
                 $v_cod = bin2hex(random_bytes(16)); // Genera il codice di verifica
+
                 $criptoPass = md5(md5($_POST['password'])); 
                 
                 // Inserisce l'utente nella tabella users

@@ -36,7 +36,9 @@ function getProductTitle($subproductId) {
 
 $userEmail = $mysqli->real_escape_string($_SESSION['user']['email']);
 
+
 // indirizzi di spedizione 
+
 $addressesQuery = "SELECT * FROM shipping_address WHERE users_email = ?";
 $stmtAddresses = $mysqli->prepare($addressesQuery);
 $stmtAddresses->bind_param("s", $userEmail);
@@ -110,7 +112,6 @@ if ($stmt) {
                 $title = $productData['title'];
                 $size = $cartItem['size'];
                 $color = $cartItem['color'];
-
                 $price = floatval($cartItem['price']);
                 $quantity = intval($cartItem['quantity']);
                 $availability = intval($cartItem['availability']);
@@ -148,6 +149,7 @@ if ($stmt) {
     echo "Errore nella query del carrello: " . $mysqli->error;
 }
 
+
 // verifica se ci sono prodotti da acquistare
 if (empty($products)) {
     echo "Nessun prodotto disponibile nel carrello per l'ordine.";
@@ -155,6 +157,7 @@ if (empty($products)) {
 }
 
 // vrifica se l' indirizzo di spedizione e il metodo di pagamento sono stati selezionati
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['address_list']) && isset($_POST['payment_method'])) {
     
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
@@ -221,6 +224,7 @@ if ($mysqli->query($insertOrderQuery)) {
     // Aggiungi i prodotti associati all'ordine nella tabella orders_has_products
     foreach ($products as $product) {
         $subproductId = $product['subproduct_id']; 
+
         $quantity = $product['quantity']; // Quantità nel carrello
 
         // Query per inserire i dati nella tabella orders_has_products
@@ -292,7 +296,6 @@ if (mail($to, $subject, $message, $headers)) {
 } else {
     echo "Errore durante l'invio dell'email di conferma.";
 }
-        
         
         // svuota il carrello
 $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
