@@ -36,43 +36,7 @@
           (style_selector_div = e("<div />")
             .attr("id", "styleSelector")
             .addClass("style-selector visible-md visible-lg")
-            .append(
-              e("<h4 />")
-                .addClass("selector-title")
-                .html("Style Selector")
-                .append(
-                  e("<a />")
-                    .attr("href", "#")
-                    .append(
-                      e("<div />")
-                        .addClass("icon-wrap")
-                        .append(
-                          e("<i />").addClass("fa fa-spin fa-cog"),
-                          e("<i />").addClass(
-                            "fa fa-spin fa-spin-reverse fa-cog"
-                          ),
-                          e("<i />").addClass("fa fa-spin fa-cog")
-                        )
-                    )
-                ),
-              e("<div />")
-                .addClass("style-selector-wrap")
-                .append(
-                  e("<h5 />").html("Colors"),
-                  e("<ul />")
-                    .addClass("options colors")
-                    .attr("data-type", "colors"),
-                  e("<div />").addClass("divider"),
-                  e("<div />")
-                    .addClass("options-links")
-                    .append(
-                      e("<a />")
-                        .addClass("reset")
-                        .attr("href", "#")
-                        .html("Reset")
-                    )
-                )
-            )),
+            ),
             e("body").append(style_selector_div),
             (a.container = e("#styleSelector")),
             a.container.find("div.options-links.mode a").click(function (o) {
