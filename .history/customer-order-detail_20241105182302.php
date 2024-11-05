@@ -116,6 +116,8 @@ if (isset($_SESSION['user']['groups']) && $_SESSION['user']['groups'] == 1) {
                 $colore = getColorName($sub_product_data['color']);
                 
                 $body->setContent("color", $colore);
+
+                $body->setContent("color", $sub_product_data['color']);
                 $body->setContent("price", formatPrice($calculatedPrice)); 
                 
                 $product_id = $sub_product_data['products_id'];
