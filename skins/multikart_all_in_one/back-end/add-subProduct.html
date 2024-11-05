@@ -111,7 +111,6 @@
                                     <form class="needs-validation add-product-form" novalidate method="post"
                                         action="add-subProduct.php?id=<[id]>" enctype="multipart/form-data">
                                         <input type="hidden" name="productId" value="<[id]>">
-                                        <!-- resto del form -->
                                         <button type="submit" name="save" value="save"
                                             class="btn btn-primary">Salva</button>
                                         <button type="reset" class="btn btn-light">Annulla</button>
@@ -175,9 +174,11 @@
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; 
+
+          imgElement.src = e.target.result; // sorgente dell'immagine
         }
-        reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(event.target.files[0]); // Leggi il file selezionato
+
       });
       document.getElementById('imageInput2').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
@@ -195,7 +196,8 @@
         reader.onload = function(e) {
           imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(event.target.files[0]); 
+
       });
       document.getElementById('imageInput4').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
@@ -204,15 +206,18 @@
         reader.onload = function(e) {
           imgElement.src = e.target.result; 
         }
-        reader.readAsDataURL(event.target.files[0]);
+
+        reader.readAsDataURL(event.target.files[0]); 
+
       });
       document.getElementById('imageInput5').addEventListener('change', function(event) {
         var imgElement = document.getElementById("imagePreview");
         console.log(imgElement)
         var reader = new FileReader();
         reader.onload = function(e) {
-          imgElement.src = e.target.result; 
+          imgElement.src = e.target.result;
         }
-        reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(event.target.files[0]); 
+
       });
 </script>

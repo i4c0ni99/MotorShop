@@ -30,13 +30,13 @@ function isEmailOrPhoneUnique($email, $phone) {
     $phoneResult = $mysqli->query($phoneQuery);
 
     if ($emailResult->num_rows > 0) {
-        // L'email è già presente nel database
+        // L'email è già presente nel DB
         return "email";
     } elseif ($phoneResult->num_rows > 0) {
-        // Il numero di cellulare è già presente nel database
+        // Il numero di cellulare è già presente nel DB
         return "phone";
     } else {
-        // Sia l'email che il numero di cellulare sono univoci
+        // email e numero di cellulare sono univoci
         return "unique";
     }
 }
@@ -53,7 +53,8 @@ function sendMail($email, $v_cod) {
         return false;
     }
 
-    // sostituisce i segnaposto con i valori effettivi
+    // sostituisce con i valori effettivi
+
     $htmlContent = str_replace(
         ['{{name}}', '{{verification_link}}'], 
         [$name, $verificationLink], 
@@ -74,7 +75,7 @@ function sendMail($email, $v_cod) {
         // Destinatario e mittente
         $mail->setFrom('noreply@motorshop.it', 'MotorShop Italia');
         $mail->addAddress($email);
-        // Contenuto dell'email
+        // Contenuto
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $htmlContent;
@@ -88,19 +89,19 @@ function sendMail($email, $v_cod) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Controllo dei campi obbligatori
+    // campi obbligatori
     if (isset($_POST['email'], $_POST['name'], $_POST['surname'], $_POST['password'], $_POST['confirmPassword'])) {
 
-        // Controllo che le password coincidano
+        // controlla che le password coincidano
         if ($_POST['password'] != $_POST['confirmPassword']) {
             echo "<script>alert('Attenzione, le password non coincidono');</script>";
         } else {
-            // Verifica se email e telefono sono univoci
+            // verifica se email e telefono sono univoci
             $unique = isEmailOrPhoneUnique($_POST['email'], $_POST['phoneNumber']);
             
             if ($unique === "unique") {
                 $v_cod = bin2hex(random_bytes(16)); // Genera il codice di verifica
-                // Entrambi email e numero di cellulare sono univoci, procedi con l'inserimento nel database
+
                 $criptoPass = md5(md5($_POST['password'])); 
                 
                 // Inserisce l'utente nella tabella users

@@ -36,7 +36,9 @@ function getProductTitle($subproductId) {
 
 $userEmail = $mysqli->real_escape_string($_SESSION['user']['email']);
 
-// Carica gli indirizzi di spedizione 
+
+// indirizzi di spedizione 
+
 $addressesQuery = "SELECT * FROM shipping_address WHERE users_email = ?";
 $stmtAddresses = $mysqli->prepare($addressesQuery);
 $stmtAddresses->bind_param("s", $userEmail);
@@ -78,25 +80,28 @@ if (isset($_POST['add-address-button'])) {
     }
 }
 
-// Prodotti e prezzo totale dell'ordine
+// totale ordine
 $totalPrice = 0;
 $products = [];
 $sub_quantity = 0;
 
-// Mostra il carrello dell'utente nel riepilogo ordine
+// prodotti dal carrello
 $userEmail = $_SESSION['user']['email'];
-$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price,sp.quantity as prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc,i.id FROM cart c JOIN sub_products sp ON c.subproduct_id = sp.id INNER JOIN images i ON sp.products_id = i.product_id WHERE c.user_email = ? GROUP BY sp.products_id ";
+$query = "SELECT c.subproduct_id, c.quantity, sp.products_id, sp.price, sp.quantity AS prod_quantity, sp.availability, sp.color, sp.size, i.imgsrc, i.id 
+          FROM cart c 
+          JOIN sub_products sp ON c.subproduct_id = sp.id 
+          INNER JOIN images i ON sp.products_id = i.product_id 
+          WHERE c.user_email = ? 
+          GROUP BY sp.products_id";
 $stmt = $mysqli->prepare($query);
 if ($stmt) {
     $stmt->bind_param("s", $userEmail);
     $stmt->execute();
     $result = $stmt->get_result();
-    $totalPrice = 0;
 
     while ($cartItem = $result->fetch_assoc()) {
         $subproductId = $cartItem['subproduct_id'];
-        $sub_quantity = $cartIitem['prod_quantity'];
-        
+        $sub_quantity = $cartItem['prod_quantity'];
         $productQuery = "SELECT title FROM products WHERE id = ?";
         $stmt_product = $mysqli->prepare($productQuery);
         if ($stmt_product) {
@@ -107,31 +112,52 @@ if ($stmt) {
                 $title = $productData['title'];
                 $size = $cartItem['size'];
                 $color = $cartItem['color'];
-                
-                $price = floatval($cartItem['price']); 
-                $quantity = intval($cartItem['quantity']); 
+                $price = floatval($cartItem['price']);
+                $quantity = intval($cartItem['quantity']);
+                $availability = intval($cartItem['availability']);
+                $stockQuantity = intval($cartItem['prod_quantity']);
 
-                // Calcola il totale
-                $subtotal = $price * $quantity;
-                $totalPrice += $subtotal;
-                
-                $body->setContent("title", $title);
-                $body->setContent("quantity", $quantity);
-                $body->setContent("size", $size);
-                $body->setContent("color", $color);
-                $body->setContent("price", priceFormatter($subtotal));
+                // verifica se il sottoprodotto è disponibile 
+                if ($availability == 1 && $quantity <= $stockQuantity) {
+                    
+                    $subtotal = $price * $quantity;
+                    $totalPrice += $subtotal;
+
+                    // dettagli del prodotto nell'array
+                    $products[] = [
+                        'subproduct_id' => $subproductId, 
+                        'title' => $title,
+                        'quantity' => $quantity,
+                        'subtotal' => $subtotal,
+                        'quantityCheck' => $stockQuantity - $quantity
+                    ];
+                    $body->setContent("title", $title);
+                    $body->setContent("quantity", $quantity);
+                    $body->setContent("size", $size);
+                    $body->setContent("color", $color);
+                    $body->setContent("price", priceFormatter($subtotal));
+                } else {
+                    echo "Prodotto con ID $subproductId non disponibile o quantità insufficiente. Sarà escluso dall'ordine.<br>";
+                }
             }
             $stmt_product->close();
         }
     }
     $stmt->close();
-    
     $body->setContent("total_price", priceFormatter($totalPrice));
 } else {
     echo "Errore nella query del carrello: " . $mysqli->error;
 }
 
-// Verifica se l' indirizzo di spedizione è stato selezionato
+
+// verifica se ci sono prodotti da acquistare
+if (empty($products)) {
+    echo "Nessun prodotto disponibile nel carrello per l'ordine.";
+    exit;
+}
+
+// vrifica se l' indirizzo di spedizione e il metodo di pagamento sono stati selezionati
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['address_list']) && isset($_POST['payment_method'])) {
     
     $shippingAddressId = $mysqli->real_escape_string($_POST['address_list']);
@@ -145,27 +171,25 @@ if ($resultCart) {
 
     $products = []; // salva i dettagli dei prodotti
 
-     // Calcola importo totale e salva i dati dei prodotti nell'array
+     // calcola importo totale e salva i dati dei prodotti nell'array
      while ($row = $resultCart->fetch_assoc()) {
         
-        // Dati del carrello
+        // Dati carrello
         $subproductId = $row['subproduct_id'];
         $quantity = $row['quantity'];
-        // Dati del sottoprodotto
+        // Dati sottoprodotto
         $price = $row['price'];
         $availability = $row['availability'];
         $stockQuantity = $row['stock'];
-
-         // Verifica che il prodotto sia disponibile e che la quantità richiesta sia disponibile in stock
+         
          if ($availability == 1 && $cartQuantity <= $stockQuantity) {
             
-        // Calcola il totale parziale per ciascun sottoprodotto nel carrello
+        // totale parziale per ciascun sottoprodotto nel carrello
         $subtotal = $price * $quantity;
         $totalPrice += $subtotal; 
 
         $productTitle = getProductTitle($subproductId);
-
-        // Aggiungi dettagli del prodotto all'array
+        
         $products[] = [
             'subproduct_id' => $subproductId, 
             'title' => $productTitle,
@@ -174,7 +198,6 @@ if ($resultCart) {
             'quantityCheck' => $stockQuantity - $quantity
         ];
     } else {
-            // Prodotto non disponibile o quantità richiesta non in stock
             echo "Prodotto con ID $subproductId non disponibile o quantità insufficiente. Sarà escluso dall'ordine.<br>";
         }
     }
@@ -200,7 +223,8 @@ if ($mysqli->query($insertOrderQuery)) {
 
     // Aggiungi i prodotti associati all'ordine nella tabella orders_has_products
     foreach ($products as $product) {
-        $subproductId = $product['subproduct_id']; // ID del sottoprodotto
+        $subproductId = $product['subproduct_id']; 
+
         $quantity = $product['quantity']; // Quantità nel carrello
 
         // Query per inserire i dati nella tabella orders_has_products
@@ -211,10 +235,8 @@ if ($mysqli->query($insertOrderQuery)) {
         $stmtOrderHasProducts->bind_param("iii", $orderId, $subproductId, $quantity);
 
         if ($stmtOrderHasProducts->execute()) {
-            // Inserimento riuscito
             echo "Prodotto con ID $subproductId inserito correttamente nell'ordine.<br>";
         } else {
-            // Errore
             echo "Errore durante l'inserimento del prodotto con ID $subproductId nell'ordine: " . $stmtOrderHasProducts->error . "<br>";
         }
 
@@ -274,27 +296,42 @@ if (mail($to, $subject, $message, $headers)) {
 } else {
     echo "Errore durante l'invio dell'email di conferma.";
 }
+        
         // svuota il carrello
-        $deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
-        if ($mysqli->query($deleteCartQuery)) {
-            echo "Carrello svuotato con successo.";
-            if ($mysqli->query($deleteCartQuery)) {
-                echo "Carrello svuotato con successo.";
-                foreach($products as $prod){
-                if($prod['quantityCheck'] > 0 ){
-                $mysqli->query("UPDATE sub_products SET quantity = quantity - " . intval($prod['quantity']) . " WHERE id = " . intval($prod['subproduct_id']));
-                echo $prod['quantity'];
-                }else{ 
-                    $mysqli->query("UPDATE sub_products SET quantity = quantity - " . intval($prod['quantity']) . ", availability = 0 WHERE id = " . intval($prod['subproduct_id']));
-                    echo $prod['quantity'];
-                }
-            }
-        }
-            echo json_encode(['success' => 'success']);
+$deleteCartQuery = "DELETE FROM cart WHERE user_email = '$userEmail'";
+if ($mysqli->query($deleteCartQuery)) {
+    echo "Carrello svuotato con successo.";
+    foreach ($products as $prod) {
+        // Verifica se la quantità richiesta è maggiore di 0
+        if ($prod['quantityCheck'] > 0) {
+            // quantità disponibile del sottoprodotto
+            $result = $mysqli->query("SELECT quantity FROM sub_products WHERE id = " . intval($prod['subproduct_id']));
+            $subProduct = $result->fetch_assoc();
+            $availableQuantity = $subProduct['quantity'];
 
-            
+            // Se la quantità da acquistare è maggiore della quantità disponibile, inserisci solo la quantità disponibile
+            $quantityToBuy = min(intval($prod['quantity']), $availableQuantity);
+
+            // aggiorna la quantità del sottoprodotto
+            $mysqli->query("UPDATE sub_products SET quantity = quantity - $quantityToBuy WHERE id = " . intval($prod['subproduct_id']));
+
+            // Se la quantità disponibile diventa zero, aggiorna la disponibilità a 0
+            if ($availableQuantity - $quantityToBuy <= 0) {
+                $mysqli->query("UPDATE sub_products SET availability = 0 WHERE id = " . intval($prod['subproduct_id']));
+            }
+
+            echo "Quantità inserita nell'ordine: $quantityToBuy per il sottoprodotto ID " . $prod['subproduct_id'];
         } else {
-            echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
+            // Se la quantità da acquistare è zero o negativa, aggiorna direttamente la disponibilità a 0
+            $mysqli->query("UPDATE sub_products SET quantity = quantity - " . intval($prod['quantity']) . ", availability = 0 WHERE id = " . intval($prod['subproduct_id']));
+            echo "Quantità zero inserita nell'ordine per il sottoprodotto ID " . $prod['subproduct_id'];
+        }
+        echo "Errore durante l'eliminazione dei prodotti dal carrello: " . $mysqli->error;
+    }
+    echo json_encode(['success' => 'success']);
+} else {
+    echo "Errore nello svuotamento del carrello.";
+        
         }
         
     } else {
@@ -304,7 +341,7 @@ if (mail($to, $subject, $message, $headers)) {
     echo "Errore durante la query del carrello: " . $mysqli->error;
 }
     
-}else{
+} else{
     echo "Errore: nessun indirizzo di spedizione selezionato.";
 }
 

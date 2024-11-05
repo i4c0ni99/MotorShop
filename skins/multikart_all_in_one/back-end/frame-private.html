@@ -317,19 +317,18 @@
         CKEDITOR.replace('description');
         CKEDITOR.replace('details');
         CKEDITOR.replace('information');
-    
-        // Funzione per validare i campi CKEditor
+        
         function validateCKEditorFields() {
             let descriptionContent = CKEDITOR.instances['description'].getData().trim();
             let detailsContent = CKEDITOR.instances['details'].getData().trim();
     
-            // Validazione del campo "description"
+            // validazione "description"
             if (descriptionContent.length < 5) {
                 alert("La descrizione è obbligatoria e deve avere almeno 5 caratteri.");
                 return false;
             }
     
-            // Validazione del campo "details"
+            // campo "details"
             if (detailsContent.length < 5) {
                 alert("Le specifiche sono obbligatorie e devono avere almeno 5 caratteri.");
                 return false;
@@ -338,15 +337,15 @@
             return true;
         }
     
-        // Intercetta l'invio del modulo
+        // invio form ckeditor
         document.querySelector('.add-product-form').addEventListener('submit', function (e) {
             if (!validateCKEditorFields()) {
-                e.preventDefault();  // Impedisci l'invio del modulo se la validazione fallisce
+                e.preventDefault();  
             }
         });
     </script>
     <script>
-          // Inizializza CKEditor per i campi specificati
+
           function get_brand(){
             
             const title = document.getElementsByName('title')[0].value
