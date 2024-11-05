@@ -29,7 +29,8 @@ $resultRevenue = $mysqli->query($queryRevenue);
 if ($resultRevenue) {
     $rowRevenue = $resultRevenue->fetch_assoc();
     $revenue = $rowRevenue['total_revenue']; 
-
+    
+    // Formatta il fatturato con al massimo due decimali
     $revenue = number_format($revenue, 2, '.', ''); // 2 decimali
 } else {
     $revenue = 0; 

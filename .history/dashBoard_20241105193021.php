@@ -20,20 +20,16 @@ if (isset($_SESSION['user'])) {
         exit();
     }
 
-    // Fatturato mensile
-$queryRevenue = "SELECT SUM(totalPrice) AS total_revenue
-FROM orders
-WHERE MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())";
 
-$resultRevenue = $mysqli->query($queryRevenue);
-if ($resultRevenue) {
-    $rowRevenue = $resultRevenue->fetch_assoc();
-    $revenue = $rowRevenue['total_revenue']; 
 
-    $revenue = number_format($revenue, 2, '.', ''); // 2 decimali
-} else {
-    $revenue = 0; 
-}
+
+
+
+
+
+
+
+
 
 $body->setContent("revenue", $revenue);
 
